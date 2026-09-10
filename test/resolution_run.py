@@ -72,8 +72,32 @@ CASES = [
   ("beer",        ["ale", "porter", "india pale ale"],                      ["Maize plant"]),
   ("beef",        ["beef steak", "beef jerky", "beef broth", "beef liver",
                    "corned beef"],                                          ["cow milk", "cheddar cheese"]),
+
+  # --- culinary vocabulary, pinned 2026-09-10 --------------------------------
+  # Colloquial, regional and compound names FoodOn does not carry. Harvested from
+  # a blind comparison against a query-time LLM: these are the terms it got right
+  # and lexical matching could not. Pinned rather than inferred, because each is a
+  # fixed fact about vocabulary -- mangetout does not stop meaning snow pea.
+  # The rejects matter as much as the expects: two of these were deliberately
+  # pinned NARROW, and these assertions are what stops a later "helpful" widening.
+  ("mangetout",   ["snow pea pod (edible, fresh)", "sugar snap pea plant"], ["Maize plant"]),
+  ("cilantro",    ["coriander leaf", "coriander seed", "curry powder"],
+                  ["Maize plant", "parsley"]),
+  ("creme fraiche", [],        ["coffee creamer", "whipped cream", "clotted cream"]),
+  ("double cream",  [],        ["coffee creamer", "clotted cream"]),
+  ("greek yoghurt", [],        ["frozen yogurt"]),
+  ("chilli flakes", ["tabasco pepper plant", "thai pepper plant", "cayenne pepper"],
+                  ["black pepper plant"]),
+  ("smoked paprika", [],       ["Maize plant"]),
+  ("san marzano tomatoes", ["tomato juice food product", "tomato (whole or pieces)"],
+                  ["Maize plant"]),
+  # shrimp, not crustacean: crab and lobster are a different question
+  ("prawns",      ["whiteleg shrimp", "giant tiger prawn"],
+                  ["Maize plant", "oyster", "blue crab"]),
 ]
-MIN_CLOSURE = {"edamame": 1, "paprika": 1, "sulphites": 2}
+MIN_CLOSURE = {"edamame": 1, "paprika": 1, "sulphites": 2,
+               "creme fraiche": 1, "double cream": 1, "greek yoghurt": 1,
+               "smoked paprika": 2}
 
 fails, checks = [], 0
 print(f"{'query':<22} {'status':<11} {'roots':<44} {'closure':>8}  expect")
@@ -115,13 +139,20 @@ print("-" * 108)
 #                     facet difference.
 #
 # A future loosening of `_interchangeable` that merges any of these is a regression.
+#
+# Run against a STORE-FREE resolver. `prawn` is pinned to `shrimp` as of 2026-09-10,
+# so the live resolver never reaches the merge for it -- and a trap that passes
+# because the code path it guards was bypassed is a guard that has quietly stopped
+# guarding. Pinning is a decision about one term; the merge behaviour underneath it
+# still has to hold, and this is where that is asserted.
+r_nopin = Resolver(graph=g, store=None)
 TRAPS = [
   ("strawberry", "merges", ["strawberry", "strawberry plant"], ["strawberry tree"]),
   ("prawn",      "holds",  [], []),
   ("coffee",     "holds",  [], []),
 ]
 for q, expect, must_merge, must_exclude in TRAPS:
-    res = r.resolve(q)
+    res = r_nopin.resolve(q)
     checks += 1
     roots = {g.label(i) for i in (res.get("roots") or [])}
     if expect == "holds":

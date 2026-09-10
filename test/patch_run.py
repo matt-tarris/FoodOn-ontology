@@ -72,14 +72,33 @@ for o in json.load(open("config/overrides.json"))["overrides"]:
         for r in roots:
             expected_as.add((cur(tgt), WEAK[claim], cur(r)))
 
-# parallel-hierarchy correspondences, recomputed the same way the emitter does
+# parallel-hierarchy correspondences, recomputed the same way the emitter does.
+# Compared as UNORDERED pairs. Two facets of one ingredient often expand to each
+# other -- `tomato` finds `tomato plant` and `tomato plant` finds `tomato` -- and
+# the emitter writes such a pair once. That is not a gap: the property is declared
+# symmetric, and because `robot query` does no reasoning, build/sparql/
+# patch_closure.rq walks it in both directions explicitly. Demanding both triples
+# here would fail the emitter for output the consumer reads correctly.
 store = json.load(open("data/resolution-store.json"))
 _roots = sorted({r for e in store["entries"].values()
                  if e.get("status") == "resolved" for r in (e.get("roots") or [])})
+expected_same = set()
 for _r in _roots:
     for _k in (g.expand_roots([_r]) or {}):
         if _k != _r:
-            expected_as.add((cur(_r), "local:sameOrganismAs", cur(_k)))
+            expected_same.add(frozenset((cur(_r), cur(_k))))
+ttl_same = {frozenset((t, v)) for t, p, v in assertions if p == "local:sameOrganismAs"}
+assertions = {(t, p, v) for t, p, v in assertions if p != "local:sameOrganismAs"}
+
+checks += 1
+if expected_same - ttl_same:
+    fails.append(f"{len(expected_same - ttl_same)} organism correspondences absent "
+                 f"from the .ttl, e.g. {[sorted(x) for x in list(expected_same - ttl_same)[:3]]}")
+checks += 1
+if ttl_same - expected_same:
+    fails.append(f"{len(ttl_same - expected_same)} organism correspondences in the "
+                 f".ttl with no governed root behind them, e.g. "
+                 f"{[sorted(x) for x in list(ttl_same - expected_same)[:3]]}")
 
 checks += 1
 missing = expected_ax - axioms
@@ -119,7 +138,8 @@ if pairs_weak & pairs_cont:
                  f"{sorted(pairs_weak & pairs_cont)[:3]}")
 
 print(f"round trip: {len(axioms)} containment axioms, {len(assertions)} local "
-      f"assertions, all traced to a governed file")
+      f"assertions, {len(ttl_same)} organism correspondences, all traced to a "
+      f"governed file")
 
 # ---------------------------------------------------------------- parity
 if not os.path.exists(QUERYABLE):

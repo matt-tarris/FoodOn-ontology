@@ -3206,6 +3206,10 @@ obo:FOODON_03411230 local:sameOrganismAs obo:NCBITaxon_4513 .
 obo:FOODON_03316061 local:sameOrganismAs obo:NCBITaxon_9031 .
 ### chicken egg  <->  chicken egg food product   [label convention]
 obo:FOODON_03316061 local:sameOrganismAs obo:FOODON_00001275 .
+### coriander  <->  coriander food product   [label convention]
+obo:FOODON_03310370 local:sameOrganismAs obo:FOODON_00001763 .
+### coriander  <->  coriander plant   [label convention]
+obo:FOODON_03310370 local:sameOrganismAs obo:FOODON_03411381 .
 ### mollusc  <->  mollusc food product   [label convention]
 obo:FOODON_03412112 local:sameOrganismAs obo:FOODON_00002044 .
 ### nut food product  <->  nut   [label convention (stripped)]
@@ -3214,12 +3218,26 @@ obo:FOODON_00001172 local:sameOrganismAs obo:FOODON_03303171 .
 obo:FOODON_03414319 local:sameOrganismAs obo:FOODON_00003429 .
 ### rye plant  <->  Secale cereale   [taxon pivot]
 obo:FOODON_03411313 local:sameOrganismAs obo:NCBITaxon_4550 .
+### shrimp  <->  shrimp food product   [label convention]
+obo:FOODON_03411237 local:sameOrganismAs obo:FOODON_00002239 .
+### shrimp  <->  shrimp species   [label convention]
+obo:FOODON_03411237 local:sameOrganismAs obo:FOODON_00005670 .
+### snow pea plant  <->  Lathyrus oleraceus subsp. oleraceus   [taxon pivot]
+obo:FOODON_03412466 local:sameOrganismAs obo:NCBITaxon_208194 .
 ### solanaceae plant  <->  Solanaceae   [label convention (stripped)]
 obo:FOODON_03414934 local:sameOrganismAs obo:NCBITaxon_4070 .
 ### soybean plant  <->  Glycine max   [taxon pivot]
 obo:FOODON_03411452 local:sameOrganismAs obo:NCBITaxon_3847 .
 ### soybean plant  <->  soybean   [label convention (stripped)]
 obo:FOODON_03411452 local:sameOrganismAs obo:FOODON_03301415 .
+### tomato  <->  Solanum lycopersicum   [taxon pivot]
+obo:FOODON_03301453 local:sameOrganismAs obo:NCBITaxon_4081 .
+### tomato  <->  tomato food product   [label convention]
+obo:FOODON_03301453 local:sameOrganismAs obo:FOODON_00001164 .
+### tomato  <->  tomato plant   [label convention]
+obo:FOODON_03301453 local:sameOrganismAs obo:FOODON_03411276 .
+### tomato plant  <->  Solanum lycopersicum   [taxon pivot]
+obo:FOODON_03411276 local:sameOrganismAs obo:NCBITaxon_4081 .
 
 
 # --- pinned free-text resolutions -------------------------------------------
@@ -3230,19 +3248,30 @@ obo:FOODON_03411230 local:resolvesQuery "gluten" , "gluten containing grains" , 
 obo:FOODON_00001260 local:resolvesQuery "beer" .
 obo:FOODON_00001134 local:resolvesQuery "beef" .
 obo:FOODON_03316061 local:resolvesQuery "egg" .
+obo:FOODON_00003744 local:resolvesQuery "chili flakes" , "chilli flakes" .
+obo:FOODON_03310370 local:resolvesQuery "cilantro" .
+obo:FOODON_03411381 local:resolvesQuery "cilantro" .
+obo:FOODON_03302607 local:resolvesQuery "creme fraiche" , "creme fraîche" , "crème fraiche" , "crème fraîche" .
 obo:FOODON_00002809 local:resolvesQuery "edamame" .
 obo:FOODON_03420194 local:resolvesQuery "egg" .
+obo:FOODON_00004409 local:resolvesQuery "greek yoghurt" .
+obo:FOODON_03310795 local:resolvesQuery "double cream" .
 obo:FOODON_03411134 local:resolvesQuery "alpha gal" , "alpha-gal" , "mammalian meat" , "mammalian meat (alpha-gal)" , "red meat" .
 obo:FOODON_03412112 local:resolvesQuery "mollusc" , "molluscan shellfish" , "molluscs" , "mollusk" , "shellfish (mollusc)" .
 obo:FOODON_00001172 local:resolvesQuery "tree nut" , "tree nuts" , "treenut" .
 obo:FOODON_03411213 local:resolvesQuery "tree nut" , "tree nuts" , "treenut" .
 obo:FOODON_03414319 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
-obo:FOODON_03301223 local:resolvesQuery "paprika" .
-obo:FOODON_03316348 local:resolvesQuery "paprika" .
+obo:FOODON_03301223 local:resolvesQuery "paprika" , "smoked paprika" .
+obo:FOODON_03316348 local:resolvesQuery "paprika" , "smoked paprika" .
 obo:FOODON_03411313 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
+obo:FOODON_03411237 local:resolvesQuery "prawn" , "prawns" .
+obo:FOODON_03412466 local:resolvesQuery "mange tout" , "mange-tout" , "mangetout" .
 obo:FOODON_03414934 local:resolvesQuery "nightshade" , "nightshades" , "solanaceae" .
 obo:FOODON_03411452 local:resolvesQuery "soja" , "soy" , "soya" , "soybean" .
 obo:CHEBI_26823 local:resolvesQuery "sulfite" , "sulfites" , "sulfur dioxide" , "sulphite" , "sulphites" , "sulphur dioxide" .
+obo:FOODON_03301453 local:resolvesQuery "san marzano" , "san marzano tomato" , "san marzano tomatoes" .
+obo:FOODON_00001164 local:resolvesQuery "san marzano" , "san marzano tomato" , "san marzano tomatoes" .
+obo:FOODON_03411276 local:resolvesQuery "san marzano" , "san marzano tomato" , "san marzano tomatoes" .
 obo:FOODON_03411358 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
 obo:FOODON_03411312 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
 obo:FOODON_00002364 local:resolvesQuery "wine" .

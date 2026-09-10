@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-10",
+  "version": "1.0.0",
   "resolver_version": "1.0.0",
   "ontology_version": "2025-12-30",
   "note": "Only terms the deterministic stage could not settle. Terms absent here are resolved live by build/resolve.py on lexical + structural evidence.",
@@ -617,13 +617,9 @@
       "resolver_version": "1.0.0"
     },
     "wine": {
+      "query": "wine",
       "status": "resolved",
       "method": "offline-review",
-      "reviewed_by": "Matt",
-      "reviewed_date": "2026-09-10",
-      "ontology_version": "2025-12-30",
-      "resolver_version": "1.0.0",
-      "query": "wine",
       "roots": [
         "http://purl.obolibrary.org/obo/FOODON_00002364"
       ],
@@ -632,16 +628,16 @@
       ],
       "confidence": "high",
       "rationale": "FoodOn has no class labelled `wine`, only preparation variants -- `wine (dealcoholized)`, `wine (canned)`, `wine (homemade)` -- so the lexical resolver ranked those and returned `ambiguous` with nothing usable. Pinned to `wine or wine-like food product` (106 classes) rather than `grape wine` (55): the broader class carries fruit wine as well as the grape varietals, and someone avoiding wine is avoiding all of it. Verified to cover Bordeaux, Burgundy, Chardonnay, Chianti and fruit wine.",
-      "note": "no base class exists upstream; this is a data gap, not a scoring failure"
-    },
-    "beer": {
-      "status": "resolved",
-      "method": "offline-review",
+      "note": "no base class exists upstream; this is a data gap, not a scoring failure",
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-10",
       "ontology_version": "2025-12-30",
-      "resolver_version": "1.0.0",
+      "resolver_version": "1.0.0"
+    },
+    "beer": {
       "query": "beer",
+      "status": "resolved",
+      "method": "offline-review",
       "roots": [
         "http://purl.obolibrary.org/obo/FOODON_00001260"
       ],
@@ -650,16 +646,16 @@
       ],
       "confidence": "high",
       "rationale": "Same shape as wine: no `beer` class, only variants like `beer (draft)` and `beer (freeze-concentrated)`. `beer beverage` is the general class, 17 classes, and covers ale, pale ale, India pale ale, porter, brown beer and barley malt beer. Gluten-relevant, since barley malt beer sits inside it.",
-      "note": "no base class exists upstream; this is a data gap, not a scoring failure"
-    },
-    "beef": {
-      "status": "resolved",
-      "method": "offline-review",
+      "note": "no base class exists upstream; this is a data gap, not a scoring failure",
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-10",
       "ontology_version": "2025-12-30",
-      "resolver_version": "1.0.0",
+      "resolver_version": "1.0.0"
+    },
+    "beef": {
       "query": "beef",
+      "status": "resolved",
+      "method": "offline-review",
       "roots": [
         "http://purl.obolibrary.org/obo/FOODON_00001134"
       ],
@@ -668,7 +664,351 @@
       ],
       "confidence": "high",
       "rationale": "No `beef` or `beef food product` class exists; the resolver was ranking `beef (ground)`, `beef (cooked)` and `beef (chopped)`. Pinned to `bovine meat food product`, which reaches beef steak, ground beef patty, beef jerky, beef broth, beef liver and corned beef. The meat-cut classes were considered instead -- `piece of beef` (320) and `butchery cut of beef` (286) are dairy-clean -- and rejected because they miss all of the processed beef: jerky, broth, patties and organs. Recall-first, with the dairy over-reach removed by a signed `remove` override rather than by narrowing the root.",
-      "note": "this root pivots through `cow food product --in taxon--> Bos taurus` and so reaches cow milk and cheese; see the `remove` override in config/overrides.json, which takes the closure from 1,555 to 785 and dairy from 677 classes to 25"
+      "note": "this root pivots through `cow food product --in taxon--> Bos taurus` and so reaches cow milk and cheese; see the `remove` override in config/overrides.json, which takes the closure from 1,555 to 785 and dairy from 677 classes to 25",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "mangetout": {
+      "query": "mangetout",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03412466"
+      ],
+      "root_labels": [
+        "snow pea plant"
+      ],
+      "confidence": "high",
+      "rationale": "'mangetout' appears on no FoodOn label or synonym. It is the British and French culinary name for the snow pea -- the flat, immature edible pod of Lathyrus oleraceus (formerly Pisum sativum) var. macrocarpon. `snow pea plant` (closure 11) is the source-form class, and its descent already contains `snow pea pod (edible, fresh)`, so pinning the plant covers the food form too.",
+      "note": "the closure also carries `sugar snap pea plant` and `field pea`, which sit in the same FoodOn cultivar cluster. Broader than mangetout strictly is, but every member is the same species, so nothing false is claimed.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "mange tout": {
+      "query": "mange tout",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03412466"
+      ],
+      "root_labels": [
+        "snow pea plant"
+      ],
+      "confidence": "high",
+      "rationale": "'mangetout' appears on no FoodOn label or synonym. It is the British and French culinary name for the snow pea -- the flat, immature edible pod of Lathyrus oleraceus (formerly Pisum sativum) var. macrocarpon. `snow pea plant` (closure 11) is the source-form class, and its descent already contains `snow pea pod (edible, fresh)`, so pinning the plant covers the food form too.",
+      "note": "the closure also carries `sugar snap pea plant` and `field pea`, which sit in the same FoodOn cultivar cluster. Broader than mangetout strictly is, but every member is the same species, so nothing false is claimed.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "mange-tout": {
+      "query": "mange-tout",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03412466"
+      ],
+      "root_labels": [
+        "snow pea plant"
+      ],
+      "confidence": "high",
+      "rationale": "'mangetout' appears on no FoodOn label or synonym. It is the British and French culinary name for the snow pea -- the flat, immature edible pod of Lathyrus oleraceus (formerly Pisum sativum) var. macrocarpon. `snow pea plant` (closure 11) is the source-form class, and its descent already contains `snow pea pod (edible, fresh)`, so pinning the plant covers the food form too.",
+      "note": "the closure also carries `sugar snap pea plant` and `field pea`, which sit in the same FoodOn cultivar cluster. Broader than mangetout strictly is, but every member is the same species, so nothing false is claimed.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "cilantro": {
+      "query": "cilantro",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03310370",
+        "http://purl.obolibrary.org/obo/FOODON_03411381"
+      ],
+      "root_labels": [
+        "coriander",
+        "coriander plant"
+      ],
+      "confidence": "high",
+      "rationale": "The only pin here that overrides a resolution the deterministic stage already makes. `cilantro` reached `Coriandrum sativum` (closure 8) -- the organism, correct but thin. The query 'coriander' resolves to `coriander` + `coriander plant` (closure 14), which additionally carries the leaf forms (raw, dried, whole), `coriander food product`, `curry powder` and `pickling spice`. The 8-node closure is a strict subset of the 14, verified, so this loses nothing. Cilantro and coriander are the same plant under two names and should return the same graph.",
+      "note": "`coriander` itself is deliberately NOT pinned: it resolves correctly without help and should keep tracking the ontology.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "creme fraiche": {
+      "query": "creme fraiche",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03302607"
+      ],
+      "root_labels": [
+        "cream (cultured)"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models creme fraiche only as an EFSA FoodEx2 code-list entry, `27170 - creme fraiche and other mild variants of sour cream`, which sits in an excluded branch and cannot be a root. The nearest real class is `cream (cultured)`, which is what creme fraiche is: cream soured with a mesophilic culture. A leaf (closure 1), so the graph is small and honest rather than large and wrong.",
+      "note": "the broad alternative is `cream food product` (closure 61 -- clotted cream, whipped cream, coffee creamer, ranch dressing). Rejected as over-inclusion: cream is not the allergen, milk is, and a diner with a dairy problem should say 'dairy' or 'milk', both of which already resolve.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "cr\u00e8me fra\u00eeche": {
+      "query": "cr\u00e8me fra\u00eeche",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03302607"
+      ],
+      "root_labels": [
+        "cream (cultured)"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models creme fraiche only as an EFSA FoodEx2 code-list entry, `27170 - creme fraiche and other mild variants of sour cream`, which sits in an excluded branch and cannot be a root. The nearest real class is `cream (cultured)`, which is what creme fraiche is: cream soured with a mesophilic culture. A leaf (closure 1), so the graph is small and honest rather than large and wrong.",
+      "note": "the broad alternative is `cream food product` (closure 61 -- clotted cream, whipped cream, coffee creamer, ranch dressing). Rejected as over-inclusion: cream is not the allergen, milk is, and a diner with a dairy problem should say 'dairy' or 'milk', both of which already resolve.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "cr\u00e8me fraiche": {
+      "query": "cr\u00e8me fraiche",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03302607"
+      ],
+      "root_labels": [
+        "cream (cultured)"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models creme fraiche only as an EFSA FoodEx2 code-list entry, `27170 - creme fraiche and other mild variants of sour cream`, which sits in an excluded branch and cannot be a root. The nearest real class is `cream (cultured)`, which is what creme fraiche is: cream soured with a mesophilic culture. A leaf (closure 1), so the graph is small and honest rather than large and wrong.",
+      "note": "the broad alternative is `cream food product` (closure 61 -- clotted cream, whipped cream, coffee creamer, ranch dressing). Rejected as over-inclusion: cream is not the allergen, milk is, and a diner with a dairy problem should say 'dairy' or 'milk', both of which already resolve.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "creme fra\u00eeche": {
+      "query": "creme fra\u00eeche",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03302607"
+      ],
+      "root_labels": [
+        "cream (cultured)"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models creme fraiche only as an EFSA FoodEx2 code-list entry, `27170 - creme fraiche and other mild variants of sour cream`, which sits in an excluded branch and cannot be a root. The nearest real class is `cream (cultured)`, which is what creme fraiche is: cream soured with a mesophilic culture. A leaf (closure 1), so the graph is small and honest rather than large and wrong.",
+      "note": "the broad alternative is `cream food product` (closure 61 -- clotted cream, whipped cream, coffee creamer, ranch dressing). Rejected as over-inclusion: cream is not the allergen, milk is, and a diner with a dairy problem should say 'dairy' or 'milk', both of which already resolve.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "double cream": {
+      "query": "double cream",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03310795"
+      ],
+      "root_labels": [
+        "heavy cream"
+      ],
+      "confidence": "high",
+      "rationale": "'double cream' appears on no FoodOn label. `heavy cream` is the same product under the US name -- both are the >=36% butterfat pouring cream -- and it is a real FoodOn class that the query 'heavy cream' already resolves to. A leaf (closure 1).",
+      "note": "same breadth trade-off as creme fraiche: `cream food product` (61) was available and rejected for the same reason.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "greek yoghurt": {
+      "query": "greek yoghurt",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00004409"
+      ],
+      "root_labels": [
+        "greek yogurt"
+      ],
+      "confidence": "high",
+      "rationale": "A spelling gap, nothing more: FoodOn has `greek yogurt` and the query 'greek yogurt' resolves to it. The British spelling fails only because the compound has no match, even though 'yoghurt' alone already resolves through the GS1 and EFSA synonyms. A leaf (closure 1) -- greek yogurt is an endpoint in FoodOn, with nothing modelled as derived from it.",
+      "note": "low-yield by nature. Someone avoiding greek yoghurt for a dairy reason wants 'dairy' or 'milk'; this pin answers the literal question.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "chilli flakes": {
+      "query": "chilli flakes",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00003744"
+      ],
+      "root_labels": [
+        "chili pepper"
+      ],
+      "confidence": "high",
+      "rationale": "Two gaps at once: the British 'chilli' spelling and the '... flakes' form. FoodOn models no flake form of chili, so the pin goes to the ingredient itself. `chili pepper` (closure 160) is what the queries 'chili', 'chili pepper' and 'chilli pepper' all already resolve to, so this makes the flake phrasing agree with them.",
+      "note": "the closure is the Capsicum cultivar set, which includes sweet bell peppers. That is FoodOn's own structure, not a claim that bell pepper is a chilli.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "chili flakes": {
+      "query": "chili flakes",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00003744"
+      ],
+      "root_labels": [
+        "chili pepper"
+      ],
+      "confidence": "high",
+      "rationale": "Two gaps at once: the British 'chilli' spelling and the '... flakes' form. FoodOn models no flake form of chili, so the pin goes to the ingredient itself. `chili pepper` (closure 160) is what the queries 'chili', 'chili pepper' and 'chilli pepper' all already resolve to, so this makes the flake phrasing agree with them.",
+      "note": "the closure is the Capsicum cultivar set, which includes sweet bell peppers. That is FoodOn's own structure, not a claim that bell pepper is a chilli.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "smoked paprika": {
+      "query": "smoked paprika",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03301223",
+        "http://purl.obolibrary.org/obo/FOODON_03316348"
+      ],
+      "root_labels": [
+        "paprika (ground)",
+        "paprika puree"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models no smoked, sweet or hot paprika -- only the two forms already pinned for the bare query 'paprika'. This pin makes the qualified phrasing agree with the unqualified one rather than returning nothing. Both roots are leaves (closure 2 together).",
+      "note": "deliberately identical to the `paprika` pin. Its value in this project is as the TARGET of a nightshade or pepper query, which reaches it through the repaired `hungarian wax pepper food product -> hungarian wax pepper plant` edge, not as a root.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "san marzano tomatoes": {
+      "query": "san marzano tomatoes",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411276",
+        "http://purl.obolibrary.org/obo/FOODON_03301453",
+        "http://purl.obolibrary.org/obo/FOODON_00001164"
+      ],
+      "root_labels": [
+        "tomato plant",
+        "tomato",
+        "tomato food product"
+      ],
+      "confidence": "high",
+      "rationale": "San Marzano is a plum tomato cultivar FoodOn does not model, though it models many others (Beefsteak, Carbon, Damsel, Roma). The three roots are exactly what the query 'tomato' resolves to after the facet merge, closure 164. Adding `Solanum lycopersicum` as a fourth root was tested and changes nothing: root expansion pairs the plant with its NCBITaxon species automatically.",
+      "note": "a cultivar-name pin. If FoodOn later adds a San Marzano class this entry becomes wrong in the direction of too broad, which is what build/check_upstream_fixes.py is for.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "san marzano tomato": {
+      "query": "san marzano tomato",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411276",
+        "http://purl.obolibrary.org/obo/FOODON_03301453",
+        "http://purl.obolibrary.org/obo/FOODON_00001164"
+      ],
+      "root_labels": [
+        "tomato plant",
+        "tomato",
+        "tomato food product"
+      ],
+      "confidence": "high",
+      "rationale": "San Marzano is a plum tomato cultivar FoodOn does not model, though it models many others (Beefsteak, Carbon, Damsel, Roma). The three roots are exactly what the query 'tomato' resolves to after the facet merge, closure 164. Adding `Solanum lycopersicum` as a fourth root was tested and changes nothing: root expansion pairs the plant with its NCBITaxon species automatically.",
+      "note": "a cultivar-name pin. If FoodOn later adds a San Marzano class this entry becomes wrong in the direction of too broad, which is what build/check_upstream_fixes.py is for.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "san marzano": {
+      "query": "san marzano",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411276",
+        "http://purl.obolibrary.org/obo/FOODON_03301453",
+        "http://purl.obolibrary.org/obo/FOODON_00001164"
+      ],
+      "root_labels": [
+        "tomato plant",
+        "tomato",
+        "tomato food product"
+      ],
+      "confidence": "high",
+      "rationale": "San Marzano is a plum tomato cultivar FoodOn does not model, though it models many others (Beefsteak, Carbon, Damsel, Roma). The three roots are exactly what the query 'tomato' resolves to after the facet merge, closure 164. Adding `Solanum lycopersicum` as a fourth root was tested and changes nothing: root expansion pairs the plant with its NCBITaxon species automatically.",
+      "note": "a cultivar-name pin. If FoodOn later adds a San Marzano class this entry becomes wrong in the direction of too broad, which is what build/check_upstream_fixes.py is for.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "prawns": {
+      "query": "prawns",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411237"
+      ],
+      "root_labels": [
+        "shrimp"
+      ],
+      "confidence": "high",
+      "rationale": "'prawn' and 'shrimp' are the same animals under British and American names. FoodOn commits to `shrimp` as the class name while scattering 'prawn' across species labels (`Indian prawn`, `western king prawn`, `caramote prawn`). The bare query came back ambiguous because those species labels compete with the EFSA code-list entries; `shrimp` (closure 214) is the grain that covers them all.",
+      "note": "NOT pinned to `crustacean` (closure 731). A clinical crustacean allergy is usually broader than prawn -- crab and lobster too -- but that is a different question from the one the diner asked, and 'shellfish (crustacean)' already resolves for when they mean it.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "prawn": {
+      "query": "prawn",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411237"
+      ],
+      "root_labels": [
+        "shrimp"
+      ],
+      "confidence": "high",
+      "rationale": "'prawn' and 'shrimp' are the same animals under British and American names. FoodOn commits to `shrimp` as the class name while scattering 'prawn' across species labels (`Indian prawn`, `western king prawn`, `caramote prawn`). The bare query came back ambiguous because those species labels compete with the EFSA code-list entries; `shrimp` (closure 214) is the grain that covers them all.",
+      "note": "NOT pinned to `crustacean` (closure 731). A clinical crustacean allergy is usually broader than prawn -- crab and lobster too -- but that is a different question from the one the diner asked, and 'shellfish (crustacean)' already resolves for when they mean it.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
     }
   }
 }
