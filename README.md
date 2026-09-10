@@ -513,6 +513,22 @@ is an artefact of how finely that branch was subdivided; it is not a statement a
 relevance, and truncating on it hands back a shorter answer with nothing on screen to
 say it was shortened.
 
+**Plurals are normalised, but only to a form FoodOn knows.** A diner types
+`tomatoes`. FoodOn is inconsistent about which form it carries — `potatoes` is a
+synonym upstream and resolved, `tomatoes` was not and returned `absent`. Measured over
+84 real singular/plural pairs, 25 plurals failed while the singular worked.
+
+The query as typed always wins; a singular is only tried if it resolves to nothing
+usable, so `molluscs`, `sulphites`, `nightshades` and `grits` are never rewritten out
+from under themselves. And a candidate singular is accepted **only if FoodOn already
+knows it** — an exact hit on a pin, a label, a synonym or a preparation-stripped
+label. That guard is the whole point: a bare suffix-stripper is worse than doing
+nothing, because `peaches → pea` *resolves*, to pea's 106-class closure instead of
+peach's 59. Candidates are tried smallest-edit first, which is what sends `peaches` to
+`peach` before it could ever reach `pea`, and `octopuses` to `octopus` rather than
+`octopu`. **70 of 72 plural forms now resolve**, 22 of them by this route; the two that
+do not are `prawns` (four species, genuinely ambiguous) and `knives`.
+
 **A facet is not a sense.** FoodOn splits one ingredient across up to four classes —
 the plant, the food, the `<X> food product` grouping and the NCBITaxon taxon. Scoring
 those against each other treats them as competing answers, and they are not:

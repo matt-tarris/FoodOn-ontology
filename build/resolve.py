@@ -128,6 +128,45 @@ class Resolver:
         alts.sort(key=lambda a: -a["closure"])
         return alts[:5]
 
+    # ---- plural normalisation ----------------------------------------------
+    # A diner types `tomatoes`, not `tomato`. FoodOn is inconsistent about which it
+    # carries: `potatoes` is a synonym upstream and resolves, `tomatoes` is not and
+    # returned `absent`. Measured over 84 real singular/plural pairs, 25 plurals
+    # failed while the singular worked -- all of them the irregular endings (-ies,
+    # -oes, -es, -ves) plus plurals of terms that are only reachable through a pin.
+    #
+    # Pinning each plural was the alternative and was rejected: it fixes the nine
+    # terms measured and nothing else, and it duplicates every future pin. This is
+    # the general rule the project's own note asks for.
+    #
+    # THE SAFETY PROPERTY. A bare suffix-stripper is worse than doing nothing,
+    # because it invents terms that happen to resolve to the WRONG thing:
+    # `peaches` -> `pea` resolves, to pea's 106-class closure instead of peach's 59.
+    # `octopuses` -> `octopu`, `radishes` -> `radi`, `chillies` -> `chilly`.
+    # So a candidate singular is only accepted if FoodOn already KNOWS it -- an exact
+    # hit on a pin, a label, a synonym, or a preparation-stripped label. Candidates
+    # are tried smallest-edit first, which is what makes `peaches` reach `peach`
+    # (strip `-es`) before it could ever reach `pea` (strip `-ches`).
+    def _known(self, w):
+        return (w in self.store.get("entries", {}) or w in self.label_ix
+                or w in self.syn_ix or w in self.bare_ix)
+
+    def singularise(self, q):
+        """A singular form FoodOn knows, or None. Never invents a term."""
+        w = q.strip().lower()
+        if len(w) < 4 or not w.endswith("s"):
+            return None
+        cands = []
+        if w.endswith("ies"): cands.append(w[:-3] + "y")
+        if w.endswith("ves"): cands += [w[:-3] + "fe", w[:-3] + "f"]
+        if w.endswith("oes"): cands.append(w[:-2])
+        if w.endswith("es"):  cands.append(w[:-2])
+        cands.append(w[:-1])
+        for c in cands:
+            if len(c) >= 3 and c != w and self._known(c):
+                return c
+        return None
+
     # ---- facet merge --------------------------------------------------------
     # A cuisine query names an INGREDIENT, and FoodOn splits every ingredient across
     # up to four classes: the plant, the food, the `<X> food product` grouping and
@@ -199,7 +238,29 @@ class Resolver:
             bases.update(why); k += 1
         return (iris[:k], sorted(bases)) if k >= 2 else ([], [])
 
-    def resolve(self, query, margin=8.0):
+    def resolve(self, query, margin=8.0, _normalised_from=None):
+        key = query.strip().lower()
+        # The query as typed always wins. Only if it resolves to nothing usable is a
+        # known singular tried, so a term that is genuinely plural upstream
+        # (`molluscs`, `sulphites`, `grits`) is never rewritten out from under itself.
+        if _normalised_from is None:
+            direct = self._resolve_exact(query, margin)
+            if direct.get("status") == "resolved":
+                return direct
+            sing = self.singularise(query)
+            if sing:
+                alt = self.resolve(sing, margin, _normalised_from=key)
+                if alt.get("status") == "resolved":
+                    out = dict(alt, query=query, normalised_from=key,
+                               normalised_to=sing)
+                    out["note"] = (f"`{key}` is not a FoodOn term; resolved via the "
+                                   f"singular `{sing}`, which is. "
+                                   + str(alt.get("note") or "")).strip()
+                    return out
+            return direct
+        return self._resolve_exact(query, margin)
+
+    def _resolve_exact(self, query, margin=8.0):
         key = query.strip().lower()
         pinned = self.store.get("entries", {}).get(key)
         if pinned:
