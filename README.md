@@ -74,6 +74,32 @@ single-child chains collapse onto one ray (`d3.tree` centres a parent over its
 children — corn puts 89 nodes on 72 distinct angles), which is a radial collision no
 amount of extra circumference fixes. `always show labels` overrides the whole pass.
 
+**A collapsed cluster is named by culinary function, or by nothing at all.** Where
+FoodOn supplies a US CFR rollup, the cluster gets a readable category —
+`Bakery & Grain Products · 20`, `Thickeners, Stabilizers & Gelling Agents · 9`. That
+path works, and `config/function-categories.json` maps all 170 CFR groups FoodOn uses
+onto 19 categories with none left over.
+
+But only **2,342 of 39,894 classes** carry a `member of` rollup at all, so across 16
+allergen queries 93 of 136 clusters had no category. Those used to read `via is a` or
+`via derives from`, which claimed a grouping rationale the data cannot support: every
+child in a taxonomy is reached by `is a`, so the label only repeated what the edge
+colour already drew. They now read **`16 more`** — the count is the one fact about
+such a group that is certainly true, and it is what you act on. The relation stays on
+the edge colour and in the tooltip (`reached by derives from`).
+
+Measured before removing it, on the 135 affected clusters: a shared label stem that
+adds anything beyond the parent's own name exists for **8%**. Another 27% have a stem
+that merely echoes the parent — `potato` under `potato (whole or pieces)`, `pepper
+plant` under `hot pepper plant` — which is no better than `via is a`, and 64% have no
+stem at all. Role homogeneity was no better: 62% of clusters are role-pure, but the
+labels that yields read as `18 derivatives`. FoodOn names children by extending the
+parent's name, which is exactly what makes a shared stem redundant here.
+
+Grouping is still by relation even when unlabelled, so two count-only clusters can
+hang off one parent with different edge colours. Merging them would force one colour
+onto a mixed group and misreport how the members were reached.
+
 One signal per visual channel, and none of them doubles up:
 
 | channel | encodes |

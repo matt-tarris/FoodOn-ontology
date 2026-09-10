@@ -143,22 +143,44 @@ function buildDisplay(graph, expanded, showLow, revealed) {
 
     // wide sibling sets group by culinary function before they are drawn
     if (out.length > 14 && !out.some((e) => forced.has(e.target))) {
+      /* A wide sibling set is grouped by CULINARY FUNCTION where FoodOn supplies
+       * one (spec 6) -- `Bakery & Grain Products`, `Thickeners, Stabilizers &
+       * Gelling Agents`. That path works and is kept, but it only ever applies to a
+       * minority: only 2,342 of 39,894 classes carry a `member of` CFR rollup at
+       * all, so across 16 allergen queries 93 of 136 clusters had no category.
+       *
+       * Those used to be labelled `via is a` / `via derives from`, which claimed a
+       * grouping rationale the data does not support: every child in a taxonomy is
+       * reached by `is a`, so the label only repeated what the edge already drew.
+       * Measured before removing it -- a shared label stem that adds anything beyond
+       * the parent's own name exists for 8% of these clusters; 27% have a stem that
+       * merely echoes the parent (`potato` under `potato (whole or pieces)`, `pepper
+       * plant` under `hot pepper plant`) and 64% have none at all. Role homogeneity
+       * was no better: 62% pure, but the labels it yields read as `18 derivatives`.
+       *
+       * So an uncategorised cluster now states only what is certainly true: how
+       * many. The relation stays on the edge colour, where it was already drawn, and
+       * in the tooltip.
+       *
+       * Grouping is still BY RELATION even when unlabelled. Merging them would force
+       * one incoming edge colour onto a mixed group and misreport how the members
+       * were reached.
+       */
       const groups = new Map();
       for (const e of out) {
         const n = byIri.get(e.target);
-        // culinary function first (spec 6). Failing that, group by the relation that
-        // reached them, which at least says what kind of link is being collapsed --
-        // more use than a generic "other".
-        // The readable category first (spec 6): grouping on the raw CFR label gives
-        // 170 uneven buckets mixing ingredient function with product type. Falls back
-        // to the raw label, then to the relation, so nothing is left unlabelled.
-        const key = n.function_category?.label
-                 || n.rollup_groups?.[0]?.label
-                 || `via ${e.relation_label}`;
-        if (!groups.has(key)) groups.set(key, []);
-        groups.get(key).push(e);
+        // `rollup_groups?.[0]?.label` used to sit between these two as a fallback and
+        // was dead code: function_category is DERIVED from rollup_groups, and
+        // config/function-categories.json maps all 170 CFR groups FoodOn uses, so of
+        // 863 nodes carrying a rollup, zero lacked a category.
+        const cat = n.function_category?.label || null;
+        const key = cat || ` via:${e.relation_label}`;
+        if (!groups.has(key))
+          groups.set(key, { cat, via: cat ? null : e.relation_label, members: [] });
+        groups.get(key).members.push(e);
       }
-      for (const [key, members] of groups) {
+      for (const [key, grp] of groups) {
+        const members = grp.members;
         const cid = `cluster:${id}:${key}`;
         if (expanded.has(cid) || members.length <= 2 ||
             members.some((m) => forced.has(m.target))) {
@@ -167,7 +189,8 @@ function buildDisplay(graph, expanded, showLow, revealed) {
             visible.add(e.target); queue.push(e.target);
           }
         } else {
-          clusters.push({ id: cid, parent: id, label: key, count: members.length,
+          clusters.push({ id: cid, parent: id, label: grp.cat, via: grp.via,
+                          count: members.length,
                           members: members.map((m) => m.target) });
         }
       }
@@ -186,8 +209,15 @@ function buildDisplay(graph, expanded, showLow, revealed) {
   }));
   for (const c of clusters) {
     const pd = graph.nodes.find((n) => n.iri === c.parent)?.depth ?? 1;
-    nodes.push({ iri: c.id, label: c.label, kind: "cluster", count: c.count, depth: pd + 1,
-                 members: c.members, is_root: false, convergent: false, multi_path: false });
+    // `label` is the DISPLAY string and must always be one: the lineage
+    // breadcrumb, the tooltip and the JSON drawer all read it, and a null here
+    // made the breadcrumb fall through to the synthetic cluster IRI
+    // ("cluster:http://purl.obolibrary.org/obo/..."). The category, which may
+    // legitimately be absent, gets its own field.
+    nodes.push({ iri: c.id, label: c.label || `${c.count} more`,
+                 category: c.label, via: c.via, kind: "cluster",
+                 count: c.count, depth: pd + 1, members: c.members,
+                 is_root: false, convergent: false, multi_path: false });
   }
   const nodeIds = new Set(nodes.map((n) => n.iri));
   const links = graph.edges
@@ -391,7 +421,10 @@ function GraphView({ graph, expanded, onToggle, onSelect, selected, showLow, rev
     const TAU2 = 2 * Math.PI;
     for (const d of nodes) {
       const base = trimLabel(d.label, labelTier(d) <= 2 ? 42 : 30);
-      d.labelText = d.kind === "cluster" ? base + " \u00b7 " + d.count
+      // a category keeps its name and count; an uncategorised cluster states only
+      // the count, which is the one fact about it that is certainly true
+      d.labelText = d.kind === "cluster"
+                    ? (d.category ? base + " \u00b7 " + d.count : base)
                   : d.hidden ? base + "  +" + d.hidden : base;
     }
     const LINE = 12;            // perpendicular room one line of text needs
@@ -614,7 +647,9 @@ function GraphView({ graph, expanded, onToggle, onSelect, selected, showLow, rev
     node.on("mouseenter", (ev, d) => {
         tip.style("opacity", 1)
            .html(d.kind === "cluster"
-             ? "<b>" + d.label + "</b><br>" + d.count + " items — click to expand"
+             ? "<b>" + d.label + "</b><br>" +
+               d.count + " items — click to expand" +
+               (d.via ? "<br>reached by <i>" + d.via + "</i>" : "")
              : "<b>" + d.label + "</b><br>" + (d.curie || "") +
                // radius is distance-to-deepest-leaf under a dendrogram, not depth, so
                // the hop count has to be stated rather than read off the drawing
@@ -1226,7 +1261,8 @@ function Legend() {
       <div><span class="dot" style=${{ background: "var(--n-derivative)",
         boxShadow: "0 0 0 2px var(--convergent)" }}></span>reached by several paths</div>
       <div><span class="dot" style=${{ background: "#f4efe6",
-        border: "1.4px solid #d8cfbe", borderRadius: 3 }}></span>collapsed function cluster</div>
+        border: "1.4px solid #d8cfbe", borderRadius: 3 }}></span>collapsed — named by
+        culinary function where FoodOn has one, else just the count</div>
       <div class="hint" style=${{ marginTop: 6, display: "block" }}>
         Hover any node to trace its route back to the root; the breadcrumb names the
         relation and provenance at every hop.</div>
