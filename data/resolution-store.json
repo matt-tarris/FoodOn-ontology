@@ -615,6 +615,60 @@
       "reviewed_date": "2026-09-09",
       "ontology_version": "2025-12-30",
       "resolver_version": "1.0.0"
+    },
+    "wine": {
+      "status": "resolved",
+      "method": "offline-review",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0",
+      "query": "wine",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00002364"
+      ],
+      "root_labels": [
+        "wine or wine-like food product"
+      ],
+      "confidence": "high",
+      "rationale": "FoodOn has no class labelled `wine`, only preparation variants -- `wine (dealcoholized)`, `wine (canned)`, `wine (homemade)` -- so the lexical resolver ranked those and returned `ambiguous` with nothing usable. Pinned to `wine or wine-like food product` (106 classes) rather than `grape wine` (55): the broader class carries fruit wine as well as the grape varietals, and someone avoiding wine is avoiding all of it. Verified to cover Bordeaux, Burgundy, Chardonnay, Chianti and fruit wine.",
+      "note": "no base class exists upstream; this is a data gap, not a scoring failure"
+    },
+    "beer": {
+      "status": "resolved",
+      "method": "offline-review",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0",
+      "query": "beer",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00001260"
+      ],
+      "root_labels": [
+        "beer beverage"
+      ],
+      "confidence": "high",
+      "rationale": "Same shape as wine: no `beer` class, only variants like `beer (draft)` and `beer (freeze-concentrated)`. `beer beverage` is the general class, 17 classes, and covers ale, pale ale, India pale ale, porter, brown beer and barley malt beer. Gluten-relevant, since barley malt beer sits inside it.",
+      "note": "no base class exists upstream; this is a data gap, not a scoring failure"
+    },
+    "beef": {
+      "status": "resolved",
+      "method": "offline-review",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0",
+      "query": "beef",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00001134"
+      ],
+      "root_labels": [
+        "bovine meat food product"
+      ],
+      "confidence": "high",
+      "rationale": "No `beef` or `beef food product` class exists; the resolver was ranking `beef (ground)`, `beef (cooked)` and `beef (chopped)`. Pinned to `bovine meat food product`, which reaches beef steak, ground beef patty, beef jerky, beef broth, beef liver and corned beef. The meat-cut classes were considered instead -- `piece of beef` (320) and `butchery cut of beef` (286) are dairy-clean -- and rejected because they miss all of the processed beef: jerky, broth, patties and organs. Recall-first, with the dairy over-reach removed by a signed `remove` override rather than by narrowing the root.",
+      "note": "this root pivots through `cow food product --in taxon--> Bos taurus` and so reaches cow milk and cheese; see the `remove` override in config/overrides.json, which takes the closure from 1,555 to 785 and dairy from 677 classes to 25"
     }
   }
 }

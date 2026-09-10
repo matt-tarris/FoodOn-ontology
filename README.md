@@ -333,7 +333,7 @@ python3 build/build_resolution_store.py
 python3 build/validate_store.py
 
 python3 test/run.py             # 116 golden + invariant assertions
-python3 test/resolution_run.py  # 134 resolution assertions
+python3 test/resolution_run.py  # 155 resolution assertions
 python3 test/override_run.py    # 61 assertions: signed claims do what their claim says
 python3 test/mined_run.py       # 123 assertions: nothing unsigned reaches an answer
 python3 test/allergen_run.py    # real allergen derivative coverage
@@ -541,10 +541,28 @@ what `config/repair-signoff.json` declines by name for `avian animal`; a resolve
 not do quietly what the repair pass refuses to do explicitly. Two rank pins in
 `test/resolution_run.py` hold that line.
 
-Over 107 everyday cuisine terms this took resolution from **82 to 101**. What remains
-is not a tuning problem: `wine`, `beer` and `beef` have **no base class in FoodOn** at
-all — only preparation variants like `wine (dealcoholized)` and `beef (ground)` —
-so they want pinned resolutions, with `grape wine` (55 classes) the obvious ruling.
+Over 107 everyday cuisine terms this took resolution from **82 to 101**. Of the
+remainder, `wine`, `beer` and `beef` were never a tuning problem: FoodOn has **no base
+class** for any of them, only preparation variants like `wine (dealcoholized)` and
+`beef (ground)`. They are now pinned:
+
+| query | root | closure |
+|---|---|---|
+| `wine` | `wine or wine-like food product` | 106 — chosen over `grape wine` (55) because it carries fruit wine too |
+| `beer` | `beer beverage` | 17 — ale, IPA, porter, brown beer, barley malt beer |
+| `beef` | `bovine meat food product` | 1,555 → **785** after the override below |
+
+**Beef needed an override as well as a pin.** Its root reaches `cow food product`,
+which carries `in taxon Bos taurus`; the species pivot then walks back down from the
+taxon and returns everything else bovine — `cow milk`, `cheddar cheese` and 675 more
+dairy classes. A **beef** query was telling a diner to avoid milk. The meat-cut
+classes were considered instead — `piece of beef` (320) and `butchery cut of beef`
+(286) are dairy-clean — and rejected because they miss every processed form: jerky,
+broth, patties, organs. So the pin stays broad and a signed `remove` override
+suppresses `milk` for that root, the same mechanism as peanut/tree-nut. Dairy drops
+from 677 classes to 25, and those remaining are legitimate: `dairy cow` is a bovine,
+and a cheeseburger does contain beef. Verified in both directions — a `milk` query's
+1,098 classes contain no beef, because reaching it would require ascending.
 
 **Absent is an answer.** Roughly two thirds of everyday allergen vocabulary has no
 FoodOn class at all. The resolver says so rather than resolving to something

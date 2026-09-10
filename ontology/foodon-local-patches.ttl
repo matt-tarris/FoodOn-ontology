@@ -2905,12 +2905,40 @@ local:patch-f119275e262c a local:Patch ;
 
 
 # =============================================================================
-# Exceptions that OWL cannot express as retractions   (1)
+# Exceptions that OWL cannot express as retractions   (2)
 # =============================================================================
 # OWL is monotonic: an import adds and never removes. Where an upstream
 # axiom is ontologically defensible but wrong for avoidance, the exception
 # is stated declaratively for a traversal to honour.
 
+
+### milk  --notAvoidanceRelevantFor-->  bovine meat food product
+#   confidence: high
+#   claim:      not_avoidance_relevant
+#   query:      bovine meat food product
+#   reviewer:   Matt
+#   `bovine meat food product is_a cow food product`, and `cow food product`
+#   carries `in taxon Bos taurus`. The species pivot then walks back down from
+#   the taxon and reaches everything else bovine, including `cow milk`,
+#   `cheddar cheese` and 675 more dairy classes -- so a BEEF query told a
+#   diner to avoid milk. Beef and milk are separate avoidances: FALCPA lists
+#   milk as an allergen and beef not at all, and someone who avoids beef for
+#   religious or dietary reasons is usually not avoiding dairy. Suppressing
+#   `milk` for this root takes the closure from 1,555 to 785 and dairy from
+#   677 to 25, while keeping beef steak, ground beef patty, beef jerky, beef
+#   broth and beef liver.
+obo:UBERON_0001913 local:notAvoidanceRelevantFor obo:FOODON_00001134 .
+local:patch-e0d6f777300f a local:Patch ;
+    local:patchSection "remove" ;
+    local:patchTarget obo:UBERON_0001913 ;
+    local:patchProperty local:notAvoidanceRelevantFor ;
+    local:patchValue obo:FOODON_00001134 ;
+    local:patchConfidence "high" ;
+    local:patchClaim "not_avoidance_relevant" ;
+    local:patchQuery "bovine meat food product" ;
+    rdfs:comment "`bovine meat food product is_a cow food product`, and `cow food product` carries `in taxon Bos taurus`. The species pivot then walks back down from the taxon and reaches everything else bovine, including `cow milk`, `cheddar cheese` and 675 more dairy classes -- so a BEEF query told a diner to avoid milk. Beef and milk are separate avoidances: FALCPA lists milk as an allergen and beef not at all, and someone who avoids beef for religious or dietary reasons is usually not avoiding dairy. Suppressing `milk` for this root takes the closure from 1,555 to 785 and dairy from 677 to 25, while keeping beef steak, ground beef patty, beef jerky, beef broth and beef liver." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
 
 ### peanut plant  --notAvoidanceRelevantFor-->  nut producing plant
 #   confidence: high
@@ -3199,6 +3227,8 @@ obo:FOODON_03411452 local:sameOrganismAs obo:FOODON_03301415 .
 # same string where one cannot cover the allergen alone.
 obo:FOODON_02010002 local:resolvesQuery "egg" .
 obo:FOODON_03411230 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
+obo:FOODON_00001260 local:resolvesQuery "beer" .
+obo:FOODON_00001134 local:resolvesQuery "beef" .
 obo:FOODON_03316061 local:resolvesQuery "egg" .
 obo:FOODON_00002809 local:resolvesQuery "edamame" .
 obo:FOODON_03420194 local:resolvesQuery "egg" .
@@ -3215,3 +3245,4 @@ obo:FOODON_03411452 local:resolvesQuery "soja" , "soy" , "soya" , "soybean" .
 obo:CHEBI_26823 local:resolvesQuery "sulfite" , "sulfites" , "sulfur dioxide" , "sulphite" , "sulphites" , "sulphur dioxide" .
 obo:FOODON_03411358 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
 obo:FOODON_03411312 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
+obo:FOODON_00002364 local:resolvesQuery "wine" .

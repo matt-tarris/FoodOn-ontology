@@ -61,6 +61,17 @@ CASES = [
   ("onion",       ["onion powder", "onion (raw)", "onion soup food product"], ["Maize plant"]),
   ("rice",        ["rice flour", "rice bran"],                             ["wheat plant"]),
   ("lemon",       ["lemon peel"],                                          ["Maize plant"]),
+
+  # --- pinned where FoodOn has no base class ---------------------------------
+  # wine, beer and beef exist upstream only as preparation variants
+  # (`wine (dealcoholized)`, `beef (ground)`), so no scoring rule can reach a usable
+  # root. These are pinned in data/resolution-store.json. `beef` additionally carries
+  # a `remove` override: its root pivots through `in taxon Bos taurus` and would
+  # otherwise put cow milk and cheddar on a beef-avoider's list.
+  ("wine",        ["Bordeaux wine", "Chardonnay wine", "fruit wine"],       ["Maize plant"]),
+  ("beer",        ["ale", "porter", "india pale ale"],                      ["Maize plant"]),
+  ("beef",        ["beef steak", "beef jerky", "beef broth", "beef liver",
+                   "corned beef"],                                          ["cow milk", "cheddar cheese"]),
 ]
 MIN_CLOSURE = {"edamame": 1, "paprika": 1, "sulphites": 2}
 
