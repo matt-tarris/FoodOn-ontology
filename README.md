@@ -221,6 +221,40 @@ A triplestore keeps the vendor graph separate and so can do this in one query;
 that check for a SPARQL 1.1 Update endpoint. It is optional — the ROBOT merge needs
 no infrastructure.
 
+## Reclaiming disk
+
+About 160 MB of what sits in `data/` and `ontology/` is derived and rebuildable. All
+of it is already gitignored, so this is a local-disk question only.
+
+```bash
+./tools/clean.sh                 # dry run: what would go, and the rebuild cost
+./tools/clean.sh --sparql --yes  # ~85 MB, 19s to rebuild
+./tools/clean.sh --build  --yes  # ~73 MB, 12s to rebuild
+./tools/clean.sh --all    --yes  # both
+```
+
+Dry run by default; nothing is deleted without `--yes`.
+
+The app opens exactly seven files at startup — `data/index.json` plus
+`repairs-classified.json`, `mined-classified.json`, `resolution-store.json` and three
+configs. Everything else is either a vendor download or an intermediate. `--build`
+does remove `index.json`, so the app will not start again until
+`build/build_index.py` has re-run; `--sparql` touches nothing the app reads, and
+costs only the parity half of `test/patch_run.py`, which degrades to 6 assertions
+with a message rather than failing.
+
+Two guards, and the second is the one that matters:
+
+- the vendor files (`ontology/foodon.owl`, `tools/robot.jar`) are on an explicit deny
+  list — they are downloads, not derivations, so re-fetching them is a network round
+  trip rather than a build step
+- **anything git tracks is skipped**, checked per file against the index rather than
+  trusted to the path lists. `repairs-classified.json` and `mined-classified.json`
+  look like intermediates and are read by the traversal at startup;
+  `resolution-store.json` is a governed decision. A typo in the target list cannot
+  destroy a reviewed decision — verified by adding two governed files to the list and
+  confirming they were skipped with a reason while the derived files went.
+
 ## Getting the two vendor files
 
 Neither is committed: both are large, hash-pinned and downloadable. A fresh clone
