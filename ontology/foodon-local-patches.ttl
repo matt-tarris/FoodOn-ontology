@@ -1,0 +1,3217 @@
+# =============================================================================
+# FoodOn local patch layer
+# =============================================================================
+#
+# GENERATED FILE -- do not hand-edit. Regenerate with:
+#
+#     python3 build/emit_patches.py
+#
+# Source of truth is the governed decision files, which carry the guards, the
+# claim types and the sign-off records, and which the test suite runs against:
+#
+#     data/repairs-classified.json    label-convention repairs (rule + guards)
+#     config/repair-signoff.json      human rulings on those
+#     data/mined-classified.json      definition-mined bridges
+#     config/mined-signoff.json       human rulings on those, per class
+#     config/overrides.json           reviewed claims, by claim type
+#     config/relation_policy.json     which relations propagate, and exclusions
+#     data/resolution-store.json      pinned free-text resolutions
+#
+# HOW TO USE
+#
+#     java -jar tools/robot.jar merge \
+#          --input ontology/foodon.owl \
+#          --input ontology/foodon-local-patches.ttl \
+#          --output ontology/foodon-merged.owl
+#
+# `ontology/foodon.owl` is never modified. Drop in a new upstream release and
+# re-merge; a catalog (ontology/catalog-v001.xml) resolves the owl:imports below
+# to the local copy so this file also loads standalone in a reasoner or
+# triplestore.
+#
+# HOW TO AUDIT
+#
+# Every axiom below is preceded by a comment block naming the rule that produced
+# it, the guards it passed, the evidence, and who signed it. The same facts are
+# repeated as a machine-readable `local:Patch` record, so an audit can also be run
+# in SPARQL -- see build/sparql/upstream_fixed.rq, which finds patches that a new
+# upstream release has made redundant.
+#
+# WHAT IS DELIBERATELY NOT A CONTAINMENT AXIOM
+#
+# `may_contain`, `cross_reactive` and `disputed` are NOT containment and are
+# emitted on their own declared properties, never on RO:0001000. Asserting them as
+# `derives from` would tell a corn-avoider that citric acid contains corn, which is
+# not a property of the substance. See the property comments below.
+#
+# ontology version patched : 2025-12-30
+# generated                : 2026-09-10
+# =============================================================================
+
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix local:   <https://fluxon.com/ns/foodon-local/> .
+
+<https://fluxon.com/ns/foodon-local/patches.ttl> a owl:Ontology ;
+    owl:imports <http://purl.obolibrary.org/obo/foodon.owl> ;
+    dcterms:title "FoodOn local patch layer"@en ;
+    dcterms:description """Locally asserted axioms that FoodOn omits, plus locally
+declared properties for claims that are weaker than containment. Generated from
+reviewed decision files by build/emit_patches.py; see the header of that file for
+what can and cannot be expressed as an axiom."""@en ;
+    dcterms:created "2026-09-10"^^xsd:date ;
+    dcterms:creator "Matt" ;
+    owl:versionInfo "patches for FoodOn 2025-12-30, generated 2026-09-10" ;
+    rdfs:comment "Upstream foodon.owl is never modified. This layer is additive."@en .
+
+
+# =============================================================================
+# Local vocabulary
+# =============================================================================
+# Four object properties and a small provenance vocabulary. The three weak-claim
+# properties exist so that a claim which is NOT containment can be stated honestly
+# rather than being smuggled onto RO:0001000.
+
+local:mayDeriveFrom a owl:ObjectProperty ;
+    rdfs:label "may derive from"@en ;
+    rdfs:comment """Commonly but not necessarily derived from the subject. The
+feedstock is a producer choice, not a property of the substance: citric acid is
+Aspergillus fermentation on a sugar feedstock that is often, but not always, corn.
+THIS IS NOT CONTAINMENT and must not be treated as obo:RO_0001000. A consumer
+should surface it as a label to check or a supplier to ask."""@en ;
+    rdfs:seeAlso <http://purl.obolibrary.org/obo/foodon.owl> .
+
+local:crossReactiveWith a owl:ObjectProperty ;
+    rdfs:label "cross reactive with"@en ;
+    rdfs:comment """Immunologically related to the subject, but the allergen protein
+is NOT present. Relevant to a clinical history, not to what is in the dish.
+Treating this as containment is wrong in the direction that needlessly excludes
+safe food."""@en .
+
+local:disputedAvoidance a owl:ObjectProperty ;
+    rdfs:label "disputed avoidance"@en ;
+    rdfs:comment """Appears on avoidance lists for the subject without an established
+containment basis. Recorded so the claim is visible and auditable; NOT
+containment."""@en .
+
+local:notAvoidanceRelevantFor a owl:ObjectProperty ;
+    rdfs:label "not avoidance relevant for"@en ;
+    rdfs:comment """The subject is ontologically a descendant of the object in
+FoodOn, but must NOT be treated as part of its avoidance closure. OWL is monotonic
+and an import cannot retract an upstream axiom, so this states the exception
+declaratively for a traversal to honour instead. The motivating case is
+`peanut plant is_a nut producing plant`, which is defensible botanically and wrong
+for allergens: FALCPA treats peanut and tree nut as separate allergens."""@en .
+
+local:propagatesAvoidance a owl:AnnotationProperty ;
+    rdfs:label "propagates avoidance"@en ;
+    rdfs:comment """On an object property: whether avoidance travels along it, and in
+which direction. `inverse` means avoidance travels object to subject, which is the
+direction obo:RO_0001000 is asserted in (product derives from source)."""@en .
+
+local:excludedFromTraversal a owl:AnnotationProperty ;
+    rdfs:label "excluded from traversal"@en ;
+    rdfs:comment """On a class: this class and everything beneath it is out of scope
+for avoidance traversal. Not a claim about the ontology, a claim about scope."""@en .
+
+local:pivotsTo a owl:ObjectProperty ;
+    rdfs:label "pivots to"@en ;
+    rdfs:comment """Materialised by build/sparql/patch_materialize_avoidance.rq, not
+asserted here: the rank-guarded forward `in taxon` hop from a FoodOn class to its own
+species-rank taxon. Kept separate from local:propagatesTo because it belongs to the
+taxonomic phase of a query -- it fires from a class reached by is_a descent from the
+root, never from a derivative. Declared here so the vocabulary is documented in one
+place."""@en .
+
+local:propagatesTo a owl:ObjectProperty ;
+    rdfs:label "propagates avoidance to"@en ;
+    rdfs:comment """Materialised, not asserted here. One hop of avoidance, always
+source to product, so a closure over it can never ascend to a shared ancestor and
+come back down. That is what keeps corn from reaching wheat."""@en .
+
+local:sameOrganismAs a owl:ObjectProperty ;
+    rdfs:label "same organism as"@en ;
+    rdfs:comment """The subject and object denote the SAME organism in two parallel
+FoodOn hierarchies that share no terms. Solanaceae exists twice -- NCBITaxon_4070 and
+FoodOn's own `solanaceae plant` -- and rooting a query on either one silently loses
+the other, which is how eggplant went missing. Deliberately NOT owl:equivalentClass:
+the two classes have different subclass trees and different annotation, so asserting
+equivalence would invite a reasoner to merge things this project has not reviewed.
+A consumer should treat both ends as co-roots of the same query. Derived two ways --
+a species-rank `in taxon` pivot, or FoodOn's own label convention -- never by a
+hardcoded pair; see audit F4 and Graph.expand_roots."""@en ;
+    a owl:SymmetricProperty .
+
+local:resolvesQuery a owl:AnnotationProperty ;
+    rdfs:label "resolves query"@en ;
+    rdfs:comment """On a class: a free-text query that has been pinned to this class
+as one of its roots. Several classes may carry the same query string when one class
+cannot cover the allergen on its own -- `gluten` pins five grain species."""@en .
+
+local:Patch a owl:Class ;
+    rdfs:label "local patch record"@en ;
+    rdfs:comment """Provenance for one locally asserted axiom or claim. Carries the
+rule, guards, evidence and reviewer so the patch layer can be audited in SPARQL as
+well as by reading the comments."""@en .
+
+local:patchTarget a owl:AnnotationProperty ;
+    rdfs:label "patch target"@en .
+
+local:patchProperty a owl:AnnotationProperty ;
+    rdfs:label "patch property"@en .
+
+local:patchValue a owl:AnnotationProperty ;
+    rdfs:label "patch value"@en .
+
+local:patchRule a owl:AnnotationProperty ;
+    rdfs:label "patch rule"@en .
+
+local:patchGuards a owl:AnnotationProperty ;
+    rdfs:label "patch guards"@en .
+
+local:patchEvidence a owl:AnnotationProperty ;
+    rdfs:label "patch evidence"@en .
+
+local:patchConfidence a owl:AnnotationProperty ;
+    rdfs:label "patch confidence"@en .
+
+local:patchClaim a owl:AnnotationProperty ;
+    rdfs:label "patch claim"@en .
+
+local:patchSection a owl:AnnotationProperty ;
+    rdfs:label "patch section"@en .
+
+local:patchQuery a owl:AnnotationProperty ;
+    rdfs:label "patch query class"@en .
+
+local:supersededBy a owl:AnnotationProperty ;
+    rdfs:label "superseded by"@en .
+
+
+
+# =============================================================================
+# Omitted `derives from` axioms, recovered by naming convention   (76)
+# =============================================================================
+# FoodOn applies `<X> food product --derives from--> <X> plant`
+# inconsistently: only 38% of those classes carry it. `hungarian wax pepper
+# food product` omits it while its sibling `hungarian wax pepper pickle food
+# product` has it, which is why paprika was structurally disconnected from
+# the nightshade family. Recovered by rule, not by a per-ingredient list,
+# with two structural guards: organism-branch compatibility and uniqueness
+# of the candidate source. Note the source is the most specific true one --
+# the CULTIVAR plant, not the family. Solanaceae is then reached through
+# FoodOn's own is_a chain, which keeps the axiom correct for a narrower
+# query too.
+
+
+### angelica food product  --RO:0001000-->  angelica plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: subtree is A. archangelica and A. sylvestris, both food-use; no toxic congener reachable
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00003030 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411377 ] .
+local:patch-64d9540dcf43 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00003030 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411377 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: subtree is A. archangelica and A. sylvestris, both food-use; no toxic congener reachable" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### asparagus bean food product  --RO:0001000-->  asparagus bean plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002773 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411724 ] .
+local:patch-b7fd0b756ed1 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002773 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411724 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### baobab food product  --RO:0001000-->  baobab plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Adansonia digitata
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004579 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412759 ] .
+local:patch-e03dd141bde9 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004579 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412759 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Adansonia digitata" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### bean food product  --RO:0001000-->  bean plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: grouping over Phaseolus/Vicia/Glycine, but no-ascent means a soy query cannot reach it; a bean class query should return all beans
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001635 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411567 ] .
+local:patch-ec295997e889 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001635 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411567 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: grouping over Phaseolus/Vicia/Glycine, but no-ascent means a soy query cannot reach it; a bean class query should return all beans" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### bilberry food product  --RO:0001000-->  bilberry plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Vaccinium myrtillus
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004717 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412013 ] .
+local:patch-517059cd6cb6 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004717 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412013 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Vaccinium myrtillus" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### bitter melon food product  --RO:0001000-->  bitter melon plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Momordica charantia
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004367 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411101 ] .
+local:patch-88ffb94dd621 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004367 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411101 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Momordica charantia" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### black cumin food product  --RO:0001000-->  black cumin plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: leaf source with no in-taxon; FoodOn does not commit to Nigella vs Bunium and nothing ambiguous is reachable
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_03000177 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411176 ] .
+local:patch-4ae6941deef4 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_03000177 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411176 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: leaf source with no in-taxon; FoodOn does not commit to Nigella vs Bunium and nothing ambiguous is reachable" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### borage food product  --RO:0001000-->  borage plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Borago officinalis
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00003038 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411735 ] .
+local:patch-047067313a7a a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00003038 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411735 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Borago officinalis" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### breadfruit food product  --RO:0001000-->  breadfruit plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Artocarpus altilis
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00005226 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411504 ] .
+local:patch-3213adbd3442 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00005226 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411504 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Artocarpus altilis" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### california blackberry food product  --RO:0001000-->  california blackberry plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Rubus ursinus
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004588 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03414207 ] .
+local:patch-19309d10a654 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004588 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03414207 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Rubus ursinus" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### caper food product  --RO:0001000-->  caper plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001681 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411247 ] .
+local:patch-2ce70296e811 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001681 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411247 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### caraway food product  --RO:0001000-->  caraway plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00003022 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411549 ] .
+local:patch-d16df1f9f78d a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00003022 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411549 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### carrot food product  --RO:0001000-->  carrot plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Daucus carota
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001687 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411227 ] .
+local:patch-aea71ed2d09c a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001687 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411227 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Daucus carota" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### cassava food product  --RO:0001000-->  cassava plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001692 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411352 ] .
+local:patch-7faab5e5537d a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001692 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411352 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### cattail food product  --RO:0001000-->  cattail plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: Typha latifolia and T. angustifolia, both edible
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00005191 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03414729 ] .
+local:patch-bdc27f9e43d7 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00005191 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03414729 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: Typha latifolia and T. angustifolia, both edible" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### celeriac food product  --RO:0001000-->  celeriac plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004114 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411729 ] .
+local:patch-e54c51eea3bc a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004114 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411729 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### celtuce food product  --RO:0001000-->  celtuce plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_03000065 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411728 ] .
+local:patch-d3a8917fda1f a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_03000065 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411728 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### chard food product  --RO:0001000-->  chard plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002498 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411175 ] .
+local:patch-58ea650a6289 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002498 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411175 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### chia food product  --RO:0001000-->  chia plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Salvia hispanica
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_03000431 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411723 ] .
+local:patch-65ebac91868e a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_03000431 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411723 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Salvia hispanica" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### chokeberry food product  --RO:0001000-->  chokeberry plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: Aronia grouping, all edible; distinct from chokecherry which has its own species-level repair
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004582 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03414951 ] .
+local:patch-370b07e70e38 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004582 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03414951 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: Aronia grouping, all edible; distinct from chokecherry which has its own species-level repair" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### chokecherry food product  --RO:0001000-->  chokecherry plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Prunus virginiana
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004221 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412044 ] .
+local:patch-c155fc708489 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004221 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412044 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Prunus virginiana" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### clingstone peach food product  --RO:0001000-->  clingstone peach tree
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001743 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_00003474 ] .
+local:patch-eae200be0049 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001743 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_00003474 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### coriander food product  --RO:0001000-->  coriander plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001763 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411381 ] .
+local:patch-45f02e78ad16 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001763 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411381 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### cumin food product  --RO:0001000-->  cumin plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_03311872 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411274 ] .
+local:patch-4a06441b2c64 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_03311872 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411274 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### custard apple food product  --RO:0001000-->  custard apple tree
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Annona reticulata
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004808 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411689 ] .
+local:patch-5853c03c53fc a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004808 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411689 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Annona reticulata" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### dandelion food product  --RO:0001000-->  dandelion plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002435 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411428 ] .
+local:patch-6fe8bd66de97 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002435 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411428 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### dill food product  --RO:0001000-->  dill plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Anethum graveolens
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001811 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411277 ] .
+local:patch-80fd0e531470 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001811 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411277 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Anethum graveolens" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### fennel food product  --RO:0001000-->  fennel plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Anethum foeniculum
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004265 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411262 ] .
+local:patch-4660a080b619 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004265 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411262 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Anethum foeniculum" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### fenugreek food product  --RO:0001000-->  fenugreek plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Trigonella foenum-graecum
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001837 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411696 ] .
+local:patch-5dc853d0b8ab a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001837 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411696 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Trigonella foenum-graecum" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### fireweed food product  --RO:0001000-->  fireweed plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_03000072 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03413725 ] .
+local:patch-9d6fcb343a42 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_03000072 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03413725 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### garden cress food product  --RO:0001000-->  garden cress plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Lepidium sativum
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_03000034 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412270 ] .
+local:patch-9f4e8a82e1a8 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_03000034 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412270 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Lepidium sativum" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### garlic food product  --RO:0001000-->  garlic plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Allium sativum
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001895 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411233 ] .
+local:patch-87ed2af20c2d a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001895 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411233 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Allium sativum" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### ginseng food product  --RO:0001000-->  ginseng plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: source genuinely mixes genera - three Panax species plus Eleutherococcus senticosus (siberian ginseng); applied for recall but tagged so it is visibly distinguishable
+#   confidence: medium
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001904 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411673 ] .
+local:patch-be0cdb455bc5 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001904 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411673 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: source genuinely mixes genera - three Panax species plus Eleutherococcus senticosus (siberian ginseng); applied for recall but tagged so it is visibly distinguishable" ;
+    local:patchConfidence "medium" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### granadilla de quijo food product  --RO:0001000-->  granadilla de quijo plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004750 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_00004751 ] .
+local:patch-7632e8141eb1 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004750 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_00004751 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### hungarian wax pepper food product  --RO:0001000-->  hungarian wax pepper plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001959 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411353 ] .
+local:patch-9a1936568ec0 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001959 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411353 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### jack-bean food product  --RO:0001000-->  jack-bean plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Canavalia ensiformis
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002779 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03413400 ] .
+local:patch-d43fcdeb503a a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002779 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03413400 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Canavalia ensiformis" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### jerusalem artichoke food product  --RO:0001000-->  jerusalem artichoke plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Helianthus tuberosus
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001979 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411038 ] .
+local:patch-e01f5ed5aa2e a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001979 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411038 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Helianthus tuberosus" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### land cress food product  --RO:0001000-->  land cress plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Barbarea verna
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00003525 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412873 ] .
+local:patch-be4ab6f9b890 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00003525 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412873 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Barbarea verna" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### lemon balm food product  --RO:0001000-->  lemon balm plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Melissa officinalis
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00003725 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412621 ] .
+local:patch-c71eac8e691a a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00003725 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412621 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Melissa officinalis" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### mallow food product  --RO:0001000-->  mallow plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: Malva grouping; marshmallow (Althaea) is a different genus and not covered
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004718 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03413413 ] .
+local:patch-77e129b7957b a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004718 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03413413 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: Malva grouping; marshmallow (Althaea) is a different genus and not covered" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### millet food product  --RO:0001000-->  millet plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: polyphyletic but matches culinary usage and how the term is queried
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002038 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412505 ] .
+local:patch-a8c41b05ca8c a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002038 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412505 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: polyphyletic but matches culinary usage and how the term is queried" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### nasturtium food product  --RO:0001000-->  nasturtium plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: subtree is entirely Tropaeolum; Nasturtium officinale (watercress) is absent
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004772 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03415002 ] .
+local:patch-12e06e959ab9 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004772 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03415002 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: subtree is entirely Tropaeolum; Nasturtium officinale (watercress) is absent" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### New Zealand spinach food product  --RO:0001000-->  new zealand spinach plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Tetragonia tetragonoides
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_03000083 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411732 ] .
+local:patch-4bbe476844ad a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_03000083 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411732 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Tetragonia tetragonoides" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### nutmeg food product  --RO:0001000-->  nutmeg plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Myristica fragrans
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002061 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411214 ] .
+local:patch-09b59adc1a3d a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002061 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411214 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Myristica fragrans" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### oregano food product  --RO:0001000-->  oregano plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Origanum vulgare
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002073 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411542 ] .
+local:patch-3a61ddfaf004 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002073 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411542 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Origanum vulgare" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### parsley food product  --RO:0001000-->  parsley plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002084 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411550 ] .
+local:patch-dca0c2b52eb5 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002084 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411550 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### peach food product  --RO:0001000-->  peach tree
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Prunus persica
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002095 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411350 ] .
+local:patch-0463be46afe0 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002095 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411350 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Prunus persica" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### peach palm food product  --RO:0001000-->  peach palm plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Bactris gasipaes
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004787 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03414923 ] .
+local:patch-2b7ebe5207dc a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004787 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03414923 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Bactris gasipaes" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### peppermint food product  --RO:0001000-->  peppermint plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Mentha x piperita
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002112 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411449 ] .
+local:patch-850828d8bdcc a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002112 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411449 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Mentha x piperita" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### pigeon pea food product  --RO:0001000-->  pigeon pea plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Cajanus cajan
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002780 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412010 ] .
+local:patch-9f3b3117110c a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002780 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412010 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Cajanus cajan" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### pitaya food product  --RO:0001000-->  pitaya plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Selenicereus undatus
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004381 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412781 ] .
+local:patch-fb579dc73065 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004381 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412781 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Selenicereus undatus" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### rosemary food product  --RO:0001000-->  rosemary plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002212 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411495 ] .
+local:patch-91261e64d38f a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002212 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411495 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### rye food product  --RO:0001000-->  rye plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Secale cereale
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00001190 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411313 ] .
+local:patch-9753e757c2dc a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00001190 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411313 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Secale cereale" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### saffron food product  --RO:0001000-->  saffron plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Crocus sativus
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00003043 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411459 ] .
+local:patch-fb192a9eb823 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00003043 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411459 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Crocus sativus" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### sage food product  --RO:0001000-->  sage plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: subtree is entirely Salvia (kitchen/greek/mexican bush, S. elegans); sagebrush is not reachable
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002217 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411303 ] .
+local:patch-0c6a29eed3d1 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002217 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411303 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: subtree is entirely Salvia (kitchen/greek/mexican bush, S. elegans); sagebrush is not reachable" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### sapodilla food product  --RO:0001000-->  sapodilla plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Manilkara zapota
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004249 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411693 ] .
+local:patch-4f7920e09c75 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004249 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411693 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Manilkara zapota" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### sarsaparilla food product  --RO:0001000-->  sarsaparilla plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: products name Smilax aristolochiifolia explicitly; no Aralia present
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002492 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412065 ] .
+local:patch-3b4abaf1b9f6 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002492 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412065 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: products name Smilax aristolochiifolia explicitly; no Aralia present" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### soft wheat food product  --RO:0001000-->  soft wheat plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   research: Triticum aestivum; its two sub-sources are cultivar groups, not other species
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002254 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411421 ] .
+local:patch-64953ab7aa00 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002254 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411421 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "research: Triticum aestivum; its two sub-sources are cultivar groups, not other species" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### sorrel food product  --RO:0001000-->  sorrel plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: subtree is entirely Rumex; Hibiscus sabdariffa 'sorrel' is absent from FoodOn, a separate pre-existing gap
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00003093 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411641 ] .
+local:patch-c4a2910ce6aa a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00003093 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411641 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: subtree is entirely Rumex; Hibiscus sabdariffa 'sorrel' is absent from FoodOn, a separate pre-existing gap" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### soursop food product  --RO:0001000-->  soursop plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Annona muricata
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00003789 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411480 ] .
+local:patch-cfde7fca1d7f a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00003789 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411480 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Annona muricata" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### spelt food product  --RO:0001000-->  spelt plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Triticum spelta
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004434 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412917 ] .
+local:patch-913ace5a8d84 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004434 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412917 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Triticum spelta" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### spinach food product  --RO:0001000-->  spinach plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Spinacia oleracea
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002269 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_00001273 ] .
+local:patch-0b9e0b7a5d56 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002269 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_00001273 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Spinacia oleracea" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### stone fruit food product  --RO:0001000-->  stone fruit plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: culinary grouping; fires only on a stone-fruit-level query
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002277 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411539 ] .
+local:patch-282b1f422b4a a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002277 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411539 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: culinary grouping; fires only on a stone-fruit-level query" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### strawberry guava food product  --RO:0001000-->  strawberry guava plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Psidium cattleyanum
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004226 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411649 ] .
+local:patch-69adbaf36cc3 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004226 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411649 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Psidium cattleyanum" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### sumac food product  --RO:0001000-->  sumac plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: correct on its own terms; the mis-parented rye kernel in its subtree is a separate FoodOn defect tracked independently
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004378 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412161 ] .
+local:patch-e78718b20c87 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004378 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412161 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: correct on its own terms; the mis-parented rye kernel in its subtree is a separate FoodOn defect tracked independently" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### tangelo food product  --RO:0001000-->  tangelo plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Citrus x tangelo
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004371 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411473 ] .
+local:patch-e30efed060d2 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004371 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411473 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Citrus x tangelo" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### tarragon food product  --RO:0001000-->  tarragon plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Artemisia dracunculus
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002311 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411469 ] .
+local:patch-5f1ee1ca1ab2 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002311 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411469 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Artemisia dracunculus" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### thyme food product  --RO:0001000-->  thyme plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   signed off by Matt: clean Thymus genus grouping, no non-Thymus usage in food
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002312 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411199 ] .
+local:patch-14a75664c266 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002312 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411199 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "signed off by Matt: clean Thymus genus grouping, no non-Thymus usage in food" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### turmeric food product  --RO:0001000-->  turmeric plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Curcuma longa
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002323 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411425 ] .
+local:patch-3b365e2599bb a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002323 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411425 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Curcuma longa" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### velvet bean food product  --RO:0001000-->  velvet bean plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00004156 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03413403 ] .
+local:patch-0e2912fdee8b a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00004156 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03413403 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### walnut food product  --RO:0001000-->  walnut tree
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002338 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411290 ] .
+local:patch-d7a39d45ee16 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002338 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411290 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### watermelon food product  --RO:0001000-->  watermelon plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Citrullus lanatus
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002343 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_00001155 ] .
+local:patch-d6f5f340c93c a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002343 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_00001155 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Citrullus lanatus" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### white pepper food product  --RO:0001000-->  white pepper plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   research: Piper nigrum -- same species as black pepper, differing only in processing
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002361 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411141 ] .
+local:patch-f4a34b2cb4eb a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002361 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411141 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "research: Piper nigrum -- same species as black pepper, differing only in processing" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### wood apple food product  --RO:0001000-->  wood apple plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   single species: Limonia acidissima
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002367 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412845 ] .
+local:patch-e43f1ca1adb7 a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002367 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412845 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "single species: Limonia acidissima" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### youngberry food product  --RO:0001000-->  youngberry plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   leaf source, no sub-sources
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002372 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411388 ] .
+local:patch-69066dc6890a a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002372 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411388 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "leaf source, no sub-sources" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### zucchini food product  --RO:0001000-->  zucchini plant
+#   rule:       label-convention <X> food product -> <X> <source>
+#   guards:     organism-branch, uniqueness
+#   evidence:   research: Cucurbita pepo; the sub-source is a cultivar group
+#   confidence: high
+#   reviewer:   build/repair_derives.py + build/classify_repairs.py
+#   FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+#   Recovered from the naming convention plus two structural guards.
+obo:FOODON_00002448 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411462 ] .
+local:patch-16b33787f4fc a local:Patch ;
+    local:patchSection "repair" ;
+    local:patchTarget obo:FOODON_00002448 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411462 ;
+    local:patchRule "label-convention <X> food product -> <X> <source>" ;
+    local:patchGuards "organism-branch, uniqueness" ;
+    local:patchEvidence "research: Cucurbita pepo; the sub-source is a cultivar group" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn omits `derives from` on 62% of its `<X> food product` classes. Recovered from the naming convention plus two structural guards." ;
+    dcterms:creator "build/repair_derives.py + build/classify_repairs.py" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+
+# =============================================================================
+# Bridges extracted from FoodOn's own definition text   (10)
+# =============================================================================
+# FoodOn frequently states an origin in prose while asserting nothing.
+# Paprika's definition reads 'derived from the dried fruit of several
+# varieties of Capsicum annuum L.'; pasta's reads 'an unleavened dough of
+# wheat flour'. Each of these was extracted, passed five guards, and signed
+# off against that one class's own sentence. Prose is not an axiom, so a
+# human ruling is recorded per class.
+
+
+### acorn flour  --RO:0001000-->  oak tree
+#   rule:       E: definition mining
+#   evidence:   A flour that is made by grinding acorns, the nuts of oak trees, after they have been properly processed to remove tannin.
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   Definition names the source outright and unambiguously: 'a flour made by
+#   grinding acorns, the nuts of oak trees, after they have been properly
+#   processed to remove tannin'. Leaf class, no existing out-edges, one
+#   source. `oak tree` is parented `temperate-zone nut producing plant`, so
+#   acorn flour also becomes reachable from a tree-nut query -- correct, an
+#   acorn is a nut.
+obo:FOODON_00005523 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411715 ] .
+local:patch-793d7522213d a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_00005523 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411715 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "A flour that is made by grinding acorns, the nuts of oak trees, after they have been properly processed to remove tannin." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. Definition names the source outright and unambiguously: 'a flour made by grinding acorns, the nuts of oak trees, after they have been properly processed to remove tannin'. Leaf class, no existing out-edges, one source. `oak tree` is parented `temperate-zone nut producing plant`, so acorn flour also becomes reachable from a tree-nut query -- correct, an acorn is a nut." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### croziflette  --RO:0001000-->  buckwheat plant
+#   rule:       E: definition mining
+#   evidence:   A tartiflette except that small squares of pasta, crozets de Savoie (usually made from buckwheat but sometimes durum) are used instead of potatoes.
+#   confidence: medium
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   MEDIUM, not high, and the reason is in the definition: 'crozets de Savoie
+#   (usually made from buckwheat BUT SOMETIMES DURUM)'. That is a recipe
+#   choice, the same shape as the may_contain overrides that are deliberately
+#   kept out of the closure. Signed anyway under the recall-first policy,
+#   because the distinction that matters is which way an error falls:
+#   buckwheat allergy is anaphylactic and crozets are USUALLY buckwheat, so a
+#   buckwheat-avoider must see this dish. The cost is over-inclusion for the
+#   durum variant, which is the safe direction. TWO GAPS THIS DOES NOT CLOSE,
+#   recorded so nobody reads the dish as mapped: (1) croziflette is a
+#   multi-component dish (tartiflette base) and so also contains milk via
+#   reblochon, pork via bacon and allium via onion -- FoodOn asserts none of
+#   those and this bridge adds none of them; (2) the durum variant means it
+#   may contain gluten, and since buckwheat is gluten-free it will NOT appear
+#   on a gluten query. Revisit if a dish-level ingredient layer arrives.
+obo:FOODON_00003268 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411405 ] .
+local:patch-660e709748e0 a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_00003268 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411405 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "A tartiflette except that small squares of pasta, crozets de Savoie (usually made from buckwheat but sometimes durum) are used instead of potatoes." ;
+    local:patchConfidence "medium" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. MEDIUM, not high, and the reason is in the definition: 'crozets de Savoie (usually made from buckwheat BUT SOMETIMES DURUM)'. That is a recipe choice, the same shape as the may_contain overrides that are deliberately kept out of the closure. Signed anyway under the recall-first policy, because the distinction that matters is which way an error falls: buckwheat allergy is anaphylactic and crozets are USUALLY buckwheat, so a buckwheat-avoider must see this dish. The cost is over-inclusion for the durum variant, which is the safe direction. TWO GAPS THIS DOES NOT CLOSE, recorded so nobody reads the dish as mapped: (1) croziflette is a multi-component dish (tartiflette base) and so also contains milk via reblochon, pork via bacon and allium via onion -- FoodOn asserts none of those and this bridge adds none of them; (2) the durum variant means it may contain gluten, and since buckwheat is gluten-free it will NOT appear on a gluten query. Revisit if a dish-level ingredient layer arrives." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### malt syrup  --RO:0001000-->  barley plant
+#   rule:       E: definition mining
+#   evidence:   A syrup made from malted barley or grains.
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   Definition: 'a syrup made from malted barley or grains'. The 'or grains'
+#   hedge was checked and does not weaken this class, because FoodOn keeps the
+#   generic reading in a SEPARATE class: `malted cereal syrup` (under
+#   flavoring syrup) is the any-grain one, and `rice syrup` is its own class
+#   under plant sweetener, so neither is touched by this edge. FoodOn also
+#   already parents `malt extract` under `barley product flavoring`, which is
+#   the ontology's own statement that unqualified malt means barley. Leaf
+#   class, adds only itself. Barley malt syrup is a well-known hidden gluten
+#   source, so the recall matters.
+obo:FOODON_00005587 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411230 ] .
+local:patch-04e216f0f3b9 a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_00005587 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411230 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "A syrup made from malted barley or grains." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. Definition: 'a syrup made from malted barley or grains'. The 'or grains' hedge was checked and does not weaken this class, because FoodOn keeps the generic reading in a SEPARATE class: `malted cereal syrup` (under flavoring syrup) is the any-grain one, and `rice syrup` is its own class under plant sweetener, so neither is touched by this edge. FoodOn also already parents `malt extract` under `barley product flavoring`, which is the ontology's own statement that unqualified malt means barley. Leaf class, adds only itself. Barley malt syrup is a well-known hidden gluten source, so the recall matters." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### mustard condiment food product  --RO:0001000-->  mustard plant
+#   rule:       E: definition mining
+#   evidence:   A condiment made from the seeds of a mustard plant (white/yellow mustard, Sinapis alba; brown mustard, Brassica juncea; or black mustard, Brassica nig
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   The definition names the source outright: 'a condiment made from the seeds
+#   of a mustard plant (white/yellow mustard, Sinapis alba; brown mustard,
+#   Brassica juncea; or black mustard, Brassica nigra)'. All 9 subtree members
+#   are genuine mustard condiments (dijon, prepared, relish, sauce, mostarda
+#   di frutta, made-with-beer) with no mustard-free member. `mustard plant` is
+#   a grouping over Sinapis and Brassica, which is the right granularity here
+#   rather than too coarse: EU labelling treats mustard as ONE allergen across
+#   those species.
+obo:FOODON_00002052 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03412069 ] .
+local:patch-80e627357576 a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_00002052 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03412069 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "A condiment made from the seeds of a mustard plant (white/yellow mustard, Sinapis alba; brown mustard, Brassica juncea; or black mustard, Brassica nig" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. The definition names the source outright: 'a condiment made from the seeds of a mustard plant (white/yellow mustard, Sinapis alba; brown mustard, Brassica juncea; or black mustard, Brassica nigra)'. All 9 subtree members are genuine mustard condiments (dijon, prepared, relish, sauce, mostarda di frutta, made-with-beer) with no mustard-free member. `mustard plant` is a grouping over Sinapis and Brassica, which is the right granularity here rather than too coarse: EU labelling treats mustard as ONE allergen across those species." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### pasta  --RO:0001000-->  wheat plant
+#   rule:       E: definition mining
+#   evidence:   A type of food typically made from an unleavened dough of wheat flour mixed with water or eggs, and formed into sheets or other shapes, then cooked by
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   FoodOn's own definition: 'an unleavened dough of wheat flour mixed with
+#   water or eggs'. Subtree is 6 preparation states of pasta itself (canned,
+#   dried, fresh, frozen, wet-packed) and nothing else, so the bridge cannot
+#   over-reach. Checked against the sibling case: the broader `pasta food
+#   product` was NOT signed because its 119-member subtree includes
+#   gluten-free pasta, corn pasta, rice noodle and shirataki noodle -- that
+#   class is a shape, not a grain.
+obo:FOODON_03306347 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411312 ] .
+local:patch-ee8ad255c241 a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_03306347 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "A type of food typically made from an unleavened dough of wheat flour mixed with water or eggs, and formed into sheets or other shapes, then cooked by" ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. FoodOn's own definition: 'an unleavened dough of wheat flour mixed with water or eggs'. Subtree is 6 preparation states of pasta itself (canned, dried, fresh, frozen, wet-packed) and nothing else, so the bridge cannot over-reach. Checked against the sibling case: the broader `pasta food product` was NOT signed because its 119-member subtree includes gluten-free pasta, corn pasta, rice noodle and shirataki noodle -- that class is a shape, not a grain." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### soy-based protein powder  --RO:0001000-->  soybean plant
+#   rule:       E: definition mining
+#   evidence:   A plant-based protein supplement what is derived from soybeans.
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   Definition: 'a plant-based protein supplement what is derived from
+#   soybeans' (FoodOn's typo, unambiguous meaning). Parented by function as
+#   `dietary supplement, amino acid or protein` with no source asserted -- the
+#   exact pattern audit F records for processed ingredients. Leaf class, adds
+#   only itself. Soy is a FALCPA top-9 allergen.
+obo:FOODON_00005589 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411452 ] .
+local:patch-e780f8a97fd5 a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_00005589 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411452 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "A plant-based protein supplement what is derived from soybeans." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. Definition: 'a plant-based protein supplement what is derived from soybeans' (FoodOn's typo, unambiguous meaning). Parented by function as `dietary supplement, amino acid or protein` with no source asserted -- the exact pattern audit F records for processed ingredients. Leaf class, adds only itself. Soy is a FALCPA top-9 allergen." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### tahini  --RO:0001000-->  sesame plant
+#   rule:       E: definition mining
+#   evidence:   A condiment made from toasted ground hulled sesame.
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   FoodOn's own definition: 'a condiment made from toasted ground hulled
+#   sesame'. Subtree is tahini and white tahini, both sesame. Sesame is an EU
+#   top-14 and US FALCPA allergen and tahini was previously reachable ONLY
+#   through the signed `contains` override, which this makes structural;
+#   expect override_run to report that override as redundant.
+obo:FOODON_00003855 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411226 ] .
+local:patch-e62516d3037b a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_00003855 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411226 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "A condiment made from toasted ground hulled sesame." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. FoodOn's own definition: 'a condiment made from toasted ground hulled sesame'. Subtree is tahini and white tahini, both sesame. Sesame is an EU top-14 and US FALCPA allergen and tahini was previously reachable ONLY through the signed `contains` override, which this makes structural; expect override_run to report that override as redundant." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### white tahini  --RO:0001000-->  sesame plant
+#   rule:       E: definition mining
+#   evidence:   Tahini made from hulled white sesame seeds.
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   Definition: 'Tahini made from hulled white sesame seeds'. Redundant by
+#   descent today because it is_a tahini, which is now signed; kept as a
+#   direct anchor so a future FoodOn re-parenting cannot silently disconnect
+#   it. Same treatment as the sodium caseinate override.
+obo:FOODON_00003873 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411226 ] .
+local:patch-9461ac4de0b4 a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_00003873 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411226 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "Tahini made from hulled white sesame seeds." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. Definition: 'Tahini made from hulled white sesame seeds'. Redundant by descent today because it is_a tahini, which is now signed; kept as a direct anchor so a future FoodOn re-parenting cannot silently disconnect it. Same treatment as the sodium caseinate override." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### whole wheat pasta  --RO:0001000-->  wheat plant
+#   rule:       E: definition mining
+#   evidence:   Pasta made from whole wheat flour that retains the bran, germ, and endosperm of the wheat grain.
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   Definition: 'made from whole wheat flour that retains the bran'. Leaf
+#   class, adds only itself. Wheat is in the name and in the definition; there
+#   is no other reading.
+obo:FOODON_00005528 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411312 ] .
+local:patch-3fc1a7a0d8f8 a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_00005528 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "Pasta made from whole wheat flour that retains the bran, germ, and endosperm of the wheat grain." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. Definition: 'made from whole wheat flour that retains the bran'. Leaf class, adds only itself. Wheat is in the name and in the definition; there is no other reading." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### yellow mustard (prepared)  --RO:0001000-->  white mustard plant
+#   rule:       E: definition mining
+#   evidence:   A food product that is made from yellow mustard.
+#   confidence: high
+#   reviewer:   Matt
+#   Extracted from FoodOn's own definition text and signed off per class.
+#   Definition: 'made from yellow mustard'; white mustard is Sinapis alba,
+#   which is the same seed yellow mustard names. Not merely redundant under
+#   the entry above: that one anchors at the `mustard plant` grouping, this
+#   one adds the species-level route so a `Sinapis alba` or `white mustard`
+#   query reaches it too.
+obo:FOODON_03000286 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411148 ] .
+local:patch-7ddf37989de2 a local:Patch ;
+    local:patchSection "mined" ;
+    local:patchTarget obo:FOODON_03000286 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411148 ;
+    local:patchRule "E: definition mining" ;
+    local:patchEvidence "A food product that is made from yellow mustard." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "Extracted from FoodOn's own definition text and signed off per class. Definition: 'made from yellow mustard'; white mustard is Sinapis alba, which is the same seed yellow mustard names. Not merely redundant under the entry above: that one anchors at the `mustard plant` grouping, this one adds the species-level route so a `Sinapis alba` or `white mustard` query reaches it too." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+
+# =============================================================================
+# Reviewed containment claims FoodOn cannot make   (7)
+# =============================================================================
+# FoodOn parents processed ingredients by function -- `tahini is_a
+# condiment`, `casein is_a protein extract` -- and asserts no source. These
+# are the cases where the containment is real and the ontology simply has no
+# axiom for it.
+
+
+### casein  --RO:0001000-->  milk
+#   evidence:   audit: processed ingredients are parented by function with no derives-from
+#   confidence: high
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   the predominant milk protein. FoodOn models this class but parents it by
+#   function (protein extract, concentrate or isolate) and asserts no source.
+obo:FOODON_03420180 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-8e753c9e718c a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03420180 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "audit: processed ingredients are parented by function with no derives-from" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "the predominant milk protein. FoodOn models this class but parents it by function (protein extract, concentrate or isolate) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### fish sauce  --RO:0001000-->  fish species
+#   evidence:   audit: processed ingredients are parented by function with no derives-from
+#   confidence: high
+#   claim:      contains
+#   query:      Fish
+#   reviewer:   Matt
+#   fermented fish. FoodOn models this class but parents it by function
+#   (sauce) and asserts no source.
+obo:FOODON_03317197 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411222 ] .
+local:patch-bf4d72b2dbd5 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03317197 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411222 ;
+    local:patchEvidence "audit: processed ingredients are parented by function with no derives-from" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Fish" ;
+    rdfs:comment "fermented fish. FoodOn models this class but parents it by function (sauce) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### hickory nut  --RO:0001000-->  hickory tree
+#   evidence:   audit F11, build/detect_misparent.py
+#   confidence: high
+#   claim:      contains
+#   query:      hickory
+#   reviewer:   Matt
+#   FoodOn parents hickory nut under mustard spinach food product. hickory
+#   tree has a closure of 1, and pecan sits under hickory nut, so both are
+#   orphaned - a tree-nut false negative.
+obo:FOODON_00003089 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411553 ] .
+local:patch-e48328408916 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00003089 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411553 ;
+    local:patchEvidence "audit F11, build/detect_misparent.py" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "hickory" ;
+    rdfs:comment "FoodOn parents hickory nut under mustard spinach food product. hickory tree has a closure of 1, and pecan sits under hickory nut, so both are orphaned - a tree-nut false negative." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### lysozyme  --RO:0001000-->  chicken egg
+#   evidence:   audit: processed ingredients are parented by function with no derives-from
+#   confidence: high
+#   claim:      contains
+#   query:      Egg
+#   reviewer:   Matt
+#   food-grade lysozyme is hen egg white lysozyme. FoodOn models this class
+#   but parents it by function (food additive) and asserts no source.
+obo:FOODON_03413135 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03316061 ] .
+local:patch-480196a403a0 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03413135 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03316061 ;
+    local:patchEvidence "audit: processed ingredients are parented by function with no derives-from" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Egg" ;
+    rdfs:comment "food-grade lysozyme is hen egg white lysozyme. FoodOn models this class but parents it by function (food additive) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### lysozyme  --RO:0001000-->  egg or egg component
+#   evidence:   audit: processed ingredients are parented by function with no derives-from
+#   confidence: high
+#   claim:      contains
+#   query:      Egg
+#   reviewer:   Matt
+#   food-grade lysozyme is hen egg white lysozyme. FoodOn models this class
+#   but parents it by function (food additive) and asserts no source.
+obo:FOODON_03413135 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03420194 ] .
+local:patch-e118d150686f a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03413135 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03420194 ;
+    local:patchEvidence "audit: processed ingredients are parented by function with no derives-from" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Egg" ;
+    rdfs:comment "food-grade lysozyme is hen egg white lysozyme. FoodOn models this class but parents it by function (food additive) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### rye kernel  --RO:0001000-->  rye plant
+#   evidence:   audit F11, build/detect_misparent.py
+#   confidence: high
+#   claim:      contains
+#   query:      rye
+#   reviewer:   Matt
+#   FoodOn parents rye kernel under sumac food product (IDs 00003734 vs sumac
+#   berry 00003733, an adjacent-ID slip). A rye query misses rye kernel and
+#   its raw/cooked/dried forms - a gluten false negative.
+obo:FOODON_00003734 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411313 ] .
+local:patch-22b4753b5264 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00003734 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411313 ;
+    local:patchEvidence "audit F11, build/detect_misparent.py" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "rye" ;
+    rdfs:comment "FoodOn parents rye kernel under sumac food product (IDs 00003734 vs sumac berry 00003733, an adjacent-ID slip). A rye query misses rye kernel and its raw/cooked/dried forms - a gluten false negative." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### sodium caseinate  --RO:0001000-->  milk
+#   evidence:   audit: processed ingredients are parented by function with no derives-from
+#   confidence: high
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   casein salt. FoodOn models this class but parents it by function (casein)
+#   and asserts no source.
+obo:FOODON_03317011 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-c1085192f1cf a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03317011 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "audit: processed ingredients are parented by function with no derives-from" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "casein salt. FoodOn models this class but parents it by function (casein) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+
+# =============================================================================
+# Claims that are NOT containment   (14)
+# =============================================================================
+# Emitted on local properties, never on RO:0001000. Read the property
+# comments before consuming these. Entries marked DECLINED were reviewed and
+# rejected as containment; they are kept because the reasoning is the useful
+# part.
+
+
+### ascorbic acid  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   synthesised from glucose, feedstock often corn
+obo:CHEBI_22652 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-5d8ad720c664 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_22652 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "synthesised from glucose, feedstock often corn" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### calcium citrate  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   citric acid salt, inherits the citric acid feedstock question
+obo:CHEBI_190513 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-d089b5c0e382 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_190513 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "citric acid salt, inherits the citric acid feedstock question" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### carrageenan  --disputedAvoidance-->  mammal
+#   evidence:   appears on avoidance lists without an established containment basis
+#   confidence: low
+#   claim:      disputed
+#   query:      Mammalian Meat (Alpha-Gal)
+#   status:     DECLINED as containment
+#   reviewer:   Matt
+#   red seaweed polysaccharide, contains no mammalian material or alpha-gal;
+#   appears on alpha-gal lists via a contested GI-symptom hypothesis
+obo:CHEBI_3435 local:disputedAvoidance obo:FOODON_03411134 .
+local:patch-9741085ee471 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_3435 ;
+    local:patchProperty local:disputedAvoidance ;
+    local:patchValue obo:FOODON_03411134 ;
+    local:patchEvidence "appears on avoidance lists without an established containment basis" ;
+    local:patchConfidence "low" ;
+    local:patchClaim "disputed" ;
+    local:patchQuery "Mammalian Meat (Alpha-Gal)" ;
+    rdfs:comment "red seaweed polysaccharide, contains no mammalian material or alpha-gal; appears on alpha-gal lists via a contested GI-symptom hypothesis" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### chitosan  --mayDeriveFrom-->  shellfish species
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Shellfish
+#   reviewer:   Matt
+#   deacetylated chitin; crustacean shells OR fungal mycelium
+obo:CHEBI_16261 local:mayDeriveFrom obo:FOODON_03411433 .
+local:patch-8149703c6908 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_16261 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:FOODON_03411433 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Shellfish" ;
+    rdfs:comment "deacetylated chitin; crustacean shells OR fungal mycelium" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   Aspergillus niger fermentation on a sugar feedstock, often corn
+obo:CHEBI_30769 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-894fffce8d9c a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "Aspergillus niger fermentation on a sugar feedstock, often corn" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### cyclodextrin  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   enzymatic conversion of starch, feedstock varies
+obo:CHEBI_23456 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-a72714519bda a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_23456 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "enzymatic conversion of starch, feedstock varies" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### dextrin  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   starch hydrolysate, feedstock varies
+obo:CHEBI_28675 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-543462807a9a a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_28675 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "starch hydrolysate, feedstock varies" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### dextrose  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   glucose; corn-derived in the US, other feedstocks elsewhere
+obo:FOODON_03315177 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-b2c794bed781 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03315177 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "glucose; corn-derived in the US, other feedstocks elsewhere" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### erythritol  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   fermentation of corn or wheat starch hydrolysate
+obo:CHEBI_17113 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-943f35fe3c2e a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_17113 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "fermentation of corn or wheat starch hydrolysate" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### maltodextrin  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   starch hydrolysate; corn, wheat, potato or tapioca depending on plant
+obo:CHEBI_25140 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-199abee602b8 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_25140 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "starch hydrolysate; corn, wheat, potato or tapioca depending on plant" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### nisin  --mayDeriveFrom-->  milk
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Milk
+#   reviewer:   Matt
+#   Lactococcus lactis bacteriocin, commonly cultured on a dairy medium
+obo:CHEBI_71629 local:mayDeriveFrom obo:UBERON_0001913 .
+local:patch-7adde503634a a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_71629 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Lactococcus lactis bacteriocin, commonly cultured on a dairy medium" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### pink peppercorn  --crossReactiveWith-->  nut food product
+#   evidence:   clinical cross-reactivity literature; the allergen protein is not present
+#   confidence: medium
+#   claim:      cross_reactive
+#   query:      Tree Nuts
+#   status:     DECLINED as containment
+#   reviewer:   Matt
+#   Schinus in Anacardiaceae with cashew and pistachio; cross-reactive,
+#   contains no tree nut
+obo:FOODON_00003810 local:crossReactiveWith obo:FOODON_00001172 .
+local:patch-a1598bbb230a a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_00003810 ;
+    local:patchProperty local:crossReactiveWith ;
+    local:patchValue obo:FOODON_00001172 ;
+    local:patchEvidence "clinical cross-reactivity literature; the allergen protein is not present" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "cross_reactive" ;
+    local:patchQuery "Tree Nuts" ;
+    rdfs:comment "Schinus in Anacardiaceae with cashew and pistachio; cross-reactive, contains no tree nut" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### pink peppercorn  --crossReactiveWith-->  nut producing plant
+#   evidence:   clinical cross-reactivity literature; the allergen protein is not present
+#   confidence: medium
+#   claim:      cross_reactive
+#   query:      Tree Nuts
+#   status:     DECLINED as containment
+#   reviewer:   Matt
+#   Schinus in Anacardiaceae with cashew and pistachio; cross-reactive,
+#   contains no tree nut
+obo:FOODON_00003810 local:crossReactiveWith obo:FOODON_03411213 .
+local:patch-f3720bb6e71a a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_00003810 ;
+    local:patchProperty local:crossReactiveWith ;
+    local:patchValue obo:FOODON_03411213 ;
+    local:patchEvidence "clinical cross-reactivity literature; the allergen protein is not present" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "cross_reactive" ;
+    local:patchQuery "Tree Nuts" ;
+    rdfs:comment "Schinus in Anacardiaceae with cashew and pistachio; cross-reactive, contains no tree nut" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### xanthan gum  --mayDeriveFrom-->  Zea mays subsp. mays
+#   evidence:   manufacturing feedstock varies by producer; not a property of the substance
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   Xanthomonas fermentation, feedstock often corn glucose
+obo:FOODON_03413321 local:mayDeriveFrom obo:NCBITaxon_381124 .
+local:patch-f119275e262c a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413321 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:NCBITaxon_381124 ;
+    local:patchEvidence "manufacturing feedstock varies by producer; not a property of the substance" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "Xanthomonas fermentation, feedstock often corn glucose" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+
+# =============================================================================
+# Exceptions that OWL cannot express as retractions   (1)
+# =============================================================================
+# OWL is monotonic: an import adds and never removes. Where an upstream
+# axiom is ontologically defensible but wrong for avoidance, the exception
+# is stated declaratively for a traversal to honour.
+
+
+### peanut plant  --notAvoidanceRelevantFor-->  nut producing plant
+#   confidence: high
+#   claim:      not_avoidance_relevant
+#   query:      nut producing plant
+#   reviewer:   Matt
+#   FoodOn asserts `peanut plant is_a nut producing plant`, defensible
+#   botanically but wrong for allergens: FALCPA treats peanut and tree nut as
+#   SEPARATE allergens. Without this a tree-nut query returns peanut and its
+#   91-node closure. The two FoodOn sub-branches that exclude peanut cover
+#   only 4 of 7 major tree nuts between them, so there is no clean class to
+#   resolve to instead. Confirmed by Matt 2026-09-09: disconnect in both
+#   directions.
+obo:FOODON_03411337 local:notAvoidanceRelevantFor obo:FOODON_03411213 .
+local:patch-225d55b2b91c a local:Patch ;
+    local:patchSection "remove" ;
+    local:patchTarget obo:FOODON_03411337 ;
+    local:patchProperty local:notAvoidanceRelevantFor ;
+    local:patchValue obo:FOODON_03411213 ;
+    local:patchConfidence "high" ;
+    local:patchClaim "not_avoidance_relevant" ;
+    local:patchQuery "nut producing plant" ;
+    rdfs:comment "FoodOn asserts `peanut plant is_a nut producing plant`, defensible botanically but wrong for allergens: FALCPA treats peanut and tree nut as SEPARATE allergens. Without this a tree-nut query returns peanut and its 91-node closure. The two FoodOn sub-branches that exclude peanut cover only 4 of 7 major tree nuts between them, so there is no clean class to resolve to instead. Confirmed by Matt 2026-09-09: disconnect in both directions." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+
+# =============================================================================
+# Retired patches, kept for the audit trail   (1)
+# =============================================================================
+# These were correct and signed, and are now carried by structure instead --
+# either upstream or by another patch. No axiom is emitted. They are listed
+# so that the record of why the gap existed survives, and so a regression is
+# recognisable.
+
+
+### tahini  --RO:0001000-->  sesame plant
+#   by:         mined bridge `tahini -> sesame plant`, signed in config/mined-signoff.json
+#   reviewer:   Matt
+#   FoodOn's own definition of tahini reads 'a condiment made from toasted
+#   ground hulled sesame'. build/classify_mined.py extracted that, it was
+#   signed, and the class is now reached structurally, so this override no
+#   longer has work to do. Retired rather than deleted: the record of WHY the
+#   gap existed is the useful part, and if the structural route ever breaks,
+#   test/override_run.py fails and names this entry as the fix.
+#   (no axiom emitted)
+local:patch-6b7a0e85c496 a local:Patch ;
+    local:patchSection "superseded" ;
+    local:patchTarget obo:FOODON_00003855 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411226 ;
+    local:supersededBy "mined bridge `tahini -> sesame plant`, signed in config/mined-signoff.json" ;
+    rdfs:comment "FoodOn's own definition of tahini reads 'a condiment made from toasted ground hulled sesame'. build/classify_mined.py extracted that, it was signed, and the class is now reached structurally, so this override no longer has work to do. Retired rather than deleted: the record of WHY the gap existed is the useful part, and if the structural route ever breaks, test/override_run.py fails and names this entry as the fix." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+
+# =============================================================================
+# Claims whose target has no FoodOn class   (7)
+# =============================================================================
+# There is nothing to point an axiom at. Recorded as text because the safety
+# information matters more than the modelling.
+
+
+### hydrolyzed plant protein
+#   claim:      may_contain
+#   query:      Soy
+#   reviewer:   Matt
+#   soy, wheat or corn depending on producer
+#   (no axiom emitted)
+local:patch-69c3f073c176 a local:Patch ;
+    local:patchSection "absent" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Soy" ;
+    rdfs:comment "soy, wheat or corn depending on producer" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### hydrolyzed vegetable protein
+#   claim:      may_contain
+#   query:      Soy
+#   reviewer:   Matt
+#   soy, wheat or corn depending on producer
+#   (no axiom emitted)
+local:patch-69c3f073c176 a local:Patch ;
+    local:patchSection "absent" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Soy" ;
+    rdfs:comment "soy, wheat or corn depending on producer" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### lactic acid starter culture
+#   claim:      may_contain
+#   query:      Milk
+#   reviewer:   Matt
+#   may be propagated on a dairy medium
+#   (no axiom emitted)
+local:patch-69c3f073c176 a local:Patch ;
+    local:patchSection "absent" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "may be propagated on a dairy medium" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### mahlab
+#   claim:      cross_reactive
+#   query:      Tree Nuts
+#   reviewer:   Matt
+#   Prunus mahaleb kernel; a stone-fruit kernel, cross-reactive rather than a
+#   tree nut
+#   (no axiom emitted)
+local:patch-69c3f073c176 a local:Patch ;
+    local:patchSection "absent" ;
+    local:patchClaim "cross_reactive" ;
+    local:patchQuery "Tree Nuts" ;
+    rdfs:comment "Prunus mahaleb kernel; a stone-fruit kernel, cross-reactive rather than a tree nut" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### modified food starch
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   any starch source; unspecified by name
+#   (no axiom emitted)
+local:patch-69c3f073c176 a local:Patch ;
+    local:patchSection "absent" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "any starch source; unspecified by name" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### sorbitol
+#   claim:      may_contain
+#   query:      Corn
+#   reviewer:   Matt
+#   hydrogenated glucose, feedstock often corn
+#   (no axiom emitted)
+local:patch-69c3f073c176 a local:Patch ;
+    local:patchSection "absent" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Corn" ;
+    rdfs:comment "hydrogenated glucose, feedstock often corn" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### textured vegetable protein
+#   claim:      may_contain
+#   query:      Soy
+#   reviewer:   Matt
+#   usually soy, but the name does not commit to a source
+#   (no axiom emitted)
+local:patch-69c3f073c176 a local:Patch ;
+    local:patchSection "absent" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Soy" ;
+    rdfs:comment "usually soy, but the name does not commit to a source" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+
+# =============================================================================
+# Traversal policy, as annotations
+# =============================================================================
+# Not axioms: these say how a consumer should WALK the merged graph. A
+# relation propagating `inverse` means avoidance travels object to subject,
+# which is the direction RO:0001000 is asserted in. Emitted so a SPARQL
+# consumer can read the policy from the data instead of re-deriving it.
+
+obo:RO_0001000 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "core derivation: product derives from source organism/material" .
+obo:RO_0002162 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "only systematic bridge from FoodOn classes into the NCBITaxon backbone; required for class-level botanical queries" .
+obo:FOODON_00001563 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "has defining ingredient: strawberry wine -> strawberry. Direct composition" .
+obo:FOODON_00002420 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "has ingredient: direct composition" .
+obo:BFO_0000050 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "part_of: traverse whole -> part. Was drafted as `forward` on the reasoning that part->whole is the direction avoidance travels; that was wrong and measurably so. Forward made a soy query return lobster and its 73-node subtree via `soybean oil (flavored with extract from lobster shell) part_of lobster`. Inverse is correct: avoiding lobster should flag that oil, avoiding soy should not flag lobster" .
+obo:BFO_0000051 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "has_part: whole -> part. Composition, but 411 of 483 have anonymous fillers and are not edge-able" .
+obo:RO_0002202 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "develops_from: mostly PO plant-anatomy, but genuinely a derivation" .
+obo:RO_0003001 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "produced by: food produced by an organism" .
+obo:OBI_0000293 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "has specified input: process input becomes part of the output" .
+obo:RO_0002233 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "has input: bean flour -> bean (dried). Derivation-like" .
+obo:RO_0009001 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "has substance added: lasagne -> cheese food product. Direct composition" .
+obo:RO_0002473 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "composed primarily of: brown sugar -> sucrose. Targets are ChEBI, so gated by the label-granularity boundary" .
+obo:RO_0002160 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "only_in_taxon: taxon restriction, same role as in taxon" .
+obo:RO_0009003 local:propagatesAvoidance "inverse" ;
+    rdfs:comment "immersed in: 1 edge (lasagne -> packed in gravy or sauce). Kept for recall, low confidence" .
+obo:RO_0002350 local:propagatesAvoidance "none" ;
+    rdfs:comment "member of: 2,343 edges pointing almost entirely at US CFR regulatory groupings. A classification facet, not composition -- propagating it would link every nutritive sweetener to every other. Retained as the primary input to the section 6 functional rollup" .
+obo:RO_0000086 local:propagatesAvoidance "none" ;
+    rdfs:comment "has quality: quality annotation, not composition" .
+obo:RO_0002351 local:propagatesAvoidance "none" ;
+    rdfs:comment "has member: inverse of member of, same reasoning" .
+obo:RO_0001025 local:propagatesAvoidance "none" ;
+    rdfs:comment "located_in: geography (GAZ)" .
+obo:RO_0002353 local:propagatesAvoidance "none" ;
+    rdfs:comment "output of: points at a process (food (canned) -> food canning), not an ingredient" .
+obo:OBI_0000312 local:propagatesAvoidance "none" ;
+    rdfs:comment "is specified output of: points at a process" .
+obo:FOODON_00001301 local:propagatesAvoidance "none" ;
+    rdfs:comment "has food substance analog: imitation peanut butter -> peanut butter. MUST NOT propagate -- an analog is defined by NOT containing the thing it imitates. Surfaced in the UI as 'related, verify separately', never as containment" .
+obo:OBI_0000299 local:propagatesAvoidance "none" ;
+    rdfs:comment "has specified output: process output, wrong direction for containment" .
+obo:HANCESTRO_0308 local:propagatesAvoidance "none" ;
+    rdfs:comment "hasCountryOfOrigin: geography" .
+obo:RO_0009004 local:propagatesAvoidance "none" ;
+    rdfs:comment "has consumer: who eats it, not what is in it" .
+obo:RO_0000053 local:propagatesAvoidance "none" ;
+    rdfs:comment "has characteristic: quality annotation" .
+obo:RO_0000056 local:propagatesAvoidance "none" ;
+    rdfs:comment "participates_in: process participation" .
+obo:IAO_0000136 local:propagatesAvoidance "none" ;
+    rdfs:comment "is about: metadata" .
+obo:RO_0002219 local:propagatesAvoidance "none" ;
+    rdfs:comment "surrounded by: spatial, not compositional" .
+obo:RO_0000057 local:propagatesAvoidance "none" ;
+    rdfs:comment "has_participant: process participation" .
+obo:RO_0002170 local:propagatesAvoidance "none" ;
+    rdfs:comment "connected to: spatial" .
+obo:RO_0002234 local:propagatesAvoidance "none" ;
+    rdfs:comment "has output: process output" .
+obo:BFO_0000062 local:propagatesAvoidance "none" ;
+    rdfs:comment "preceded_by: temporal" .
+
+### excluded branch: agency food product type  (6074 classes)
+#   parallel regulatory classification vocabularies (EFSA FoodEx2, US CFR, EC,
+#   CCPR). '00030 - cereal grains' alone groups wheat, maize, rye, barley and
+#   rice, so traversing this branch leaks corn into wheat without ever
+#   ascending the food hierarchy. See audit F10.
+obo:FOODON_03400361 local:excludedFromTraversal true .
+### excluded branch: embryo  (12 classes)
+#   UBERON developmental stages -- morula, blastula, gastrula, neurula,
+#   2/4/8-cell stage. FoodOn parents `embryo` under `animal egg`, which is
+#   defensible biologically: an egg does contain one. But these are stages of
+#   development, not things that appear on a plate or a label, and they are
+#   the only non-food members of the animal egg subtree. Excluded when `animal
+#   egg` was added as a root for the `egg` query, so that adding quail, goose
+#   and ostrich egg did not also add 12 embryology classes. Whole branch is
+#   UBERON and 12 classes; no food class sits under it.
+obo:UBERON_0000922 local:excludedFromTraversal true .
+
+# --- parallel-hierarchy correspondences -------------------------------------
+# The same organism under two FoodOn class trees that share no terms.
+# Emitted because a closure that starts on only one of the pair silently
+# under-reports: measured on Solanaceae, 620 classes from NCBITaxon_4070
+# alone against 630 with the pair. Computed per root by taxon pivot or label
+# convention, not listed by hand.
+
+### barley plant  <->  Hordeum vulgare   [taxon pivot]
+obo:FOODON_03411230 local:sameOrganismAs obo:NCBITaxon_4513 .
+### chicken egg  <->  Gallus gallus   [taxon pivot]
+obo:FOODON_03316061 local:sameOrganismAs obo:NCBITaxon_9031 .
+### chicken egg  <->  chicken egg food product   [label convention]
+obo:FOODON_03316061 local:sameOrganismAs obo:FOODON_00001275 .
+### mollusc  <->  mollusc food product   [label convention]
+obo:FOODON_03412112 local:sameOrganismAs obo:FOODON_00002044 .
+### nut food product  <->  nut   [label convention (stripped)]
+obo:FOODON_00001172 local:sameOrganismAs obo:FOODON_03303171 .
+### oat plant  <->  oat   [label convention (stripped)]
+obo:FOODON_03414319 local:sameOrganismAs obo:FOODON_00003429 .
+### rye plant  <->  Secale cereale   [taxon pivot]
+obo:FOODON_03411313 local:sameOrganismAs obo:NCBITaxon_4550 .
+### solanaceae plant  <->  Solanaceae   [label convention (stripped)]
+obo:FOODON_03414934 local:sameOrganismAs obo:NCBITaxon_4070 .
+### soybean plant  <->  Glycine max   [taxon pivot]
+obo:FOODON_03411452 local:sameOrganismAs obo:NCBITaxon_3847 .
+### soybean plant  <->  soybean   [label convention (stripped)]
+obo:FOODON_03411452 local:sameOrganismAs obo:FOODON_03301415 .
+
+
+# --- pinned free-text resolutions -------------------------------------------
+# Which classes a free-text query resolves to. Several classes carry the
+# same string where one cannot cover the allergen alone.
+obo:FOODON_02010002 local:resolvesQuery "egg" .
+obo:FOODON_03411230 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
+obo:FOODON_03316061 local:resolvesQuery "egg" .
+obo:FOODON_00002809 local:resolvesQuery "edamame" .
+obo:FOODON_03420194 local:resolvesQuery "egg" .
+obo:FOODON_03411134 local:resolvesQuery "alpha gal" , "alpha-gal" , "mammalian meat" , "mammalian meat (alpha-gal)" , "red meat" .
+obo:FOODON_03412112 local:resolvesQuery "mollusc" , "molluscan shellfish" , "molluscs" , "mollusk" , "shellfish (mollusc)" .
+obo:FOODON_00001172 local:resolvesQuery "tree nut" , "tree nuts" , "treenut" .
+obo:FOODON_03411213 local:resolvesQuery "tree nut" , "tree nuts" , "treenut" .
+obo:FOODON_03414319 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
+obo:FOODON_03301223 local:resolvesQuery "paprika" .
+obo:FOODON_03316348 local:resolvesQuery "paprika" .
+obo:FOODON_03411313 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
+obo:FOODON_03414934 local:resolvesQuery "nightshade" , "nightshades" , "solanaceae" .
+obo:FOODON_03411452 local:resolvesQuery "soja" , "soy" , "soya" , "soybean" .
+obo:CHEBI_26823 local:resolvesQuery "sulfite" , "sulfites" , "sulfur dioxide" , "sulphite" , "sulphites" , "sulphur dioxide" .
+obo:FOODON_03411358 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .
+obo:FOODON_03411312 local:resolvesQuery "gluten" , "gluten containing grains" , "gluten-containing grains" .

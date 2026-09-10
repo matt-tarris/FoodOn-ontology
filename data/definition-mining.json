@@ -1,0 +1,2478 @@
+{
+  "version": "2026-09-09",
+  "status": "MEASUREMENT ONLY - writes no edges",
+  "candidates": [
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004512",
+      "label": "00 white wheat flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411421",
+      "source_label": "soft wheat plant",
+      "phrase": "innermost part of soft wheat grain such that it co",
+      "definition": "A flour ground from the innermost part of soft wheat grain such that it contains very little bran or germ."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03540126",
+      "label": "01260 - rye only bread and rolls (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "wheat flour is considered",
+      "definition": "The group includes any type of bread having rye as main ingredient. The presence of wheat flour is considered almost negligible. The part consumed/ana"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03540143",
+      "label": "01430 - tortilla (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "wheat flour",
+      "definition": "The group includes any type of Tortilla or taco, a flat bread traditionally based on maize meal, but nowadays also made from wheat flour. The part con"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03540169",
+      "label": "01690 - pretzels (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "wheat flour",
+      "definition": "The group includes any type of soft Pretzels. This group includes only the \"bread-like\" pretzel made from wheat flour, water and yeast, usually sprink"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03540180",
+      "label": "01800 - fresh durum pasta (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "durum wheat",
+      "definition": "The group includes any type of fresh durum pasta (i.e. obtained from durum wheat, without use of eggs, not dried, normally needing refrigeration). By "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03540183",
+      "label": "01830 - dried durum pasta (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "durum wheat",
+      "definition": "The group includes any type of dried pasta obtained from durum wheat (where the moisture content has been reduced to such an extent to allow storage f"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03540187",
+      "label": "01870 - fresh stuffed durum pasta (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "durum wheat",
+      "definition": "The group includes any type of fresh stuffed durum pasta (i.e. obtained from durum wheat, without use of eggs, not dried, normally needing refrigerati"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03540190",
+      "label": "01900 - dried stuffed durum pasta (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "durum wheat",
+      "definition": "The group includes any type of Dried stuffed pasta obtained from durum wheat (where the moisture content has been reduced to such an extent to allow s"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03540667",
+      "label": "06670 - cucurbits fruiting vegetables (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412511",
+      "source_label": "hubbard squash plant",
+      "phrase": "plants of the taxonomic group cucurbitaceae family",
+      "definition": "Group/item describing a raw commodity obtained from plants of the taxonomic group Cucurbitaceae family. The group includes the fruiting body of any ty"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03400983",
+      "label": "10000043 - sugar/sugar substitutes (shelf stable) (gs1 gpc)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411378",
+      "source_label": "sugar cane plant",
+      "phrase": "different stages of refining the juice of the suga",
+      "definition": "Includes any products that can be described/observed as a sweet substance, obtained from the different stages of refining the juice of the sugar cane/"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03400899",
+      "label": "10000116 - tea - bags/loose (gs1 gpc)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411623",
+      "source_label": "tea plant",
+      "phrase": "dried leaves of the tea plant",
+      "definition": "Includes any products that can be described/observed as loose tea that is derived from the dried leaves of the tea plant, Camellia Sinensis. \nSpecific"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03400901",
+      "label": "10000118 - tea - ready to drink (gs1 gpc)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411623",
+      "source_label": "tea plant",
+      "phrase": "dried leaves of the tea plant",
+      "definition": "Includes any products that can be described/observed as a ready to drink beverage made from the dried leaves of the tea plant, Camellia Sinensis. \nInc"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03401110",
+      "label": "10000252 - popcorn (shelf stable) (gs1 gpc)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00003425",
+      "source_label": "Maize plant",
+      "phrase": "maize",
+      "definition": "Includes any products that can be described/observed as a type of food usually consumed between meals, made from maize (corn). \nIncludes both unpopped"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03400972",
+      "label": "10000286 - cereal products - ready to eat (perishable) (gs1 gpc)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "wheat",
+      "definition": "Includes any products that can be described/observed as a processed cereal produced from wheat, rye, barley, oats, or other types of grain, which has "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03401515",
+      "label": "10006311 - coffee substitutes - instant (gs1 gpc)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411552",
+      "source_label": "chicory plant",
+      "phrase": "root of the chicory plant or other coffee substitu",
+      "definition": "Includes any products that can be described/observed as a substance made from the root of the Chicory plant or other coffee substitute which makes the"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03401516",
+      "label": "10006312 - coffee substitutes - ready to drink (gs1 gpc)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411552",
+      "source_label": "chicory plant",
+      "phrase": "coffee substitutes such as chicory",
+      "definition": "Includes any products that can be described/observed as a ready to drink non\u0096carbonated beverage made from coffee substitutes such as chicory. Include"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541100",
+      "label": "11000 - chickpea flour (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413484",
+      "source_label": "garden pea plant",
+      "phrase": "chick peas",
+      "definition": "The group includes any type of flour made from Chick peas. The part consumed/analysed is by default the whole or a portion of it representing the obse"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541811",
+      "label": "18110 - jam, lingonberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411019",
+      "source_label": "lingonberry plant",
+      "phrase": "lingonberry",
+      "definition": "The group includes any type of Jam obtained from Lingonberry. The part consumed/analysed is by default the whole or a portion of it representing the o"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541815",
+      "label": "18150 - jam, rose hips (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411225",
+      "source_label": "rose plant",
+      "phrase": "rose hips",
+      "definition": "The group includes any type of Jam obtained from Rose hips. The part consumed/analysed is by default the whole or a portion of it representing the obs"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541819",
+      "label": "18190 - jam, sweet cherry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411091",
+      "source_label": "sweet cherry plant",
+      "phrase": "sweet cherry",
+      "definition": "The group includes any type of Jam obtained from Sweet cherry. The part consumed/analysed is by default the whole or a portion of it representing the "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541820",
+      "label": "18200 - jam, sour cherry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411052",
+      "source_label": "sour cherry plant",
+      "phrase": "sour cherry",
+      "definition": "The group includes any type of Jam obtained from Sour cherry. The part consumed/analysed is by default the whole or a portion of it representing the o"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541831",
+      "label": "18310 - fruit compote, apple (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "apple",
+      "definition": "The group includes any type of Fruit compote obtained from Apple. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541832",
+      "label": "18320 - fruit compote, apricot (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411529",
+      "source_label": "apricot tree",
+      "phrase": "apricot",
+      "definition": "The group includes any type of Fruit compote obtained from Apricot. The part consumed/analysed is by default the whole or a portion of it representing"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541833",
+      "label": "18330 - fruit compote, cranberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414209",
+      "source_label": "cranberry plant",
+      "phrase": "cranberry",
+      "definition": "The group includes any type of Fruit compote obtained from Cranberry. The part consumed/analysed is by default the whole or a portion of it representi"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541835",
+      "label": "18350 - fruit compote, peach (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411350",
+      "source_label": "peach tree",
+      "phrase": "peach",
+      "definition": "The group includes any type of Fruit compote obtained from Peach. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541836",
+      "label": "18360 - fruit compote, pear (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411344",
+      "source_label": "pear plant",
+      "phrase": "pear",
+      "definition": "The group includes any type of Fruit compote obtained from Pear. The part consumed/analysed is by default the whole or a portion of it representing th"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541837",
+      "label": "18370 - fruit compote, pineapple (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411484",
+      "source_label": "pineapple plant",
+      "phrase": "pineapple",
+      "definition": "The group includes any type of Fruit compote obtained from Pineapple. The part consumed/analysed is by default the whole or a portion of it representi"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541838",
+      "label": "18380 - fruit compote, plum (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411206",
+      "source_label": "plum plant",
+      "phrase": "plum",
+      "definition": "The group includes any type of Fruit compote obtained from Plum. The part consumed/analysed is by default the whole or a portion of it representing th"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541839",
+      "label": "18390 - fruit compote, sweet cherry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411091",
+      "source_label": "sweet cherry plant",
+      "phrase": "sweet cherry",
+      "definition": "The group includes any type of Fruit compote obtained from Sweet cherry. The part consumed/analysed is by default the whole or a portion of it represe"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03541840",
+      "label": "18400 - fruit compote, sour cherry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411052",
+      "source_label": "sour cherry plant",
+      "phrase": "sour cherry",
+      "definition": "The group includes any type of Fruit compote obtained from Sour cherry. The part consumed/analysed is by default the whole or a portion of it represen"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543003",
+      "label": "30030 - sorghum molasses (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411448",
+      "source_label": "sorghum plant",
+      "phrase": "sorghum",
+      "definition": "The group includes any type of molasses obtained from sorghum. The part consumed/analysed is by default the whole or a portion of it representing the "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543004",
+      "label": "30040 - sugar cane molasses (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411378",
+      "source_label": "sugar cane plant",
+      "phrase": "sugar cane",
+      "definition": "The group includes any type of molasses obtained from Sugar cane. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543005",
+      "label": "30050 - sugar beet molasses (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411370",
+      "source_label": "sugar beet plant",
+      "phrase": "sugar beet",
+      "definition": "The group includes any type of molasses obtained from Sugar beet. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543007",
+      "label": "30070 - barley malt syrup (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411230",
+      "source_label": "barley plant",
+      "phrase": "malted barley",
+      "definition": "The group includes any type of syrup produced from malted barley. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543008",
+      "label": "30080 - corn syrup (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00003425",
+      "source_label": "Maize plant",
+      "phrase": "starch of maize",
+      "definition": "The group includes any type of Corn syrup, usually made from the starch of maize (corn). The part consumed/analysed is by default the whole or a porti"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543009",
+      "label": "30090 - sugar beet syrup (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411370",
+      "source_label": "sugar beet plant",
+      "phrase": "sugar beet",
+      "definition": "The group includes any type of syrup produced from Sugar beet. The part consumed/analysed is by default the whole or a portion of it representing the "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543162",
+      "label": "31620 - juice, apple-grape (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "apple and grape",
+      "definition": "The group includes any type of juice made from Apple and Grape. The part consumed/analysed is by default the whole or a portion of it representing the"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543163",
+      "label": "31630 - juice, apple-cherry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "apple and cherry",
+      "definition": "The group includes any type of juice made from Apple and Cherry. The part consumed/analysed is by default the whole or a portion of it representing th"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543164",
+      "label": "31640 - juice, orange-grapefruit (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411339",
+      "source_label": "orange plant",
+      "phrase": "orange and grapefruit",
+      "definition": "The group includes any type of juice made from Orange and Grapefruit. The part consumed/analysed is by default the whole or a portion of it representi"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543165",
+      "label": "31650 - juice, peach-apricot (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411350",
+      "source_label": "peach tree",
+      "phrase": "peach and apricot",
+      "definition": "The group includes any type of juice made from Peach and Apricot. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543166",
+      "label": "31660 - juice, strawberry-cherry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411393",
+      "source_label": "strawberry plant",
+      "phrase": "strawberry and cherry",
+      "definition": "The group includes any type of juice made from Strawberry and Cherry. The part consumed/analysed is by default the whole or a portion of it representi"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543167",
+      "label": "31670 - juice, mandarin-banana (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414270",
+      "source_label": "banana plant",
+      "phrase": "mandarin and banana",
+      "definition": "The group includes any type of juice made from Mandarin and Banana. The part consumed/analysed is by default the whole or a portion of it representing"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543168",
+      "label": "31680 - juice, apricot-orange (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411529",
+      "source_label": "apricot tree",
+      "phrase": "apricot and orange",
+      "definition": "The group includes any type of juice made from Apricot and Orange. The part consumed/analysed is by default the whole or a portion of it representing "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543169",
+      "label": "31690 - juice, orange-peach (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411339",
+      "source_label": "orange plant",
+      "phrase": "orange and peach",
+      "definition": "The group includes any type of juice made from Orange and Peach. The part consumed/analysed is by default the whole or a portion of it representing th"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543171",
+      "label": "31710 - juice, apple (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "apple",
+      "definition": "The group includes any type of juice made from Apple. The part consumed/analysed is by default the whole or a portion of it representing the observed "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543172",
+      "label": "31720 - juice, orange (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411339",
+      "source_label": "orange plant",
+      "phrase": "orange",
+      "definition": "The group includes any type of juice made from Orange. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543173",
+      "label": "31730 - juice, cranberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414209",
+      "source_label": "cranberry plant",
+      "phrase": "cranberry",
+      "definition": "The group includes any type of juice made from Cranberry. The part consumed/analysed is by default the whole or a portion of it representing the obser"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543174",
+      "label": "31740 - juice, apricot (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411529",
+      "source_label": "apricot tree",
+      "phrase": "apricot",
+      "definition": "The group includes any type of juice made from Apricot. The part consumed/analysed is by default the whole or a portion of it representing the observe"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543175",
+      "label": "31750 - juice, grapefruit (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411507",
+      "source_label": "grapefruit plant",
+      "phrase": "grapefruit",
+      "definition": "The group includes any type of juice made from Grapefruit. The part consumed/analysed is by default the whole or a portion of it representing the obse"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543176",
+      "label": "31760 - juice, pineapple (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411484",
+      "source_label": "pineapple plant",
+      "phrase": "pineapple",
+      "definition": "The group includes any type of juice made from Pineapple. The part consumed/analysed is by default the whole or a portion of it representing the obser"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543178",
+      "label": "31780 - juice, black currant (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411192",
+      "source_label": "black currant plant",
+      "phrase": "black currant",
+      "definition": "The group includes any type of juice made from Black currant. The part consumed/analysed is by default the whole or a portion of it representing the o"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543180",
+      "label": "31800 - juice, blackberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414206",
+      "source_label": "blackberry plant",
+      "phrase": "blackberry",
+      "definition": "The group includes any type of juice made from Blackberry. The part consumed/analysed is by default the whole or a portion of it representing the obse"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543182",
+      "label": "31820 - juice, elderberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411403",
+      "source_label": "european elder plant",
+      "phrase": "elderberry",
+      "definition": "The group includes any type of juice made from Elderberry. The part consumed/analysed is by default the whole or a portion of it representing the obse"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543184",
+      "label": "31840 - juice, guava (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411333",
+      "source_label": "guava plant",
+      "phrase": "guava",
+      "definition": "The group includes any type of juice made from Guava. The part consumed/analysed is by default the whole or a portion of it representing the observed "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543185",
+      "label": "31850 - juice, lemon (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411275",
+      "source_label": "lemon plant",
+      "phrase": "lemon",
+      "definition": "The group includes any type of juice made from Lemon. The part consumed/analysed is by default the whole or a portion of it representing the observed "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543187",
+      "label": "31870 - juice, mango (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411270",
+      "source_label": "mango plant",
+      "phrase": "mango",
+      "definition": "The group includes any type of juice made from Mango. The part consumed/analysed is by default the whole or a portion of it representing the observed "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543188",
+      "label": "31880 - juice, nectarine (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411436",
+      "source_label": "nectarine tree",
+      "phrase": "nectarine",
+      "definition": "The group includes any type of juice made from Nectarine. The part consumed/analysed is by default the whole or a portion of it representing the obser"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543190",
+      "label": "31900 - juice, peach (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411350",
+      "source_label": "peach tree",
+      "phrase": "peach",
+      "definition": "The group includes any type of juice made from Peach. The part consumed/analysed is by default the whole or a portion of it representing the observed "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543191",
+      "label": "31910 - juice, pear (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411344",
+      "source_label": "pear plant",
+      "phrase": "pear",
+      "definition": "The group includes any type of juice made from Pear. The part consumed/analysed is by default the whole or a portion of it representing the observed h"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543192",
+      "label": "31920 - juice, pomegranate (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411162",
+      "source_label": "pomegranate plant",
+      "phrase": "pomegranate",
+      "definition": "The group includes any type of juice made from Pomegranate. The part consumed/analysed is by default the whole or a portion of it representing the obs"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543194",
+      "label": "31940 - juice, red currant (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411055",
+      "source_label": "red currant plant",
+      "phrase": "red currant",
+      "definition": "The group includes any type of juice made from Red currant. The part consumed/analysed is by default the whole or a portion of it representing the obs"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543196",
+      "label": "31960 - nectar, apricot (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411529",
+      "source_label": "apricot tree",
+      "phrase": "apricot",
+      "definition": "The group includes any type of nectar made from Apricot. The part consumed/analysed is by default the whole or a portion of it representing the observ"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543197",
+      "label": "31970 - nectar, apple (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "apple",
+      "definition": "The group includes any type of nectar made from Apple. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543199",
+      "label": "31990 - nectar, banana (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414270",
+      "source_label": "banana plant",
+      "phrase": "banana",
+      "definition": "The group includes any type of nectar made from Banana. The part consumed/analysed is by default the whole or a portion of it representing the observe"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543200",
+      "label": "32000 - nectar, orange (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411339",
+      "source_label": "orange plant",
+      "phrase": "orange",
+      "definition": "The group includes any type of nectar made from Orange. The part consumed/analysed is by default the whole or a portion of it representing the observe"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543201",
+      "label": "32010 - nectar, peach (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411350",
+      "source_label": "peach tree",
+      "phrase": "peach",
+      "definition": "The group includes any type of nectar made from Peach. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543202",
+      "label": "32020 - nectar, pear (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411344",
+      "source_label": "pear plant",
+      "phrase": "pear",
+      "definition": "The group includes any type of nectar made from Pear. The part consumed/analysed is by default the whole or a portion of it representing the observed "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543203",
+      "label": "32030 - nectar, pineapple (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411484",
+      "source_label": "pineapple plant",
+      "phrase": "pineapple",
+      "definition": "The group includes any type of nectar made from Pineapple. The part consumed/analysed is by default the whole or a portion of it representing the obse"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543205",
+      "label": "32050 - nectar, mango (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411270",
+      "source_label": "mango plant",
+      "phrase": "mango",
+      "definition": "The group includes any type of nectar made from Mango. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543207",
+      "label": "32070 - juice, tomato (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411276",
+      "source_label": "tomato plant",
+      "phrase": "tomato",
+      "definition": "The group includes any type of juice made from tomato. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543208",
+      "label": "32080 - juice, carrot (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411227",
+      "source_label": "carrot plant",
+      "phrase": "carrot",
+      "definition": "The group includes any type of Juice made from Carrot. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543210",
+      "label": "32100 - juice, celery (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411282",
+      "source_label": "celery plant",
+      "phrase": "celery",
+      "definition": "The group includes any type of Juice made from Celery. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543212",
+      "label": "32120 - juice, white cabbage (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412071",
+      "source_label": "white cabbage plant",
+      "phrase": "white cabbage",
+      "definition": "The group includes any type of Juice made from White cabbage. The part consumed/analysed is by default the whole or a portion of it representing the o"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543213",
+      "label": "32130 - juice, potato (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411218",
+      "source_label": "potato plant",
+      "phrase": "potato",
+      "definition": "The group includes any type of Juice made from Potato. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543214",
+      "label": "32140 - juice, cucumber (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411404",
+      "source_label": "cucumber plant",
+      "phrase": "cucumber",
+      "definition": "The group includes any type of Juice made from Cucumber. The part consumed/analysed is by default the whole or a portion of it representing the observ"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543215",
+      "label": "32150 - juice, turnip (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411238",
+      "source_label": "turnip plant",
+      "phrase": "turnip",
+      "definition": "The group includes any type of Juice made from Turnip. The part consumed/analysed is by default the whole or a portion of it representing the observed"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543217",
+      "label": "32170 - juice, tomato-leafy vegetables (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411276",
+      "source_label": "tomato plant",
+      "phrase": "tomato and leafy vegetables",
+      "definition": "The group includes any type of juice made from tomato and leafy vegetables. The part consumed/analysed is by default the whole or a portion of it repr"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543218",
+      "label": "32180 - juice, tomato-carrot (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411276",
+      "source_label": "tomato plant",
+      "phrase": "tomato and carrot",
+      "definition": "The group includes any type of juice made from tomato and carrot. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543222",
+      "label": "32220 - juice, apple-carrot (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "apple and carrot",
+      "definition": "The group includes any type of Juice made from Apple and carrot. The part consumed/analysed is by default the whole or a portion of it representing th"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543232",
+      "label": "32320 - juice concentrate, blackberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414206",
+      "source_label": "blackberry plant",
+      "phrase": "blackberry",
+      "definition": "The group includes any type of Juice concentrate made from blackberry. The part consumed/analysed is by default the whole or a portion of it represent"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543233",
+      "label": "32330 - juice concentrate, blueberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411491",
+      "source_label": "blueberry plant",
+      "phrase": "blueberry",
+      "definition": "The group includes any type of Juice concentrate made from blueberry. The part consumed/analysed is by default the whole or a portion of it representi"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543234",
+      "label": "32340 - juice concentrate, black currant (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411192",
+      "source_label": "black currant plant",
+      "phrase": "black currant",
+      "definition": "The group includes any type of Juice concentrate made from Black currant. The part consumed/analysed is by default the whole or a portion of it repres"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543235",
+      "label": "32350 - juice concentrate, red currant (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411055",
+      "source_label": "red currant plant",
+      "phrase": "red currant",
+      "definition": "The group includes any type of Juice concentrate made from Red currant. The part consumed/analysed is by default the whole or a portion of it represen"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543236",
+      "label": "32360 - juice concentrate, cranberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414209",
+      "source_label": "cranberry plant",
+      "phrase": "cranberry",
+      "definition": "The group includes any type of Juice concentrate made from cranberry. The part consumed/analysed is by default the whole or a portion of it representi"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543237",
+      "label": "32370 - juice concentrate, gooseberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411394",
+      "source_label": "gooseberry plant",
+      "phrase": "gooseberry",
+      "definition": "The group includes any type of Juice concentrate made from gooseberry. The part consumed/analysed is by default the whole or a portion of it represent"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543240",
+      "label": "32400 - juice concentrate, orange (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411339",
+      "source_label": "orange plant",
+      "phrase": "orange",
+      "definition": "The group includes any type of Juice concentrate made from orange. The part consumed/analysed is by default the whole or a portion of it representing "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543241",
+      "label": "32410 - juice concentrate, peach (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411350",
+      "source_label": "peach tree",
+      "phrase": "peach",
+      "definition": "The group includes any type of Juice concentrate made from peach. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543242",
+      "label": "32420 - juice concentrate, plum (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411206",
+      "source_label": "plum plant",
+      "phrase": "plum",
+      "definition": "The group includes any type of Juice concentrate made from Plum (Prune). The part consumed/analysed is by default the whole or a portion of it represe"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543243",
+      "label": "32430 - juice concentrate, raspberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411494",
+      "source_label": "raspberry plant",
+      "phrase": "raspberry",
+      "definition": "The group includes any type of Juice concentrate made from raspberry. The part consumed/analysed is by default the whole or a portion of it representi"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543244",
+      "label": "32440 - juice concentrate, strawberry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411393",
+      "source_label": "strawberry plant",
+      "phrase": "strawberry",
+      "definition": "The group includes any type of Juice concentrate made from strawberry. The part consumed/analysed is by default the whole or a portion of it represent"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543245",
+      "label": "32450 - juice concentrate, sweet cherry (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411091",
+      "source_label": "sweet cherry plant",
+      "phrase": "sweet cherry",
+      "definition": "The group includes any type of Juice concentrate made from sweet cherry. The part consumed/analysed is by default the whole or a portion of it represe"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543246",
+      "label": "32460 - juice concentrate, apple (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "apple",
+      "definition": "The group includes any type of Juice concentrate made from apple. The part consumed/analysed is by default the whole or a portion of it representing t"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543247",
+      "label": "32470 - juice concentrate, pineapple (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411484",
+      "source_label": "pineapple plant",
+      "phrase": "pineapple",
+      "definition": "The group includes any type of Juice concentrate made from pineapple. The part consumed/analysed is by default the whole or a portion of it representi"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543248",
+      "label": "32480 - juice concentrate, pomegranate (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411162",
+      "source_label": "pomegranate plant",
+      "phrase": "pomegranate or granate apple",
+      "definition": "The group includes any type of Juice concentrate made from pomegranate or granate apple. The part consumed/analysed is by default the whole or a porti"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543435",
+      "label": "34350 - cocoa powder (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411318",
+      "source_label": "cacao plant",
+      "phrase": "cacao beans",
+      "definition": "The group includes any type of Cocoa powder obtained from cacao beans. The part consumed/analysed is by default unspecified. When relevant, informatio"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543829",
+      "label": "38290 - tempeh (all types) (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "whole soybeans",
+      "definition": "The group includes any type of tempeh, a traditional fermented food product from Indonesia. It is high in protein and used as meat imitate in differen"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543841",
+      "label": "38410 - tofu (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "soybeans",
+      "definition": "The group includes any type of Tofu, also known as soy curd, i.e. a product usually made from soybeans, water and coagulants. The part consumed/analys"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03543979",
+      "label": "39790 - milk rice (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "rice cooked in milk",
+      "definition": "The group includes any type of Milk rice, a dish usually made from rice cooked in milk. The part consumed/analysed is by default the whole marketed un"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03544111",
+      "label": "41110 - soy sauce (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "fermented soybeans and other ingredients",
+      "definition": "The group includes any type of Soy sauce (Soya sauce, Tamari), made from fermented soybeans and other ingredients. The part consumed/analysed is by de"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03544404",
+      "label": "44040 - wasabi flavour (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412236",
+      "source_label": "wasabi plant",
+      "phrase": "wasabi",
+      "definition": "Mixture of substances providing the flavour of wasabi] and [https://en.wikipedia.org/wiki/Flavor]"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03544471",
+      "label": "44710 - steviol glucoside (efsa foodex2)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414455",
+      "source_label": "stevia plant",
+      "phrase": "stevia plant",
+      "definition": "The group includes any type of Steviol glucoside (extracted from Stevia plant). The part consumed/analysed is by default the whole marketed unit or a "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003279",
+      "label": "Cornichon pickle",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411469",
+      "source_label": "tarragon plant",
+      "phrase": "a small gherkin pickled in vinegar and tarragon",
+      "definition": "A tart French pickle made from a small gherkin pickled in vinegar and tarragon."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005370",
+      "label": "Muscat wine",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411178",
+      "source_label": "muscat grape plant",
+      "phrase": "muscat grape variety",
+      "definition": "A red wine wine varietal produced from the Muscat grape variety, that is known for its aromatic and sweet characteristics."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03415110",
+      "label": "Nerica rice plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412512",
+      "source_label": "african rice plant",
+      "phrase": "african rice cultivars",
+      "definition": "New Rice for Africa (\"NERICA\") is a cultivar group of interspecific hybrid rice developed by the Africa Rice Center (AfricaRice) to improve the yield "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005523",
+      "label": "acorn flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411715",
+      "source_label": "oak tree",
+      "phrase": "oak trees",
+      "definition": "A flour that is made by grinding acorns, the nuts of oak trees, after they have been properly processed to remove tannin."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03413330",
+      "label": "african oil palm plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411286",
+      "source_label": "palm plant",
+      "phrase": "palm oil",
+      "definition": "Elaeis guineensis is a species of palm commonly called African oil palm or macaw-fat. It is the principal source of palm oil. [https://en.wikipedia.or"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000218",
+      "label": "almond (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411272",
+      "source_label": "almond tree",
+      "phrase": "a processed almond",
+      "definition": "A whole almond or some substance made from a processed almond."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003919",
+      "label": "almond meal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412720",
+      "source_label": "sweet almond plant",
+      "phrase": "a sweet almond",
+      "definition": "A meal (coarse flour) ground from a sweet almond."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03310788",
+      "label": "apple (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "processed apple",
+      "definition": "A whole apple or some substance made from processed apple."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003605",
+      "label": "apple flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411245",
+      "source_label": "apple tree",
+      "phrase": "milling of apple fruit",
+      "definition": "Flour made from the milling of apple fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000469",
+      "label": "arrowroot flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412400",
+      "source_label": "arrowroot plant",
+      "phrase": "rhizome of an arrowroot plant",
+      "definition": "A white, powdery starch extracted from the rhizome of an arrowroot plant (Maranta arundinacea), which is naturally gluten-free and grain-free."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000491",
+      "label": "arrowroot flour food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412400",
+      "source_label": "arrowroot plant",
+      "phrase": "arrowroot flour",
+      "definition": "A food product that is derived from arrowroot flour."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001251",
+      "label": "avian food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00002616",
+      "source_label": "avian animal",
+      "phrase": "some avian animal",
+      "definition": "A food product that is derived from some avian animal."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03303705",
+      "label": "banana passionfruit pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412028",
+      "source_label": "banana passionfruit plant",
+      "phrase": "a banana passionfruit",
+      "definition": "The pulp of a Banana passionfruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005549",
+      "label": "baobab powder",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412759",
+      "source_label": "baobab plant",
+      "phrase": "dried fruit pulp of the baobab tree",
+      "definition": "A powder made from the dried fruit pulp of the baobab tree (Adansonia spp)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000233",
+      "label": "basil (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411158",
+      "source_label": "sweet basil plant",
+      "phrase": "processed basil",
+      "definition": "Whole basil or some substance made from processed basil."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000234",
+      "label": "basil leaf (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411158",
+      "source_label": "sweet basil plant",
+      "phrase": "a processed basil leaf",
+      "definition": "A whole basil leaf or some substance made from a processed basil leaf."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005494",
+      "label": "beet puree",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411309",
+      "source_label": "beet plant",
+      "phrase": "cooked beet root",
+      "definition": "Puree made from cooked beet root, that is blended to a smooth consistency."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412311",
+      "label": "betel nut palm plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412310",
+      "source_label": "betel plant",
+      "phrase": "the betel palm",
+      "definition": "Betel nut, also known as Pinang or Areca nut, is the seed of the Betel Palm (*Areca catechu*). Betel nuts are often chewed for their helpful effects, "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03601013",
+      "label": "bhel",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "puffed rice with spices and chutneys",
+      "definition": "A snack food which is made from puffed rice with spices and chutneys."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03601014",
+      "label": "bhujia",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411920",
+      "source_label": "moth bean plant",
+      "phrase": "moth bean flour",
+      "definition": "A snack food which is made from moth bean flour, gram flour and spices and is popular in India."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03310425",
+      "label": "binagol (dish)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411636",
+      "source_label": "taro plant",
+      "phrase": "grated gabi or taro tubers and condensed milk then",
+      "definition": "Binagol or sometimes called binangol is a visayan delicacy made from grated gabi or taro tubers and condensed milk then cooked in coconut shells and w"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003853",
+      "label": "bird feed",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00002616",
+      "source_label": "avian animal",
+      "phrase": "bird that can be",
+      "definition": "Bird food is food (often varieties of seeds, nuts, or dried fruits) eaten by birds. The various types of bird food reflect the species of bird that ca"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000177",
+      "label": "black cumin food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411176",
+      "source_label": "black cumin plant",
+      "phrase": "a black cumin plant",
+      "definition": "A food product derived from a black cumin plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000247",
+      "label": "black cumin seed (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411176",
+      "source_label": "black cumin plant",
+      "phrase": "a processed black cumin seed",
+      "definition": "Whole black cumin seed or some substance made from a processed black cumin seed."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000242",
+      "label": "black pepper (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411191",
+      "source_label": "black pepper plant",
+      "phrase": "processed black pepper",
+      "definition": "A whole black pepper or some substance made from processed black pepper."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005243",
+      "label": "black tea (steeped)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411623",
+      "source_label": "tea plant",
+      "phrase": "fully oxidized black tea leaves",
+      "definition": "Steeped tea made from fully oxidized black tea leaves (Camellia sinensis)"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003920",
+      "label": "blanched almond meal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411272",
+      "source_label": "almond tree",
+      "phrase": "an almond",
+      "definition": "An almond meal ground from an almond (with the skin removed)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002561",
+      "label": "blini",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "wheat or",
+      "definition": "A blini is a Russian and Ukrainian pancake traditionally made from wheat or (more rarely) buckwheat flour and served with smetana, tvorog, butter, cav"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002514",
+      "label": "blue corn meal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414507",
+      "source_label": "blue corn plant",
+      "phrase": "whole blue corn and has a sweet flavor",
+      "definition": "Blue corn meal is a corn meal that is ground from whole blue corn and has a sweet flavor. It is also a staple of New Mexican cuisine used commonly to "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002769",
+      "label": "brown bean food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411567",
+      "source_label": "bean plant",
+      "phrase": "a scandinavian brown bean plant",
+      "definition": "A food product made from a scandinavian brown bean plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005505",
+      "label": "brown rice cereal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "whole brown rice kernels",
+      "definition": "Cereal made from whole brown rice kernels, often processed for easier consumption."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003351",
+      "label": "brown rice flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "brown rice and in which the bran and germ are incl",
+      "definition": "Rice flour made from brown rice and in which the bran and germ are included in the milling process."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003143",
+      "label": "bulgur",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "cracked parboiled groats of several different whea",
+      "definition": "Bulgur is a cereal food made from the cracked parboiled groats of several different wheat species, most often from durum wheat."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001677",
+      "label": "cabbage head food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411406",
+      "source_label": "cabbage plant",
+      "phrase": "head or leaf portion of a cabbage plant",
+      "definition": "A cabbage vegetable food product is a food product derived from the head or leaf portion of a cabbage plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03400272",
+      "label": "cacao or chocolate product (us cfr)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411318",
+      "source_label": "cacao plant",
+      "phrase": "cacao beans and chocolate- or cacao-flavored foods",
+      "definition": "Any form of cacao, cacao product, chocolate, chocolate product or chocolate product analog except chocolate candy; includes such products as cacao bea"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002694",
+      "label": "canola meal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411248",
+      "source_label": "rapeseed plant",
+      "phrase": "canola grain",
+      "definition": "Canola meal is an oilseed meal made from canola grain.  Canola meal is a by-product of the oil crushing process."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001681",
+      "label": "caper food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411247",
+      "source_label": "caper plant",
+      "phrase": "flower buds or fruit of the caper plant",
+      "definition": "A caper food product is a food product derived from the flower buds or fruit of the caper plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001683",
+      "label": "cardamom food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411665",
+      "source_label": "green cardamom plant",
+      "phrase": "a black or green cardamom plant",
+      "definition": "A cardamom food product is a food product derived from a black or green cardamom plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003866",
+      "label": "cashew milk",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411221",
+      "source_label": "cashew plant",
+      "phrase": "water-based cashew extract for flavouring and arom",
+      "definition": "Cashew milk is a manufactured, nondairy beverage made from water-based cashew extract for flavouring and aroma."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004114",
+      "label": "celeriac food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411729",
+      "source_label": "celeriac plant",
+      "phrase": "celeriac plant",
+      "definition": "A celery food product derived from the celeriac plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03303119",
+      "label": "cellulose sausage casing (edible)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411210",
+      "source_label": "cotton plant",
+      "phrase": "cotton bags and those derived from processed cotto",
+      "definition": "Cellulose sausage casings include those made from cotton bags and those derived from processed cotton linters. The cloth bags give a high degree of un"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000065",
+      "label": "celtuce food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411728",
+      "source_label": "celtuce plant",
+      "phrase": "celtuce plant",
+      "definition": "A food product derived from the celtuce plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002498",
+      "label": "chard food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411175",
+      "source_label": "chard plant",
+      "phrase": "a chard plant cultivar",
+      "definition": "A food product made from a chard plant cultivar."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004511",
+      "label": "chestnut flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411544",
+      "source_label": "chestnut tree",
+      "phrase": "dried chestnut meat",
+      "definition": "Flour made from dried chestnut meat."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000179",
+      "label": "chia seed food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411723",
+      "source_label": "chia plant",
+      "phrase": "a chia seed",
+      "definition": "A food product derived from a chia seed."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003925",
+      "label": "chia seed powder",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411723",
+      "source_label": "chia plant",
+      "phrase": "chia seeds",
+      "definition": "A powder made from chia seeds."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03415020",
+      "label": "chile cocopalm plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411286",
+      "source_label": "palm plant",
+      "phrase": "this palm to produce",
+      "definition": "Jubaea is a genus of palms (family *Arecaceae*) with one species, *Jubaea chilensis*, or *J. spectabilis*, the Chilean wine palm or Chile cocopalm. Th"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03303919",
+      "label": "chinese mint oil",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411267",
+      "source_label": "mint plant",
+      "phrase": "mint plant",
+      "definition": "An oil extracted from mint plant"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000240",
+      "label": "chive leaf (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411294",
+      "source_label": "chive plant",
+      "phrase": "a processed chive leaf",
+      "definition": "A whole chive leaf or some substance made from a processed chive leaf."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004221",
+      "label": "chokecherry food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412044",
+      "source_label": "chokecherry plant",
+      "phrase": "a chokecherry plant",
+      "definition": "A food product derived from a chokecherry plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306051",
+      "label": "copra",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411536",
+      "source_label": "coconut palm plant",
+      "phrase": "the coconut palm",
+      "definition": "Copra is the dried meat or kernel of the coconut, which is the fruit of the coconut palm."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000222",
+      "label": "coriander (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411381",
+      "source_label": "coriander plant",
+      "phrase": "processed coriander",
+      "definition": "Whole coriander or some substance made from processed coriander."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000223",
+      "label": "coriander leaf (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411381",
+      "source_label": "coriander plant",
+      "phrase": "a processed coriander leaf",
+      "definition": "A whole coriander leaf or some substance made from a processed coriander leaf."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000224",
+      "label": "coriander seed (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411381",
+      "source_label": "coriander plant",
+      "phrase": "a processed coriander seed",
+      "definition": "A whole coriander seed or some substance made from a processed coriander seed."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001571",
+      "label": "corn stover",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411324",
+      "source_label": "grain plant",
+      "phrase": "cereal grain",
+      "definition": "Corn stover consists of the leaves and stalks of maize (corn) (Zea mays ssp. mays L.) plants left in a field after harvest and consists of the residue"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005532",
+      "label": "couscous",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "durum wheat semolina",
+      "definition": "A dish made from durum wheat semolina, which is moistened and rolled into small granules, then steamed or boiled."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003268",
+      "label": "croziflette",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411405",
+      "source_label": "buckwheat plant",
+      "phrase": "buckwheat but sometimes durum",
+      "definition": "A tartiflette except that small squares of pasta, crozets de Savoie (usually made from buckwheat but sometimes durum) are used instead of potatoes."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000229",
+      "label": "cucumber (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411404",
+      "source_label": "cucumber plant",
+      "phrase": "a processed cucumber",
+      "definition": "A whole cucumber or some substance made from a processed cucumber."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03311872",
+      "label": "cumin food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411274",
+      "source_label": "cumin plant",
+      "phrase": "seed of a cumin plant",
+      "definition": "A cumin food product is derived from the seed of a cumin plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004811",
+      "label": "custard apple pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411689",
+      "source_label": "custard apple tree",
+      "phrase": "a custard apple fruit",
+      "definition": "The pulp of a custard apple fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03311571",
+      "label": "dosa",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "a fermented rice-based batter",
+      "definition": "A rice pancake, originating from South India, made from a fermented rice-based batter."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/UBERON_0007378",
+      "label": "egg yolk",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00002616",
+      "source_label": "avian animal",
+      "phrase": "a bird or reptile",
+      "definition": "The yellow spheroidal mass of stored food that forms the inner portion of the egg of a bird or reptile and is surrounded by the white."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03401311",
+      "label": "enzyme supplement",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411484",
+      "source_label": "pineapple plant",
+      "phrase": "plants like pineapple and papaya and from the orga",
+      "definition": "Plant and animal enzymes are used to facilitate the digestive process and improve the body's ability to maintain balanced metabolism. Enzyme supplemen"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000244",
+      "label": "fennel (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411262",
+      "source_label": "fennel plant",
+      "phrase": "processed fennel",
+      "definition": "Whole fennel or some substance made from processed fennel."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004514",
+      "label": "fine semolina flour (durum wheat)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "very finely milled durum wheat middlings",
+      "definition": "Flour made from very finely milled durum wheat middlings."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000072",
+      "label": "fireweed food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413725",
+      "source_label": "fireweed plant",
+      "phrase": "fireweed plant",
+      "definition": "A food product derived from the fireweed plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002415",
+      "label": "food milling",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411324",
+      "source_label": "grain plant",
+      "phrase": "milling grain into flour",
+      "definition": "The process of milling grain into flour, usually performed by a grist mill, corn mill or flour mill."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004365",
+      "label": "freekeh (cooked)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "green durum wheat",
+      "definition": "A cereal food made from green durum wheat (Triticum turgidum var. durum) that is roasted and rubbed to create its flavour."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03301844",
+      "label": "garlic powder",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411233",
+      "source_label": "garlic plant",
+      "phrase": "dried garlic flake that has been ground into a pow",
+      "definition": "A seasoning made from dried garlic flake that has been ground into a powder."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000220",
+      "label": "ginger root (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411265",
+      "source_label": "ginger plant",
+      "phrase": "a processed ginger root",
+      "definition": "A whole ginger root or some substance made from a processed ginger root."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003353",
+      "label": "glutinous rice flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "glutinous rice",
+      "definition": "Flour made from glutinous rice."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307561",
+      "label": "glutinous rice food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "glutinous rice",
+      "definition": "A food product made from glutinous rice."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004359",
+      "label": "goji berry food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414197",
+      "source_label": "wolfberry plant",
+      "phrase": "a goji berry plant",
+      "definition": "A food product that is derived from a goji berry plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003317",
+      "label": "graham flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411324",
+      "source_label": "grain plant",
+      "phrase": "whole grain",
+      "definition": "A type of coarse-ground whole wheat flour similar to conventional whole wheat flour in that both are made from the whole grain, but graham flour is gr"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03400125",
+      "label": "grain or starch product (us cfr)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411324",
+      "source_label": "grain plant",
+      "phrase": "non-grain sources",
+      "definition": "Any form of whole or milled grain, prepared grain product or starch containing product derived from non-grain sources. [FDA CFSAN 1995]"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03601071",
+      "label": "gram flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00002918",
+      "source_label": "chickpea plant",
+      "phrase": "bengal gram variety of chickpea",
+      "definition": "A chickpea flour which is made from the Bengal gram variety of chickpea."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004754",
+      "label": "granadilla de quijo pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00004751",
+      "source_label": "granadilla de quijo plant",
+      "phrase": "a granadilla de quijo",
+      "definition": "The pulp of a granadilla de quijo fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005603",
+      "label": "granadilla pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412785",
+      "source_label": "giant granadilla plant",
+      "phrase": "a granadilla fruit",
+      "definition": "The pulp of a granadilla fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005515",
+      "label": "green tea (steeped)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411623",
+      "source_label": "tea plant",
+      "phrase": "green tea leaves",
+      "definition": "Steeped tea made from green tea leaves (Camellia sinensis)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005472",
+      "label": "guanabana nectar",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411480",
+      "source_label": "soursop plant",
+      "phrase": "pulp of the guanabana fruit",
+      "definition": "Nectar derived from the pulp of the guanabana fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412063",
+      "label": "guarana plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411567",
+      "source_label": "bean plant",
+      "phrase": "a coffee bean",
+      "definition": "Guarana (*Paullinia cupana*, syn. *P. crysan*, *P. sorbilis*) is a climbing plant in the maple family, *Sapindaceae*, native to the Amazon basin and e"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03460848",
+      "label": "guarana seed",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412063",
+      "source_label": "guarana plant",
+      "phrase": "a guarana plant",
+      "definition": "Guarana seed is the seed of a guarana plant.  Used as a dietary supplement or herb, it is an effective stimulant: it contains about twice the concentr"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005513",
+      "label": "guava sauce",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411333",
+      "source_label": "guava plant",
+      "phrase": "guava",
+      "definition": "A fruit sauce made from guava."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003915",
+      "label": "habanero powder",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412555",
+      "source_label": "habanero pepper plant",
+      "phrase": "habanero",
+      "definition": "A powder made from habanero, which is a hot variety of a chili pepper."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005516",
+      "label": "hibiscus tea (steeped)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412082",
+      "source_label": "hibiscus plant",
+      "phrase": "dried hibiscus flowers",
+      "definition": "Steeped tea made from dried hibiscus flowers (Hibiscus sabdariffa)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03310226",
+      "label": "hominy",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00003425",
+      "source_label": "Maize plant",
+      "phrase": "dried maize",
+      "definition": "Hominy is a food produced from dried maize (corn) kernels that have been treated with an alkali, in a process called nixtamalization (nextamalli is th"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001979",
+      "label": "jerusalem artichoke food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411038",
+      "source_label": "jerusalem artichoke plant",
+      "phrase": "jerusalem artichoke plant",
+      "definition": "A food product made from the jerusalem artichoke plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002841",
+      "label": "juniper ash",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412040",
+      "source_label": "juniper plant",
+      "phrase": "juniper tree",
+      "definition": "Juniper ash is ash derived from the juniper tree."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000235",
+      "label": "kale (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411281",
+      "source_label": "kale plant",
+      "phrase": "processed kale",
+      "definition": "Whole kale or some substance made from processed kale."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000236",
+      "label": "kale leaf (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411281",
+      "source_label": "kale plant",
+      "phrase": "a processed kale leaf",
+      "definition": "A whole kale leaf or some substance made from a processed kale leaf."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03311566",
+      "label": "kamu",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412505",
+      "source_label": "millet plant",
+      "phrase": "fermented millet",
+      "definition": "Kamu is a starch-cake food product made from fermented millet."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004658",
+      "label": "labrador tea (dry)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411623",
+      "source_label": "tea plant",
+      "phrase": "leaves of marsh labrador tea plant",
+      "definition": "A herbal tea that is made from the leaves of marsh labrador tea plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003725",
+      "label": "lemon balm food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412621",
+      "source_label": "lemon balm plant",
+      "phrase": "lemon balm plant",
+      "definition": "A plant leaf food product derived from the lemon balm plant (Melissa officinalis)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000239",
+      "label": "lettuce head (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411390",
+      "source_label": "lettuce plant",
+      "phrase": "a processed lettuce head",
+      "definition": "A whole lettuce head or some substance made from a processed lettuce head."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000271",
+      "label": "light rye flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411313",
+      "source_label": "rye plant",
+      "phrase": "centre of the rye kernel",
+      "definition": "Rye flour obtained from the centre of the rye kernel."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004431",
+      "label": "mafurra nut food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412329",
+      "source_label": "mafurra tree",
+      "phrase": "a mafurra",
+      "definition": "A food product derived from a mafurra (Trichilia emetica) nut."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005587",
+      "label": "malt syrup",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411230",
+      "source_label": "barley plant",
+      "phrase": "malted barley or grains",
+      "definition": "A syrup made from malted barley or grains."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306510",
+      "label": "malted cow milk (powdered)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411230",
+      "source_label": "barley plant",
+      "phrase": "a mixture of malted barley",
+      "definition": "Malted milk is a powdered gruel made from a mixture of malted barley, wheat flour, and evaporated whole milk."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000217",
+      "label": "mango (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411270",
+      "source_label": "mango plant",
+      "phrase": "a processed mango",
+      "definition": "A whole mango or some substance made from a processed mango."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005309",
+      "label": "medium-grain white rice",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411324",
+      "source_label": "grain plant",
+      "phrase": "a medium-grain rice plant",
+      "definition": "A white rice food product which is the endosperm of a medium-grain rice plant"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002867",
+      "label": "mexican rice (dish)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "white rice",
+      "definition": "Spanish rice is a Mexican side dish or an ingredient in other dishes made from white rice, tomatoes, garlic, onions, etc. It is traditionally made by "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001632",
+      "label": "milled barley food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411230",
+      "source_label": "barley plant",
+      "phrase": "milled barley",
+      "definition": "A food product made from milled barley."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002062",
+      "label": "milled oat food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411219",
+      "source_label": "common oat plant",
+      "phrase": "milled oats",
+      "definition": "A food product made from milled oats."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000237",
+      "label": "mint (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411267",
+      "source_label": "mint plant",
+      "phrase": "processed mint",
+      "definition": "Whole mint or some substance made from processed mint."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004312",
+      "label": "mint sauce",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411434",
+      "source_label": "spearmint plant",
+      "phrase": "finely chopped spearmint",
+      "definition": "A mint food product which is a sauce made from finely chopped spearmint (Mentha spicata) leaves soaked in vinegar, and a sweetener."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03601061",
+      "label": "mochi",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411324",
+      "source_label": "grain plant",
+      "phrase": "a short-grain japonica glutinous rice pounded into",
+      "definition": "A rice cake which is made from a short-grain japonica glutinous rice pounded into a paste and may contain other ingredients such as sugar and cornstar"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004099",
+      "label": "morinda powder",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413470",
+      "source_label": "indian mulberry tree",
+      "phrase": "fruit of noni plant",
+      "definition": "A powder made from the fruit of noni plant (Morinda citrifolia)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002052",
+      "label": "mustard condiment food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412069",
+      "source_label": "mustard plant",
+      "phrase": "seeds of a mustard plant",
+      "definition": "A condiment made from the seeds of a mustard plant (white/yellow mustard, Sinapis alba; brown mustard, Brassica juncea; or black mustard, Brassica nig"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004355",
+      "label": "mustard spinach food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411092",
+      "source_label": "brown mustard plant",
+      "phrase": "japense mustard spinach plant",
+      "definition": "A brassica food product that is derived from japense mustard spinach plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004806",
+      "label": "naranjilla pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412062",
+      "source_label": "naranjilla plant",
+      "phrase": "a naranjilla",
+      "definition": "The pulp of a naranjilla."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002870",
+      "label": "natt\u014d",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "soybeans that have been fermented with bacillus su",
+      "definition": "Natt\u014d is a traditional Japanese food made from soybeans that have been fermented with Bacillus subtilis var. natto.  Some eat it as a breakfast food."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003921",
+      "label": "natural almond meal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411272",
+      "source_label": "almond tree",
+      "phrase": "a whole almond",
+      "definition": "An almond meal ground from a whole almond (with the skin intact)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003917",
+      "label": "neem leaf powder",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412444",
+      "source_label": "neem plant",
+      "phrase": "a leaf of neem tree",
+      "definition": "A herbal green powder made from a leaf of Neem tree (Azadirachta indica)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003223",
+      "label": "nutmeg butter",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411214",
+      "source_label": "nutmeg plant",
+      "phrase": "nutmeg nut by expression",
+      "definition": "A butter obtained from the nutmeg nut by expression. It is semisolid, reddish-brown in colour, and has the taste and smell of nutmeg itself."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002061",
+      "label": "nutmeg food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411214",
+      "source_label": "nutmeg plant",
+      "phrase": "nutmeg seed or seed skin",
+      "definition": "Nutmeg food product is a product made from the nutmeg seed or seed skin."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005553",
+      "label": "oat bran cereal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414319",
+      "source_label": "oat plant",
+      "phrase": "outer layer of the oat grain",
+      "definition": "A cereal that is made from the outer layer of the oat grain (the bran), which is separated from the endosperm and germ."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306272",
+      "label": "oat flakes",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411219",
+      "source_label": "common oat plant",
+      "phrase": "oats and usually served as a cold cereal product",
+      "definition": "Milled and reconstructed flakes made from oats and usually served as a cold cereal product."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004515",
+      "label": "oat milk",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411219",
+      "source_label": "common oat plant",
+      "phrase": "procesed oats",
+      "definition": "A beverage made from procesed oats."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306633",
+      "label": "olive oil (virgin)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411299",
+      "source_label": "olive plant",
+      "phrase": "fruit of the olive tree solely by mechanical or ot",
+      "definition": "Virgin olive oil is oil obtained from the fruit of the olive tree solely by mechanical or other physical means under conditions, particularly thermal "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005517",
+      "label": "oolong tea (steeped)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411623",
+      "source_label": "tea plant",
+      "phrase": "partially oxidized tea leaves",
+      "definition": "Steeped tea made from partially oxidized tea leaves (Camellia sinensis)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414730",
+      "label": "orchid plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411355",
+      "source_label": "vanilla plant",
+      "phrase": "the vanilla plant",
+      "definition": "The *Orchidaceae* are a diverse and widespread family of flowering plants, with blooms that are often colourful and often fragrant, commonly known as "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03310486",
+      "label": "palm kernel oil",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411286",
+      "source_label": "palm plant",
+      "phrase": "kernel of the oil palm elaeis guineensis",
+      "definition": "An edible plant oil derived from the kernel of the oil palm Elaeis guineensis.  It should not be confused with the other two edible oils derived from "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000228",
+      "label": "papaya (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411249",
+      "source_label": "papaya plant",
+      "phrase": "processed papaya",
+      "definition": "Whole papaya or some substance made from processed papaya."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000231",
+      "label": "parsley leaf (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411550",
+      "source_label": "parsley plant",
+      "phrase": "a processed parsley leaf",
+      "definition": "A whole parsley leaf or some substance made from a processed parsley leaf."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306347",
+      "label": "pasta",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "an unleavened dough of wheat flour mixed with wate",
+      "definition": "A type of food typically made from an unleavened dough of wheat flour mixed with water or eggs, and formed into sheets or other shapes, then cooked by"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03400815",
+      "label": "pasta and similar products (eurofir)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "durum wheat flour",
+      "definition": "Eurocode-2 group 06.30. Pasta can be either dried or fresh, and as main-dish (pasta asciutta) or miniature pasta (e.g. to add to soups). Although past"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001211",
+      "label": "pasta food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "an unleavened dough of wheat or buckwheat  flour a",
+      "definition": "A food made from an unleavened dough of wheat or buckwheat  flour and water, sometimes with other ingredients such as eggs and vegetable  extracts."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000232",
+      "label": "pattypan squash (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411208",
+      "source_label": "squash plant",
+      "phrase": "a processed pattypan squash",
+      "definition": "A whole pattypan squash or some substance made from a processed pattypan squash."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00000075",
+      "label": "pea (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413484",
+      "source_label": "garden pea plant",
+      "phrase": "whole peas as a result of some food processing",
+      "definition": "A pea substance is a food substance derived from whole peas as a result of some food processing."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004790",
+      "label": "peach palm peel",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414923",
+      "source_label": "peach palm plant",
+      "phrase": "a peach palm fruit",
+      "definition": "The peel of a peach palm fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004794",
+      "label": "peach palm pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414923",
+      "source_label": "peach palm plant",
+      "phrase": "a peach palm fruit",
+      "definition": "The pulp of a peach palm fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003313",
+      "label": "pear tomato (raw)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411344",
+      "source_label": "pear plant",
+      "phrase": "a pear",
+      "definition": "A group of indeterminate heirloom tomatoes in the shape of a pear, but smaller, and having yellow, orange, and red varieties."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411107",
+      "label": "pear tomato plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411344",
+      "source_label": "pear plant",
+      "phrase": "a pear",
+      "definition": "Pear tomato or teardrop tomato is the common name for any one in a group of indeterminate heirloom tomatoes. It originated in Europe in the 1700s. The"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003883",
+      "label": "pico de gallo",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411276",
+      "source_label": "tomato plant",
+      "phrase": "chopped tomato",
+      "definition": "A type of salsa made from chopped tomato, onion, and serrano peppers (jalape\u00f1os or habaneros can be used as alternatives), with salt, lime juice, and "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002780",
+      "label": "pigeon pea food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412010",
+      "source_label": "pigeon pea plant",
+      "phrase": "pigeon pea plant",
+      "definition": "A pigeon pea food product is a food product derived from the pigeon pea plant"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003059",
+      "label": "piki",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414507",
+      "source_label": "blue corn plant",
+      "phrase": "blue corn meal used in hopi cuisine",
+      "definition": "Piki is a bread made from blue corn meal used in Hopi cuisine."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004110",
+      "label": "pikliz",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411406",
+      "source_label": "cabbage plant",
+      "phrase": "shredded cabbage",
+      "definition": "A fermented vegetable food product condiment which is 1) of Haitian origin and 2) is made from shredded cabbage, carrot, peppers (piment) and spices, "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002768",
+      "label": "pink bean food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411567",
+      "source_label": "bean plant",
+      "phrase": "pink bean plant",
+      "definition": "A food product made from the pink bean plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004381",
+      "label": "pitaya food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412781",
+      "source_label": "pitaya plant",
+      "phrase": "a pitaya fruit",
+      "definition": "A food product derived from a pitaya fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03301580",
+      "label": "plum (raw)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411206",
+      "source_label": "plum plant",
+      "phrase": "a plum plant",
+      "definition": "A plum is the fruit of a plum plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414965",
+      "label": "plumcot plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411206",
+      "source_label": "plum plant",
+      "phrase": "a plum seed parent",
+      "definition": "Pluots, apriums, apriplums, or plumcots, are some of the hybrids between different *Prunus* species that are also called interspecific plums. Whereas "
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005441",
+      "label": "pomegranate juice",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411162",
+      "source_label": "pomegranate plant",
+      "phrase": "pomegranate",
+      "definition": "A fruit juice made from pomegranate."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001131",
+      "label": "poultry meat food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00002616",
+      "source_label": "avian animal",
+      "phrase": "domesticated bird meat",
+      "definition": "A food product made from domesticated bird meat."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004506",
+      "label": "quinoa flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412027",
+      "source_label": "quinoa plant",
+      "phrase": "quinoa",
+      "definition": "Flour made from quinoa."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005552",
+      "label": "raspberry puree",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411494",
+      "source_label": "raspberry plant",
+      "phrase": "raspberry",
+      "definition": "A puree made from raspberry."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412523",
+      "label": "red kuri squash plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411456",
+      "source_label": "pumpkin plant",
+      "phrase": "a small pumpkin without",
+      "definition": "Red kuri squash is thin skinned orange colored winter squash, that has the appearance of a small pumpkin without the ridges. It belongs to the Hubbard"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003226",
+      "label": "rice bran oil",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "hard outer brown layer of rice called chaff",
+      "definition": "Oil extracted from the hard outer brown layer of rice called chaff (rice husk)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003056",
+      "label": "rice bread",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "rice flour rather than wheat flour",
+      "definition": "Rice bread is a type of bread that is made from rice flour rather than wheat flour."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002207",
+      "label": "rice flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "rice",
+      "definition": "Flour made from rice."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005555",
+      "label": "rice noodle",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "rice",
+      "definition": "Noodles that are made from rice."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001332",
+      "label": "rice powder (roasted)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "toasted rice",
+      "definition": "A rice powder derived from toasted rice."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03305135",
+      "label": "rice pudding",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "rice mixed with water or milk",
+      "definition": "A pudding food product made from rice mixed with water or milk."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03601051",
+      "label": "rice puto",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "slightly fermented rice dough",
+      "definition": "A rice cake which is steamed and is traditionally made from slightly fermented rice dough."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307110",
+      "label": "rolled oats",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414319",
+      "source_label": "oat plant",
+      "phrase": "oat groats",
+      "definition": "A type of lightly processed whole-grain food. Traditionally, they are made from oat groats (hulled grains) that have been dehusked and steamed, before"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03415067",
+      "label": "roman wormwood plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03415065",
+      "source_label": "absinthe plant",
+      "phrase": "absinthe and vermouth",
+      "definition": "Artemisia pontica, the Roman wormwood or small absinthe, is an herb used in the production of absinthe and vermouth. [https://en.wikipedia.org/wiki/Ar"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003277",
+      "label": "rooibos tea (steeped)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412057",
+      "source_label": "rooibos plant",
+      "phrase": "dried rooibos plant",
+      "definition": "Steeped tea made from dried Rooibos plant (Aspalathus linearis) tea leaves."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001076",
+      "label": "sake food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "rice with the mold",
+      "definition": "Sake is a fermented rice beverage resulting from the fermentation of rice with the mold Aspergillus oryzae and, in parallel, with the yeast Saccharomy"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414927",
+      "label": "salak palm plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411286",
+      "source_label": "palm plant",
+      "phrase": "the palm",
+      "definition": "Salak (*Salacca zalacca*) is a species of palm tree (family *Arecaceae*) native to Java and Sumatra in Indonesia. The fruits grow in clusters at the b"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004249",
+      "label": "sapodilla food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411693",
+      "source_label": "sapodilla plant",
+      "phrase": "sapodilla tree",
+      "definition": "A food product derived from the sapodilla tree (Manilkara zapota)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000250",
+      "label": "scallion (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411478",
+      "source_label": "scallion plant",
+      "phrase": "a processed scallion",
+      "definition": "A whole scallion or some substance made from a processed scallion."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004513",
+      "label": "semolina flour (durum wheat)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411079",
+      "source_label": "durum wheat plant",
+      "phrase": "more finely milled durum wheat middlings",
+      "definition": "Flour made from more finely milled durum wheat middlings."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004525",
+      "label": "sesame butter",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411226",
+      "source_label": "sesame plant",
+      "phrase": "roasted unhulled or hulled sesame seeds",
+      "definition": "A seed butter made from roasted unhulled or hulled sesame seeds."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003197",
+      "label": "shea fruit food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411667",
+      "source_label": "sheanut tree",
+      "phrase": "fruit or seed of the shea tree",
+      "definition": "A food product derived from the fruit or seed of the shea tree."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03316570",
+      "label": "sorrel concentrate",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411641",
+      "source_label": "sorrel plant",
+      "phrase": "sorrel petals",
+      "definition": "Sorrel concentrate is concentrated juice made from sorrel petals"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005627",
+      "label": "soursop pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411480",
+      "source_label": "soursop plant",
+      "phrase": "a soursop fruit",
+      "definition": "The pulp of a soursop fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005636",
+      "label": "south american sapote pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411693",
+      "source_label": "sapodilla plant",
+      "phrase": "a south american sapote",
+      "definition": "The pulp of a south american sapote fruit"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003854",
+      "label": "soy nut butter",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "soybeans that are roasted",
+      "definition": "A nut butter made from soybeans that are roasted, crushed, and mixed with soybean oil to form a stiff textured food spread with a mild nutty flavor."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005578",
+      "label": "soy protein concentrate",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "whole soybeans",
+      "definition": "A concentrated soy protein product derived from whole soybeans, containing approximately 70% protein. It is produced by partially removing fats and ca"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005589",
+      "label": "soy-based protein powder",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "soybeans",
+      "definition": "A plant-based protein supplement what is derived from soybeans."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03302142",
+      "label": "soybean flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "soybeans",
+      "definition": "A flour made from soybeans."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005520",
+      "label": "soybean flour (full fat)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "whole soybeans",
+      "definition": "A soybean flour that is made from whole soybeans, retaining all of the natural oils, which gives it a higher fat content."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005521",
+      "label": "soybean flour (low fat)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "whole soybeans that has been processed to reduce i",
+      "definition": "A soybean flour made from whole soybeans that has been processed to reduce its natural oil content."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03302757",
+      "label": "soybean meal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "soybean oil",
+      "definition": "A meal that is the by-product of the extraction of soybean oil."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003227",
+      "label": "soybean oil (fully hydrogenated)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "soybeans",
+      "definition": "A fully hydrogenated oil made from soybeans."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003225",
+      "label": "soybean oil (partly hydrogenated)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "soybeans",
+      "definition": "A partly hydrogenated oil made from soybeans."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004721",
+      "label": "spelt flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412917",
+      "source_label": "spelt plant",
+      "phrase": "spelt seed",
+      "definition": "A flour made from spelt seed."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004434",
+      "label": "spelt food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412917",
+      "source_label": "spelt plant",
+      "phrase": "spelt wheat",
+      "definition": "A food product made from spelt wheat."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000221",
+      "label": "spinach (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00001273",
+      "source_label": "spinach plant",
+      "phrase": "processed spinach",
+      "definition": "Whole spinach or some substance made from processed spinach."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002269",
+      "label": "spinach food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00001273",
+      "source_label": "spinach plant",
+      "phrase": "spinach",
+      "definition": "A food product made from spinach."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000433",
+      "label": "squash (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411208",
+      "source_label": "squash plant",
+      "phrase": "a processed squash",
+      "definition": "A whole squash or some substance made from a processed squash."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005492",
+      "label": "squash puree",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411208",
+      "source_label": "squash plant",
+      "phrase": "cooked squash",
+      "definition": "Puree made from cooked squash, that is blended to a smooth consistency."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004378",
+      "label": "sumac food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412161",
+      "source_label": "sumac plant",
+      "phrase": "a sumac plant",
+      "definition": "A food product derived from a sumac plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412315",
+      "label": "summer orange plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411507",
+      "source_label": "grapefruit plant",
+      "phrase": "grapefruit and oblate in",
+      "definition": "Amanatsu or natsumikan is a yellowish orange citrus hybrid fruit, a group of cultivars of *Citrus natsudaidai*, which were discovered in 1740 in the Y"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000434",
+      "label": "summer squash (whole or pieces)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411208",
+      "source_label": "squash plant",
+      "phrase": "processed summer squash",
+      "definition": "Whole summer squash or some substance made from processed summer squash."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005493",
+      "label": "sweet potato puree",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411106",
+      "source_label": "sweet potato plant",
+      "phrase": "cooked sweet potato",
+      "definition": "Puree made from cooked sweet potato, that is blended to a smooth consistency."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03415081",
+      "label": "sweet-tea plant",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414206",
+      "source_label": "blackberry plant",
+      "phrase": "leaves of chinese blackberry",
+      "definition": "Chinese sweet tea is a traditional Chinese herbal tea, made from the leaves of Chinese Blackberry (*Rubus suavissimus*). These leaves contain a natura"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003855",
+      "label": "tahini",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411226",
+      "source_label": "sesame plant",
+      "phrase": "toasted ground hulled sesame",
+      "definition": "A condiment made from toasted ground hulled sesame."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005473",
+      "label": "tamarind nectar",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411695",
+      "source_label": "tamarind plant",
+      "phrase": "pulp of the tamarind fruit",
+      "definition": "Nectar derived from the pulp of the tamarind fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005550",
+      "label": "tart cherry juice",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411306",
+      "source_label": "cherry plant",
+      "phrase": "tart cherry",
+      "definition": "A fruit juice made from tart cherry."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03304999",
+      "label": "tempeh",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411452",
+      "source_label": "soybean plant",
+      "phrase": "fermented soybeans",
+      "definition": "Tempeh is a traditional Indonesian soy product, that is made from fermented soybeans. It is made by a natural culturing and controlled fermentation pr"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002553",
+      "label": "triticale flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411358",
+      "source_label": "triticale plant",
+      "phrase": "triticale grain",
+      "definition": "Triticale flour is flour made from triticale grain."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003224",
+      "label": "ucuhuba seed oil",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411699",
+      "source_label": "ucuhuba plant",
+      "phrase": "seed of ucuhuba plants",
+      "definition": "Oil extracted from the seed of ucuhuba plants (Virola surinamensis)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003886",
+      "label": "veggie booty",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "organic rice",
+      "definition": "A snack made from organic rice & corn, with a phytonutrient blend of Spinach, Kale, and other veggies."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004156",
+      "label": "velvet bean food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413403",
+      "source_label": "velvet bean plant",
+      "phrase": "velvet bean",
+      "definition": "A bean food product made from velvet bean."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03311834",
+      "label": "virginia peanut pod (raw)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411337",
+      "source_label": "peanut plant",
+      "phrase": "all peanut varietals",
+      "definition": "A peanut from the Virginia peanut varietal which is usually the largest of all peanut varietals."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003218",
+      "label": "walnut oil",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411290",
+      "source_label": "walnut tree",
+      "phrase": "walnuts",
+      "definition": "Oil extracted from walnuts (from the Juglans regia tree)."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005558",
+      "label": "wheat germ cereal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "germ of the wheat kernel",
+      "definition": "Wheat cereal made from the germ of the wheat kernel, which is the part of the grain that can sprout into a new wheat plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03311818",
+      "label": "white rice food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411322",
+      "source_label": "rice plant",
+      "phrase": "a rice grain",
+      "definition": "A food product made primarily of the endosperm of a rice grain."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003873",
+      "label": "white tahini",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411226",
+      "source_label": "sesame plant",
+      "phrase": "hulled white sesame seeds",
+      "definition": "Tahini made from hulled white sesame seeds."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03301119",
+      "label": "whole wheat bread",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "whole or almost-whole wheat grains",
+      "definition": "Whole wheat bread or wholemeal bread is a type of bread made using flour that is partly or entirely milled from whole or almost-whole wheat grains."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005559",
+      "label": "whole wheat cereal",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "whole wheat grains that include all parts of the g",
+      "definition": "Breakfast cereal that is made from whole wheat grains that include all parts of the grain\u2014the bran, germ, and endosperm."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307448",
+      "label": "whole wheat food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "all the parts of a whole wheat kernel",
+      "definition": "A food product made from all the parts of a whole wheat kernel."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005528",
+      "label": "whole wheat pasta",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "whole wheat flour that retains the bran",
+      "definition": "Pasta made from whole wheat flour that retains the bran, germ, and endosperm of the wheat grain."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000272",
+      "label": "whole wheat pastry flour",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411312",
+      "source_label": "wheat plant",
+      "phrase": "low-protein soft spring wheat",
+      "definition": "A whole-grain flour milled from low-protein soft spring wheat."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004423",
+      "label": "wild boar food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00004503",
+      "source_label": "wild animal",
+      "phrase": "some wild boar",
+      "definition": "A food product that is derived from some wild boar."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002888",
+      "label": "yellow bean pod",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00002887",
+      "source_label": "yellow bean plant",
+      "phrase": "a yellow bean plant",
+      "definition": "A yellow bean pod is a bean pod obtained from a yellow bean plant."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000286",
+      "label": "yellow mustard (prepared)",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411148",
+      "source_label": "white mustard plant",
+      "phrase": "yellow mustard",
+      "definition": "A food product that is made from yellow mustard."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004761",
+      "label": "yellow pitaya pulp",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414949",
+      "source_label": "yellow pitaya plant",
+      "phrase": "a yellow pitaya fruit",
+      "definition": "The pulp of a yellow pitaya fruit."
+    }
+  ]
+}

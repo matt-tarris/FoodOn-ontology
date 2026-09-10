@@ -1,0 +1,17 @@
+# LOAD BEARING despite no textual reference anywhere in the project.
+# Produces data/diag.csv, which build/verify_extraction.py reads to prove the
+# restriction extraction loses nothing (audit F2 -- obographs silently drops
+# ~10% of restrictions, including 449 `derives from`). Deleting this removes the
+# only way to regenerate that check's input.
+#
+# Every restriction node in the file, with its filler kind. No reachability check
+# here (that join is quadratic) -- reachability is diffed in Python instead.
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?r ?prop ?filler WHERE {
+  ?r owl:onProperty ?prop .
+  OPTIONAL { ?r owl:someValuesFrom ?f1 }
+  OPTIONAL { ?r owl:allValuesFrom  ?f2 }
+  OPTIONAL { ?r owl:onClass        ?f3 }
+  OPTIONAL { ?r owl:hasValue       ?f4 }
+  BIND(COALESCE(?f1,?f2,?f3,?f4) AS ?filler)
+}

@@ -1,0 +1,59 @@
+# Step 2 of 2: the avoidance closure for one query root.
+#
+# Everything that should be treated as containing the root. Run against the
+# ontology produced by tools/apply_patches.sh, which is
+#   foodon.owl  +  foodon-local-patches.ttl  +  materialised local:propagatesTo
+#
+# Edit the VALUES line to change the query root. Two roots that need more than one
+# class -- `gluten` is five grain species, `nightshade` is two parallel hierarchies
+# -- are listed in the patch layer as local:resolvesQuery annotations; add them all
+# to VALUES for those.
+#
+# The walk is one-directional by construction: local:propagatesTo only ever points
+# source -> product, so there is no path that ascends to a shared ancestor and comes
+# back down. That is what keeps corn from reaching wheat.
+
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo:   <http://purl.obolibrary.org/obo/>
+PREFIX local: <https://fluxon.com/ns/foodon-local/>
+
+SELECT DISTINCT ?avoid ?label
+WHERE {
+  VALUES ?root { obo:NCBITaxon_4070 }        # Solanaceae. Add more for a multi-root
+                                             # allergen: gluten is five grain species.
+
+  # co-roots first: FoodOn splits some organisms across parallel hierarchies that
+  # share no terms, so a closure from one end alone under-reports. Measured on
+  # Solanaceae: 620 classes from NCBITaxon_4070 alone, 630 with its twin.
+  # both directions: local:sameOrganismAs is declared owl:SymmetricProperty, but a
+  # plain SPARQL engine does no reasoning, so the inverse is walked explicitly.
+  ?root (local:sameOrganismAs|^local:sameOrganismAs)* ?coroot .
+
+  # PHASE 1, taxonomic. is_a descent from the co-roots, and the rank-guarded species
+  # pivot from anything so reached. A class-level query ("allium") has to descend to
+  # its member organisms before derivative traversal means anything.
+  ?coroot (^rdfs:subClassOf|local:pivotsTo)* ?member .
+
+  # PHASE 2, derivative. From every member, follow the propagating relations and
+  # descend is_a again from whatever they reach. One uniform walk over both phases
+  # either stops at the member list or tangles them.
+  ?member local:propagatesTo* ?avoid .
+
+  FILTER(?avoid != ?root)
+
+  # scope: branches the policy excludes, and their descendants
+  FILTER NOT EXISTS {
+    ?excluded local:excludedFromTraversal true .
+    ?avoid rdfs:subClassOf* ?excluded .
+  }
+  # exceptions OWL cannot retract: peanut is not a tree nut
+  FILTER NOT EXISTS {
+    ?avoid local:notAvoidanceRelevantFor ?root .
+  }
+  FILTER NOT EXISTS {
+    ?anc local:notAvoidanceRelevantFor ?root .
+    ?avoid local:propagatesTo* ?anc .
+  }
+  OPTIONAL { ?avoid rdfs:label ?label }
+}
+ORDER BY ?label

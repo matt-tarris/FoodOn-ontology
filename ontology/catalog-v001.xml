@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Resolves the owl:imports in foodon-local-patches.ttl to the local vendor copy,
+     so the patch layer loads standalone in ROBOT, a reasoner or a triplestore
+     without reaching the network. This is the standard OBO/ODK mechanism.
+     Drop in a new upstream foodon.owl and nothing here changes. -->
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <uri id="User Entered Import Resolution"
+       name="http://purl.obolibrary.org/obo/foodon.owl" uri="foodon.owl"/>
+  <uri id="User Entered Import Resolution"
+       name="https://purl.obolibrary.org/obo/foodon.owl" uri="foodon.owl"/>
+</catalog>

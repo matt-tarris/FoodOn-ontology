@@ -1,0 +1,574 @@
+# FoodOn-Grounded Ingredient Avoidance Graph
+
+Type an ingredient (`paprika`, `edamame`) or a class (`nightshade`, `allium`, `gluten`)
+and see everything that should be treated as containing it — with the path that
+justifies each one.
+
+```bash
+python3 serve.py            # http://localhost:8790
+```
+
+**Find in graph** (the magnifier, or `/`, or ctrl/cmd-F) searches every class in the
+current result, not just the ones on screen — labels and synonyms both, since terms
+like `spelt` and `semolina` exist only as synonyms. Choosing a hit expands the path
+down to it and pans there, so a match collapsed four levels deep is one click away.
+
+A **JSON drawer** slides out from the right edge (the tab marked `JSON`), collapsed by
+default. It shows the graph as **one document**: every node and edge carries a
+`legend` key naming its category — `query root`, `derives from`, `override` and the
+rest — and records are ordered by that category, so the legend groups read as
+contiguous blocks without the graph being split apart. A key above the JSON lists the
+categories with the legend's own swatches and counts.
+
+`compact` (the default) identifies classes by curie and puts both endpoint labels on
+each edge, so an edge reads without cross-referencing; `full` restores IRIs,
+definitions and synonyms. Compact keeps every node and every edge — it drops repeated
+identifiers and prose, not records. Rendering is capped at 400k characters, which only
+the largest closures reach; the copy buttons always emit the complete document.
+
+Nothing calls an LLM at query time. Semantic judgements were made once, offline, and
+frozen into reviewable files.
+
+## Reading the graph
+
+**Layout is a radial dendrogram, not a force simulation.** Measured: 83% of the
+nightshade closure and 89% of corn have in-degree 1, so a closure is a tree with a few
+extra edges — and a force layout is the wrong instrument for that. `forceRadial` pinned
+each node to a ring by depth but nothing ordered them *within* the ring, so siblings
+from different parents interleaved and their edges crossed back and forth. `d3.cluster`
+places every node deterministically: no node overlap and no crossings among tree edges,
+guaranteed by the layout rather than negotiated by forces, and identical on every
+reload. The remaining ~15% of edges — a term with a second parent — are drawn as curves
+bowed through the centre, so nothing is hidden; they are the only lines that can cross,
+and they are the ones worth looking at.
+
+**Every leaf sits on the outer ring.** The leaves are the answer to the query — the
+things you must not serve — and on the rim they all sit at the maximum radius, where the
+circumference is greatest and each one gets the same generous slice of arc. Under
+`d3.tree` a leaf sat at its own depth, so a shallow leaf landed on a small ring holding
+almost no arc; that is where the crowding was worst. Switching to the dendrogram took
+nightshade from 45 labels to **115, with zero collisions**.
+
+The cost, stated plainly: **radius no longer means hops-from-the-root.** In a dendrogram
+an internal node's radius is its distance to the deepest leaf beneath it, so a grouping
+class with a shallow subtree sits further out than one with a deep subtree. Hop count
+moved to the tooltip and the breadcrumb, which report it exactly rather than by eye.
+
+Angular space is allocated per *leaf*, not per subtree, so a wedge is as wide as what is
+actually in it. `size([2π, R])` splits the circle evenly between the root's children,
+which gave nightshade's 17-term `solanaceae plant` the same half of the canvas as its
+130-term `Solanaceae`.
+
+The drawing is sized to its content — arc per leaf, and a 62px floor per ring — and
+never to the pane. Sizing it to the pane made a 2-node `paprika` query fill the canvas
+with two nodes 660px apart and their labels turned vertical. At four leaves or fewer the
+labels are counter-rotated back to horizontal, because the radial form buys nothing at
+that size.
+
+**Labels are placed by geometry, not by a budget.** Candidates are considered in
+priority order — roots, clusters and collapsed parents first, then grouping classes,
+organisms, multi-path nodes, leaves — and one is admitted only if it clears every label
+already placed, testing arc distance and radial run length. Tier order is what makes it
+behave: when a ray is contested the more useful name wins it. That matters because
+single-child chains collapse onto one ray (`d3.tree` centres a parent over its
+children — corn puts 89 nodes on 72 distinct angles), which is a radial collision no
+amount of extra circumference fixes. `always show labels` overrides the whole pass.
+
+One signal per visual channel, and none of them doubles up:
+
+| channel | encodes |
+|---|---|
+| **fill** | what kind of thing — near-black query root, brass organism/taxon, sage derivative |
+| **unfilled dashed ring** | a FoodOn grouping class (`field corn sweetener product`) — scaffolding, not something you can be served |
+| **node size + type size** | role rank, on one ladder: root 15 · organism 10 · category 9 · multi-path 8 · leaf 6.5 |
+| **stroke ring** | reached by several paths; a dashed outer ring means reached from more than one query root |
+| **edge colour + dash** | the relation, and whether the hop is `ontology`, `repair`, `mined` or `override` |
+
+**Hover anything to see why it is there.** The chain back to the query root is dimmed in
+and printed along the bottom with the relation named at every hop, provenance included —
+which is how paprika answers for itself:
+
+```
+… —is a→ hungarian wax pepper plant —derives from (repair)→ hungarian wax pepper food
+product —is a→ paprika (ground)          5 hops from the root
+```
+
+That `(repair)` is the point: FoodOn omits the axiom, `build/repair_derives.py` supplies
+it, and the breadcrumb says so rather than passing it off as the ontology's own claim.
+Clicking keeps the chain up; each crumb is clickable to walk back.
+
+The whole drawing is scaled to fit the pane once, measured from the rendered bounding
+box so labels are included rather than clipped; `Reset view` returns to that fit. The
+measurement happens on an animation frame, not inline — inline, `getBBox` reported a
+613px height for a box that settled at 843, and the gluten query was scaled to 1.27x
+instead of 0.93x and clipped on both sides.
+
+## Import & patch layer — using this outside the app
+
+The relationships this project establishes are exportable as a standards-compliant
+OWL patch layer, so a team can take a fresh vendor `foodon.owl`, apply one file, and
+query the same closures over SPARQL with none of this codebase in the loop.
+
+```bash
+./tools/apply_patches.sh          # vendor + patches -> merged -> queryable
+```
+
+`ontology/foodon.owl` is never modified. Drop in a new upstream release, re-run, and
+the patch layer re-applies unchanged; `ontology/foodon.owl.sha256` pins the release
+the patches were reviewed against and the script warns when it differs.
+
+| file | role |
+|---|---|
+| `ontology/foodon.owl` | vendor, untouched, gitignored |
+| `ontology/foodon-local-patches.ttl` | **the patch layer** — generated, reviewed, committed |
+| `ontology/catalog-v001.xml` | resolves the `owl:imports` to the local vendor copy, offline |
+| `ontology/foodon-merged.owl` | the two as one ontology, for a reasoner or an upload |
+| `ontology/foodon-avoidance.ttl` | materialised one-hop relations (derived) |
+| `ontology/foodon-queryable.owl` | what `build/sparql/patch_*.rq` runs against |
+
+**The patch file is generated, and that is the point.** `build/emit_patches.py`
+reads the governed decision files, so the guards, the claim types and the sign-off
+records stay the review surface and the tests keep running against them. It is
+written to be *read*: every axiom carries a comment block naming the rule, the
+guards, the evidence and the reviewer, and the same facts again as a machine-readable
+`local:Patch` record so the audit can be done in SPARQL. `test/patch_run.py` asserts
+the round trip both ways — a hand-edit to the generated file, or a decision that
+fails to export, breaks the build.
+
+**Only `contains` is emitted as `RO:0001000`.** Three claim types are not
+containment and get their own declared object properties, each with an
+`rdfs:comment` saying so plainly: `local:mayDeriveFrom` (feedstock is a producer
+choice), `local:crossReactiveWith` (the allergen protein is *not* present),
+`local:disputedAvoidance`. Emitting these as `derives from` would tell a
+corn-avoider that citric acid contains corn.
+
+**One thing OWL cannot do.** An import is monotonic — it adds and never retracts. So
+`peanut plant is_a nut producing plant`, which is defensible botanically and wrong
+for allergens, cannot be removed by a patch. It is stated declaratively as
+`local:notAvoidanceRelevantFor` for a consumer to honour, rather than pretending the
+upstream axiom is gone.
+
+**Patch at the most specific true source.** The tempting axiom for the motivating
+case is `hungarian wax pepper food product derives from Solanaceae`. That is wrong:
+Solanaceae is family rank with a 631-class closure, while the cultivar plant has 9.
+The patch names the cultivar, and Solanaceae is reached through FoodOn's own `is_a`
+chain — which keeps the axiom correct for a narrower `Capsicum annuum` query too.
+This is the same rule `classify_repairs.py` applies when it declines
+`avian food product → avian animal` as class-rank.
+
+### SPARQL, and why it needs two relations
+
+```bash
+java -jar tools/robot.jar query --input ontology/foodon-merged.owl      --query build/sparql/patch_validate_paprika.rq /dev/stdout
+```
+
+```
+paprika (ground) | hungarian wax pepper food product | RO:0001000 |
+hungarian wax pepper plant | Solanaceae | local:patch-9a1936568ec0
+```
+
+That last column is the audit trail: the bridging hop is identified as one this
+layer supplied, not FoodOn's own.
+
+SPARQL 1.1 property paths cannot step through a blank-node `owl:Restriction`, so
+"subClassOf plus propagating properties" has no single-path form. The one-hop
+relation is materialised first and a `+` path closes over it, and it takes **two**
+relations rather than one:
+
+- `local:propagatesTo` — derivative propagation, always source → product, so a
+  closure over it can never ascend to a shared ancestor and come back down
+- `local:pivotsTo` — the rank-guarded forward `in taxon` hop to a species-rank taxon
+
+They are separate because the pivot belongs to the *taxonomic* phase: it fires from
+a class reached by `is_a` descent from the root, never from a derivative. Folding
+them together is wrong in both directions — measured, omitting the pivot loses
+`Brassica juncea` and `brown mustard plant` from a mustard query, and applying it
+everywhere pivots `Nirvana corn kernel` up to the species `Zea mays` and gains three
+cultivars the app does not reach. `patch_closure.rq` composes them as two phases.
+
+Which properties propagate is **read from the patch layer**, not hardcoded in the
+query: `emit_patches.py` writes `local:propagatesAvoidance "inverse"` from
+`config/relation_policy.json`, so the policy has one source of truth.
+
+**Verified parity.** `test/patch_run.py` runs the SPARQL closure and the application
+traversal over the same roots and requires them to agree exactly:
+
+| root | app | SPARQL | diff |
+|---|---|---|---|
+| Solanaceae | 630 | 630 | 0 |
+| Maize plant | 188 | 188 | 0 |
+| wheat plant | 744 | 744 | 0 |
+| sesame plant | 18 | 18 | 0 |
+| mustard plant | 25 | 25 | 0 |
+| Capsicum | 176 | 176 | 0 |
+
+### Retiring a patch upstream has fixed
+
+```bash
+java -jar tools/robot.jar query --input ontology/foodon.owl      --query build/sparql/patch_native_axioms.rq data/native-axioms.csv
+python3 build/check_upstream_fixes.py
+```
+
+The comparison is against the **vendor file alone**, because the patch layer is
+additive and leaves no seam: once merged, our axiom is indistinguishable from
+FoodOn's. Currently 93 of 93 patches are still doing work. Nothing is deleted
+automatically — retiring goes through the same sign-off, using the `superseded`
+status, so the record of why the gap existed survives the fix and
+`test/override_run.py` keeps asserting the target is still reached.
+
+A triplestore keeps the vendor graph separate and so can do this in one query;
+`build/sparql/named_graphs.ru` has the ingest, the base-graph-only replacement and
+that check for a SPARQL 1.1 Update endpoint. It is optional — the ROBOT merge needs
+no infrastructure.
+
+## Getting the two vendor files
+
+Neither is committed: both are large, hash-pinned and downloadable. A fresh clone
+needs them before anything will build.
+
+```bash
+mkdir -p ontology tools
+
+# FoodOn 2025-12-30 (40 MB). Any release works; the patch layer is re-applied
+# against whatever is here, and tools/apply_patches.sh warns when it differs from
+# the pinned hash.
+curl -L -o ontology/foodon.owl http://purl.obolibrary.org/obo/foodon.owl
+shasum -a 256 -c ontology/foodon.owl.sha256
+
+# ROBOT 1.9.10 (79 MB)
+curl -L -o tools/robot.jar \
+  https://github.com/ontodev/robot/releases/download/v1.9.10/robot.jar
+shasum -a 256 -c tools/robot.jar.sha256
+```
+
+Both `.sha256` files ARE committed, so a mismatch is visible immediately: for ROBOT
+it means the wrong version, and for FoodOn it means a release the local patch layer
+has not been reviewed against.
+
+## Build and test
+
+```bash
+java -Xmx10g -jar tools/robot.jar convert -i ontology/foodon.owl --format json -o data/foodon-asserted.obo.json
+java -Xmx12g -jar tools/robot.jar query   -i ontology/foodon.owl --query build/sparql/structure.rq data/structure.csv
+python3 build/extract_edges.py        # restrictions -> data/restrictions.csv
+python3 build/verify_extraction.py    # fails if any restriction is lost
+python3 build/build_index.py          # -> data/index.json
+python3 build/repair_derives.py       # omitted derives-from axioms
+python3 build/classify_repairs.py     # auto-apply vs sign-off
+python3 build/mine_definitions.py     # origin phrasing in FoodOn's own prose
+python3 build/classify_mined.py       # -> review queue; applies only what is signed
+python3 build/emit_patches.py         # -> ontology/foodon-local-patches.ttl
+./tools/apply_patches.sh              # vendor + patches -> queryable ontology
+python3 build/build_relation_policy.py
+python3 build/build_resolution_store.py
+python3 build/validate_store.py
+
+python3 test/run.py             # 116 golden + invariant assertions
+python3 test/resolution_run.py  # 104 resolution assertions
+python3 test/override_run.py    # 61 assertions: signed claims do what their claim says
+python3 test/mined_run.py       # 123 assertions: nothing unsigned reaches an answer
+python3 test/allergen_run.py    # real allergen derivative coverage
+python3 test/patch_run.py       # 12 assertions: the .ttl export means what the app means
+
+python3 build/audit/probe.py    # the one-off discovery scripts; see build/audit/README.md
+```
+
+## Layout
+
+```
+ontology/    vendor foodon.owl (gitignored) + the local patch layer + merge products
+config/      the governed decisions -- see the table below
+data/        derived indexes and classified candidate sets
+build/       the pipeline, in the order the Build section runs it
+build/audit/ one-off discovery scripts, provenance for audit/01-structural-audit.md
+build/sparql/ extraction and patch-layer queries
+test/        six suites, ~440 assertions
+web/         the UI (React + D3, no build step)
+tools/       robot.jar and apply_patches.sh
+```
+
+`build/` holds three kinds of script and the directory alone does not distinguish
+them, so: the **pipeline** ones are exactly those listed in the Build section, in
+that order. The **generators** for governed files — `build_function_categories.py`,
+`draft_overrides.py`, `make_allergen_golden.py`, `detect_misparent.py` — run rarely
+and are safe to re-run: each carries a decision forward rather than restamping it.
+`policy_sensitivity.py` is a verification harness cited by
+`config/relation_policy.json` as the method behind each direction ruling. Everything
+that ran once and produced the structural audit is under `build/audit/`.
+
+Two files look dead and are not, and both now say so at the top: `build/sparql/diag.rq`
+(feeds the extraction-completeness check) and `build/build_function_categories.py`
+(the only way to regenerate a config the traversal reads).
+
+## Governed files — the decisions, not the code
+
+| file | what it governs |
+|---|---|
+| `config/relation_policy.json` | which relations propagate avoidance, and in which direction |
+| `config/repair-signoff.json` | human rulings on repaired axioms |
+| `config/overrides.json` | regulatory and provenance claims the ontology cannot make; `entry_types` documents `add` / `remove` / `declined` / `superseded` |
+| `config/mined-signoff.json` | human rulings on bridges mined from FoodOn's prose |
+| `data/resolution-store.json` | pinned free-text resolutions |
+| `config/function-categories.json` | readable grouping vocabulary over FoodOn's raw CFR groups |
+
+`audit/01-structural-audit.md` records what FoodOn turned out to be like and why each
+rule exists. Read it before changing anything that looks arbitrary.
+
+## Grouping for readability
+
+Section 6 asks for culinary-function rollup. FoodOn carries one — 170 US CFR groups
+over 2,342 classes — but it is uneven and mixes two axes: `nutritive sweetener` is an
+ingredient role, `doughnut` is a finished food. `config/function-categories.json`
+folds all 170 into 17 readable categories on two tiers:
+
+- **ingredient_function** — the six categories of the supplied taxonomy: emulsifiers
+  and binders, thickeners and gelling agents, sweeteners, preservatives and
+  acidulants, clarifying agents, flavour enhancers.
+- **product_type** — bakery, confectionery, dairy, beverages, alcohol, meat and
+  seafood, sauces and soups, fruit and vegetable, desserts, prepared foods,
+  substitutes, eggs, fats and oils.
+
+The second tier exists because most of the CFR vocabulary is product type, and forcing
+those into a functional category would be a category error.
+
+**Why not the supplied derivative lists directly.** Measured: naming the derivatives
+outright (soy lecithin, HWP, mono- and diglycerides, gelatin, isinglass…) tags 77 of
+39,894 classes and **zero** nodes on gluten, soy, tree nut and nightshade queries —
+55% of those terms have no FoodOn class, because the list names precisely the
+processed ingredients FoodOn models worst. Mapping the CFR vocabulary instead tags
+53 corn, 163 milk, 274 gluten and 274 tree-nut nodes. The taxonomy was right; the
+route to it had to change.
+
+## The eight things that decide correctness
+
+**No ascent, structurally.** The traversal adjacency contains only edges pointing in
+the avoidance-propagating direction; `subClassOf` is indexed parent→child and the
+reverse is never added. There is no code path that ascends, so no configuration
+mistake can create one. Corn cannot reach wheat because the upward half of that walk
+does not exist in the graph. Two negative tests assert it in both directions.
+
+**Direction is never "both".** `derives from` is asserted product→source, so avoidance
+travels object→subject. Allowing both directions permits product→source→sibling
+product — ascend-then-redescend through a relation instead of through `is_a`. This was
+not hypothetical: `part_of` was drafted as `forward` and made a soy query return
+lobster and its 73-node subtree.
+
+**Only `contains` enters the closure.** The closure means one thing — treat this as
+containing the query — so the three weaker claim types in `config/overrides.json` are
+reported beside the graph rather than drawn in it. Their own definitions say why:
+`may_contain` is "feedstock is a producer choice", so corn-derived citric acid is
+corn-derived *at some producers* and asserting containment states a fact about the
+substance that is not true; `cross_reactive` says outright that "the allergen protein
+is NOT present", which as a containment edge is wrong in the direction that needlessly
+excludes safe food; `disputed` has "no established containment basis". All three used
+to be injected exactly like `contains`, which is what `test/allergen_run.py` was
+failing on — 11 terms reached by traversal that only a weaker claim supported. Nothing
+is dropped: they surface under *Reported, not traversed* with the claim, the reason and
+the reviewer's note, and `test/override_run.py` asserts both halves — a `contains`
+override must reach the graph, and a weaker one must not, but must still be reported.
+
+**Excluded branches are config, not code.** `config/relation_policy.json` lists them
+and `build/traverse.py` reads that list. It used to hardcode the agency root while the
+policy file described the rule as documentation, so the file named a rule the code
+never consulted and a second branch could not be added without editing code. Two
+branches are excluded now: `agency food product type` (6,074 classes of parallel
+regulatory vocabularies — audit F10) and `embryo` (UBERON:0000922, 12 classes).
+
+The embryo one came out of the union fix. FoodOn parents `embryo` under `animal egg`,
+which is defensible — an egg does contain one — but morula, blastula, gastrula and the
+2/4/8-cell stages are stages of development, not things on a plate. They are also the
+only non-food members of the `animal egg` subtree, which mattered because that class
+had to become a root: see below. Measured cost of the exclusion across 18 queries: the
+12 classes and nothing else.
+
+**`egg` resolves to three roots.** `egg or egg component` (yolk and white),
+`chicken egg`, and `animal egg` — none subsumes another. The third was added after the
+union fix, which exposed a false negative on a FALCPA top-9 allergen: `animal egg` had
+been reachable only through the inverted edge `animal egg is_a shelled egg`, so
+correcting the direction dropped `quail egg`, `goose egg`, `ostrich egg`, `turkey egg`,
+`turtle egg` and `animal roe` out of an egg query. Egg allergy is to proteins every
+bird egg carries, so the species-spanning class belongs in the roots; the embryology
+classes underneath it are handled by the exclusion above rather than by narrowing the
+root. Egg: 894 before the union fix → 1,148 after → **1,160** with the third root.
+
+**Union operands are children, not parents.** A named class inside a class expression
+points one of two ways, and which one depends on the connective:
+
+| axiom | meaning | count |
+|---|---|---|
+| `X ≡ A ⊓ B` | X ⊑ A, X ⊑ B — operands are **parents** | 5,254 |
+| `X ≡ A ⊔ B` | A ⊑ X, B ⊑ X — operands are **children** | 50 |
+| `X ⊑ A ⊔ B` | every X is an A or a B, and **nothing** about X ⊑ A | 13 |
+| `X ⊑ A ⊓ B` | operands are parents | 8 |
+
+`build/build_index.py` used to descend `owl:unionOf` and `owl:intersectionOf`
+identically, so union operands became parents. A mutual `is_a` **is** an equivalence,
+and the result was 50 of them — `nut food product`, `plant seed or nut food product`
+and `plant seed food product` collapsed into one class, and so did the aquatic-animal
+groupings. Two allergen consequences, both severe:
+
+- a **tree nut** query descended into every plant seed and returned 2,176 classes
+  including `rice plant`, `soybean plant`, `buckwheat plant` and `quinoa seed`
+- **fish** and **shellfish** returned the *same* 4,508 classes — they were one query,
+  though FALCPA treats them as separate allergens
+
+Fixed: union operands under an equivalence are emitted as children; under a
+`subClassOf` they yield no subsumption at all and are kept on their own weaker
+`isa_union` kind, because recall-first still wants `chia seed (whole or pieces)`
+reachable from chia even though we cannot say which operand it is. A union reached
+inside a *restriction filler* is neither — `blood meal ≡ derives from some (Bos taurus
+or swine)` makes neither a parent nor a child, and that stayed on `rel_nest`.
+
+Mutual pairs went 50 → 4, and the four that remain are genuine FoodOn defects rather
+than extraction artefacts (`vegetable ↔ vegetable (whole or pieces)` and three like
+it), plus one self-loop (`atlantic cod material is_a atlantic cod material`). Only
+four queries moved: tree nut 2,176 → **399**, shellfish 4,508 → **1,314**, fish
+4,508 → **3,173**, egg 894 → **1,148**. Everything else is byte-identical and
+containment recall stays 23/23. Verified that nothing real was lost: `cashew`,
+`pistachio`, `brazil nut` and `pine nut` were already unreachable from a tree-nut
+query *before* the fix — that is the FoodOn coverage gap the peanut `remove` override
+already documents, not a regression. Three invariants in `test/golden.json` pin it.
+
+**Depth budgets are runaway guards, not policy.** Taxonomic descent and derivative
+traversal get separate budgets, each counted from where that phase starts. They used
+to share one budget of 6 counted from the query root, and that silently truncated real
+answers in two ways at once. `pepper` is a shallow grouping over a deep taxonomy, so
+`hungarian wax pepper plant` landed at depth 6 with the budget already spent — its
+food products were never looked at, and a `pepper` query returned 147 classes and no
+paprika while the *narrower* `Capsicum` returned 177 and found it. The same cap also
+lost jalapeño, pimiento, guajillo, pasilla, anaheim and 14 more actual peppers, and
+cost `tree nut` 671 classes. Every query saturates well inside the current guard of
+12 and the whole set runs in 0.01–0.03s, so the cap costs nothing and exists only so
+a future cyclic release cannot spin. How deep an organism sits in FoodOn's taxonomy
+is an artefact of how finely that branch was subdivided; it is not a statement about
+relevance, and truncating on it hands back a shorter answer with nothing on screen to
+say it was shortened.
+
+**Absent is an answer.** Roughly two thirds of everyday allergen vocabulary has no
+FoodOn class at all. The resolver says so rather than resolving to something
+approximate.
+
+## Bridges awaiting review
+
+FoodOn omits `derives from` on 62% of its `<X> food product` classes.
+`build/repair_derives.py` recovers 76 of them from the naming convention plus two
+structural guards — that is the edge that connects paprika to nightshade.
+`build/classify_mined.py` covers what the convention cannot see, and puts every
+candidate in a **review queue rather than the graph**:
+
+| rule | source of evidence | in queue |
+|---|---|---|
+| E | FoodOn's own definitions (`pasta` is "an unleavened dough of wheat flour") | 11 |
+| B | interior qualifier: `<X> <qualifier> food product` → `<X> <source>` | 1 |
+| D | preparation-state twin, emitted as the missing `is a` it actually is | 13 |
+
+**Signed so far: 10.**
+
+| bridge | effect |
+|---|---|
+| `pasta → wheat plant`, `whole wheat pasta → wheat plant` | gluten 829 → 863 |
+| `malt syrup → barley plant` | gluten → 864, barley 48. A classic hidden gluten source |
+| `mustard condiment food product → mustard plant` | mustard 37 → 47: dijon, mustard sauce, relish, mostarda di frutta |
+| `yellow mustard (prepared) → white mustard plant` | adds the species-level route, so a `white mustard` / *Sinapis alba* query reaches it too |
+| `soy-based protein powder → soybean plant` | soy 133 → 134 |
+| `acorn flour → oak tree` | reachable from oak and, correctly, from a tree-nut query — an acorn is a nut |
+| `croziflette → buckwheat plant` | **medium** confidence, deliberately — see below |
+| `tahini → sesame plant`, `white tahini → sesame plant` | sesame stays at 19, but on **structure instead of curation** — `Sesame → tahini` is now reported redundant in `override_run.py` |
+
+`croziflette` is the only entry signed at **medium**. Its definition reads "crozets
+de Savoie (usually made from buckwheat **but sometimes durum**)" — a recipe choice,
+the same shape as the `may_contain` overrides that are kept out of the closure.
+Signed anyway under recall-first, because buckwheat allergy is anaphylactic and
+crozets usually *are* buckwheat, so the over-inclusion falls in the safe direction.
+Two gaps it does not close, recorded in the sign-off so nobody reads the dish as
+mapped: it is a multi-component dish that also contains milk (reblochon), pork
+(bacon) and allium (onion), none of which FoodOn asserts; and the durum variant means
+it may contain gluten, which will not show on a gluten query since buckwheat is
+gluten-free.
+
+The malt entry is the one that needed an argument. Its definition hedges — "a syrup
+made from malted barley **or grains**" — but FoodOn keeps the generic reading in a
+separate class (`malted cereal syrup`, under flavoring syrup), keeps `rice syrup`
+separate again under plant sweetener, and already parents `malt extract` under
+`barley product flavoring`. That last one is the ontology's own statement that
+unqualified malt means barley. Verified after signing: neither `malted cereal syrup`
+nor `rice syrup` is pulled into a gluten query.
+
+That last row is the direction of travel: a signed override replaced by an axiom
+FoodOn's own prose already contained. The `Sesame → tahini` override has since been
+**retired** — `type: "superseded"`, not deleted, because the record of why the gap
+existed is the useful part. `test/override_run.py` keeps that retirement honest: a
+superseded entry's target must still be reached, and not by an override, or the test
+fails and names the entry to reinstate. Verified by removing the mined bridge, which
+produced exactly that failure. Retiring an override without this check would be an
+untested deletion of a safety claim.
+
+`test/mined_run.py` reports `white tahini` as redundant — it is `is a tahini`, so it
+arrives by descent; it is kept as a direct anchor against a future re-parenting, the
+same treatment as the sodium caseinate override.
+
+The broader `pasta food product` was deliberately **not** signed — see below.
+
+Nothing here changes an answer. `config/mined-signoff.json` is keyed by **product
+IRI** — not by source label as `config/repair-signoff.json` is — because a mined
+bridge rests on one class's own prose sentence and is evidence for exactly that
+class. `test/mined_run.py` asserts the queue is inert and that a signed entry
+actually fires.
+
+**Five guards, each earned from a real false positive.** 295 of 330 candidates are
+rejected: 182 already reachable, 103 external code-list rows, and then the ones that
+matter — `pear tomato plant → pear plant` (the product is itself an organism; a pear
+tomato is a tomato), `food milling → grain plant` (a process has no origin),
+`enzyme supplement → pineapple plant` (the definition reads "plants like pineapple
+and papaya" — an example list, not an origin), and `chocolate (imitation) → chocolate`
+(an analog is defined by *not* containing what it imitates, which is why
+`has food substance analog` is non-propagating in the relation policy).
+
+**Every candidate carries its impact, because one of them needs it.** Dry-running
+`pasta food product → wheat plant` grew a gluten query from 829 to 964 classes and
+pulled in `gluten-free pasta` — `pasta food product` is a shape, not a grain. The
+queue reports `+119` against that entry and names the conflict, so it reads as a
+decline-or-narrow decision rather than a free win. `pasta → wheat plant` (+6) and
+`whole wheat pasta` (+1) are the clean parts of the same finding.
+
+**Not implemented, on purpose.** Product-form suffixes (`<X> oil`, `<X> sauce`,
+`<X> syrup`) were measured at ~50% precision: `pancake syrup → pancake`,
+`malt syrup → malt root` (it is barley), `feather meal → feather`. `<X> sauce` and
+`<X> syrup` name the dish, not the source, and no guard separates the two cases.
+Definition mining gets `malt syrup → barley plant` right from the prose instead, and
+`test/mined_run.py` fails if rule C ever appears in the queue.
+
+## Coverage
+
+Against the supplied allergen derivative list (103 terms across 12 allergens), scored
+by relation type because the list conflates four relations that need different
+machinery:
+
+| relation | result |
+|---|---|
+| containment | **23/23 reached** of those FoodOn has a class for |
+| synonym | 4/4 resolve into the right closure |
+| provenance / cross-reactive / disputed | 0 reached by structure — no false containment; 20 carried as reported claims |
+
+## Known limits
+
+- **48 of 71 containment terms do not exist in FoodOn at all.** `soy lecithin`,
+  `whey protein concentrate`, `ovalbumin`, `bovine gelatin`, `isinglass`, `seitan`,
+  `triticale`, `kamut`. No traversal work changes that; it is the single largest
+  limit on the system and it is a data-availability problem.
+- FoodOn parents processed ingredients by function (`tahini is_a condiment`,
+  `casein is_a protein extract`) and asserts no source. Five such derivatives are
+  reachable only through signed overrides, not through structure.
+- 11 `may_contain` entries are signed but **reported rather than traversed**: the
+  source is genuinely open (corn, wheat, cassava, beet or molasses by producer and
+  region), so a corn query lists citric acid, xanthan gum, ascorbic acid and calcium
+  citrate under *Reported, not traversed* instead of drawing them as containment.
+  Revisit if a product-level layer can supply the actual source.
+- 7 override targets, including `sorbitol` and `modified food starch`, name terms with
+  no FoodOn class, so there is nothing to point an edge at; they surface as text in
+  the same panel.
+- Two FoodOn defects are recorded in `data/misparented.json`: `rye kernel` is parented
+  under `sumac food product`, and `hickory nut` (with `pecan` beneath it) under
+  `mustard spinach food product`. Both are allergen false negatives.
+- Certified gluten-free oats cannot be expressed here. Oats count as gluten-containing
+  by decision; the exception is a product-label fact and must be handled downstream.

@@ -1,0 +1,607 @@
+{
+  "version": "2026-09-09",
+  "status": "DRAFT - no entry governs traversal until reviewed_by is set (spec section 3)",
+  "ontology_version": "2025-12-30",
+  "claim_types": {
+    "contains": "the target genuinely contains or derives from the query. FoodOn simply fails to connect them.",
+    "may_contain": "commonly but not necessarily derived from the query; feedstock is a producer choice.",
+    "cross_reactive": "immunologically related; the allergen protein is NOT present.",
+    "disputed": "appears on avoidance lists without an established containment basis."
+  },
+  "overrides": [
+    {
+      "type": "remove",
+      "claim": "not_avoidance_relevant",
+      "status": "REVIEWED",
+      "query_root": "http://purl.obolibrary.org/obo/FOODON_03411213",
+      "query_root_label": "nut producing plant",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03411337",
+      "target_label": "peanut plant",
+      "reason": "FoodOn asserts `peanut plant is_a nut producing plant`, defensible botanically but wrong for allergens: FALCPA treats peanut and tree nut as SEPARATE allergens. Without this a tree-nut query returns peanut and its 91-node closure. The two FoodOn sub-branches that exclude peanut cover only 4 of 7 major tree nuts between them, so there is no clean class to resolve to instead. Confirmed by Matt 2026-09-09: disconnect in both directions.",
+      "source": "FDA FALCPA allergen list treats peanut and tree nuts separately",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "reverse_direction_note": "The peanut -> tree nut direction needs no override and deliberately has none. peanut's closure already contains no tree nut, because the only link is an UPWARD is_a edge the invariant never traverses. A symmetric override would also be unsafe: peanut sits INSIDE nut food product's closure, so suppressing that closure from a peanut query would delete the peanut results themselves. Enforced structurally and guarded by tests in test/resolution_run.py."
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "maltodextrin",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_25140",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "starch hydrolysate; corn, wheat, potato or tapioca depending on plant",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is the dominant practical source for this substance, so the may-contain claim is worth surfacing"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "dextrose",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03315177",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "glucose; corn-derived in the US, other feedstocks elsewhere",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is the dominant practical source for this substance, so the may-contain claim is worth surfacing"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "ANNOTATION",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "modified food starch",
+      "target_class": null,
+      "in_foodon": false,
+      "confidence": "medium",
+      "reason": "any starch source; unspecified by name",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "FoodOn has no class for this term, so it can never be a graph edge. Retained as an annotation surfaced beside the graph, so the safety information survives without pretending it is structural.",
+      "annotation_only": true
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "citric acid",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_30769",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Aspergillus niger fermentation on a sugar feedstock, often corn",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is not a FALCPA allergen, so labels give a corn-avoider no help and these lists are what they rely on. Kept as a may_contain claim so the weaker basis stays visible."
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "xanthan gum",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03413321",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Xanthomonas fermentation, feedstock often corn glucose",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is not a FALCPA allergen, so labels give a corn-avoider no help and these lists are what they rely on. Kept as a may_contain claim so the weaker basis stays visible."
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "dextrin",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_28675",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "starch hydrolysate, feedstock varies",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is the dominant practical source for this substance, so the may-contain claim is worth surfacing"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "cyclodextrin",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_23456",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "enzymatic conversion of starch, feedstock varies",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is the dominant practical source for this substance, so the may-contain claim is worth surfacing"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "ascorbic acid",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_22652",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "synthesised from glucose, feedstock often corn",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is not a FALCPA allergen, so labels give a corn-avoider no help and these lists are what they rely on. Kept as a may_contain claim so the weaker basis stays visible."
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "erythritol",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_17113",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "fermentation of corn or wheat starch hydrolysate",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is the dominant practical source for this substance, so the may-contain claim is worth surfacing"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "sorbitol",
+      "target_class": null,
+      "in_foodon": false,
+      "confidence": "medium",
+      "reason": "hydrogenated glucose, feedstock often corn",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is the dominant practical source for this substance, so the may-contain claim is worth surfacing"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Corn",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/NCBITaxon_381124"
+      ],
+      "query_root_labels": [
+        "Zea mays subsp. mays"
+      ],
+      "target_label": "calcium citrate",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_190513",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "citric acid salt, inherits the citric acid feedstock question",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: corn is not a FALCPA allergen, so labels give a corn-avoider no help and these lists are what they rely on. Kept as a may_contain claim so the weaker basis stays visible."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "casein",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03420180",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "the predominant milk protein. FoodOn models this class but parents it by function (protein extract, concentrate or isolate) and asserts no source.",
+      "source": "audit: processed ingredients are parented by function with no derives-from",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09"
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "sodium caseinate",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03317011",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "casein salt. FoodOn models this class but parents it by function (casein) and asserts no source.",
+      "source": "audit: processed ingredients are parented by function with no derives-from",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "nisin",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_71629",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Lactococcus lactis bacteriocin, commonly cultured on a dairy medium",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: Lactococcus lactis fermentation, but commercial preparations are standardly carried on milk solids."
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "ANNOTATION",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "lactic acid starter culture",
+      "target_class": null,
+      "in_foodon": false,
+      "confidence": "medium",
+      "reason": "may be propagated on a dairy medium",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "FoodOn has no class for this term, so it can never be a graph edge. Retained as an annotation surfaced beside the graph, so the safety information survives without pretending it is structural.",
+      "annotation_only": true
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Egg",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03420194",
+        "http://purl.obolibrary.org/obo/FOODON_03316061"
+      ],
+      "query_root_labels": [
+        "egg or egg component",
+        "chicken egg"
+      ],
+      "target_label": "lysozyme",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03413135",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "food-grade lysozyme is hen egg white lysozyme. FoodOn models this class but parents it by function (food additive) and asserts no source.",
+      "source": "audit: processed ingredients are parented by function with no derives-from",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09"
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Fish",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411222"
+      ],
+      "query_root_labels": [
+        "fish species"
+      ],
+      "target_label": "fish sauce",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03317197",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "fermented fish. FoodOn models this class but parents it by function (sauce) and asserts no source.",
+      "source": "audit: processed ingredients are parented by function with no derives-from",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Shellfish",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411433"
+      ],
+      "query_root_labels": [
+        "shellfish species"
+      ],
+      "target_label": "chitosan",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_16261",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "deacetylated chitin; crustacean shells OR fungal mycelium",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "signed: commercial chitosan is overwhelmingly crustacean shell waste; fungal chitosan is a niche vegan alternative. Originally misfiled as open-source."
+    },
+    {
+      "type": "declined",
+      "claim": "cross_reactive",
+      "status": "DECLINED",
+      "query_class": "Tree Nuts",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411213",
+        "http://purl.obolibrary.org/obo/FOODON_00001172"
+      ],
+      "query_root_labels": [
+        "nut producing plant",
+        "nut food product"
+      ],
+      "target_label": "pink peppercorn",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00003810",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Schinus in Anacardiaceae with cashew and pistachio; cross-reactive, contains no tree nut",
+      "source": "clinical cross-reactivity literature; the allergen protein is not present",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "declined 2026-09-09: the evidence is case reports rather than prevalence data, so the graph stays containment-only. Retained here as a record that this was considered and why it was declined, not as an active claim."
+    },
+    {
+      "type": "declined",
+      "claim": "cross_reactive",
+      "status": "DECLINED",
+      "query_class": "Tree Nuts",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411213",
+        "http://purl.obolibrary.org/obo/FOODON_00001172"
+      ],
+      "query_root_labels": [
+        "nut producing plant",
+        "nut food product"
+      ],
+      "target_label": "mahlab",
+      "target_class": null,
+      "in_foodon": false,
+      "confidence": "medium",
+      "reason": "Prunus mahaleb kernel; a stone-fruit kernel, cross-reactive rather than a tree nut",
+      "source": "clinical cross-reactivity literature; the allergen protein is not present",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "declined 2026-09-09: the evidence is case reports rather than prevalence data, so the graph stays containment-only. Retained here as a record that this was considered and why it was declined, not as an active claim."
+    },
+    {
+      "type": "declined",
+      "claim": "disputed",
+      "status": "DECLINED",
+      "query_class": "Mammalian Meat (Alpha-Gal)",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411134"
+      ],
+      "query_root_labels": [
+        "mammal"
+      ],
+      "target_label": "carrageenan",
+      "target_class": "http://purl.obolibrary.org/obo/CHEBI_3435",
+      "in_foodon": true,
+      "confidence": "low",
+      "reason": "red seaweed polysaccharide, contains no mammalian material or alpha-gal; appears on alpha-gal lists via a contested GI-symptom hypothesis",
+      "source": "appears on avoidance lists without an established containment basis",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "declined 2026-09-09: the evidence is case reports rather than prevalence data, so the graph stays containment-only. Retained here as a record that this was considered and why it was declined, not as an active claim."
+    },
+    {
+      "type": "superseded",
+      "claim": "contains",
+      "status": "SUPERSEDED",
+      "query_class": "Sesame",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411226"
+      ],
+      "query_root_labels": [
+        "sesame plant"
+      ],
+      "target_label": "tahini",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00003855",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "ground hulled sesame. FoodOn models this class but parents it by function (condiment) and asserts no source.",
+      "source": "audit: processed ingredients are parented by function with no derives-from",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "superseded_by": "mined bridge `tahini -> sesame plant`, signed in config/mined-signoff.json",
+      "superseded_date": "2026-09-10",
+      "superseded_reason": "FoodOn's own definition of tahini reads 'a condiment made from toasted ground hulled sesame'. build/classify_mined.py extracted that, it was signed, and the class is now reached structurally, so this override no longer has work to do. Retired rather than deleted: the record of WHY the gap existed is the useful part, and if the structural route ever breaks, test/override_run.py fails and names this entry as the fix."
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "ANNOTATION",
+      "query_class": "Soy",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411452"
+      ],
+      "query_root_labels": [
+        "soybean plant"
+      ],
+      "target_label": "textured vegetable protein",
+      "target_class": null,
+      "in_foodon": false,
+      "confidence": "medium",
+      "reason": "usually soy, but the name does not commit to a source",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "FoodOn has no class for this term, so it can never be a graph edge. Retained as an annotation surfaced beside the graph, so the safety information survives without pretending it is structural.",
+      "annotation_only": true
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "ANNOTATION",
+      "query_class": "Soy",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411452"
+      ],
+      "query_root_labels": [
+        "soybean plant"
+      ],
+      "target_label": "hydrolyzed plant protein",
+      "target_class": null,
+      "in_foodon": false,
+      "confidence": "medium",
+      "reason": "soy, wheat or corn depending on producer",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "FoodOn has no class for this term, so it can never be a graph edge. Retained as an annotation surfaced beside the graph, so the safety information survives without pretending it is structural.",
+      "annotation_only": true
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "ANNOTATION",
+      "query_class": "Soy",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411452"
+      ],
+      "query_root_labels": [
+        "soybean plant"
+      ],
+      "target_label": "hydrolyzed vegetable protein",
+      "target_class": null,
+      "in_foodon": false,
+      "confidence": "medium",
+      "reason": "soy, wheat or corn depending on producer",
+      "source": "manufacturing feedstock varies by producer; not a property of the substance",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09",
+      "review_note": "FoodOn has no class for this term, so it can never be a graph edge. Retained as an annotation surfaced beside the graph, so the safety information survives without pretending it is structural.",
+      "annotation_only": true
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "rye",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411313"
+      ],
+      "query_root_labels": [
+        "rye plant"
+      ],
+      "target_label": "rye kernel",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00003734",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "FoodOn parents rye kernel under sumac food product (IDs 00003734 vs sumac berry 00003733, an adjacent-ID slip). A rye query misses rye kernel and its raw/cooked/dried forms - a gluten false negative.",
+      "source": "audit F11, build/detect_misparent.py",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09"
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "hickory",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411553"
+      ],
+      "query_root_labels": [
+        "hickory tree"
+      ],
+      "target_label": "hickory nut",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00003089",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "FoodOn parents hickory nut under mustard spinach food product. hickory tree has a closure of 1, and pecan sits under hickory nut, so both are orphaned - a tree-nut false negative.",
+      "source": "audit F11, build/detect_misparent.py",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-09"
+    }
+  ],
+  "entry_types": {
+    "add": "inject a claim the ontology does not make. Only claim `contains` enters the closure.",
+    "remove": "suppress a subtree that is ontologically real but not avoidance-relevant for one query.",
+    "declined": "reviewed and rejected. Kept so the reasoning is not lost.",
+    "superseded": "was correct and signed, and is now carried by structure instead. Inert, kept for the audit trail; test/override_run.py asserts the structural route still holds."
+  }
+}

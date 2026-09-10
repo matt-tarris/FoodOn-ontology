@@ -1,0 +1,327 @@
+{
+  "version": "2026-09-10",
+  "status": "REVIEWED",
+  "review": {
+    "reviewed_by": "Matt",
+    "reviewed_date": "2026-09-10",
+    "method": "walked through with measured sensitivity per relation (build/policy_sensitivity.py): each propagating relation dropped and each non-propagating relation enabled, closure delta measured across corn, nightshade, milk, soy, wheat and tree nut.",
+    "decisions": [
+      "part_of flipped from forward to inverse. Forward made a soy query return lobster and its 73-node subtree via `soybean oil (flavored with extract from lobster shell) part_of lobster`. Regression tests in test/golden.json now fail if it is flipped back.",
+      "Eight propagating relations with no measurable effect on any golden query are KEPT for recall-first, each flagged evidence=untested rather than left implying validation.",
+      "composed primarily of keeps propagating into ChEBI, gated by terminal_namespaces: a ChEBI class is reachable but never expanded, so sucrose and maltodextrin are admissible as label items while molecular structure stays out of scope.",
+      "2026-09-10: `embryo` (UBERON:0000922, 12 classes) added to excluded_branches, and traverse.py changed to READ excluded_branches from this file instead of hardcoding the agency root -- the file had been describing a rule the code did not consult."
+    ],
+    "confirmed_without_change": [
+      "derives from and in taxon as the two load-bearing relations (dropping them costs 2,574 and 359 nodes respectively).",
+      "member of NON-propagating: its 2,343 edges point at US CFR regulatory groupings; propagating would link every nutritive sweetener to every other. Retained as the section 6 rollup source.",
+      "has food substance analog NON-propagating: asserts `imitation blue cheese -> blue cheese` and `egg material analog -> egg food product`. Propagating would tell a milk-avoider that imitation cheese contains milk, steering them away from the safe substitute. The relation is also asserted in both directions for some pairs and includes `cheese analog, dairy-based`, so it is unreliable either way.",
+      "output of / is specified output of NON-propagating: they point at processes, not ingredients."
+    ]
+  },
+  "ontology_version": "2025-12-30",
+  "generated_by": "build/build_relation_policy.py",
+  "direction_semantics": {
+    "inverse": "traverse object -> subject. The relation is asserted product -> source, so avoidance travels backwards along it.",
+    "forward": "traverse subject -> object. The relation is already asserted in the direction avoidance travels.",
+    "note": "No relation is bidirectional. 'both' would permit product -> source -> sibling product, which is the ascend-then-redescend failure in another form."
+  },
+  "hierarchy_traversal": {
+    "property": "rdfs:subClassOf",
+    "direction": "inverse",
+    "rationale": "descend to subclasses only. Ascending is forbidden by the section 2 invariant; see build/traverse.py."
+  },
+  "terminal_namespaces": [
+    {
+      "namespace": "CHEBI",
+      "rule": "reachable but not expanded",
+      "reason": "spec target granularity is the ingredient label. A ChEBI class may be reached when a food product points at it (brown sugar composed primarily of sucrose; maltodextrin exists ONLY as CHEBI:25140 and is a real label item), but traversal stops there rather than descending into molecular structure. The boundary is ingredient-label granularity, not the ontology border."
+    }
+  ],
+  "excluded_branches": [
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03400361",
+      "label": "agency food product type",
+      "size": 6074,
+      "reason": "parallel regulatory classification vocabularies (EFSA FoodEx2, US CFR, EC, CCPR). '00030 - cereal grains' alone groups wheat, maize, rye, barley and rice, so traversing this branch leaks corn into wheat without ever ascending the food hierarchy. See audit F10."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/UBERON_0000922",
+      "label": "embryo",
+      "size": 12,
+      "reason": "UBERON developmental stages -- morula, blastula, gastrula, neurula, 2/4/8-cell stage. FoodOn parents `embryo` under `animal egg`, which is defensible biologically: an egg does contain one. But these are stages of development, not things that appear on a plate or a label, and they are the only non-food members of the animal egg subtree. Excluded when `animal egg` was added as a root for the `egg` query, so that adding quail, goose and ostrich egg did not also add 12 embryology classes. Whole branch is UBERON and 12 classes; no food class sits under it.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10"
+    }
+  ],
+  "propagating_relations": [
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0001000",
+      "curie": "RO:0001000",
+      "label": "derives from",
+      "usage_count": 3296,
+      "direction": "inverse",
+      "confidence": "high",
+      "evidence": "exercised by the golden set",
+      "rationale": "core derivation: product derives from source organism/material"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002162",
+      "curie": "RO:0002162",
+      "label": "in taxon",
+      "usage_count": 3082,
+      "direction": "inverse",
+      "confidence": "high",
+      "evidence": "exercised by the golden set",
+      "rationale": "only systematic bridge from FoodOn classes into the NCBITaxon backbone; required for class-level botanical queries"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/FOODON_00001563",
+      "curie": "FOODON:00001563",
+      "label": "has defining ingredient",
+      "usage_count": 313,
+      "direction": "inverse",
+      "confidence": "high",
+      "evidence": "exercised by the golden set",
+      "rationale": "has defining ingredient: strawberry wine -> strawberry. Direct composition"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/FOODON_00002420",
+      "curie": "FOODON:00002420",
+      "label": "has ingredient",
+      "usage_count": 145,
+      "direction": "inverse",
+      "confidence": "high",
+      "evidence": "exercised by the golden set",
+      "rationale": "has ingredient: direct composition"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/BFO_0000050",
+      "curie": "BFO:0000050",
+      "label": "part_of",
+      "usage_count": 63,
+      "direction": "inverse",
+      "confidence": "medium",
+      "evidence": "exercised by the golden set",
+      "rationale": "part_of: traverse whole -> part. Was drafted as `forward` on the reasoning that part->whole is the direction avoidance travels; that was wrong and measurably so. Forward made a soy query return lobster and its 73-node subtree via `soybean oil (flavored with extract from lobster shell) part_of lobster`. Inverse is correct: avoiding lobster should flag that oil, avoiding soy should not flag lobster"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/BFO_0000051",
+      "curie": "BFO:0000051",
+      "label": "has_part",
+      "usage_count": 46,
+      "direction": "inverse",
+      "confidence": "medium",
+      "evidence": "exercised by the golden set",
+      "rationale": "has_part: whole -> part. Composition, but 411 of 483 have anonymous fillers and are not edge-able"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002202",
+      "curie": "RO:0002202",
+      "label": "develops_from",
+      "usage_count": 33,
+      "direction": "inverse",
+      "confidence": "medium",
+      "evidence": "untested - no effect on any golden query as of build/policy_sensitivity.py 2026-09-09",
+      "rationale": "develops_from: mostly PO plant-anatomy, but genuinely a derivation"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0003001",
+      "curie": "RO:0003001",
+      "label": "produced by",
+      "usage_count": 16,
+      "direction": "inverse",
+      "confidence": "high",
+      "evidence": "untested - no effect on any golden query as of build/policy_sensitivity.py 2026-09-09",
+      "rationale": "produced by: food produced by an organism"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/OBI_0000293",
+      "curie": "OBI:0000293",
+      "label": "has specified input",
+      "usage_count": 11,
+      "direction": "inverse",
+      "confidence": "medium",
+      "evidence": "untested - no effect on any golden query as of build/policy_sensitivity.py 2026-09-09",
+      "rationale": "has specified input: process input becomes part of the output"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002233",
+      "curie": "RO:0002233",
+      "label": "has input",
+      "usage_count": 9,
+      "direction": "inverse",
+      "confidence": "medium",
+      "evidence": "untested - no effect on any golden query as of build/policy_sensitivity.py 2026-09-09",
+      "rationale": "has input: bean flour -> bean (dried). Derivation-like"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0009001",
+      "curie": "RO:0009001",
+      "label": "has substance added",
+      "usage_count": 5,
+      "direction": "inverse",
+      "confidence": "high",
+      "evidence": "untested - no effect on any golden query as of build/policy_sensitivity.py 2026-09-09",
+      "rationale": "has substance added: lasagne -> cheese food product. Direct composition"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002473",
+      "curie": "RO:0002473",
+      "label": "composed primarily of",
+      "usage_count": 4,
+      "direction": "inverse",
+      "confidence": "high",
+      "evidence": "untested - no effect on any golden query as of build/policy_sensitivity.py 2026-09-09",
+      "rationale": "composed primarily of: brown sugar -> sucrose. Targets are ChEBI, so gated by the label-granularity boundary"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002160",
+      "curie": "RO:0002160",
+      "label": "only_in_taxon",
+      "usage_count": 2,
+      "direction": "inverse",
+      "confidence": "medium",
+      "evidence": "untested - no effect on any golden query as of build/policy_sensitivity.py 2026-09-09",
+      "rationale": "only_in_taxon: taxon restriction, same role as in taxon"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0009003",
+      "curie": "RO:0009003",
+      "label": "immersed in",
+      "usage_count": 1,
+      "direction": "inverse",
+      "confidence": "low",
+      "evidence": "untested - no effect on any golden query as of build/policy_sensitivity.py 2026-09-09",
+      "rationale": "immersed in: 1 edge (lasagne -> packed in gravy or sauce). Kept for recall, low confidence"
+    }
+  ],
+  "non_propagating_relations": [
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002350",
+      "curie": "RO:0002350",
+      "label": "member of",
+      "usage_count": 2343,
+      "reason": "member of: 2,343 edges pointing almost entirely at US CFR regulatory groupings. A classification facet, not composition -- propagating it would link every nutritive sweetener to every other. Retained as the primary input to the section 6 functional rollup"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0000086",
+      "curie": "RO:0000086",
+      "label": "has quality",
+      "usage_count": 1800,
+      "reason": "has quality: quality annotation, not composition"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002351",
+      "curie": "RO:0002351",
+      "label": "has member",
+      "usage_count": 292,
+      "reason": "has member: inverse of member of, same reasoning"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0001025",
+      "curie": "RO:0001025",
+      "label": "located_in",
+      "usage_count": 67,
+      "reason": "located_in: geography (GAZ)"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002353",
+      "curie": "RO:0002353",
+      "label": "output of",
+      "usage_count": 61,
+      "reason": "output of: points at a process (food (canned) -> food canning), not an ingredient"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/OBI_0000312",
+      "curie": "OBI:0000312",
+      "label": "is specified output of",
+      "usage_count": 55,
+      "reason": "is specified output of: points at a process"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/FOODON_00001301",
+      "curie": "FOODON:00001301",
+      "label": "has food substance analog",
+      "usage_count": 38,
+      "reason": "has food substance analog: imitation peanut butter -> peanut butter. MUST NOT propagate -- an analog is defined by NOT containing the thing it imitates. Surfaced in the UI as 'related, verify separately', never as containment"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/OBI_0000299",
+      "curie": "OBI:0000299",
+      "label": "has specified output",
+      "usage_count": 27,
+      "reason": "has specified output: process output, wrong direction for containment"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/HANCESTRO_0308",
+      "curie": "HANCESTRO:0308",
+      "label": "hasCountryOfOrigin",
+      "usage_count": 11,
+      "reason": "hasCountryOfOrigin: geography"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0009004",
+      "curie": "RO:0009004",
+      "label": "has consumer",
+      "usage_count": 10,
+      "reason": "has consumer: who eats it, not what is in it"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0000053",
+      "curie": "RO:0000053",
+      "label": "has characteristic",
+      "usage_count": 8,
+      "reason": "has characteristic: quality annotation"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0000056",
+      "curie": "RO:0000056",
+      "label": "participates_in",
+      "usage_count": 7,
+      "reason": "participates_in: process participation"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/IAO_0000136",
+      "curie": "IAO:0000136",
+      "label": "is about",
+      "usage_count": 4,
+      "reason": "is about: metadata"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002219",
+      "curie": "RO:0002219",
+      "label": "surrounded by",
+      "usage_count": 3,
+      "reason": "surrounded by: spatial, not compositional"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0000057",
+      "curie": "RO:0000057",
+      "label": "has_participant",
+      "usage_count": 3,
+      "reason": "has_participant: process participation"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002170",
+      "curie": "RO:0002170",
+      "label": "connected to",
+      "usage_count": 1,
+      "reason": "connected to: spatial"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/RO_0002234",
+      "curie": "RO:0002234",
+      "label": "has output",
+      "usage_count": 1,
+      "reason": "has output: process output"
+    },
+    {
+      "property": "http://purl.obolibrary.org/obo/BFO_0000062",
+      "curie": "BFO:0000062",
+      "label": "preceded_by",
+      "usage_count": 1,
+      "reason": "preceded_by: temporal"
+    }
+  ],
+  "unclassified": []
+}

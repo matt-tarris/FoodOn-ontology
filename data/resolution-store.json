@@ -1,0 +1,620 @@
+{
+  "version": "2026-09-10",
+  "resolver_version": "1.0.0",
+  "ontology_version": "2025-12-30",
+  "note": "Only terms the deterministic stage could not settle. Terms absent here are resolved live by build/resolve.py on lexical + structural evidence.",
+  "entries": {
+    "nightshade": {
+      "query": "nightshade",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03414934"
+      ],
+      "root_labels": [
+        "solanaceae plant"
+      ],
+      "confidence": "high",
+      "rationale": "No lexical route exists: no FoodOn label or synonym contains 'nightshade' except unrelated plants (malabar nightshade, black nightshade). Nightshade is the culinary name for Solanaceae. Root expansion pairs `solanaceae plant` with NCBITaxon `Solanaceae` automatically, so either resolves to the same 480-node graph.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "nightshades": {
+      "query": "nightshades",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03414934"
+      ],
+      "root_labels": [
+        "solanaceae plant"
+      ],
+      "confidence": "high",
+      "rationale": "No lexical route exists: no FoodOn label or synonym contains 'nightshade' except unrelated plants (malabar nightshade, black nightshade). Nightshade is the culinary name for Solanaceae. Root expansion pairs `solanaceae plant` with NCBITaxon `Solanaceae` automatically, so either resolves to the same 480-node graph.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "solanaceae": {
+      "query": "solanaceae",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03414934"
+      ],
+      "root_labels": [
+        "solanaceae plant"
+      ],
+      "confidence": "high",
+      "rationale": "No lexical route exists: no FoodOn label or synonym contains 'nightshade' except unrelated plants (malabar nightshade, black nightshade). Nightshade is the culinary name for Solanaceae. Root expansion pairs `solanaceae plant` with NCBITaxon `Solanaceae` automatically, so either resolves to the same 480-node graph.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "soy": {
+      "query": "soy",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411452"
+      ],
+      "root_labels": [
+        "soybean plant"
+      ],
+      "confidence": "high",
+      "rationale": "'soy' and 'soya' appear on no FoodOn label or synonym. Glycine max is the source organism; `soybean plant` (closure 125) is the source-form class.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "soya": {
+      "query": "soya",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411452"
+      ],
+      "root_labels": [
+        "soybean plant"
+      ],
+      "confidence": "high",
+      "rationale": "'soy' and 'soya' appear on no FoodOn label or synonym. Glycine max is the source organism; `soybean plant` (closure 125) is the source-form class.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "soybean": {
+      "query": "soybean",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411452"
+      ],
+      "root_labels": [
+        "soybean plant"
+      ],
+      "confidence": "high",
+      "rationale": "'soy' and 'soya' appear on no FoodOn label or synonym. Glycine max is the source organism; `soybean plant` (closure 125) is the source-form class.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "soja": {
+      "query": "soja",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411452"
+      ],
+      "root_labels": [
+        "soybean plant"
+      ],
+      "confidence": "high",
+      "rationale": "'soy' and 'soya' appear on no FoodOn label or synonym. Glycine max is the source organism; `soybean plant` (closure 125) is the source-form class.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "egg": {
+      "query": "egg",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03420194",
+        "http://purl.obolibrary.org/obo/FOODON_03316061",
+        "http://purl.obolibrary.org/obo/FOODON_02010002"
+      ],
+      "root_labels": [
+        "egg or egg component",
+        "chicken egg",
+        "animal egg"
+      ],
+      "confidence": "high",
+      "rationale": "Lexically ambiguous between `chicken egg` (closure 291) and `egg food product` (72). Resolved to three classes that cover different fractions of the same allergen and none of which subsumes another: `egg or egg component` (yolk and white), `chicken egg`, and `animal egg`. The third was added 2026-09-10 after the unionOf extraction fix: `animal egg` had been reachable only through the inverted edge `animal egg is_a shelled egg`, and once that was corrected the query lost `quail egg`, `goose egg`, `ostrich egg` and `animal roe` -- a false negative on a FALCPA top-9 allergen. Egg allergy is to the egg proteins, which every bird egg carries, so the species-spanning class belongs in the roots. The 12 UBERON embryology classes that also sit under `animal egg` are excluded by config/relation_policy.json rather than by narrowing this root.",
+      "note": "multi-root by design: the two classes cover different fractions of the same allergen",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-10",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "tree nut": {
+      "query": "tree nut",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411213",
+        "http://purl.obolibrary.org/obo/FOODON_00001172"
+      ],
+      "root_labels": [
+        "nut producing plant",
+        "nut food product"
+      ],
+      "confidence": "high",
+      "rationale": "FoodOn's own `tree nut` class is a stub: its closure is 2 (itself and `almond kernel (raw)`), so the lexically perfect match is structurally useless. `nut producing plant` (385) reaches all eight major tree nuts - almond, cashew, walnut, hazelnut, pistachio, pecan, macadamia, brazil - and `nut food product` (538) adds the product side.",
+      "note": "the clearest case for the store: lexical resolution succeeded and was wrong",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "tree nuts": {
+      "query": "tree nuts",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411213",
+        "http://purl.obolibrary.org/obo/FOODON_00001172"
+      ],
+      "root_labels": [
+        "nut producing plant",
+        "nut food product"
+      ],
+      "confidence": "high",
+      "rationale": "FoodOn's own `tree nut` class is a stub: its closure is 2 (itself and `almond kernel (raw)`), so the lexically perfect match is structurally useless. `nut producing plant` (385) reaches all eight major tree nuts - almond, cashew, walnut, hazelnut, pistachio, pecan, macadamia, brazil - and `nut food product` (538) adds the product side.",
+      "note": "the clearest case for the store: lexical resolution succeeded and was wrong",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "treenut": {
+      "query": "treenut",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411213",
+        "http://purl.obolibrary.org/obo/FOODON_00001172"
+      ],
+      "root_labels": [
+        "nut producing plant",
+        "nut food product"
+      ],
+      "confidence": "high",
+      "rationale": "FoodOn's own `tree nut` class is a stub: its closure is 2 (itself and `almond kernel (raw)`), so the lexically perfect match is structurally useless. `nut producing plant` (385) reaches all eight major tree nuts - almond, cashew, walnut, hazelnut, pistachio, pecan, macadamia, brazil - and `nut food product` (538) adds the product side.",
+      "note": "the clearest case for the store: lexical resolution succeeded and was wrong",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "gluten": {
+      "query": "gluten",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312",
+        "http://purl.obolibrary.org/obo/FOODON_03411230",
+        "http://purl.obolibrary.org/obo/FOODON_03411313",
+        "http://purl.obolibrary.org/obo/FOODON_03411358",
+        "http://purl.obolibrary.org/obo/FOODON_03414319"
+      ],
+      "root_labels": [
+        "wheat plant",
+        "barley plant",
+        "rye plant",
+        "triticale plant",
+        "oat plant"
+      ],
+      "confidence": "high",
+      "rationale": "FoodOn's `gluten` class has a closure of 1. Gluten is not one organism: the avoidance-relevant answer is the gluten-containing grains. Wheat (624), barley (47), rye (26), triticale (6) and oat (40).",
+      "note": "OATS ARE INCLUDED, by decision of Matt 2026-09-09: oats are treated as gluten-containing unless specifically labelled gluten-free. This is the stricter, recall-first reading and it is a policy choice, not a botanical claim - oats contain avenin rather than gluten, and the real risk is cross-contamination in milling and transport. THE GLUTEN-FREE-OAT EXCEPTION CANNOT BE EXPRESSED IN THIS GRAPH: FoodOn has no gluten-free oat class, and its `gluten free claim` class is an isolated labelling facet with nothing pointing at it. So certified gluten-free oats must be handled downstream at the product level, where the label is visible. The graph's claim is about oats as an ingredient, not about any given package.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "gluten-containing grains": {
+      "query": "gluten-containing grains",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312",
+        "http://purl.obolibrary.org/obo/FOODON_03411230",
+        "http://purl.obolibrary.org/obo/FOODON_03411313",
+        "http://purl.obolibrary.org/obo/FOODON_03411358",
+        "http://purl.obolibrary.org/obo/FOODON_03414319"
+      ],
+      "root_labels": [
+        "wheat plant",
+        "barley plant",
+        "rye plant",
+        "triticale plant",
+        "oat plant"
+      ],
+      "confidence": "high",
+      "rationale": "FoodOn's `gluten` class has a closure of 1. Gluten is not one organism: the avoidance-relevant answer is the gluten-containing grains. Wheat (624), barley (47), rye (26), triticale (6) and oat (40).",
+      "note": "OATS ARE INCLUDED, by decision of Matt 2026-09-09: oats are treated as gluten-containing unless specifically labelled gluten-free. This is the stricter, recall-first reading and it is a policy choice, not a botanical claim - oats contain avenin rather than gluten, and the real risk is cross-contamination in milling and transport. THE GLUTEN-FREE-OAT EXCEPTION CANNOT BE EXPRESSED IN THIS GRAPH: FoodOn has no gluten-free oat class, and its `gluten free claim` class is an isolated labelling facet with nothing pointing at it. So certified gluten-free oats must be handled downstream at the product level, where the label is visible. The graph's claim is about oats as an ingredient, not about any given package.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "gluten containing grains": {
+      "query": "gluten containing grains",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312",
+        "http://purl.obolibrary.org/obo/FOODON_03411230",
+        "http://purl.obolibrary.org/obo/FOODON_03411313",
+        "http://purl.obolibrary.org/obo/FOODON_03411358",
+        "http://purl.obolibrary.org/obo/FOODON_03414319"
+      ],
+      "root_labels": [
+        "wheat plant",
+        "barley plant",
+        "rye plant",
+        "triticale plant",
+        "oat plant"
+      ],
+      "confidence": "high",
+      "rationale": "FoodOn's `gluten` class has a closure of 1. Gluten is not one organism: the avoidance-relevant answer is the gluten-containing grains. Wheat (624), barley (47), rye (26), triticale (6) and oat (40).",
+      "note": "OATS ARE INCLUDED, by decision of Matt 2026-09-09: oats are treated as gluten-containing unless specifically labelled gluten-free. This is the stricter, recall-first reading and it is a policy choice, not a botanical claim - oats contain avenin rather than gluten, and the real risk is cross-contamination in milling and transport. THE GLUTEN-FREE-OAT EXCEPTION CANNOT BE EXPRESSED IN THIS GRAPH: FoodOn has no gluten-free oat class, and its `gluten free claim` class is an isolated labelling facet with nothing pointing at it. So certified gluten-free oats must be handled downstream at the product level, where the label is visible. The graph's claim is about oats as an ingredient, not about any given package.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "molluscan shellfish": {
+      "query": "molluscan shellfish",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03412112"
+      ],
+      "root_labels": [
+        "mollusc"
+      ],
+      "confidence": "high",
+      "rationale": "`mollusc` (closure 480) is the correct class. Note FoodOn keeps molluscs and crustaceans separate, matching EU labelling which treats them as distinct allergens; `shellfish species` (798) spans both and is the wrong grain if the user means molluscs specifically.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "mollusc": {
+      "query": "mollusc",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03412112"
+      ],
+      "root_labels": [
+        "mollusc"
+      ],
+      "confidence": "high",
+      "rationale": "`mollusc` (closure 480) is the correct class. Note FoodOn keeps molluscs and crustaceans separate, matching EU labelling which treats them as distinct allergens; `shellfish species` (798) spans both and is the wrong grain if the user means molluscs specifically.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "molluscs": {
+      "query": "molluscs",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03412112"
+      ],
+      "root_labels": [
+        "mollusc"
+      ],
+      "confidence": "high",
+      "rationale": "`mollusc` (closure 480) is the correct class. Note FoodOn keeps molluscs and crustaceans separate, matching EU labelling which treats them as distinct allergens; `shellfish species` (798) spans both and is the wrong grain if the user means molluscs specifically.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "mollusk": {
+      "query": "mollusk",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03412112"
+      ],
+      "root_labels": [
+        "mollusc"
+      ],
+      "confidence": "high",
+      "rationale": "`mollusc` (closure 480) is the correct class. Note FoodOn keeps molluscs and crustaceans separate, matching EU labelling which treats them as distinct allergens; `shellfish species` (798) spans both and is the wrong grain if the user means molluscs specifically.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "shellfish (mollusc)": {
+      "query": "shellfish (mollusc)",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03412112"
+      ],
+      "root_labels": [
+        "mollusc"
+      ],
+      "confidence": "high",
+      "rationale": "`mollusc` (closure 480) is the correct class. Note FoodOn keeps molluscs and crustaceans separate, matching EU labelling which treats them as distinct allergens; `shellfish species` (798) spans both and is the wrong grain if the user means molluscs specifically.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "paprika": {
+      "query": "paprika",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03301223",
+        "http://purl.obolibrary.org/obo/FOODON_03316348"
+      ],
+      "root_labels": [
+        "paprika (ground)",
+        "paprika puree"
+      ],
+      "confidence": "medium",
+      "rationale": "Both paprika forms FoodOn models, each a leaf (closure 1). Correct but small: paprika is an endpoint, so an avoidance query returns little. Its value in this project is as the target of a nightshade query, which now reaches it via the repaired `hungarian wax pepper food product -> hungarian wax pepper plant` edge.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "edamame": {
+      "query": "edamame",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00002809"
+      ],
+      "root_labels": [
+        "edamame"
+      ],
+      "confidence": "high",
+      "rationale": "Genuine leaf, closure 1 - confirmed rather than corrected. Flagged for review only because low closure is indistinguishable from a stub category without human judgement.",
+      "note": "a soy query reaches edamame; the reverse does not hold, by the no-ascent invariant",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "sulphites": {
+      "query": "sulphites",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/CHEBI_26823"
+      ],
+      "root_labels": [
+        "sulfites"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models sulphites only as ChEBI chemical classes: `sulfites` -> `sulfite salt` -> `sodium sulfite`, closure 2 as a root. There is no derivative structure to traverse because sulphites are added, not derived.",
+      "note": "an honest low-yield resolution. The avoidance answer for sulphites is label-based, not ontology-based, and the UI should say so rather than implying the two-node graph is the whole picture.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "sulfites": {
+      "query": "sulfites",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/CHEBI_26823"
+      ],
+      "root_labels": [
+        "sulfites"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models sulphites only as ChEBI chemical classes: `sulfites` -> `sulfite salt` -> `sodium sulfite`, closure 2 as a root. There is no derivative structure to traverse because sulphites are added, not derived.",
+      "note": "an honest low-yield resolution. The avoidance answer for sulphites is label-based, not ontology-based, and the UI should say so rather than implying the two-node graph is the whole picture.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "sulphite": {
+      "query": "sulphite",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/CHEBI_26823"
+      ],
+      "root_labels": [
+        "sulfites"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models sulphites only as ChEBI chemical classes: `sulfites` -> `sulfite salt` -> `sodium sulfite`, closure 2 as a root. There is no derivative structure to traverse because sulphites are added, not derived.",
+      "note": "an honest low-yield resolution. The avoidance answer for sulphites is label-based, not ontology-based, and the UI should say so rather than implying the two-node graph is the whole picture.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "sulfite": {
+      "query": "sulfite",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/CHEBI_26823"
+      ],
+      "root_labels": [
+        "sulfites"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models sulphites only as ChEBI chemical classes: `sulfites` -> `sulfite salt` -> `sodium sulfite`, closure 2 as a root. There is no derivative structure to traverse because sulphites are added, not derived.",
+      "note": "an honest low-yield resolution. The avoidance answer for sulphites is label-based, not ontology-based, and the UI should say so rather than implying the two-node graph is the whole picture.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "sulphur dioxide": {
+      "query": "sulphur dioxide",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/CHEBI_26823"
+      ],
+      "root_labels": [
+        "sulfites"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models sulphites only as ChEBI chemical classes: `sulfites` -> `sulfite salt` -> `sodium sulfite`, closure 2 as a root. There is no derivative structure to traverse because sulphites are added, not derived.",
+      "note": "an honest low-yield resolution. The avoidance answer for sulphites is label-based, not ontology-based, and the UI should say so rather than implying the two-node graph is the whole picture.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "sulfur dioxide": {
+      "query": "sulfur dioxide",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/CHEBI_26823"
+      ],
+      "root_labels": [
+        "sulfites"
+      ],
+      "confidence": "medium",
+      "rationale": "FoodOn models sulphites only as ChEBI chemical classes: `sulfites` -> `sulfite salt` -> `sodium sulfite`, closure 2 as a root. There is no derivative structure to traverse because sulphites are added, not derived.",
+      "note": "an honest low-yield resolution. The avoidance answer for sulphites is label-based, not ontology-based, and the UI should say so rather than implying the two-node graph is the whole picture.",
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "mammalian meat": {
+      "query": "mammalian meat",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411134"
+      ],
+      "root_labels": [
+        "mammal"
+      ],
+      "confidence": "high",
+      "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "alpha-gal": {
+      "query": "alpha-gal",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411134"
+      ],
+      "root_labels": [
+        "mammal"
+      ],
+      "confidence": "high",
+      "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "alpha gal": {
+      "query": "alpha gal",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411134"
+      ],
+      "root_labels": [
+        "mammal"
+      ],
+      "confidence": "high",
+      "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "mammalian meat (alpha-gal)": {
+      "query": "mammalian meat (alpha-gal)",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411134"
+      ],
+      "root_labels": [
+        "mammal"
+      ],
+      "confidence": "high",
+      "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
+    "red meat": {
+      "query": "red meat",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411134"
+      ],
+      "root_labels": [
+        "mammal"
+      ],
+      "confidence": "high",
+      "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
+      "note": null,
+      "reviewed_by": "Claude (offline pass)",
+      "reviewed_date": "2026-09-09",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    }
+  }
+}

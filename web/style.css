@@ -1,0 +1,206 @@
+:root{
+  --bg:#fbfaf8; --panel:#fff; --ink:#1b1a18; --muted:#6b6862; --line:#e3dfd8;
+  --accent:#7a4b17;
+  --isa:#9a958c; --derives:#c9803a; --ingredient:#5b8a72; --taxon:#5f7fa6;
+  --part:#8a6fa8; --repair:#c0392b; --override:#b8860b;
+  --root:#2f2b26; --convergent:#c9803a; --mined:#a3428f;
+  /* Node fills carry ROLE, edges carry RELATION. The fills are deliberately less
+     saturated than any edge colour so a relation always reads on top of a node
+     rather than competing with it. Four states separable at 6px: near-black root,
+     muted brass organism, muted sage derivative, unfilled ring for a grouping class. */
+  --n-organism:#c9a24a; --n-derivative:#6fa189; --n-category:#5f8d78;
+  --label-ink:#3d3a34;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);
+  font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#root{height:100vh;display:flex;flex-direction:column}
+
+header{padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel);
+  display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+h1{margin:0;font-size:15px;font-weight:650;letter-spacing:-.01em;white-space:nowrap}
+h1 span{color:var(--muted);font-weight:400}
+form{display:flex;gap:8px;flex:1;min-width:280px;max-width:560px}
+input[type=text]{flex:1;padding:8px 12px;border:1px solid var(--line);border-radius:7px;
+  font:inherit;background:#fff}
+input[type=text]:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+button{padding:8px 15px;border:1px solid var(--line);border-radius:7px;background:#fff;
+  font:inherit;cursor:pointer}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+button:disabled{opacity:.5;cursor:default}
+.examples{display:flex;gap:6px;flex-wrap:wrap}
+.examples button{padding:3px 9px;font-size:12px;border-radius:20px;color:var(--muted)}
+
+main{flex:1;display:flex;min-height:0}
+/* overflow:hidden matters: the closed drawer is translated right by its own width,
+   and without clipping it lands on top of the side panel instead of out of view */
+.canvas{flex:1;position:relative;min-width:0;display:flex;overflow:hidden}
+.graphwrap{flex:1;position:relative;min-width:0;min-height:0}
+/* scoped to the graph: an unscoped svg rule also inflated the magnifier icon */
+.graphwrap > svg{width:100%;height:100%;display:block;cursor:grab}
+.graphwrap > svg:active{cursor:grabbing}
+
+aside{width:330px;border-left:1px solid var(--line);background:var(--panel);
+  overflow-y:auto;padding:16px;flex-shrink:0}
+aside h2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+  margin:0 0 8px}
+aside section{margin-bottom:20px}
+
+.res{border:1px solid var(--line);border-radius:9px;padding:12px;background:#fff}
+.res .q{font-size:16px;font-weight:600;margin-bottom:2px}
+.res .roots{margin:8px 0 0}
+.res .root{display:flex;justify-content:space-between;gap:8px;padding:5px 0;
+  border-top:1px dashed var(--line);font-size:13px}
+.res .root code{font-size:11px;color:var(--muted)}
+
+/* ---- clickable IRI ---- */
+.irirow{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+.irirow.compact{gap:4px}
+a.iri{display:inline-flex;align-items:baseline;gap:2px;text-decoration:none;
+  color:var(--accent);border-bottom:1px solid transparent}
+a.iri code{font-size:11.5px;color:inherit;word-break:break-all}
+.irirow.compact a.iri code{font-size:11px}
+a.iri:hover{border-bottom-color:var(--accent)}
+a.iri:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+a.iri .ext{font-size:9px;opacity:.75;transform:translateY(-1px)}
+.copyiri{border:1px solid var(--line);background:#fff;color:var(--muted);
+  font:inherit;font-size:10px;line-height:1.5;padding:1px 6px;border-radius:5px;
+  cursor:pointer;flex:0 0 auto}
+.copyiri:hover{color:var(--ink);border-color:var(--muted)}
+
+/* ---- reported-not-traversed claim groups ---- */
+.claimhead{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}
+.claimhead span:last-child{margin-left:auto;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;
+  border:1px solid var(--line);color:var(--muted);background:#fafafa;
+  font-variant-numeric:tabular-nums}
+.pill.high{color:#2c6e49;border-color:#bcdccb;background:#f2f9f5}
+.pill.medium{color:#8a6d1f;border-color:#e6d9ae;background:#fdfaf0}
+.pill.low{color:#9a3d2f;border-color:#e8c5bd;background:#fdf3f1}
+.warn{margin-top:10px;padding:9px 11px;border-radius:8px;font-size:12.5px;
+  background:#fdf6ec;border:1px solid #edd9b8;color:#7a5a1e}
+.note{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.stat{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff}
+.stat b{display:block;font-size:19px;font-weight:650;line-height:1.2;
+  font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;color:var(--muted)}
+
+.legend div{display:flex;align-items:center;gap:8px;padding:2.5px 0;font-size:12.5px}
+/* base classes, unscoped: the JSON drawer reuses these so its group headers carry
+   the same swatches as the legend */
+.swatch{width:26px;height:0;border-top-width:2.5px;border-top-style:solid;flex:0 0 26px}
+.dot{width:11px;height:11px;border-radius:50%;flex:0 0 11px}
+/* a grouping class is an unfilled dashed ring, never a filled dot — the one cue
+   that lets a dense drawing be skimmed for "category" vs "actual ingredient" */
+.dot.ring{background:none;border:2px dashed var(--n-category);box-sizing:border-box}
+
+/* ---- lineage breadcrumb ---- */
+/* Answers the question the picture cannot: WHY is this node in my results. The
+   chain is the shortest route back to a query root, with the relation and its
+   provenance named at every hop — an `override` or `repair` hop is where the
+   ontology stopped speaking and a signed decision took over. */
+.lineage{position:absolute;left:12px;right:12px;bottom:12px;z-index:6;
+  display:flex;align-items:center;gap:7px;flex-wrap:nowrap;overflow-x:auto;
+  background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:9px;
+  padding:8px 11px;scrollbar-width:thin;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.lineage::-webkit-scrollbar{height:6px}
+.lineage::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.lchip{flex:0 0 auto;font-size:12px;color:var(--ink);background:#fff;
+  border:1px solid var(--line);border-radius:7px;padding:4px 9px;cursor:pointer;
+  max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font:inherit;font-size:12px}
+.lchip:hover{border-color:var(--accent)}
+.lchip.here{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.lchip.root{border-color:var(--root);color:var(--root);font-weight:600}
+.lchip.category{border-style:dashed;border-color:var(--n-category);color:var(--n-category)}
+.lrel{flex:0 0 auto;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:5px}
+.lrel::before{content:'';width:14px;height:1.5px;background:currentColor;opacity:.7}
+/* provenance is louder than relation here: it is the part a reviewer must see */
+.lrel.repair{color:var(--repair);font-weight:600}
+.lrel.override{color:var(--override);font-weight:600}
+.lrel.mined{color:var(--mined);font-weight:600}
+.lineage .lhint{flex:0 0 auto;font-size:10.5px;color:var(--muted);margin-left:auto;
+  padding-left:10px;white-space:nowrap}
+
+.detail dl{margin:0;font-size:13px}
+.detail dt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--muted);margin-top:10px}
+.detail dd{margin:2px 0 0}
+.detail code{font-size:11.5px;word-break:break-all;color:var(--muted)}
+.detail ul{margin:4px 0 0;padding-left:16px}
+.detail li{margin:2px 0}
+
+.hint{color:var(--muted);font-size:12.5px}
+.annot{border:1px solid var(--line);border-left:3px solid var(--override);
+  border-radius:7px;padding:8px 10px;margin-bottom:7px;font-size:12.5px;background:#fffdf7}
+.annot div{color:var(--muted);margin-top:3px}
+.tooltip{position:absolute;pointer-events:none;background:#241f1a;color:#fff;
+  padding:6px 9px;border-radius:6px;font-size:12px;max-width:260px;z-index:20;
+  opacity:0;transition:opacity .1s}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted)}
+.empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  color:var(--muted);padding:40px}
+.empty p{max-width:400px}
+.controls{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap;z-index:5}
+.controls button{background:rgba(255,255,255,.94);font-size:12px;padding:5px 10px}
+/* sits one row up: the lineage breadcrumb owns the bottom strip. Held at a fixed
+   offset rather than moved on hover, so the controls never shift under the pointer */
+.filters{position:absolute;bottom:60px;left:12px;background:rgba(255,255,255,.94);
+  border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:12.5px;z-index:5}
+.filters label{display:flex;align-items:center;gap:7px;padding:2px 0;cursor:pointer}
+
+/* in-graph search */
+.searchwrap{position:absolute;top:12px;right:12px;z-index:6}
+.iconbtn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.95);
+  font-size:12px;padding:6px 11px}
+.iconbtn .mag{color:var(--muted)}
+.searchbox{width:300px;background:#fff;border:1px solid var(--line);border-radius:9px;
+  box-shadow:0 6px 22px rgba(0,0,0,.09);overflow:hidden}
+.searchrow{display:flex;align-items:center;gap:7px;padding:8px 10px;
+  border-bottom:1px solid var(--line)}
+.searchrow .mag{color:var(--muted);flex:0 0 auto}
+.mag{width:14px;height:14px;flex:0 0 auto;display:inline-block}
+.searchrow input{flex:1;border:0;font:inherit;padding:2px 0;outline:none;background:transparent}
+.searchrow button{border:0;background:transparent;color:var(--muted);padding:2px 4px;
+  font-size:13px;cursor:pointer}
+.searchmeta{padding:6px 11px;font-size:11.5px;color:var(--muted);background:#faf9f7}
+.searchresults{max-height:290px;overflow-y:auto}
+.sresult{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--line);
+  background:#fff;padding:7px 11px;cursor:pointer;font:inherit;border-radius:0}
+.sresult:hover{background:#f6f2ea}
+.slabel{display:block;font-size:12.5px}
+.smeta{display:block;font-size:10.5px;color:var(--muted);margin-top:1px}
+
+/* JSON drawer */
+.drawertab{position:absolute;top:50%;right:0;transform:translateY(-50%);
+  writing-mode:vertical-rl;padding:14px 6px;border-radius:8px 0 0 8px;
+  border-right:0;background:rgba(255,255,255,.96);font-size:11.5px;
+  letter-spacing:.06em;color:var(--muted);z-index:7;display:flex;align-items:center;gap:6px}
+.drawertab:hover{color:var(--ink)}
+.drawertab.open{right:380px}
+.drawertab span{writing-mode:horizontal-tb}
+.drawer{position:absolute;top:0;right:0;bottom:0;width:380px;background:var(--panel);
+  border-left:1px solid var(--line);transform:translateX(100%);
+  transition:transform .22s ease;z-index:6;display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawerhead{padding:12px 14px;border-bottom:1px solid var(--line)}
+.drawerhead b{display:block;font-size:14px}
+.drawerhead .hint{display:block;margin:2px 0 8px}
+.drawerbody{flex:1;overflow-y:auto;padding:10px 12px}
+.drawerbody h3{font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);margin:14px 0 6px}
+.jcopy{font-size:11px;padding:3px 9px;border-radius:6px}
+.drawerbtns{display:flex;gap:6px;flex-wrap:wrap}
+.drawerkey{padding:8px 12px;border-bottom:1px solid var(--line);background:#faf9f7;
+  display:flex;flex-direction:column;gap:2px;max-height:190px;overflow-y:auto}
+.keyrow{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted)}
+.keyrow b{margin-left:auto;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.trunc{margin:0 0 8px;padding:7px 9px;background:#fdf6ec;border:1px solid #edd9b8;
+  border-radius:6px;color:#7a5a1e}
+.jsonfull{margin:0;padding:10px;background:#faf8f5;border:1px solid var(--line);
+  border-radius:6px;font-size:10.5px;line-height:1.5;white-space:pre;overflow-x:auto}
+.jcopy.on{background:var(--accent);color:#fff;border-color:var(--accent)}

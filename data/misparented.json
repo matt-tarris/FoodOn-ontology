@@ -1,0 +1,1557 @@
+{
+  "version": "2026-09-09",
+  "ontology_version": "2025-12-30",
+  "note": "reported for review; re-parenting is never auto-applied",
+  "candidates": [
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004938",
+      "label": "Beefsteak tomato",
+      "current_parents": [
+        "tomato"
+      ],
+      "stem": "beefsteak",
+      "expected_branch": [
+        "beefsteak plant"
+      ],
+      "conflicting_parents": [
+        "tomato"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414325",
+      "label": "Beefsteak tomato cultivar",
+      "current_parents": [
+        "Solanum lycopersicum"
+      ],
+      "stem": "beefsteak",
+      "expected_branch": [
+        "beefsteak plant"
+      ],
+      "conflicting_parents": [
+        "Solanum lycopersicum"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03415005",
+      "label": "apple mint plant",
+      "current_parents": [
+        "mint plant"
+      ],
+      "stem": "apple",
+      "expected_branch": [
+        "apple food product",
+        "apple tree"
+      ],
+      "conflicting_parents": [
+        "mint plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002773",
+      "label": "asparagus bean food product",
+      "current_parents": [
+        "bean food product"
+      ],
+      "stem": "asparagus",
+      "expected_branch": [
+        "asparagus plant"
+      ],
+      "conflicting_parents": [
+        "bean food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411724",
+      "label": "asparagus bean plant",
+      "current_parents": [
+        "cowpea plant"
+      ],
+      "stem": "asparagus",
+      "expected_branch": [
+        "asparagus plant"
+      ],
+      "conflicting_parents": [
+        "cowpea plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03302599",
+      "label": "banana cake",
+      "current_parents": [
+        "wheat based cake food product"
+      ],
+      "stem": "banana",
+      "expected_branch": [
+        "banana food product",
+        "banana plant"
+      ],
+      "conflicting_parents": [
+        "wheat based cake food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412028",
+      "label": "banana passionfruit plant",
+      "current_parents": [
+        "passionflower plant"
+      ],
+      "stem": "banana",
+      "expected_branch": [
+        "banana food product",
+        "banana plant"
+      ],
+      "conflicting_parents": [
+        "passionflower plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000126",
+      "label": "banana pepper",
+      "current_parents": [
+        "serrano pepper",
+        "berry fruit"
+      ],
+      "stem": "banana",
+      "expected_branch": [
+        "banana food product",
+        "banana plant"
+      ],
+      "conflicting_parents": [
+        "berry fruit"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002017",
+      "label": "barley malt beverage",
+      "current_parents": [
+        "grain based alcoholic beverage"
+      ],
+      "stem": "barley",
+      "expected_branch": [
+        "barley food product",
+        "barley plant"
+      ],
+      "conflicting_parents": [
+        "grain based alcoholic beverage"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001653",
+      "label": "blackberry group food product",
+      "current_parents": [
+        "berry food product"
+      ],
+      "stem": "blackberry",
+      "expected_branch": [
+        "blackberry plant"
+      ],
+      "conflicting_parents": [
+        "berry food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03303936",
+      "label": "blueberry muffin mix",
+      "current_parents": [
+        "wheat bread food product"
+      ],
+      "stem": "blueberry",
+      "expected_branch": [
+        "blueberry food product",
+        "blueberry plant"
+      ],
+      "conflicting_parents": [
+        "wheat bread food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411919",
+      "label": "catjang bean plant",
+      "current_parents": [
+        "cowpea plant"
+      ],
+      "stem": "catjang",
+      "expected_branch": [
+        "catjang plant"
+      ],
+      "conflicting_parents": [
+        "cowpea plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003779",
+      "label": "catjang pea",
+      "current_parents": [
+        "cowpea",
+        "seed"
+      ],
+      "stem": "catjang",
+      "expected_branch": [
+        "catjang plant"
+      ],
+      "conflicting_parents": [
+        "cowpea"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03304879",
+      "label": "catnip tea (dry)",
+      "current_parents": [
+        "tea (dry)"
+      ],
+      "stem": "catnip",
+      "expected_branch": [
+        "catnip plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03301206",
+      "label": "century plant juice",
+      "current_parents": [
+        "juice beverage",
+        "agave food product"
+      ],
+      "stem": "century",
+      "expected_branch": [
+        "century plant"
+      ],
+      "conflicting_parents": [
+        "agave food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307870",
+      "label": "chaparral tea (dry)",
+      "current_parents": [
+        "tea (dry)"
+      ],
+      "stem": "chaparral",
+      "expected_branch": [
+        "chaparral plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003653",
+      "label": "chayote",
+      "current_parents": [
+        "gourd food product",
+        "pepo fruit"
+      ],
+      "stem": "chayote",
+      "expected_branch": [
+        "chayote plant"
+      ],
+      "conflicting_parents": [
+        "gourd food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306941",
+      "label": "cherry dill pickle",
+      "current_parents": [
+        "cucumber or gherkin pickle food product"
+      ],
+      "stem": "cherry",
+      "expected_branch": [
+        "cherry food product",
+        "cherry plant"
+      ],
+      "conflicting_parents": [
+        "cucumber or gherkin pickle food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411676",
+      "label": "cherry plum plant",
+      "current_parents": [
+        "plum plant"
+      ],
+      "stem": "cherry",
+      "expected_branch": [
+        "cherry food product",
+        "cherry plant"
+      ],
+      "conflicting_parents": [
+        "plum plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03304637",
+      "label": "chrysanthemum tea (dry)",
+      "current_parents": [
+        "tea (dry)",
+        "herbal infusion"
+      ],
+      "stem": "chrysanthemum",
+      "expected_branch": [
+        "chrysanthemum plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03305095",
+      "label": "cinnamon fern (raw)",
+      "current_parents": [
+        "fern vegetable food product"
+      ],
+      "stem": "cinnamon",
+      "expected_branch": [
+        "cinnamon food product",
+        "cinnamon plant"
+      ],
+      "conflicting_parents": [
+        "fern vegetable food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03305309",
+      "label": "cinnamon fern (salt added)",
+      "current_parents": [
+        "fern vegetable food product"
+      ],
+      "stem": "cinnamon",
+      "expected_branch": [
+        "cinnamon food product",
+        "cinnamon plant"
+      ],
+      "conflicting_parents": [
+        "fern vegetable food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412017",
+      "label": "cinnamon fern plant",
+      "current_parents": [
+        "fern plant"
+      ],
+      "stem": "cinnamon",
+      "expected_branch": [
+        "cinnamon food product",
+        "cinnamon plant"
+      ],
+      "conflicting_parents": [
+        "fern plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414962",
+      "label": "cinnamon rose plant",
+      "current_parents": [
+        "rose plant"
+      ],
+      "stem": "cinnamon",
+      "expected_branch": [
+        "cinnamon food product",
+        "cinnamon plant"
+      ],
+      "conflicting_parents": [
+        "rose plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03303079",
+      "label": "clementine (raw)",
+      "current_parents": [
+        "mandarin orange food product",
+        "orange (raw)"
+      ],
+      "stem": "clementine",
+      "expected_branch": [
+        "clementine plant"
+      ],
+      "conflicting_parents": [
+        "orange (raw)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307821",
+      "label": "coca tea leaves (food product)",
+      "current_parents": [
+        "tea based beverage product",
+        "herbal infusion"
+      ],
+      "stem": "coca",
+      "expected_branch": [
+        "coca plant"
+      ],
+      "conflicting_parents": [
+        "tea based beverage product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307862",
+      "label": "cocklebur tea leaves",
+      "current_parents": [
+        "herbal infusion",
+        "tea based beverage product"
+      ],
+      "stem": "cocklebur",
+      "expected_branch": [
+        "cocklebur plant"
+      ],
+      "conflicting_parents": [
+        "tea based beverage product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002772",
+      "label": "cranberry bean food product",
+      "current_parents": [
+        "bean food product"
+      ],
+      "stem": "cranberry",
+      "expected_branch": [
+        "cranberry food product",
+        "cranberry plant"
+      ],
+      "conflicting_parents": [
+        "bean food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03413328",
+      "label": "date plum plant",
+      "current_parents": [
+        "persimmon plant"
+      ],
+      "stem": "date",
+      "expected_branch": [
+        "date food product",
+        "date plant"
+      ],
+      "conflicting_parents": [
+        "persimmon plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306757",
+      "label": "dill pickle",
+      "current_parents": [
+        "cucumber or gherkin pickle food product"
+      ],
+      "stem": "dill",
+      "expected_branch": [
+        "dill food product",
+        "dill plant"
+      ],
+      "conflicting_parents": [
+        "cucumber or gherkin pickle food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306177",
+      "label": "elderberry juice",
+      "current_parents": [
+        "berry juice"
+      ],
+      "stem": "elderberry",
+      "expected_branch": [
+        "elderberry food product",
+        "elderberry plant"
+      ],
+      "conflicting_parents": [
+        "berry juice"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03303212",
+      "label": "ginger cracker",
+      "current_parents": [
+        "wheat cracker food product"
+      ],
+      "stem": "ginger",
+      "expected_branch": [
+        "ginger food product",
+        "ginger plant"
+      ],
+      "conflicting_parents": [
+        "wheat cracker food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411047",
+      "label": "grain or seed-producing plant",
+      "current_parents": [
+        "whole plant"
+      ],
+      "stem": "grain",
+      "expected_branch": [
+        "grain plant"
+      ],
+      "conflicting_parents": [
+        "whole plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002569",
+      "label": "hibiscus tea (dry)",
+      "current_parents": [
+        "tea (dry)",
+        "vegetable juice food product"
+      ],
+      "stem": "hibiscus",
+      "expected_branch": [
+        "hibiscus plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005516",
+      "label": "hibiscus tea (steeped)",
+      "current_parents": [
+        "tea (steeped)"
+      ],
+      "stem": "hibiscus",
+      "expected_branch": [
+        "hibiscus plant"
+      ],
+      "conflicting_parents": [
+        "tea (steeped)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003089",
+      "label": "hickory nut",
+      "current_parents": [
+        "drupe fruit",
+        "mustard spinach food product"
+      ],
+      "stem": "hickory",
+      "expected_branch": [
+        "hickory tree"
+      ],
+      "conflicting_parents": [
+        "mustard spinach food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03304680",
+      "label": "jasmine tea (dry)",
+      "current_parents": [
+        "tea (dry)"
+      ],
+      "stem": "jasmine",
+      "expected_branch": [
+        "jasmine plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03305595",
+      "label": "lemon grass tea (steeped)",
+      "current_parents": [
+        "tea (steeped)",
+        "herbal infusion"
+      ],
+      "stem": "lemon",
+      "expected_branch": [
+        "lemon food product",
+        "lemon plant"
+      ],
+      "conflicting_parents": [
+        "tea (steeped)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03301908",
+      "label": "lemon tea (dry)",
+      "current_parents": [
+        "tea (dry)"
+      ],
+      "stem": "lemon",
+      "expected_branch": [
+        "lemon food product",
+        "lemon plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005519",
+      "label": "lemon tea (dry, instant)",
+      "current_parents": [
+        "tea (dry, instant)"
+      ],
+      "stem": "lemon",
+      "expected_branch": [
+        "lemon food product",
+        "lemon plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry, instant)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03317159",
+      "label": "lemon tea (no added energy-containing sweetener, powdered)",
+      "current_parents": [
+        "tea (dry, instant)"
+      ],
+      "stem": "lemon",
+      "expected_branch": [
+        "lemon food product",
+        "lemon plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry, instant)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414998",
+      "label": "lemon thyme plant",
+      "current_parents": [
+        "thyme plant"
+      ],
+      "stem": "lemon",
+      "expected_branch": [
+        "lemon food product",
+        "lemon plant"
+      ],
+      "conflicting_parents": [
+        "thyme plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412953",
+      "label": "lemon verbena plant",
+      "current_parents": [
+        "verbena plant"
+      ],
+      "stem": "lemon",
+      "expected_branch": [
+        "lemon food product",
+        "lemon plant"
+      ],
+      "conflicting_parents": [
+        "verbena plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03302725",
+      "label": "mango chutney",
+      "current_parents": [
+        "apple condiment"
+      ],
+      "stem": "mango",
+      "expected_branch": [
+        "mango food product",
+        "mango plant"
+      ],
+      "conflicting_parents": [
+        "apple condiment"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412042",
+      "label": "mango melon plant",
+      "current_parents": [
+        "melon plant"
+      ],
+      "stem": "mango",
+      "expected_branch": [
+        "mango food product",
+        "mango plant"
+      ],
+      "conflicting_parents": [
+        "melon plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307218",
+      "label": "mango melon preserve",
+      "current_parents": [
+        "melon food product"
+      ],
+      "stem": "mango",
+      "expected_branch": [
+        "mango food product",
+        "mango plant"
+      ],
+      "conflicting_parents": [
+        "melon food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004629",
+      "label": "marionberry",
+      "current_parents": [
+        "berry",
+        "blackberry",
+        "drupelet berry"
+      ],
+      "stem": "marionberry",
+      "expected_branch": [
+        "marionberry plant"
+      ],
+      "conflicting_parents": [
+        "berry",
+        "blackberry"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001153",
+      "label": "muskmelon (Cucumis melo) fruit food product",
+      "current_parents": [
+        "melon fruit food product"
+      ],
+      "stem": "muskmelon",
+      "expected_branch": [
+        "muskmelon plant"
+      ],
+      "conflicting_parents": [
+        "melon fruit food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003688",
+      "label": "naranjilla",
+      "current_parents": [
+        "berry fruit",
+        "narangilla food product"
+      ],
+      "stem": "naranjilla",
+      "expected_branch": [
+        "naranjilla plant"
+      ],
+      "conflicting_parents": [
+        "berry fruit"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003585",
+      "label": "nectarine",
+      "current_parents": [
+        "peach",
+        "drupe fruit"
+      ],
+      "stem": "nectarine",
+      "expected_branch": [
+        "nectarine tree"
+      ],
+      "conflicting_parents": [
+        "peach"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003749",
+      "label": "olallieberry",
+      "current_parents": [
+        "berry fruit",
+        "berry"
+      ],
+      "stem": "olallieberry",
+      "expected_branch": [
+        "olallieberry plant"
+      ],
+      "conflicting_parents": [
+        "berry fruit",
+        "berry"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003160",
+      "label": "orange mint",
+      "current_parents": [
+        "mint plant"
+      ],
+      "stem": "orange",
+      "expected_branch": [
+        "orange food product",
+        "orange plant"
+      ],
+      "conflicting_parents": [
+        "mint plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000144",
+      "label": "orange tomato",
+      "current_parents": [
+        "tomato"
+      ],
+      "stem": "orange",
+      "expected_branch": [
+        "orange food product",
+        "orange plant"
+      ],
+      "conflicting_parents": [
+        "tomato"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003710",
+      "label": "pawpaw",
+      "current_parents": [
+        "stone fruit food product",
+        "berry fruit"
+      ],
+      "stem": "pawpaw",
+      "expected_branch": [
+        "pawpaw plant"
+      ],
+      "conflicting_parents": [
+        "berry fruit"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414923",
+      "label": "peach palm plant",
+      "current_parents": [
+        "palm plant"
+      ],
+      "stem": "peach",
+      "expected_branch": [
+        "peach food product",
+        "peach tree"
+      ],
+      "conflicting_parents": [
+        "palm plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003570",
+      "label": "pear tomato",
+      "current_parents": [
+        "tomato"
+      ],
+      "stem": "pear",
+      "expected_branch": [
+        "pear food product",
+        "pear plant"
+      ],
+      "conflicting_parents": [
+        "tomato"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03309583",
+      "label": "pear tomato (canned)",
+      "current_parents": [
+        "tomato (canned)"
+      ],
+      "stem": "pear",
+      "expected_branch": [
+        "pear food product",
+        "pear plant"
+      ],
+      "conflicting_parents": [
+        "tomato (canned)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003313",
+      "label": "pear tomato (raw)",
+      "current_parents": [
+        "tomato (raw)"
+      ],
+      "stem": "pear",
+      "expected_branch": [
+        "pear food product",
+        "pear plant"
+      ],
+      "conflicting_parents": [
+        "tomato (raw)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411107",
+      "label": "pear tomato plant",
+      "current_parents": [
+        "Solanum lycopersicum"
+      ],
+      "stem": "pear",
+      "expected_branch": [
+        "pear food product",
+        "pear plant"
+      ],
+      "conflicting_parents": [
+        "Solanum lycopersicum"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03310966",
+      "label": "pineapple danish pastry",
+      "current_parents": [
+        "wheat based pastry food product"
+      ],
+      "stem": "pineapple",
+      "expected_branch": [
+        "pineapple food product",
+        "pineapple plant"
+      ],
+      "conflicting_parents": [
+        "wheat based pastry food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005319",
+      "label": "pineapple guava",
+      "current_parents": [
+        "berry fruit"
+      ],
+      "stem": "pineapple",
+      "expected_branch": [
+        "pineapple food product",
+        "pineapple plant"
+      ],
+      "conflicting_parents": [
+        "berry fruit"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003073",
+      "label": "pineapple sage leaf",
+      "current_parents": [
+        "sage food product",
+        "leaf"
+      ],
+      "stem": "pineapple",
+      "expected_branch": [
+        "pineapple food product",
+        "pineapple plant"
+      ],
+      "conflicting_parents": [
+        "sage food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002159",
+      "label": "plantain (musa) food product",
+      "current_parents": [
+        "banana food product"
+      ],
+      "stem": "plantain",
+      "expected_branch": [
+        "plantain plant"
+      ],
+      "conflicting_parents": [
+        "banana food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003756",
+      "label": "plum tomato",
+      "current_parents": [
+        "tomato",
+        "berry fruit"
+      ],
+      "stem": "plum",
+      "expected_branch": [
+        "plum plant"
+      ],
+      "conflicting_parents": [
+        "tomato",
+        "berry fruit"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03413742",
+      "label": "plum tomato plant",
+      "current_parents": [
+        "Solanum lycopersicum"
+      ],
+      "stem": "plum",
+      "expected_branch": [
+        "plum plant"
+      ],
+      "conflicting_parents": [
+        "Solanum lycopersicum"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03316559",
+      "label": "poppy-seed cake",
+      "current_parents": [
+        "wheat based cake food product"
+      ],
+      "stem": "poppy",
+      "expected_branch": [
+        "poppy plant"
+      ],
+      "conflicting_parents": [
+        "wheat based cake food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414706",
+      "label": "potato bean plant",
+      "current_parents": [
+        "cowpea family",
+        "bean plant"
+      ],
+      "stem": "potato",
+      "expected_branch": [
+        "potato food product",
+        "potato plant"
+      ],
+      "conflicting_parents": [
+        "cowpea family",
+        "bean plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03302362",
+      "label": "potato cracker",
+      "current_parents": [
+        "wheat cracker food product"
+      ],
+      "stem": "potato",
+      "expected_branch": [
+        "potato food product",
+        "potato plant"
+      ],
+      "conflicting_parents": [
+        "wheat cracker food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414734",
+      "label": "potato orchid plant",
+      "current_parents": [
+        "orchid plant"
+      ],
+      "stem": "potato",
+      "expected_branch": [
+        "potato food product",
+        "potato plant"
+      ],
+      "conflicting_parents": [
+        "orchid plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03302312",
+      "label": "potato roll",
+      "current_parents": [
+        "wheat roll or bun"
+      ],
+      "stem": "potato",
+      "expected_branch": [
+        "potato food product",
+        "potato plant"
+      ],
+      "conflicting_parents": [
+        "wheat roll or bun"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03306897",
+      "label": "potato-flavored chip (puffed)",
+      "current_parents": [
+        "cassava snack food product"
+      ],
+      "stem": "potato",
+      "expected_branch": [
+        "potato food product",
+        "potato plant"
+      ],
+      "conflicting_parents": [
+        "cassava snack food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004563",
+      "label": "radicchio head",
+      "current_parents": [
+        "chicory food product",
+        "rosette"
+      ],
+      "stem": "radicchio",
+      "expected_branch": [
+        "radicchio plant"
+      ],
+      "conflicting_parents": [
+        "chicory food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002203",
+      "label": "rice based alcoholic beverage",
+      "current_parents": [
+        "grain based alcoholic beverage"
+      ],
+      "stem": "rice",
+      "expected_branch": [
+        "rice food product",
+        "rice plant"
+      ],
+      "conflicting_parents": [
+        "grain based alcoholic beverage"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002204",
+      "label": "rice bean food product",
+      "current_parents": [
+        "bean food product"
+      ],
+      "stem": "rice",
+      "expected_branch": [
+        "rice food product",
+        "rice plant"
+      ],
+      "conflicting_parents": [
+        "bean food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411702",
+      "label": "rice bean plant",
+      "current_parents": [
+        "cowpea family",
+        "bean plant"
+      ],
+      "stem": "rice",
+      "expected_branch": [
+        "rice food product",
+        "rice plant"
+      ],
+      "conflicting_parents": [
+        "cowpea family",
+        "bean plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002687",
+      "label": "romaine lettuce head",
+      "current_parents": [
+        "lettuce head (anatomical)",
+        "rosette"
+      ],
+      "stem": "romaine",
+      "expected_branch": [
+        "romaine plant"
+      ],
+      "conflicting_parents": [
+        "lettuce head (anatomical)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307690",
+      "label": "rooibos tea (dry)",
+      "current_parents": [
+        "tea (dry)"
+      ],
+      "stem": "rooibos",
+      "expected_branch": [
+        "rooibos plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003277",
+      "label": "rooibos tea (steeped)",
+      "current_parents": [
+        "tea (steeped)"
+      ],
+      "stem": "rooibos",
+      "expected_branch": [
+        "rooibos plant"
+      ],
+      "conflicting_parents": [
+        "tea (steeped)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307880",
+      "label": "rose black china tea (dry)",
+      "current_parents": [
+        "tea (dry)"
+      ],
+      "stem": "rose",
+      "expected_branch": [
+        "rose food product",
+        "rose plant"
+      ],
+      "conflicting_parents": [
+        "tea (dry)"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002213",
+      "label": "rye based bakery food product",
+      "current_parents": [
+        "grain based bakery food product"
+      ],
+      "stem": "rye",
+      "expected_branch": [
+        "rye food product",
+        "rye plant"
+      ],
+      "conflicting_parents": [
+        "grain based bakery food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003734",
+      "label": "rye kernel",
+      "current_parents": [
+        "sumac food product",
+        "caryopsis fruit"
+      ],
+      "stem": "rye",
+      "expected_branch": [
+        "rye food product",
+        "rye plant"
+      ],
+      "conflicting_parents": [
+        "sumac food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003007",
+      "label": "saskatoon berry",
+      "current_parents": [
+        "berry food product"
+      ],
+      "stem": "saskatoon",
+      "expected_branch": [
+        "saskatoon plant"
+      ],
+      "conflicting_parents": [
+        "berry food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03304102",
+      "label": "sesame chip",
+      "current_parents": [
+        "wheat based snack food product"
+      ],
+      "stem": "sesame",
+      "expected_branch": [
+        "sesame food product",
+        "sesame plant"
+      ],
+      "conflicting_parents": [
+        "wheat based snack food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03316570",
+      "label": "sorrel concentrate",
+      "current_parents": [
+        "roselle food product"
+      ],
+      "stem": "sorrel",
+      "expected_branch": [
+        "sorrel food product",
+        "sorrel plant"
+      ],
+      "conflicting_parents": [
+        "roselle food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003837",
+      "label": "soybean sprout",
+      "current_parents": [
+        "germinated or sprouted seed",
+        "bean sprout"
+      ],
+      "stem": "soybean",
+      "expected_branch": [
+        "soybean food product",
+        "soybean plant"
+      ],
+      "conflicting_parents": [
+        "bean sprout"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03303921",
+      "label": "spearmint leaf",
+      "current_parents": [
+        "mint leaf",
+        "herb food product",
+        "leaf"
+      ],
+      "stem": "spearmint",
+      "expected_branch": [
+        "spearmint plant"
+      ],
+      "conflicting_parents": [
+        "mint leaf"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003719",
+      "label": "squashberry",
+      "current_parents": [
+        "berry fruit"
+      ],
+      "stem": "squashberry",
+      "expected_branch": [
+        "squashberry plant"
+      ],
+      "conflicting_parents": [
+        "berry fruit"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411649",
+      "label": "strawberry guava plant",
+      "current_parents": [
+        "guava plant"
+      ],
+      "stem": "strawberry",
+      "expected_branch": [
+        "strawberry food product",
+        "strawberry plant",
+        "strawberry tree"
+      ],
+      "conflicting_parents": [
+        "guava plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414269",
+      "label": "strawberry raspberry plant",
+      "current_parents": [
+        "raspberry plant"
+      ],
+      "stem": "strawberry",
+      "expected_branch": [
+        "strawberry food product",
+        "strawberry plant",
+        "strawberry tree"
+      ],
+      "conflicting_parents": [
+        "raspberry plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414236",
+      "label": "tamarind plum plant",
+      "current_parents": [
+        "dialium plant"
+      ],
+      "stem": "tamarind",
+      "expected_branch": [
+        "tamarind food product",
+        "tamarind plant"
+      ],
+      "conflicting_parents": [
+        "dialium plant"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00004815",
+      "label": "tepary bean",
+      "current_parents": [
+        "bean",
+        "seed"
+      ],
+      "stem": "tepary",
+      "expected_branch": [
+        "tepary plant"
+      ],
+      "conflicting_parents": [
+        "bean"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307235",
+      "label": "walnut catsup",
+      "current_parents": [
+        "tomato condiment"
+      ],
+      "stem": "walnut",
+      "expected_branch": [
+        "walnut food product",
+        "walnut tree"
+      ],
+      "conflicting_parents": [
+        "tomato condiment"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00002347",
+      "label": "wheat based bakery food product",
+      "current_parents": [
+        "grain based bakery food product"
+      ],
+      "stem": "wheat",
+      "expected_branch": [
+        "wheat food product",
+        "wheat plant"
+      ],
+      "conflicting_parents": [
+        "grain based bakery food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00003434",
+      "label": "whole grain rice kernel",
+      "current_parents": [
+        "rice kernel food product",
+        "caryopsis fruit"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "rice kernel food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03310174",
+      "label": "whole grain rye bread",
+      "current_parents": [
+        "rye bread food product"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "rye bread food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03000279",
+      "label": "whole groat buckwheat flour",
+      "current_parents": [
+        "buckwheat food product"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "buckwheat food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03309855",
+      "label": "whole oats (raw)",
+      "current_parents": [
+        "oat"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "oat"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03301119",
+      "label": "whole wheat bread",
+      "current_parents": [
+        "wheat bread"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "wheat bread"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03302651",
+      "label": "whole wheat cracker",
+      "current_parents": [
+        "wheat cracker food product"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "wheat cracker food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03302471",
+      "label": "whole wheat crispbread",
+      "current_parents": [
+        "wheat bread food product",
+        "crispbread"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "wheat bread food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03307448",
+      "label": "whole wheat food product",
+      "current_parents": [
+        "wheat food product"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "wheat food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00005528",
+      "label": "whole wheat pasta",
+      "current_parents": [
+        "wheat pasta"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "wheat pasta"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03304540",
+      "label": "whole wheat pita bread",
+      "current_parents": [
+        "wheat bread food product"
+      ],
+      "stem": "whole",
+      "expected_branch": [
+        "whole plant"
+      ],
+      "conflicting_parents": [
+        "wheat bread food product"
+      ]
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_00001204",
+      "label": "yam bean food product",
+      "current_parents": [
+        "bean food product",
+        "pulse food product"
+      ],
+      "stem": "yam",
+      "expected_branch": [
+        "yam food product",
+        "yam plant"
+      ],
+      "conflicting_parents": [
+        "bean food product"
+      ]
+    }
+  ]
+}

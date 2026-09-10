@@ -1,0 +1,14 @@
+[
+  {"common":"Corn","uncommon":["maltodextrin","dextrose","high fructose corn syrup","corn starch","modified food starch","citric acid","xanthan gum","dextrin","cyclodextrin","zein","ascorbic acid","erythritol","sorbitol","calcium citrate"]},
+  {"common":"Milk","uncommon":["casein","caseinates","sodium caseinate","calcium caseinate","potassium caseinate","whey protein hydrolysate","whey protein concentrate","lactalbumin","lactoglobulin","nisin","lactic acid starter culture","butterfat","ghee"]},
+  {"common":"Egg","uncommon":["lysozyme","E1105","egg albumen","ovalbumin","ovomucoid","ovotransferrin","dried egg white solids","meringue powder"]},
+  {"common":"Fish","uncommon":["isinglass","fish collagen","fish gelatin","anchovy paste","anchovy extract","surimi","fish sauce"]},
+  {"common":"Shellfish","uncommon":["chitosan","crustacean chitin","cuttlefish ink","squid ink","seafood bouillon base","shrimp paste"]},
+  {"common":"Tree Nuts","uncommon":["pink peppercorn","Schinus terebinthifolius","mahlab","mahlepi","marzipan","gianduja","praline","nut meal","almond paste"]},
+  {"common":"Peanut","uncommon":["arachis oil","peanut flour","peanut meal","mandelonas","beer nuts"]},
+  {"common":"Wheat","uncommon":["wheat glucose syrup","wheat maltodextrin","hydrolyzed wheat protein","seitan","triticale","spelt","farro","semolina","bulgur","kamut","modified wheat starch"]},
+  {"common":"Mammalian Meat (Alpha-Gal)","uncommon":["bovine gelatin","porcine gelatin","animal rennet","carrageenan","bovine tallow","lard"]},
+  {"common":"Sesame","uncommon":["benne","benne seed","gingelly oil","tahini","til","teel","gomasio"]},
+  {"common":"Mustard","uncommon":["mustard flour","mustard meal","mustard seed oleoresin","Brassica alba","Brassica juncea","Sinapis alba"]},
+  {"common":"Soy","uncommon":["textured vegetable protein","textured soy flour","hydrolyzed plant protein","hydrolyzed vegetable protein","soy lecithin","edamame","shoyu","tamari","miso","natto","tempeh"]}
+]

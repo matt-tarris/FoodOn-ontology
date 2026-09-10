@@ -1,0 +1,37 @@
+# Vendor ontology and everything derived from it. The vendor file is large and
+# replaceable; the derived files are reproducible from it plus the governed
+# decision files, which ARE committed.
+#
+#   committed        : ontology/foodon-local-patches.ttl   (generated, but reviewed)
+#                      ontology/catalog-v001.xml
+#                      ontology/foodon.owl.sha256          (pins the release)
+#   not committed    : the vendor .owl and every merge/materialisation product
+ontology/foodon.owl
+ontology/foodon-reasoned.owl
+ontology/foodon-merged.owl
+ontology/foodon-queryable.owl
+ontology/foodon-avoidance.ttl
+
+# Vendor tool. 79 MB, hash-pinned in tools/robot.jar.sha256, and downloadable --
+# same category as the vendor ontology. Committing it would put a binary larger than
+# GitHub's 50 MB warning threshold into the history permanently.
+tools/robot.jar
+
+# Large derived data. Rebuild with the pipeline in the README.
+data/foodon-asserted.obo.json
+data/foodon-reasoned.obo.json
+data/index.json
+data/structure.csv
+data/restrictions.csv
+data/restrictions_nested.csv
+data/holders.csv
+data/orphans.csv
+data/diag.csv
+data/native-axioms.csv
+data/graph-*.json
+
+__pycache__/
+*.pyc
+
+# macOS finder metadata
+.DS_Store

@@ -1,0 +1,627 @@
+{
+  "version": "2026-09-09",
+  "source": "supplied allergen derivative list, 2026-09-09",
+  "generated_by": "build/make_allergen_golden.py",
+  "relation_types": {
+    "containment": "real derivation. Traversal MUST reach it.",
+    "synonym": "same substance, another name. Resolution-store concern (2a), not a traversal target.",
+    "provenance": "usually made from, but not necessarily. Never assertable by an ontology; overrides.json, weaker claim.",
+    "cross_reactivity": "immunologically related; the allergen is NOT present. Traversal must NOT assert containment.",
+    "disputed": "on avoidance lists without a containment basis."
+  },
+  "allergens": [
+    {
+      "common": "Corn",
+      "roots": [
+        "Maize plant"
+      ],
+      "terms": [
+        {
+          "term": "maltodextrin",
+          "relation": "provenance",
+          "note": "starch hydrolysate; corn, wheat, potato or tapioca depending on plant"
+        },
+        {
+          "term": "dextrose",
+          "relation": "provenance",
+          "note": "glucose; corn-derived in the US, other feedstocks elsewhere"
+        },
+        {
+          "term": "high fructose corn syrup",
+          "relation": "containment",
+          "note": "corn named in the substance itself"
+        },
+        {
+          "term": "corn starch",
+          "relation": "containment",
+          "note": "direct corn derivative"
+        },
+        {
+          "term": "modified food starch",
+          "relation": "provenance",
+          "note": "any starch source; unspecified by name"
+        },
+        {
+          "term": "citric acid",
+          "relation": "provenance",
+          "note": "Aspergillus niger fermentation on a sugar feedstock, often corn"
+        },
+        {
+          "term": "xanthan gum",
+          "relation": "provenance",
+          "note": "Xanthomonas fermentation, feedstock often corn glucose"
+        },
+        {
+          "term": "dextrin",
+          "relation": "provenance",
+          "note": "starch hydrolysate, feedstock varies"
+        },
+        {
+          "term": "cyclodextrin",
+          "relation": "provenance",
+          "note": "enzymatic conversion of starch, feedstock varies"
+        },
+        {
+          "term": "zein",
+          "relation": "containment",
+          "note": "zein is the corn prolamin by definition"
+        },
+        {
+          "term": "ascorbic acid",
+          "relation": "provenance",
+          "note": "synthesised from glucose, feedstock often corn"
+        },
+        {
+          "term": "erythritol",
+          "relation": "provenance",
+          "note": "fermentation of corn or wheat starch hydrolysate"
+        },
+        {
+          "term": "sorbitol",
+          "relation": "provenance",
+          "note": "hydrogenated glucose, feedstock often corn"
+        },
+        {
+          "term": "calcium citrate",
+          "relation": "provenance",
+          "note": "citric acid salt, inherits the citric acid feedstock question"
+        }
+      ]
+    },
+    {
+      "common": "Milk",
+      "roots": [
+        "dairy cow",
+        "milk"
+      ],
+      "terms": [
+        {
+          "term": "casein",
+          "relation": "containment",
+          "note": "the predominant milk protein"
+        },
+        {
+          "term": "caseinates",
+          "relation": "containment",
+          "note": "casein salts"
+        },
+        {
+          "term": "sodium caseinate",
+          "relation": "containment",
+          "note": "casein salt"
+        },
+        {
+          "term": "calcium caseinate",
+          "relation": "containment",
+          "note": "casein salt"
+        },
+        {
+          "term": "potassium caseinate",
+          "relation": "containment",
+          "note": "casein salt"
+        },
+        {
+          "term": "whey protein hydrolysate",
+          "relation": "containment",
+          "note": "milk whey fraction"
+        },
+        {
+          "term": "whey protein concentrate",
+          "relation": "containment",
+          "note": "milk whey fraction"
+        },
+        {
+          "term": "lactalbumin",
+          "relation": "containment",
+          "note": "milk whey protein"
+        },
+        {
+          "term": "lactoglobulin",
+          "relation": "containment",
+          "note": "milk whey protein"
+        },
+        {
+          "term": "nisin",
+          "relation": "provenance",
+          "note": "Lactococcus lactis bacteriocin, commonly cultured on a dairy medium"
+        },
+        {
+          "term": "lactic acid starter culture",
+          "relation": "provenance",
+          "note": "may be propagated on a dairy medium"
+        },
+        {
+          "term": "butterfat",
+          "relation": "containment",
+          "note": "milk fat"
+        },
+        {
+          "term": "ghee",
+          "relation": "containment",
+          "note": "clarified butterfat"
+        }
+      ]
+    },
+    {
+      "common": "Egg",
+      "roots": [
+        "egg or egg component",
+        "chicken"
+      ],
+      "terms": [
+        {
+          "term": "lysozyme",
+          "relation": "containment",
+          "note": "food-grade lysozyme is hen egg white lysozyme"
+        },
+        {
+          "term": "E1105",
+          "relation": "synonym",
+          "note": "E-number for lysozyme; the same substance, not a second one"
+        },
+        {
+          "term": "egg albumen",
+          "relation": "containment",
+          "note": "egg white"
+        },
+        {
+          "term": "ovalbumin",
+          "relation": "containment",
+          "note": "principal egg white protein"
+        },
+        {
+          "term": "ovomucoid",
+          "relation": "containment",
+          "note": "egg white protein"
+        },
+        {
+          "term": "ovotransferrin",
+          "relation": "containment",
+          "note": "egg white protein"
+        },
+        {
+          "term": "dried egg white solids",
+          "relation": "containment",
+          "note": "dehydrated egg white"
+        },
+        {
+          "term": "meringue powder",
+          "relation": "containment",
+          "note": "dried egg white plus sugar"
+        }
+      ]
+    },
+    {
+      "common": "Fish",
+      "roots": [
+        "fish species"
+      ],
+      "terms": [
+        {
+          "term": "isinglass",
+          "relation": "containment",
+          "note": "collagen from fish swim bladders"
+        },
+        {
+          "term": "fish collagen",
+          "relation": "containment",
+          "note": "named derivative"
+        },
+        {
+          "term": "fish gelatin",
+          "relation": "containment",
+          "note": "hydrolysed fish collagen"
+        },
+        {
+          "term": "anchovy paste",
+          "relation": "containment",
+          "note": "anchovy derivative"
+        },
+        {
+          "term": "anchovy extract",
+          "relation": "containment",
+          "note": "anchovy derivative"
+        },
+        {
+          "term": "surimi",
+          "relation": "containment",
+          "note": "washed fish mince"
+        },
+        {
+          "term": "fish sauce",
+          "relation": "containment",
+          "note": "fermented fish"
+        }
+      ]
+    },
+    {
+      "common": "Shellfish",
+      "roots": [
+        "shellfish species"
+      ],
+      "terms": [
+        {
+          "term": "chitosan",
+          "relation": "provenance",
+          "note": "deacetylated chitin; crustacean shells OR fungal mycelium"
+        },
+        {
+          "term": "crustacean chitin",
+          "relation": "containment",
+          "note": "named crustacean derivative"
+        },
+        {
+          "term": "cuttlefish ink",
+          "relation": "containment",
+          "note": "cephalopod; molluscan shellfish, distinct from crustacean"
+        },
+        {
+          "term": "squid ink",
+          "relation": "containment",
+          "note": "cephalopod; molluscan shellfish, distinct from crustacean"
+        },
+        {
+          "term": "seafood bouillon base",
+          "relation": "containment",
+          "note": "shellfish-containing stock base"
+        },
+        {
+          "term": "shrimp paste",
+          "relation": "containment",
+          "note": "fermented shrimp"
+        }
+      ]
+    },
+    {
+      "common": "Tree Nuts",
+      "roots": [
+        "nut producing plant"
+      ],
+      "terms": [
+        {
+          "term": "pink peppercorn",
+          "relation": "cross_reactivity",
+          "note": "Schinus in Anacardiaceae with cashew and pistachio; cross-reactive, contains no tree nut"
+        },
+        {
+          "term": "Schinus terebinthifolius",
+          "relation": "synonym",
+          "note": "the source species of pink peppercorn, not a separate item"
+        },
+        {
+          "term": "mahlab",
+          "relation": "cross_reactivity",
+          "note": "Prunus mahaleb kernel; a stone-fruit kernel, cross-reactive rather than a tree nut"
+        },
+        {
+          "term": "mahlepi",
+          "relation": "synonym",
+          "note": "alternate spelling of mahlab"
+        },
+        {
+          "term": "marzipan",
+          "relation": "containment",
+          "note": "almond paste and sugar"
+        },
+        {
+          "term": "gianduja",
+          "relation": "containment",
+          "note": "hazelnut and chocolate"
+        },
+        {
+          "term": "praline",
+          "relation": "containment",
+          "note": "nut and caramelised sugar"
+        },
+        {
+          "term": "nut meal",
+          "relation": "containment",
+          "note": "ground nut"
+        },
+        {
+          "term": "almond paste",
+          "relation": "containment",
+          "note": "ground almond"
+        }
+      ]
+    },
+    {
+      "common": "Peanut",
+      "roots": [
+        "peanut plant"
+      ],
+      "terms": [
+        {
+          "term": "arachis oil",
+          "relation": "synonym",
+          "note": "Arachis hypogaea oil; another name for peanut oil"
+        },
+        {
+          "term": "peanut flour",
+          "relation": "containment",
+          "note": "milled peanut"
+        },
+        {
+          "term": "peanut meal",
+          "relation": "containment",
+          "note": "milled peanut"
+        },
+        {
+          "term": "mandelonas",
+          "relation": "containment",
+          "note": "peanuts flavoured and sold as almonds"
+        },
+        {
+          "term": "beer nuts",
+          "relation": "containment",
+          "note": "coated peanuts"
+        }
+      ]
+    },
+    {
+      "common": "Wheat",
+      "roots": [
+        "wheat plant"
+      ],
+      "terms": [
+        {
+          "term": "wheat glucose syrup",
+          "relation": "containment",
+          "note": "wheat starch hydrolysate"
+        },
+        {
+          "term": "wheat maltodextrin",
+          "relation": "containment",
+          "note": "wheat starch hydrolysate"
+        },
+        {
+          "term": "hydrolyzed wheat protein",
+          "relation": "containment",
+          "note": "named wheat derivative"
+        },
+        {
+          "term": "seitan",
+          "relation": "containment",
+          "note": "wheat gluten"
+        },
+        {
+          "term": "triticale",
+          "relation": "containment",
+          "note": "wheat x rye hybrid; belongs under rye as well as wheat"
+        },
+        {
+          "term": "spelt",
+          "relation": "containment",
+          "note": "Triticum spelta"
+        },
+        {
+          "term": "farro",
+          "relation": "synonym",
+          "note": "culinary name covering emmer, spelt and einkorn"
+        },
+        {
+          "term": "semolina",
+          "relation": "containment",
+          "note": "coarse durum wheat milling fraction"
+        },
+        {
+          "term": "bulgur",
+          "relation": "containment",
+          "note": "parboiled cracked wheat"
+        },
+        {
+          "term": "kamut",
+          "relation": "containment",
+          "note": "Triticum turanicum, trademarked as Kamut"
+        },
+        {
+          "term": "modified wheat starch",
+          "relation": "containment",
+          "note": "wheat starch derivative"
+        }
+      ]
+    },
+    {
+      "common": "Mammalian Meat (Alpha-Gal)",
+      "roots": [
+        "mammal"
+      ],
+      "terms": [
+        {
+          "term": "bovine gelatin",
+          "relation": "containment",
+          "note": "hydrolysed bovine collagen"
+        },
+        {
+          "term": "porcine gelatin",
+          "relation": "containment",
+          "note": "hydrolysed porcine collagen"
+        },
+        {
+          "term": "animal rennet",
+          "relation": "containment",
+          "note": "enzyme from ruminant abomasum"
+        },
+        {
+          "term": "carrageenan",
+          "relation": "disputed",
+          "note": "red seaweed polysaccharide, contains no mammalian material or alpha-gal; appears on alpha-gal lists via a contested GI-symptom hypothesis"
+        },
+        {
+          "term": "bovine tallow",
+          "relation": "containment",
+          "note": "rendered bovine fat"
+        },
+        {
+          "term": "lard",
+          "relation": "containment",
+          "note": "rendered porcine fat"
+        }
+      ]
+    },
+    {
+      "common": "Sesame",
+      "roots": [
+        "sesame plant"
+      ],
+      "terms": [
+        {
+          "term": "benne",
+          "relation": "synonym",
+          "note": "another name for sesame"
+        },
+        {
+          "term": "benne seed",
+          "relation": "synonym",
+          "note": "another name for sesame seed"
+        },
+        {
+          "term": "gingelly oil",
+          "relation": "synonym",
+          "note": "another name for sesame oil"
+        },
+        {
+          "term": "tahini",
+          "relation": "containment",
+          "note": "ground hulled sesame"
+        },
+        {
+          "term": "til",
+          "relation": "synonym",
+          "note": "another name for sesame"
+        },
+        {
+          "term": "teel",
+          "relation": "synonym",
+          "note": "another name for sesame"
+        },
+        {
+          "term": "gomasio",
+          "relation": "containment",
+          "note": "sesame and salt condiment"
+        }
+      ]
+    },
+    {
+      "common": "Mustard",
+      "roots": [
+        "mustard plant"
+      ],
+      "terms": [
+        {
+          "term": "mustard flour",
+          "relation": "containment",
+          "note": "milled mustard seed"
+        },
+        {
+          "term": "mustard meal",
+          "relation": "containment",
+          "note": "milled mustard seed"
+        },
+        {
+          "term": "mustard seed oleoresin",
+          "relation": "containment",
+          "note": "mustard seed extract"
+        },
+        {
+          "term": "Brassica alba",
+          "relation": "synonym",
+          "note": "synonym of Sinapis alba, white mustard"
+        },
+        {
+          "term": "Brassica juncea",
+          "relation": "containment",
+          "note": "brown mustard; a sibling source species within the class query"
+        },
+        {
+          "term": "Sinapis alba",
+          "relation": "synonym",
+          "note": "white mustard; the accepted name for Brassica alba"
+        }
+      ]
+    },
+    {
+      "common": "Soy",
+      "roots": [
+        "soybean plant"
+      ],
+      "terms": [
+        {
+          "term": "textured vegetable protein",
+          "relation": "provenance",
+          "note": "usually soy, but the name does not commit to a source"
+        },
+        {
+          "term": "textured soy flour",
+          "relation": "containment",
+          "note": "named soy derivative"
+        },
+        {
+          "term": "hydrolyzed plant protein",
+          "relation": "provenance",
+          "note": "soy, wheat or corn depending on producer"
+        },
+        {
+          "term": "hydrolyzed vegetable protein",
+          "relation": "provenance",
+          "note": "soy, wheat or corn depending on producer"
+        },
+        {
+          "term": "soy lecithin",
+          "relation": "containment",
+          "note": "soybean phospholipid fraction"
+        },
+        {
+          "term": "edamame",
+          "relation": "containment",
+          "note": "immature soybean"
+        },
+        {
+          "term": "shoyu",
+          "relation": "containment",
+          "note": "fermented soy sauce"
+        },
+        {
+          "term": "tamari",
+          "relation": "containment",
+          "note": "fermented soy sauce, little or no wheat"
+        },
+        {
+          "term": "miso",
+          "relation": "containment",
+          "note": "fermented soybean paste"
+        },
+        {
+          "term": "natto",
+          "relation": "containment",
+          "note": "fermented soybean"
+        },
+        {
+          "term": "tempeh",
+          "relation": "containment",
+          "note": "fermented soybean cake"
+        }
+      ]
+    }
+  ]
+}

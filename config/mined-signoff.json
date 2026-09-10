@@ -1,0 +1,69 @@
+{
+  "version": "2026-09-09",
+  "reviewed_by": "Matt",
+  "reviewed_date": "2026-09-10",
+  "ontology_version": "2025-12-30",
+  "note": "Human sign-off on bridge candidates from build/classify_mined.py. Keyed by PRODUCT IRI, not by source label as config/repair-signoff.json is: a definition-mined bridge rests on one class's own prose sentence, so it is evidence for exactly that class. Set reviewed_by, then add an entry per product: {\"apply\": true|false, \"confidence\": \"high\"|\"medium\", \"rationale\": \"...\"}. Nothing in data/mined-classified.json affects an answer until it appears here with apply=true. A FoodOn version bump re-runs the classifier and re-presents anything not covered.",
+  "decisions": {
+    "http://purl.obolibrary.org/obo/FOODON_03306347": {
+      "apply": true,
+      "confidence": "high",
+      "label": "pasta -> wheat plant",
+      "rationale": "FoodOn's own definition: 'an unleavened dough of wheat flour mixed with water or eggs'. Subtree is 6 preparation states of pasta itself (canned, dried, fresh, frozen, wet-packed) and nothing else, so the bridge cannot over-reach. Checked against the sibling case: the broader `pasta food product` was NOT signed because its 119-member subtree includes gluten-free pasta, corn pasta, rice noodle and shirataki noodle -- that class is a shape, not a grain."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_00005528": {
+      "apply": true,
+      "confidence": "high",
+      "label": "whole wheat pasta -> wheat plant",
+      "rationale": "Definition: 'made from whole wheat flour that retains the bran'. Leaf class, adds only itself. Wheat is in the name and in the definition; there is no other reading."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_00003855": {
+      "apply": true,
+      "confidence": "high",
+      "label": "tahini -> sesame plant",
+      "rationale": "FoodOn's own definition: 'a condiment made from toasted ground hulled sesame'. Subtree is tahini and white tahini, both sesame. Sesame is an EU top-14 and US FALCPA allergen and tahini was previously reachable ONLY through the signed `contains` override, which this makes structural; expect override_run to report that override as redundant."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_00003873": {
+      "apply": true,
+      "confidence": "high",
+      "label": "white tahini -> sesame plant",
+      "rationale": "Definition: 'Tahini made from hulled white sesame seeds'. Redundant by descent today because it is_a tahini, which is now signed; kept as a direct anchor so a future FoodOn re-parenting cannot silently disconnect it. Same treatment as the sodium caseinate override."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_00002052": {
+      "apply": true,
+      "confidence": "high",
+      "label": "mustard condiment food product -> mustard plant",
+      "rationale": "The definition names the source outright: 'a condiment made from the seeds of a mustard plant (white/yellow mustard, Sinapis alba; brown mustard, Brassica juncea; or black mustard, Brassica nigra)'. All 9 subtree members are genuine mustard condiments (dijon, prepared, relish, sauce, mostarda di frutta, made-with-beer) with no mustard-free member. `mustard plant` is a grouping over Sinapis and Brassica, which is the right granularity here rather than too coarse: EU labelling treats mustard as ONE allergen across those species."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_03000286": {
+      "apply": true,
+      "confidence": "high",
+      "label": "yellow mustard (prepared) -> white mustard plant",
+      "rationale": "Definition: 'made from yellow mustard'; white mustard is Sinapis alba, which is the same seed yellow mustard names. Not merely redundant under the entry above: that one anchors at the `mustard plant` grouping, this one adds the species-level route so a `Sinapis alba` or `white mustard` query reaches it too."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_00005587": {
+      "apply": true,
+      "confidence": "high",
+      "label": "malt syrup -> barley plant",
+      "rationale": "Definition: 'a syrup made from malted barley or grains'. The 'or grains' hedge was checked and does not weaken this class, because FoodOn keeps the generic reading in a SEPARATE class: `malted cereal syrup` (under flavoring syrup) is the any-grain one, and `rice syrup` is its own class under plant sweetener, so neither is touched by this edge. FoodOn also already parents `malt extract` under `barley product flavoring`, which is the ontology's own statement that unqualified malt means barley. Leaf class, adds only itself. Barley malt syrup is a well-known hidden gluten source, so the recall matters."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_00005589": {
+      "apply": true,
+      "confidence": "high",
+      "label": "soy-based protein powder -> soybean plant",
+      "rationale": "Definition: 'a plant-based protein supplement what is derived from soybeans' (FoodOn's typo, unambiguous meaning). Parented by function as `dietary supplement, amino acid or protein` with no source asserted -- the exact pattern audit F records for processed ingredients. Leaf class, adds only itself. Soy is a FALCPA top-9 allergen."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_00005523": {
+      "apply": true,
+      "confidence": "high",
+      "label": "acorn flour -> oak tree",
+      "rationale": "Definition names the source outright and unambiguously: 'a flour made by grinding acorns, the nuts of oak trees, after they have been properly processed to remove tannin'. Leaf class, no existing out-edges, one source. `oak tree` is parented `temperate-zone nut producing plant`, so acorn flour also becomes reachable from a tree-nut query -- correct, an acorn is a nut."
+    },
+    "http://purl.obolibrary.org/obo/FOODON_00003268": {
+      "apply": true,
+      "confidence": "medium",
+      "label": "croziflette -> buckwheat plant",
+      "rationale": "MEDIUM, not high, and the reason is in the definition: 'crozets de Savoie (usually made from buckwheat BUT SOMETIMES DURUM)'. That is a recipe choice, the same shape as the may_contain overrides that are deliberately kept out of the closure. Signed anyway under the recall-first policy, because the distinction that matters is which way an error falls: buckwheat allergy is anaphylactic and crozets are USUALLY buckwheat, so a buckwheat-avoider must see this dish. The cost is over-inclusion for the durum variant, which is the safe direction. TWO GAPS THIS DOES NOT CLOSE, recorded so nobody reads the dish as mapped: (1) croziflette is a multi-component dish (tartiflette base) and so also contains milk via reblochon, pork via bacon and allium via onion -- FoodOn asserts none of those and this bridge adds none of them; (2) the durum variant means it may contain gluten, and since buckwheat is gluten-free it will NOT appear on a gluten query. Revisit if a dish-level ingredient layer arrives."
+    }
+  }
+}

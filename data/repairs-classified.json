@@ -1,0 +1,1104 @@
+{
+  "version": "2026-09-09",
+  "ontology_version": "2025-12-30",
+  "rule": "auto-apply requires single-organism structure AND no research flag",
+  "auto_apply": [
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_03000083",
+      "product_label": "New Zealand spinach food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411732",
+      "source_label": "new zealand spinach plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Tetragonia tetragonoides",
+      "is_leaf": true,
+      "evidence": "single species: Tetragonia tetragonoides"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00003030",
+      "product_label": "angelica food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411377",
+      "source_label": "angelica plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: subtree is A. archangelica and A. sylvestris, both food-use; no toxic congener reachable"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002773",
+      "product_label": "asparagus bean food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411724",
+      "source_label": "asparagus bean plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004579",
+      "product_label": "baobab food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412759",
+      "source_label": "baobab plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Adansonia digitata",
+      "is_leaf": true,
+      "evidence": "single species: Adansonia digitata"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001635",
+      "product_label": "bean food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411567",
+      "source_label": "bean plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: grouping over Phaseolus/Vicia/Glycine, but no-ascent means a soy query cannot reach it; a bean class query should return all beans"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004717",
+      "product_label": "bilberry food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412013",
+      "source_label": "bilberry plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Vaccinium myrtillus",
+      "is_leaf": true,
+      "evidence": "single species: Vaccinium myrtillus"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004367",
+      "product_label": "bitter melon food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411101",
+      "source_label": "bitter melon plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Momordica charantia",
+      "is_leaf": true,
+      "evidence": "single species: Momordica charantia"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_03000177",
+      "product_label": "black cumin food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411176",
+      "source_label": "black cumin plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "confidence": "high",
+      "evidence": "signed off by Matt: leaf source with no in-taxon; FoodOn does not commit to Nigella vs Bunium and nothing ambiguous is reachable"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00003038",
+      "product_label": "borage food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411735",
+      "source_label": "borage plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Borago officinalis",
+      "is_leaf": true,
+      "evidence": "single species: Borago officinalis"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00005226",
+      "product_label": "breadfruit food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411504",
+      "source_label": "breadfruit plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Artocarpus altilis",
+      "is_leaf": true,
+      "evidence": "single species: Artocarpus altilis"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004588",
+      "product_label": "california blackberry food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414207",
+      "source_label": "california blackberry plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Rubus ursinus",
+      "is_leaf": true,
+      "evidence": "single species: Rubus ursinus"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001681",
+      "product_label": "caper food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411247",
+      "source_label": "caper plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00003022",
+      "product_label": "caraway food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411549",
+      "source_label": "caraway plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001687",
+      "product_label": "carrot food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411227",
+      "source_label": "carrot plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Daucus carota",
+      "is_leaf": false,
+      "evidence": "single species: Daucus carota"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001692",
+      "product_label": "cassava food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411352",
+      "source_label": "cassava plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00005191",
+      "product_label": "cattail food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414729",
+      "source_label": "cattail plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: Typha latifolia and T. angustifolia, both edible"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004114",
+      "product_label": "celeriac food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411729",
+      "source_label": "celeriac plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_03000065",
+      "product_label": "celtuce food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411728",
+      "source_label": "celtuce plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002498",
+      "product_label": "chard food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411175",
+      "source_label": "chard plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_03000431",
+      "product_label": "chia food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411723",
+      "source_label": "chia plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Salvia hispanica",
+      "is_leaf": true,
+      "evidence": "single species: Salvia hispanica"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004582",
+      "product_label": "chokeberry food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414951",
+      "source_label": "chokeberry plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: Aronia grouping, all edible; distinct from chokecherry which has its own species-level repair"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004221",
+      "product_label": "chokecherry food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412044",
+      "source_label": "chokecherry plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Prunus virginiana",
+      "is_leaf": false,
+      "evidence": "single species: Prunus virginiana"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001743",
+      "product_label": "clingstone peach food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00003474",
+      "source_label": "clingstone peach tree",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001763",
+      "product_label": "coriander food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411381",
+      "source_label": "coriander plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_03311872",
+      "product_label": "cumin food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411274",
+      "source_label": "cumin plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004808",
+      "product_label": "custard apple food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411689",
+      "source_label": "custard apple tree",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Annona reticulata",
+      "is_leaf": true,
+      "evidence": "single species: Annona reticulata"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002435",
+      "product_label": "dandelion food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411428",
+      "source_label": "dandelion plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001811",
+      "product_label": "dill food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411277",
+      "source_label": "dill plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Anethum graveolens",
+      "is_leaf": true,
+      "evidence": "single species: Anethum graveolens"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004265",
+      "product_label": "fennel food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411262",
+      "source_label": "fennel plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Anethum foeniculum",
+      "is_leaf": false,
+      "evidence": "single species: Anethum foeniculum"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001837",
+      "product_label": "fenugreek food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411696",
+      "source_label": "fenugreek plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Trigonella foenum-graecum",
+      "is_leaf": false,
+      "evidence": "single species: Trigonella foenum-graecum"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_03000072",
+      "product_label": "fireweed food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413725",
+      "source_label": "fireweed plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_03000034",
+      "product_label": "garden cress food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412270",
+      "source_label": "garden cress plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Lepidium sativum",
+      "is_leaf": true,
+      "evidence": "single species: Lepidium sativum"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001895",
+      "product_label": "garlic food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411233",
+      "source_label": "garlic plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Allium sativum",
+      "is_leaf": true,
+      "evidence": "single species: Allium sativum"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001904",
+      "product_label": "ginseng food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411673",
+      "source_label": "ginseng plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "medium",
+      "evidence": "signed off by Matt: source genuinely mixes genera - three Panax species plus Eleutherococcus senticosus (siberian ginseng); applied for recall but tagged so it is visibly distinguishable"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004750",
+      "product_label": "granadilla de quijo food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00004751",
+      "source_label": "granadilla de quijo plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001959",
+      "product_label": "hungarian wax pepper food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411353",
+      "source_label": "hungarian wax pepper plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002779",
+      "product_label": "jack-bean food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413400",
+      "source_label": "jack-bean plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Canavalia ensiformis",
+      "is_leaf": true,
+      "evidence": "single species: Canavalia ensiformis"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001979",
+      "product_label": "jerusalem artichoke food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411038",
+      "source_label": "jerusalem artichoke plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Helianthus tuberosus",
+      "is_leaf": true,
+      "evidence": "single species: Helianthus tuberosus"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00003525",
+      "product_label": "land cress food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412873",
+      "source_label": "land cress plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Barbarea verna",
+      "is_leaf": true,
+      "evidence": "single species: Barbarea verna"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00003725",
+      "product_label": "lemon balm food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412621",
+      "source_label": "lemon balm plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Melissa officinalis",
+      "is_leaf": true,
+      "evidence": "single species: Melissa officinalis"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004718",
+      "product_label": "mallow food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413413",
+      "source_label": "mallow plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Malva verticillata",
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: Malva grouping; marshmallow (Althaea) is a different genus and not covered"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002038",
+      "product_label": "millet food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412505",
+      "source_label": "millet plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: polyphyletic but matches culinary usage and how the term is queried"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004772",
+      "product_label": "nasturtium food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03415002",
+      "source_label": "nasturtium plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: subtree is entirely Tropaeolum; Nasturtium officinale (watercress) is absent"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002061",
+      "product_label": "nutmeg food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411214",
+      "source_label": "nutmeg plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Myristica fragrans",
+      "is_leaf": true,
+      "evidence": "single species: Myristica fragrans"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002073",
+      "product_label": "oregano food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411542",
+      "source_label": "oregano plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Origanum vulgare",
+      "is_leaf": true,
+      "evidence": "single species: Origanum vulgare"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002084",
+      "product_label": "parsley food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411550",
+      "source_label": "parsley plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002095",
+      "product_label": "peach food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411350",
+      "source_label": "peach tree",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Prunus persica",
+      "is_leaf": true,
+      "evidence": "single species: Prunus persica"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004787",
+      "product_label": "peach palm food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03414923",
+      "source_label": "peach palm plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Bactris gasipaes",
+      "is_leaf": true,
+      "evidence": "single species: Bactris gasipaes"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002112",
+      "product_label": "peppermint food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411449",
+      "source_label": "peppermint plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Mentha x piperita",
+      "is_leaf": true,
+      "evidence": "single species: Mentha x piperita"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002780",
+      "product_label": "pigeon pea food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412010",
+      "source_label": "pigeon pea plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Cajanus cajan",
+      "is_leaf": true,
+      "evidence": "single species: Cajanus cajan"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004381",
+      "product_label": "pitaya food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412781",
+      "source_label": "pitaya plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Selenicereus undatus",
+      "is_leaf": false,
+      "evidence": "single species: Selenicereus undatus"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002212",
+      "product_label": "rosemary food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411495",
+      "source_label": "rosemary plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001190",
+      "product_label": "rye food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411313",
+      "source_label": "rye plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Secale cereale",
+      "is_leaf": false,
+      "evidence": "single species: Secale cereale"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00003043",
+      "product_label": "saffron food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411459",
+      "source_label": "saffron plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Crocus sativus",
+      "is_leaf": true,
+      "evidence": "single species: Crocus sativus"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002217",
+      "product_label": "sage food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411303",
+      "source_label": "sage plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: subtree is entirely Salvia (kitchen/greek/mexican bush, S. elegans); sagebrush is not reachable"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004249",
+      "product_label": "sapodilla food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411693",
+      "source_label": "sapodilla plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Manilkara zapota",
+      "is_leaf": true,
+      "evidence": "single species: Manilkara zapota"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002492",
+      "product_label": "sarsaparilla food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412065",
+      "source_label": "sarsaparilla plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "confidence": "high",
+      "evidence": "signed off by Matt: products name Smilax aristolochiifolia explicitly; no Aralia present"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002254",
+      "product_label": "soft wheat food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411421",
+      "source_label": "soft wheat plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "evidence": "research: Triticum aestivum; its two sub-sources are cultivar groups, not other species"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00003093",
+      "product_label": "sorrel food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411641",
+      "source_label": "sorrel plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Rumex acetosa",
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: subtree is entirely Rumex; Hibiscus sabdariffa 'sorrel' is absent from FoodOn, a separate pre-existing gap"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00003789",
+      "product_label": "soursop food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411480",
+      "source_label": "soursop plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Annona muricata",
+      "is_leaf": true,
+      "evidence": "single species: Annona muricata"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004434",
+      "product_label": "spelt food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412917",
+      "source_label": "spelt plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Triticum spelta",
+      "is_leaf": true,
+      "evidence": "single species: Triticum spelta"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002269",
+      "product_label": "spinach food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00001273",
+      "source_label": "spinach plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Spinacia oleracea",
+      "is_leaf": true,
+      "evidence": "single species: Spinacia oleracea"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002277",
+      "product_label": "stone fruit food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411539",
+      "source_label": "stone fruit plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: culinary grouping; fires only on a stone-fruit-level query"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004226",
+      "product_label": "strawberry guava food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411649",
+      "source_label": "strawberry guava plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Psidium cattleyanum",
+      "is_leaf": true,
+      "evidence": "single species: Psidium cattleyanum"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004378",
+      "product_label": "sumac food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412161",
+      "source_label": "sumac plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "confidence": "high",
+      "evidence": "signed off by Matt: correct on its own terms; the mis-parented rye kernel in its subtree is a separate FoodOn defect tracked independently"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004371",
+      "product_label": "tangelo food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411473",
+      "source_label": "tangelo plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Citrus x tangelo",
+      "is_leaf": false,
+      "evidence": "single species: Citrus x tangelo"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002311",
+      "product_label": "tarragon food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411469",
+      "source_label": "tarragon plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Artemisia dracunculus",
+      "is_leaf": true,
+      "evidence": "single species: Artemisia dracunculus"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002312",
+      "product_label": "thyme food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411199",
+      "source_label": "thyme plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": "high",
+      "evidence": "signed off by Matt: clean Thymus genus grouping, no non-Thymus usage in food"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002323",
+      "product_label": "turmeric food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411425",
+      "source_label": "turmeric plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Curcuma longa",
+      "is_leaf": true,
+      "evidence": "single species: Curcuma longa"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00004156",
+      "product_label": "velvet bean food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03413403",
+      "source_label": "velvet bean plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002338",
+      "product_label": "walnut food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411290",
+      "source_label": "walnut tree",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002343",
+      "product_label": "watermelon food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00001155",
+      "source_label": "watermelon plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Citrullus lanatus",
+      "is_leaf": true,
+      "evidence": "single species: Citrullus lanatus"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002361",
+      "product_label": "white pepper food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411141",
+      "source_label": "white pepper plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "research: Piper nigrum -- same species as black pepper, differing only in processing"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002367",
+      "product_label": "wood apple food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03412845",
+      "source_label": "wood apple plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": "Limonia acidissima",
+      "is_leaf": true,
+      "evidence": "single species: Limonia acidissima"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002372",
+      "product_label": "youngberry food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411388",
+      "source_label": "youngberry plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": true,
+      "evidence": "leaf source, no sub-sources"
+    },
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00002448",
+      "product_label": "zucchini food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_03411462",
+      "source_label": "zucchini plant",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "evidence": "research: Cucurbita pepo; the sub-source is a cultivar group"
+    }
+  ],
+  "requires_signoff": [],
+  "declined": [
+    {
+      "product": "http://purl.obolibrary.org/obo/FOODON_00001251",
+      "product_label": "avian food product",
+      "source": "http://purl.obolibrary.org/obo/FOODON_00002616",
+      "source_label": "avian animal",
+      "rule": "label-convention <X> food product -> <X> <source>",
+      "guards_passed": [
+        "organism-branch",
+        "uniqueness"
+      ],
+      "source_taxon": null,
+      "is_leaf": false,
+      "confidence": null,
+      "evidence": "signed off by Matt: class-rank (Aves): 319-node source subtree would link all avian food to all birds; too coarse to accept"
+    }
+  ]
+}

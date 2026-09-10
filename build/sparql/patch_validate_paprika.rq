@@ -1,0 +1,52 @@
+# Validation: does `paprika (ground)` resolve as a derived product of Solanaceae?
+#
+# This is the question the whole patch layer exists to answer. Before the patch,
+# FOODON_03301223 had no route to NCBITaxon_4070: its only parent is
+# `hungarian wax pepper food product`, whose only parent is `spice food product`,
+# a FUNCTIONAL class with no botanical link. FoodOn omits the
+# `derives from` axiom that its sibling `hungarian wax pepper pickle food product`
+# carries.
+#
+# Run against the MERGED ontology:
+#   java -jar tools/robot.jar query --input ontology/foodon-merged.owl \
+#        --query build/sparql/patch_validate_paprika.rq /dev/stdout
+#
+# Expect one or more rows. Zero rows means the patch layer is not loaded.
+#
+# The query crosses three kinds of hop deliberately, because no single one is
+# enough: subClassOf UP from the product, then ONE propagating property hop, then
+# subClassOf UP again from the source to the family. `derives from` and `in taxon`
+# are both admitted as the bridging property -- `in taxon` is the only systematic
+# route from a FoodOn class into the NCBITaxon backbone (audit F4).
+
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo:   <http://purl.obolibrary.org/obo/>
+PREFIX local: <https://fluxon.com/ns/foodon-local/>
+
+SELECT ?productLabel ?viaLabel ?bridge ?sourceLabel ?familyLabel ?patched
+WHERE {
+  VALUES (?product ?family) { (obo:FOODON_03301223 obo:NCBITaxon_4070) }
+  VALUES ?bridge { obo:RO_0001000 obo:RO_0002162 }
+
+  # 1. climb from the product to whichever ancestor carries the bridging axiom
+  ?product rdfs:subClassOf* ?via .
+  ?via rdfs:subClassOf ?restriction .
+  ?restriction owl:onProperty ?bridge ;
+               owl:someValuesFrom ?source .
+
+  # 2. climb from that source to the target family
+  ?source rdfs:subClassOf* ?family .
+
+  # 3. is this hop one we supplied, or FoodOn's own? BOUND(?patched) = ours
+  OPTIONAL {
+    ?patched a local:Patch ;
+             local:patchTarget ?via ;
+             local:patchValue ?source .
+  }
+
+  OPTIONAL { ?product rdfs:label ?productLabel }
+  OPTIONAL { ?via     rdfs:label ?viaLabel }
+  OPTIONAL { ?source  rdfs:label ?sourceLabel }
+  OPTIONAL { ?family  rdfs:label ?familyLabel }
+}

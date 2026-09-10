@@ -1,0 +1,24 @@
+# Every `derives from` / `in taxon` restriction the VENDOR ontology asserts natively.
+#
+# Run against ontology/foodon.owl ALONE -- not the merged product. After a merge
+# there is no way to tell our axiom from FoodOn's, which is the whole difficulty of
+# detecting an upstream fix: the patch layer is additive and leaves no seam.
+#
+#   java -jar tools/robot.jar query --input ontology/foodon.owl \
+#        --query build/sparql/patch_native_axioms.rq data/native-axioms.csv
+#
+# build/check_upstream_fixes.py compares this against the local:Patch records and
+# reports any patch upstream has made redundant.
+
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo:  <http://purl.obolibrary.org/obo/>
+
+SELECT DISTINCT ?target ?property ?value
+WHERE {
+  VALUES ?property { obo:RO_0001000 obo:RO_0002162 }
+  ?target rdfs:subClassOf ?r .
+  ?r owl:onProperty ?property ;
+     owl:someValuesFrom ?value .
+  FILTER(isIRI(?target) && isIRI(?value))
+}

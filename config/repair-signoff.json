@@ -1,0 +1,25 @@
+{
+  "version": "2026-09-09",
+  "reviewed_by": "Matt",
+  "reviewed_date": "2026-09-09",
+  "ontology_version": "2025-12-30",
+  "note": "Human sign-off on repair candidates that build/classify_repairs.py could not clear automatically. Keyed by source label. A FoodOn version bump re-runs the classifier and re-presents anything not covered here.",
+  "decisions": {
+    "avian animal":        {"apply": false, "confidence": null,     "rationale": "class-rank (Aves): 319-node source subtree would link all avian food to all birds; too coarse to accept"},
+    "bean plant":          {"apply": true,  "confidence": "high",   "rationale": "grouping over Phaseolus/Vicia/Glycine, but no-ascent means a soy query cannot reach it; a bean class query should return all beans"},
+    "stone fruit plant":   {"apply": true,  "confidence": "high",   "rationale": "culinary grouping; fires only on a stone-fruit-level query"},
+    "millet plant":        {"apply": true,  "confidence": "high",   "rationale": "polyphyletic but matches culinary usage and how the term is queried"},
+    "sage plant":          {"apply": true,  "confidence": "high",   "rationale": "subtree is entirely Salvia (kitchen/greek/mexican bush, S. elegans); sagebrush is not reachable"},
+    "thyme plant":         {"apply": true,  "confidence": "high",   "rationale": "clean Thymus genus grouping, no non-Thymus usage in food"},
+    "chokeberry plant":    {"apply": true,  "confidence": "high",   "rationale": "Aronia grouping, all edible; distinct from chokecherry which has its own species-level repair"},
+    "mallow plant":        {"apply": true,  "confidence": "high",   "rationale": "Malva grouping; marshmallow (Althaea) is a different genus and not covered"},
+    "cattail plant":       {"apply": true,  "confidence": "high",   "rationale": "Typha latifolia and T. angustifolia, both edible"},
+    "sorrel plant":        {"apply": true,  "confidence": "high",   "rationale": "subtree is entirely Rumex; Hibiscus sabdariffa 'sorrel' is absent from FoodOn, a separate pre-existing gap"},
+    "ginseng plant":       {"apply": true,  "confidence": "medium", "rationale": "source genuinely mixes genera - three Panax species plus Eleutherococcus senticosus (siberian ginseng); applied for recall but tagged so it is visibly distinguishable"},
+    "nasturtium plant":    {"apply": true,  "confidence": "high",   "rationale": "subtree is entirely Tropaeolum; Nasturtium officinale (watercress) is absent"},
+    "sarsaparilla plant":  {"apply": true,  "confidence": "high",   "rationale": "products name Smilax aristolochiifolia explicitly; no Aralia present"},
+    "black cumin plant":   {"apply": true,  "confidence": "high",   "rationale": "leaf source with no in-taxon; FoodOn does not commit to Nigella vs Bunium and nothing ambiguous is reachable"},
+    "angelica plant":      {"apply": true,  "confidence": "high",   "rationale": "subtree is A. archangelica and A. sylvestris, both food-use; no toxic congener reachable"},
+    "sumac plant":         {"apply": true,  "confidence": "high",   "rationale": "correct on its own terms; the mis-parented rye kernel in its subtree is a separate FoodOn defect tracked independently"}
+  }
+}

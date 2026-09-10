@@ -1,0 +1,16 @@
+# Flat dump of the structural triples needed to reconstruct class expressions.
+# No property paths: this is a linear scan, and the walk happens in Python where
+# the algorithm is explicit and testable (see build/extract_edges.py).
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?s ?p ?o WHERE {
+  ?s ?p ?o .
+  FILTER(?p IN (
+    rdfs:subClassOf, owl:equivalentClass, owl:disjointWith,
+    owl:intersectionOf, owl:unionOf, owl:complementOf,
+    rdf:first, rdf:rest,
+    owl:onProperty, owl:someValuesFrom, owl:allValuesFrom,
+    owl:onClass, owl:hasValue
+  ))
+}

@@ -1,0 +1,85 @@
+# Step 1 of 2: materialise a single-hop avoidance relation as plain triples.
+#
+# SPARQL 1.1 property paths cannot step through a blank-node owl:Restriction, so a
+# closure over "subClassOf plus propagating properties" cannot be written as one
+# path. The standard answer is to materialise the one-hop relation first, then let
+# a `+` path do the closure over it. That is what this CONSTRUCT is for.
+#
+# `local:propagatesTo` points in the AVOIDANCE direction: source -> product. So a
+# query root reaches everything that should be treated as containing it by walking
+# local:propagatesTo forward, and never needs to ascend.
+#
+# The propagating properties are NOT hardcoded here. They are read from
+# `local:propagatesAvoidance "inverse"`, which the patch layer emits from
+# config/relation_policy.json -- so the policy has exactly one source of truth and a
+# change to it changes this query's behaviour without editing the query.
+
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX obo:   <http://purl.obolibrary.org/obo/>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX local: <https://fluxon.com/ns/foodon-local/>
+
+CONSTRUCT {
+  ?source local:propagatesTo ?product .
+  ?pivotFrom local:pivotsTo ?pivotTo .
+}
+WHERE {
+  {
+    # THE SPECIES PIVOT -- its own relation, not propagatesTo.
+    #
+    # `wheat plant --in taxon--> Triticum aestivum` names the same organism in the
+    # NCBITaxon backbone, and this is the only branch that runs FORWARD. It is kept
+    # separate because in the application the pivot belongs to the TAXONOMIC phase:
+    # it fires from a class reached by is_a descent from the root, and never from a
+    # derivative. Folding it into propagatesTo loses that distinction, and the
+    # difference is real in both directions -- omit it and a mustard query loses
+    # Brassica juncea and brown mustard plant; apply it everywhere and a corn query
+    # pivots from `Nirvana corn kernel` up to the species `Zea mays` and gains three
+    # cultivars the application does not reach.
+    #
+    # patch_closure.rq composes the two: is_a descent and pivotsTo make up phase one,
+    # then propagatesTo closes over everything phase one reached.
+    #
+    # Rank-guarded to a BINOMIAL, and that guard is what makes a forward direction
+    # safe at all: pivoting to a genus or family would silently widen the query to a
+    # broader organism, which is how a corn query would reach wheat through Poaceae.
+    ?pivotFrom rdfs:subClassOf ?tr .
+    ?tr owl:onProperty obo:RO_0002162 ;
+        owl:someValuesFrom ?pivotTo .
+    ?pivotTo rdfs:label ?taxonLabel .
+    FILTER(REGEX(STR(?taxonLabel), "^[A-Z][a-z]+( x)? [a-z][a-z-]+"))
+  }
+  UNION
+  {
+    # taxonomic descent: a subclass is reached from its parent, never the reverse.
+    # The reverse is what would let corn reach wheat through a shared ancestor.
+    ?product rdfs:subClassOf ?source .
+    FILTER(isIRI(?source) && isIRI(?product))
+  }
+  UNION
+  {
+    # a propagating restriction whose FILLER IS A UNION. FoodOn writes
+    # `goji berry <= in taxon some (Lycium barbarum or Lycium chinense)` -- the thing
+    # is in one of those taxa but the ontology does not say which, so under
+    # recall-first each member propagates. Without this branch a Solanaceae closure
+    # loses goji berry and goji berry (dried).
+    ?product rdfs:subClassOf ?ur .
+    ?ur owl:onProperty ?up ;
+        owl:someValuesFrom ?union .
+    ?up local:propagatesAvoidance "inverse" .
+    ?union owl:unionOf/rdf:rest*/rdf:first ?source .
+    FILTER(isIRI(?source) && isIRI(?product))
+  }
+  UNION
+  {
+    # one propagating property hop, in the direction the policy declares.
+    # `derives from` is asserted product -> source, so avoidance travels
+    # object -> subject: that is what "inverse" means.
+    ?product rdfs:subClassOf ?restriction .
+    ?restriction owl:onProperty ?p ;
+                 owl:someValuesFrom ?source .
+    ?p local:propagatesAvoidance "inverse" .
+    FILTER(isIRI(?source) && isIRI(?product))
+  }
+}

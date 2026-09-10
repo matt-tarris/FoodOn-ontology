@@ -1,0 +1,281 @@
+{
+  "version": "2026-09-09",
+  "note": "Expectations validate the general rule set. A failure is a prompt to fix the rules or add a reviewed override, never to special-case the traversal.",
+  "cases": [
+    {
+      "name": "corn - spec golden case",
+      "roots": [
+        "Maize plant"
+      ],
+      "expect": [
+        "corn oil",
+        "corn syrup",
+        "corn dextrin",
+        "dextrose anhydrous",
+        "cornmeal",
+        "grits",
+        "corn starch hydrolyzate",
+        "corn flour"
+      ],
+      "reject": [
+        "wheat plant",
+        "wheat bran",
+        "rye plant",
+        "sugar cane plant",
+        "potato"
+      ]
+    },
+    {
+      "name": "nightshade - spec golden case, both hierarchies unioned",
+      "roots": [
+        "solanaceae plant",
+        "Solanaceae"
+      ],
+      "expect": [
+        "paprika (ground)",
+        "paprika puree",
+        "cayenne pepper",
+        "chili powder",
+        "ancho powder",
+        "potato",
+        "tomato",
+        "eggplant"
+      ],
+      "reject": [
+        "black pepper plant",
+        "white pepper plant",
+        "Maize plant",
+        "wheat plant"
+      ],
+      "reject_note": "black and white pepper are Piper nigrum (Piperaceae), not nightshades. The spec listed them in error; they are negatives, not misses."
+    },
+    {
+      "name": "allium - class-level query, two-phase",
+      "roots": [
+        "allium"
+      ],
+      "expect": [
+        "garlic plant",
+        "onion plant",
+        "leek plant",
+        "shallot plant",
+        "chive plant"
+      ],
+      "reject": [
+        "Maize plant",
+        "wheat plant"
+      ],
+      "require_convergence": true
+    },
+    {
+      "name": "walnut - novel case, tree nut, not tuned against",
+      "roots": [
+        "walnut tree"
+      ],
+      "expect": [
+        "walnut food product"
+      ],
+      "reject": [
+        "peanut plant",
+        "almond tree",
+        "Maize plant"
+      ]
+    },
+    {
+      "name": "peanut - novel case, legume, not tuned against",
+      "roots": [
+        "peanut plant"
+      ],
+      "expect": [
+        "peanut"
+      ],
+      "reject": [
+        "walnut tree",
+        "almond tree",
+        "soybean plant"
+      ]
+    },
+    {
+      "name": "shellfish - novel case, animal branch, not tuned against",
+      "roots": [
+        "shellfish species"
+      ],
+      "expect": [],
+      "reject": [
+        "Maize plant",
+        "wheat plant",
+        "peanut plant"
+      ]
+    },
+    {
+      "name": "INVARIANT corn does not reach wheat",
+      "roots": [
+        "Maize plant"
+      ],
+      "expect": [],
+      "reject": [
+        "wheat plant",
+        "soft wheat plant",
+        "wheat bran",
+        "durum wheat plant",
+        "rye plant",
+        "barley plant",
+        "oat plant",
+        "rice plant"
+      ],
+      "reject_note": "shared Poaceae ancestor, and the much nearer shared parents starch-producing plant / oil-producing plant / sugar-producing plant"
+    },
+    {
+      "name": "INVARIANT wheat does not reach corn",
+      "roots": [
+        "wheat plant"
+      ],
+      "expect": [],
+      "reject": [
+        "Maize plant",
+        "field corn plant",
+        "corn oil",
+        "corn syrup",
+        "cornmeal"
+      ]
+    },
+    {
+      "name": "REGRESSION soy does not reach lobster via part_of",
+      "roots": [
+        "soybean plant"
+      ],
+      "expect": [],
+      "reject": [
+        "lobster",
+        "american lobster",
+        "spiny lobster"
+      ],
+      "reject_note": "part_of was drafted as `forward`, which walked soybean plant -> soybean oil (flavored with extract from lobster shell) -> part_of -> lobster and pulled in the whole 73-node lobster subtree. Direction is now `inverse`; this test fails if it is ever flipped back."
+    },
+    {
+      "name": "shellfish DOES reach the lobster-flavoured soybean oil",
+      "roots": [
+        "shellfish species"
+      ],
+      "expect": [
+        "soybean oil (flavored with extract from lobster shell)"
+      ],
+      "reject": [
+        "soybean plant",
+        "Maize plant"
+      ],
+      "reject_note": "the correct direction for the same edge: avoiding lobster should flag the oil, avoiding soy should not flag lobster"
+    },
+    {
+      "name": "REGRESSION pepper reaches paprika and the deep cultivars",
+      "roots": [
+        "pepper"
+      ],
+      "expect": [
+        "hungarian wax pepper plant",
+        "hungarian wax pepper food product",
+        "paprika (ground)",
+        "jalapeno pepper plant",
+        "pimiento pepper plant",
+        "guajillo pepper plant",
+        "Capsicum baccatum"
+      ],
+      "reject": [
+        "wheat plant",
+        "Maize plant",
+        "soybean plant"
+      ],
+      "why": "A shared depth budget of 6, counted from the query root, put `hungarian wax pepper plant` at the edge of it: its food products were never traversed, so a `pepper` query returned 147 classes and no paprika while the narrower `Capsicum` returned 177 and found it. The same cap also cut 19 real pepper cultivars out of the taxonomic phase. Phase 1 and phase 2 now hold separate budgets, each counted from where that phase starts."
+    },
+    {
+      "name": "INVARIANT fish does not reach shellfish",
+      "roots": [
+        "fish species"
+      ],
+      "expect": [
+        "atlantic cod",
+        "salmon",
+        "tuna",
+        "anchovy"
+      ],
+      "reject": [
+        "shrimp",
+        "lobster",
+        "american lobster",
+        "blue crab",
+        "oyster"
+      ],
+      "why": "FALCPA treats fish and crustacean shellfish as SEPARATE allergens. Before the unionOf fix both queries returned the same 4,508 classes, because `owl:unionOf` operands were read as superclasses: a mutual is_a is an equivalence, and that collapsed the aquatic-animal groupings into one class."
+    },
+    {
+      "name": "INVARIANT shellfish does not reach fish",
+      "roots": [
+        "shellfish species"
+      ],
+      "expect": [
+        "shrimp",
+        "lobster",
+        "american lobster",
+        "blue crab"
+      ],
+      "reject": [
+        "atlantic cod",
+        "salmon",
+        "tuna",
+        "anchovy"
+      ],
+      "why": "The other direction of the same defect."
+    },
+    {
+      "name": "INVARIANT tree nut does not reach cereal grains or legumes",
+      "roots": [
+        "nut producing plant",
+        "nut food product"
+      ],
+      "expect": [
+        "walnut",
+        "almond",
+        "pecan",
+        "hazelnut",
+        "macadamia nut",
+        "chestnut"
+      ],
+      "reject": [
+        "rice plant",
+        "soybean plant",
+        "buckwheat plant",
+        "quinoa seed",
+        "wheat plant"
+      ],
+      "why": "`plant seed or nut food product` was asserted both as a subclass and a superclass of `nut food product`, so a tree-nut query descended into every plant seed and returned 2,176 classes including rice and soy. Now 399."
+    },
+    {
+      "name": "egg spans every bird egg, and no embryology",
+      "roots": [
+        "egg or egg component",
+        "chicken egg",
+        "animal egg"
+      ],
+      "expect": [
+        "chicken egg",
+        "quail egg",
+        "goose egg",
+        "ostrich egg",
+        "turkey egg",
+        "duck egg",
+        "animal roe",
+        "egg yolk",
+        "shelled egg"
+      ],
+      "reject": [
+        "embryo",
+        "blastula",
+        "gastrula",
+        "morula",
+        "2-cell stage embryo",
+        "neurula embryo"
+      ],
+      "why": "Egg allergy is to proteins every bird egg carries, so `animal egg` is a root alongside the component-level class. Before the unionOf fix `animal egg` was reachable only through the inverted edge `animal egg is_a shelled egg`; correcting that lost quail, goose, ostrich egg and animal roe until the root was added. The 12 UBERON embryology stages that also sit under `animal egg` are excluded by config/relation_policy.json rather than by narrowing the root -- they are the only non-food members of that subtree."
+    }
+  ]
+}
