@@ -1174,10 +1174,33 @@ function IriField({ iri, curie, compact }) {
     setCopied(true);
     setTimeout(() => setCopied(false), 1400);
   };
+  /* ONE companion tab, reused -- and no JavaScript needed to get it.
+   *
+   * `target="_blank"` was wrong twice over. It spawns a fresh tab per click, so
+   * reading six terms leaves six tabs, which is the opposite of being able to switch
+   * back and forth. And an embedded webview ignored it outright and navigated the
+   * CURRENT tab to ontobee.org, losing the query and everything expanded in the
+   * graph. A NAMED target fixes both: the browser reuses the window with that name,
+   * and it is honoured where `_blank` was not (verified -- a named-target click
+   * leaves the app loaded, while `_blank` replaced it).
+   *
+   * An interception via window.open() was tried first and is worse: this webview
+   * blocks page-initiated popups entirely, so window.open returned null and the
+   * click became a silent no-op. A user-initiated link click with a target is not a
+   * popup and is never blocked, so the declarative form is both simpler and more
+   * robust. It also keeps cmd/ctrl/shift-click, middle-click and "copy link
+   * address" working for free.
+   *
+   * Deliberately NO rel="noopener": noopener and name reuse are mutually exclusive,
+   * because noopener creates a context the opener cannot find again by name. Reuse
+   * is the requested behaviour, the destination is the OBO Foundry PURL resolver,
+   * and this is a localhost tool -- so the opener reference is accepted. Revisit if
+   * the app is ever served publicly.
+   */
   return html`
     <span class=${"irirow" + (compact ? " compact" : "")}>
-      <a class="iri" href=${iri} target="_blank" rel="noopener noreferrer"
-         title=${"Open " + iri + " at purl.obolibrary.org (new tab)"}
+      <a class="iri" href=${iri} target="foodon-term"
+         title=${"Open " + iri + " at purl.obolibrary.org — reuses one companion tab"}
          onClick=${(ev) => ev.stopPropagation()}>
         <code>${curie || iri}</code><span class="ext" aria-hidden="true">↗</span>
       </a>

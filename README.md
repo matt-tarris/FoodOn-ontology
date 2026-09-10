@@ -196,6 +196,15 @@ hungarian wax pepper plant | Solanaceae | local:patch-9a1936568ec0
 That last column is the audit trail: the bridging hop is identified as one this
 layer supplied, not FoodOn's own.
 
+Every IRI in the side panel is a link to the OBO PURL resolver, and they all share
+one **named** companion tab, so a session of looking terms up leaves you two tabs to
+switch between rather than one per term. `target="_blank"` was wrong for this twice:
+it spawns a tab per click, and an embedded webview ignored it and navigated the app's
+own tab away, losing the query. The trade-off, recorded in the code: `rel="noopener"`
+is deliberately absent, because noopener and name reuse are mutually exclusive — the
+destination is the OBO Foundry resolver and this is a localhost tool, so the opener
+reference is accepted. Revisit if it is ever served publicly.
+
 SPARQL 1.1 property paths cannot step through a blank-node `owl:Restriction`, so
 "subClassOf plus propagating properties" has no single-path form. The one-hop
 relation is materialised first and a `+` path closes over it, and it takes **two**
