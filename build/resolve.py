@@ -40,6 +40,7 @@ class Resolver:
         except (FileNotFoundError, json.JSONDecodeError):
             self.store = {"version": "1", "entries": {}}
 
+        self._clo_cache, self._twin_cache = {}, {}
         self.label_ix = {}
         self.syn_ix = collections.defaultdict(list)
         self.bare_ix = collections.defaultdict(list)   # label minus "(...)" suffix
@@ -127,6 +128,77 @@ class Resolver:
         alts.sort(key=lambda a: -a["closure"])
         return alts[:5]
 
+    # ---- facet merge --------------------------------------------------------
+    # A cuisine query names an INGREDIENT, and FoodOn splits every ingredient across
+    # up to four classes: the plant, the food, the `<X> food product` grouping and
+    # the NCBITaxon taxon. `tomato plant` / `tomato` / `tomato food product` /
+    # `Solanum lycopersicum` are not competing SENSES, they are facets of one thing --
+    # and they returned the identical 164-class closure. Scored against each other
+    # they sat 1.8 points apart, under the margin, so the query came back `ambiguous`
+    # and the user got nothing. The resolver was asking "which one?" where the answer
+    # is "those are the same thing".
+    #
+    # Genuine ambiguity is a different shape: `strawberry` vs `strawberry tree`
+    # (Arbutus unedo), `bean` across Phaseolus / Vicia / Glycine, `prawn` across four
+    # species. Those must still be held for sign-off.
+    #
+    # Two tests decide it, and the first is not a heuristic:
+    #
+    #   identical closures    a proof that the choice cannot change the answer. If two
+    #                         candidate roots reach the same set, picking either or
+    #                         both is the same query.
+    #   parallel hierarchy    expand_roots links them -- the species-rank taxon pivot
+    #                         or FoodOn's own label convention, already trusted
+    #                         elsewhere for exactly this (audit F4).
+    #
+    # SUBSUMPTION IS DELIBERATELY NOT ACCEPTED, and the reason is worth stating
+    # because it is the obvious third test. Measured across 30 cuisine terms, "one
+    # closure contains the other" would merge 70 candidate pairs -- and almost all of
+    # them differ by taxonomic RANK, not by facet: `Ocimum` (16) contains
+    # `Ocimum basilicum` (11), `pepper` (176) contains `bell pepper` (45), `Coffea`
+    # (6) contains `Coffea arabica` (2). Accepting it silently widens a query from a
+    # species to its genus, which is exactly the shape config/repair-signoff.json
+    # declines by name: `avian food product -> avian animal` was rejected as
+    # "class-rank (Aves): 319-node source subtree would link all avian food to all
+    # birds". A resolver may not do quietly what the repair pass refuses to do
+    # explicitly.
+    #
+    # Note it is NOT rejected because of `strawberry tree`. That closure is
+    # {Arbutus unedo, strawberry tree} and is entirely DISJOINT from `strawberry`, so
+    # subsumption would never have merged it. The trap it guards is the rank one.
+    #
+    # Only the longest PREFIX of pairwise-compatible candidates merges, which is what
+    # keeps the traps out: `strawberry` merges 2 and leaves `strawberry tree` behind.
+    def _closure_of(self, iri):
+        if iri not in self._clo_cache:
+            self._clo_cache[iri] = frozenset(self.g.closure([iri])[0])
+        return self._clo_cache[iri]
+
+    def _twins_of(self, iri):
+        if iri not in self._twin_cache:
+            self._twin_cache[iri] = {iri} | set(self.g.expand_roots([iri]) or {})
+        return self._twin_cache[iri]
+
+    def _interchangeable(self, a, b):
+        if self._closure_of(a) == self._closure_of(b):
+            return "identical closures"
+        if b in self._twins_of(a) or a in self._twins_of(b):
+            return "parallel hierarchy"
+        return None
+
+    def facet_merge(self, cands, limit=4):
+        """Longest prefix of candidates that all denote the same ingredient."""
+        iris = [c["iri"] for c in cands[:limit]]
+        if len(iris) < 2:
+            return [], []
+        bases, k = set(), 1
+        while k < len(iris):
+            why = [self._interchangeable(iris[j], iris[k]) for j in range(k)]
+            if not all(why):
+                break
+            bases.update(why); k += 1
+        return (iris[:k], sorted(bases)) if k >= 2 else ([], [])
+
     def resolve(self, query, margin=8.0):
         key = query.strip().lower()
         pinned = self.store.get("entries", {}).get(key)
@@ -155,6 +227,27 @@ class Resolver:
                                  "stub category; the two are not structurally distinguishable.")
                 if alts: out["larger_nearby"] = alts
             return out
+        merged, basis = self.facet_merge(c)
+        if merged:
+            byiri = {x["iri"]: x for x in c}
+            left = [x["label"] for x in c[:4] if x["iri"] not in set(merged)]
+            out = {"query": query, "status": "resolved", "method": "facet-merge",
+                   "roots": merged,
+                   "root_labels": [byiri[i]["label"] for i in merged],
+                   # `identical closures` is a proof; a merge resting only on the
+                   # parallel-hierarchy link is one inference removed from that
+                   "confidence": "high" if basis == ["identical closures"] else "medium",
+                   "viability": "ok",
+                   "merge_basis": basis,
+                   "candidates": c[:4],
+                   "note": ("the top candidates are facets of one ingredient, not "
+                            "competing senses (" + ", ".join(basis) + "), so all of "
+                            "them are roots")}
+            if left:
+                out["not_merged"] = left
+                out["note"] += ("; held out of the merge: " + ", ".join(left))
+            return out
         return {"query": query, "status": "ambiguous", "roots": [],
                 "candidates": c[:4],
-                "note": "lexical and structural evidence do not separate the top candidates"}
+                "note": "lexical and structural evidence do not separate the top "
+                        "candidates, and they are not facets of one ingredient"}

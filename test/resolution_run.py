@@ -50,6 +50,17 @@ CASES = [
   ("mustard",     [],                                                      ["Maize plant"]),
   ("fish",        ["surimi"],                                              ["Maize plant"]),
   ("edamame",     [],                                                      ["Maize plant"]),
+
+  # --- facet merge -----------------------------------------------------------
+  # FoodOn splits one ingredient across a plant, a food, a `<X> food product`
+  # grouping and a taxon. Those are facets, not competing senses, and scoring them
+  # against each other left `tomato` 1.8 points inside the margin and therefore
+  # unresolved. Each of these must now resolve AND reach real cuisine targets.
+  ("tomato",      ["tomato juice food product", "tomato (whole or pieces)"], ["Maize plant"]),
+  ("peach",       ["peach (canned)"],                                      ["Maize plant"]),
+  ("onion",       ["onion powder", "onion (raw)", "onion soup food product"], ["Maize plant"]),
+  ("rice",        ["rice flour", "rice bran"],                             ["wheat plant"]),
+  ("lemon",       ["lemon peel"],                                          ["Maize plant"]),
 ]
 MIN_CLOSURE = {"edamame": 1, "paprika": 1, "sulphites": 2}
 
@@ -82,6 +93,74 @@ for q, expect, reject in CASES:
     print(f"{q:<22} {res['status']:<11} {', '.join(res['root_labels'])[:44]:<44} {len(nodes):>8,}  {e_ok}/{len(expect)}")
 
 print("-" * 108)
+# ---- facet-merge traps -------------------------------------------------------
+# The merge takes the longest PREFIX of pairwise-compatible candidates. These three
+# are the cases that must NOT be swallowed by it, and each is a different shape:
+#
+#   strawberry tree   Arbutus unedo. Its 2 classes are a SUBSET of `strawberry`'s 52,
+#                     which is why subsumption was rejected as a compatibility test.
+#   prawn             four different species, no shared organism at all.
+#   coffee            Coffea arabica vs the genus Coffea -- a rank difference, not a
+#                     facet difference.
+#
+# A future loosening of `_interchangeable` that merges any of these is a regression.
+TRAPS = [
+  ("strawberry", "merges", ["strawberry", "strawberry plant"], ["strawberry tree"]),
+  ("prawn",      "holds",  [], []),
+  ("coffee",     "holds",  [], []),
+]
+for q, expect, must_merge, must_exclude in TRAPS:
+    res = r.resolve(q)
+    checks += 1
+    roots = {g.label(i) for i in (res.get("roots") or [])}
+    if expect == "holds":
+        if res.get("status") != "ambiguous":
+            fails.append(f"TRAP {q}: expected to stay ambiguous, got "
+                         f"{res.get('status')} -> {sorted(roots)}")
+        continue
+    if res.get("status") != "resolved":
+        fails.append(f"TRAP {q}: expected a facet merge, got {res.get('status')}")
+        continue
+    for m in must_merge:
+        if m not in roots:
+            fails.append(f"TRAP {q}: `{m}` should be one of the merged roots, got {sorted(roots)}")
+    for x in must_exclude:
+        if x in roots:
+            fails.append(f"TRAP {q}: `{x}` is a DIFFERENT organism and must not be "
+                         f"merged in; roots were {sorted(roots)}")
+
+# RANK must never be the basis of a merge. This is the real reason subsumption is
+# rejected as a compatibility test: a genus closure contains its species closure, so
+# "one contains the other" would widen a query from a species to its genus -- the
+# same thing config/repair-signoff.json declines by name for `avian animal`.
+# (`strawberry` vs `strawberry tree` is NOT this trap: those closures are disjoint.)
+RANK_PAIRS = [("ocimum", "ocimum basilicum"), ("coffea", "coffea arabica")]
+for broad, narrow in RANK_PAIRS:
+    a, b = r.label_ix.get(broad), r.label_ix.get(narrow)
+    if not (a and b):
+        continue
+    checks += 1
+    A, B = frozenset(g.closure([a])[0]), frozenset(g.closure([b])[0])
+    if not (B < A):
+        print(f"  note: {narrow} is no longer inside {broad}; this rank pin has "
+              f"changed shape and should be rechecked")
+    if r._interchangeable(a, b):
+        fails.append(f"`{broad}` and `{narrow}` are reported interchangeable -- a rank "
+                     f"difference is being treated as a facet, which widens a species "
+                     f"query to its genus")
+
+# and the disjoint case, which is what strawberry actually is
+checks += 1
+_sb, _st = r.label_ix.get("strawberry"), r.label_ix.get("strawberry tree")
+if _sb and _st:
+    A, B = frozenset(g.closure([_sb])[0]), frozenset(g.closure([_st])[0])
+    if A & B:
+        print(f"  note: strawberry and strawberry tree now share {len(A & B)} classes; "
+              f"they were disjoint when this pin was written")
+    if r._interchangeable(_sb, _st):
+        fails.append("`strawberry` and `strawberry tree` (Arbutus unedo) are reported "
+                     "interchangeable -- they are different organisms")
+
 if fails:
     print(f"\n{len(fails)} FAILURES:")
     for f in fails: print("   -", f)

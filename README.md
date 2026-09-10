@@ -333,7 +333,7 @@ python3 build/build_resolution_store.py
 python3 build/validate_store.py
 
 python3 test/run.py             # 116 golden + invariant assertions
-python3 test/resolution_run.py  # 104 resolution assertions
+python3 test/resolution_run.py  # 134 resolution assertions
 python3 test/override_run.py    # 61 assertions: signed claims do what their claim says
 python3 test/mined_run.py       # 123 assertions: nothing unsigned reaches an answer
 python3 test/allergen_run.py    # real allergen derivative coverage
@@ -408,7 +408,7 @@ processed ingredients FoodOn models worst. Mapping the CFR vocabulary instead ta
 53 corn, 163 milk, 274 gluten and 274 tree-nut nodes. The taxonomy was right; the
 route to it had to change.
 
-## The eight things that decide correctness
+## The nine things that decide correctness
 
 **No ascent, structurally.** The traversal adjacency contains only edges pointing in
 the avoidance-propagating direction; `subClassOf` is indexed parent→child and the
@@ -512,6 +512,39 @@ a future cyclic release cannot spin. How deep an organism sits in FoodOn's taxon
 is an artefact of how finely that branch was subdivided; it is not a statement about
 relevance, and truncating on it hands back a shorter answer with nothing on screen to
 say it was shortened.
+
+**A facet is not a sense.** FoodOn splits one ingredient across up to four classes —
+the plant, the food, the `<X> food product` grouping and the NCBITaxon taxon. Scoring
+those against each other treats them as competing answers, and they are not:
+`tomato plant` / `tomato` / `tomato food product` / `Solanum lycopersicum` all returned
+the **identical** 164-class closure, sat 1.8 points apart against a margin of 8, and
+so `tomato` resolved to nothing at all. The resolver was asking "which one?" where the
+answer is "those are the same thing". Facets now merge into a multi-root answer, which
+is what `gluten` (five grain species) and `egg` (three classes) already do.
+
+Two tests, and the first is not a heuristic:
+
+- **identical closures** — a proof that the choice cannot change the answer
+- **parallel hierarchy** — `expand_roots` links them, the same rank-guarded test used
+  for the split Solanaceae hierarchies (audit F4)
+
+Only the longest **prefix** of pairwise-compatible candidates merges, which is what
+keeps the traps out: `strawberry` merges 2 and leaves `strawberry tree` (*Arbutus
+unedo*) behind; `bean` merges 2 and leaves its polysemous variants behind; `prawn`
+(four species), `coffee` and `basil` stay ambiguous for sign-off.
+
+**Subsumption is deliberately not a third test.** Measured across 30 cuisine terms it
+would merge 70 candidate pairs, and almost all differ by taxonomic **rank** rather
+than facet — `Ocimum` (16) contains `Ocimum basilicum` (11), `pepper` (176) contains
+`bell pepper` (45). Accepting it widens a species query to its genus, which is exactly
+what `config/repair-signoff.json` declines by name for `avian animal`; a resolver may
+not do quietly what the repair pass refuses to do explicitly. Two rank pins in
+`test/resolution_run.py` hold that line.
+
+Over 107 everyday cuisine terms this took resolution from **82 to 101**. What remains
+is not a tuning problem: `wine`, `beer` and `beef` have **no base class in FoodOn** at
+all — only preparation variants like `wine (dealcoholized)` and `beef (ground)` —
+so they want pinned resolutions, with `grape wine` (55 classes) the obvious ruling.
 
 **Absent is an answer.** Roughly two thirds of everyday allergen vocabulary has no
 FoodOn class at all. The resolver says so rather than resolving to something
