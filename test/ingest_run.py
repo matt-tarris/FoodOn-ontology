@@ -107,6 +107,59 @@ rec = I.recipe(["2 tablespoons olive oil", "1 tablespoon chili oil"])
 if rec["usable"]:
     fails.append("a recipe with an unresolved ingredient was reported usable")
 
+# ---- batch review ------------------------------------------------------------
+# Approving re-checks the target. A proposal was validated when it was made, and the
+# ontology it was validated against is the one thing this project expects to be
+# swapped -- signing off a mapping that no longer resolves would put a dead entry in
+# the ingestion path, where it fails silently and quietly stops protecting anyone.
+import shutil, tempfile
+sys.path.insert(0, "build")
+import audit_model as A
+
+work = tempfile.mkdtemp()
+copy = os.path.join(work, "ingredient-map.json")
+shutil.copy(A.INGREDIENT_MAP, copy)
+orig = A.INGREDIENT_MAP
+A.INGREDIENT_MAP = copy
+try:
+    before = A.ingredients()
+    checks += 1
+    if before["queue"] != sorted(before["queue"], key=lambda e: -e["uses"]):
+        fails.append("the review queue is not ordered by use; a reviewer working "
+                     "top-down would not be buying the most coverage per decision")
+
+    target = next(e["term"] for e in before["queue"] if e.get("proposed"))
+    out = A.review_ingredients([target], "approve", who="test")
+    checks += 1
+    if target not in out["done"]:
+        fails.append(f"approving `{target}` did not take: {out['skipped']}")
+    after = A.ingredients()
+    checks += 1
+    if after["queued_total"] != before["queued_total"] - 1:
+        fails.append("an approved term stayed in the queue")
+    checks += 1
+    if not any(m["term"] == target and m.get("signed_off_by") for m in after["signed"]):
+        fails.append("an approved term did not arrive in `mappings` with a signature")
+
+    # a target that does not resolve must be skipped, not written
+    checks += 1
+    t2 = next(e["term"] for e in after["queue"] if e.get("proposed"))
+    out2 = A.review_ingredients([t2], "approve", who="test", target="unobtainium puree")
+    if out2["done"] or not out2["skipped"]:
+        fails.append("approved a mapping whose target does not resolve")
+
+    checks += 1
+    out3 = A.review_ingredients([], "approve", who="test")
+except A.EditError:
+    pass
+except Exception as e:
+    fails.append(f"batch review raised {type(e).__name__}: {e}")
+else:
+    fails.append("an empty selection was accepted")
+finally:
+    A.INGREDIENT_MAP = orig
+    shutil.rmtree(work)
+
 print(f"map: {len(spec.get('mappings', []))} signed, "
       f"{len(spec.get('requires_signoff', []))} queued "
       f"({spec.get('deterministic_share')}% of the seed corpus already deterministic)")

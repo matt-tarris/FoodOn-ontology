@@ -599,3 +599,87 @@ def retire(ident, why, who="Matt"):
     o["reviewed_by"] = who; o["reviewed_date"] = TODAY()
     _write(OVERRIDES, d)
     return [OVERRIDES]
+
+
+# ===========================================================================
+# Ingredient mappings: the batch review queue
+# ===========================================================================
+INGREDIENT_MAP = "config/ingredient-map.json"
+
+
+def ingredients(limit=None):
+    """The mapping queue, plus what has already been signed.
+
+    Ordered by USE. The vocabulary is steeply headed -- on 5,000 real recipes the top
+    20 terms carry about a third of the queue -- so a reviewer working top-down buys
+    the most coverage per decision, and a reviewer working alphabetically buys the
+    least.
+    """
+    spec = _read(INGREDIENT_MAP)
+    q = spec.get("requires_signoff", [])
+    q.sort(key=lambda e: -e.get("uses", 0))
+    queued_uses = sum(e.get("uses", 0) for e in q)
+    return dict(
+        signed=spec.get("mappings", []),
+        queue=q[:limit] if limit else q,
+        queued_total=len(q),
+        queued_uses=queued_uses,
+        corpus=spec.get("corpus"), corpus_lines=spec.get("corpus_lines"),
+        deterministic_share=spec.get("deterministic_share"),
+        proposed=sum(1 for e in q if e.get("proposed")),
+        declined_proposals=sum(1 for e in q if e.get("declined_reason")),
+        abstained=sum(1 for e in q if "proposed_by" in e and not e.get("proposed")
+                      and not e.get("declined_reason")),
+    )
+
+
+def review_ingredients(terms, action, who="Matt", target=None, reason=None):
+    """Approve or decline a batch of mapping proposals.
+
+    Approving re-checks that the target still resolves. A proposal was validated when
+    it was made, and the ontology it was validated against can be replaced -- the whole
+    point of the patch layer is that the vendor file gets swapped. Signing off something
+    that no longer resolves would put a dead mapping into the ingestion path, where it
+    would silently fail to match and quietly stop protecting whoever relied on it.
+    """
+    if action not in ("approve", "decline"):
+        raise EditError(f"unknown action: {action}")
+    if not terms:
+        raise EditError("no terms selected")
+    spec = _read(INGREDIENT_MAP)
+    by = {e["term"]: e for e in spec.get("requires_signoff", [])}
+    spec.setdefault("mappings", [])
+    spec.setdefault("declined", [])
+    from resolve import Resolver
+    r = Resolver()
+    done, skipped = [], []
+    for t in terms:
+        e = by.get(t)
+        if e is None:
+            skipped.append((t, "not in the queue"))
+            continue
+        if action == "decline":
+            spec["declined"].append(dict(term=t, uses=e.get("uses"),
+                                         reason=reason or e.get("declined_reason")
+                                         or "declined on review",
+                                         declined_by=who, declined_date=TODAY()))
+            done.append(t)
+            continue
+        maps_to = target or e.get("proposed")
+        if not maps_to:
+            skipped.append((t, "no proposal to approve; give a target or decline it"))
+            continue
+        res = r.resolve(maps_to)
+        if res["status"] != "resolved":
+            skipped.append((t, f"`{maps_to}` no longer resolves ({res['status']})"))
+            continue
+        spec["mappings"].append(dict(
+            term=t, maps_to=maps_to, uses=e.get("uses"),
+            root_labels=res["root_labels"], proposed_by=e.get("proposed_by"),
+            signed_off_by=who, signed_off_date=TODAY()))
+        done.append(t)
+    handled = set(done)
+    spec["requires_signoff"] = [e for e in spec.get("requires_signoff", [])
+                                if e["term"] not in handled]
+    _write(INGREDIENT_MAP, spec)
+    return dict(done=done, skipped=skipped, files=[INGREDIENT_MAP])

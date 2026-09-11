@@ -175,6 +175,21 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             reload_graph()
             return self._send({"ok": True, "files": files, "log": log,
                                "audit": audit_data()})
+        if parsed.path == "/api/audit/ingredients/review":
+            try:
+                p = self._body()
+                out = audit_model.review_ingredients(
+                    p.get("terms") or [], p.get("action"), who=p.get("who") or "Matt",
+                    target=p.get("target"), reason=p.get("reason"))
+            except audit_model.EditError as e:
+                return self._send({"error": str(e)}, 400)
+            except Exception:
+                traceback.print_exc()
+                return self._send({"error": "review failed; see the server log"}, 500)
+            # no .ttl regeneration: the ingredient map feeds build/ingest.py, not the
+            # patch layer, so nothing about the merged ontology changes here
+            return self._send({"ok": True, **out,
+                               "ingredients": audit_model.ingredients()})
         if parsed.path == "/api/audit/rebuild":
             r = subprocess.run(["./tools/apply_patches.sh"], capture_output=True, text=True)
             ok = r.returncode == 0
@@ -190,6 +205,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             qs = urllib.parse.parse_qs(parsed.query)
             return self._send({"hits": audit_model.lookup((qs.get("q") or [""])[0],
                                                           graph=GRAPH)})
+        if parsed.path == "/api/audit/ingredients":
+            return self._send(audit_model.ingredients())
         if parsed.path == "/api/audit/vocabulary":
             return self._send(audit_model.vocabulary())
         if parsed.path == "/api/audit":

@@ -418,6 +418,150 @@ function render() {
     "A decision has changed since the SPARQL graph was built. The app is current; exported queries are not.");
 }
 
+
+
+/* ====================================================================== *
+ * Ingredient mappings: batch review
+ *
+ * 500 terms is too many to decide one at a time and too few to accept blind. The
+ * queue is ordered by USE because the vocabulary is steeply headed -- the top 20
+ * terms carry about a third of it -- so working top-down buys the most coverage per
+ * decision. Select, then approve or decline the selection.
+ *
+ * `Select all shown` is scoped to the current filter on purpose. A button that
+ * selected all 500 regardless of what was on screen would make it trivial to approve
+ * the 30 risky ones and the 75 with no candidate along with the easy 273.
+ * ====================================================================== */
+let ING = null, SEL = new Set(), FILTER = "proposed", SHOW = 25;
+const LAYER_INTRO = document.querySelector(".why").outerHTML;
+
+const FILTERS = {
+  proposed:  {label: "has a proposal",   fn: e => !!e.proposed},
+  risky:     {label: "risky candidate",  fn: e => (e.candidates||[]).some(c => c.risky)},
+  nocand:    {label: "nothing proposed", fn: e => !e.proposed && !e.declined_reason},
+  declined:  {label: "proposed decline", fn: e => !!e.declined_reason},
+  all:       {label: "everything",       fn: () => true},
+};
+
+const shown = () => (ING.queue || []).filter(FILTERS[FILTER].fn).slice(0, SHOW);
+
+function ingRow(e) {
+  // Only warn when the PROPOSAL is the risky one. Flagging every risky candidate made
+  // `red wine vinegar -> wine vinegar` -- a good answer -- carry a red warning about a
+  // worse answer nobody proposed, which teaches a reviewer to ignore the colour.
+  const risky = (e.candidates || []).filter(
+    c => c.risky && (!e.proposed || c.term === e.proposed));
+  const cands = (e.candidates || []).filter(c => c.term !== e.proposed).slice(0, 2);
+  return `<tr class="${SEL.has(e.term) ? "sel" : ""}" data-term="${esc(e.term)}">
+    <td><input type="checkbox" data-cb ${SEL.has(e.term) ? "checked" : ""}></td>
+    <td><span class="term">${esc(e.term)}</span>
+      ${cands.length ? `<div class="cands">also possible: ${cands.map(c =>
+        `<b>${esc(c.term)}</b> (${c.closure})`).join(", ")}</div>` : ""}</td>
+    <td class="uses">${(e.uses || 0).toLocaleString()}</td>
+    <td>${e.proposed
+      ? `<span class="prop">${esc(e.proposed)}</span>
+         <div class="ids">${esc((e.proposed_roots || []).join(", "))} · ${e.proposed_closure} classes</div>`
+      : e.declined_reason
+        ? `<span class="noprop">not an ingredient</span><div class="ids">${esc(e.declined_reason)}</div>`
+        : `<span class="noprop">${esc(e.proposed_note || "nothing proposed")}</span>`}
+      ${risky.length ? `<span class="riskflag">${esc(risky[0].warning)}</span>` : ""}</td>
+  </tr>`;
+}
+
+function renderIngredients() {
+  const q = ING.queue || [];
+  const list = shown();
+  const pool = q.filter(FILTERS[FILTER].fn);
+  $("#sub").textContent =
+    `${ING.queued_total.toLocaleString()} terms awaiting review · `
+    + `${ING.queued_uses.toLocaleString()} ingredient uses · `
+    + `${ING.signed.length} signed`;
+  $("#key").innerHTML = "";
+  $(".why").remove();          // the patch-layer intro belongs to the other view
+  $("#out").innerHTML = `
+    ${ING.signed.length ? `<div class="done">${ING.signed.length} mapping${
+      ING.signed.length>1?"s":""} signed off and live in build/ingest.py — 
+      ${ING.signed.reduce((s,m)=>s+(m.uses||0),0).toLocaleString()} ingredient uses.</div>` : ""}
+    <p class="why"><b>${ING.deterministic_share}%</b> of
+      ${(ING.corpus_lines||0).toLocaleString()} ingredient uses in
+      <code>${esc(ING.corpus||"the corpus")}</code> already resolve without any of this.
+      These are what is left: ${ING.proposed} carry a proposal, ${ING.declined_proposals}
+      are proposed as not-an-ingredient, ${ING.abstained} abstained because FoodOn has
+      nothing. <b>A proposal is not a decision</b> — nothing here affects ingestion
+      until it is signed.</p>
+    <div class="batchbar">
+      <div class="filters2">${Object.entries(FILTERS).map(([k,v]) =>
+        `<button data-filter="${k}" aria-pressed="${k===FILTER}">${esc(v.label)} (${
+          q.filter(v.fn).length})</button>`).join("")}</div>
+      <span class="spacer"></span>
+      <span class="count">showing <b>${list.length}</b> of ${pool.length}
+        · <b>${SEL.size}</b> selected</span>
+      <button class="btn" data-all>Select all shown</button>
+      <button class="btn" data-none>Clear</button>
+      <button class="btn go" data-approve ${SEL.size?"":"disabled"}>Approve ${SEL.size||""}</button>
+      <button class="btn" data-declineb ${SEL.size?"":"disabled"}>Decline ${SEL.size||""}</button>
+    </div>
+    <table class="ing"><thead><tr>
+      <th style="width:26px"></th><th>recipe term</th><th class="uses">uses</th>
+      <th>maps to</th></tr></thead>
+      <tbody>${list.map(ingRow).join("") ||
+        '<tr><td colspan="4" style="padding:12px;color:var(--muted)">nothing matches this filter</td></tr>'}</tbody>
+    </table>
+    ${pool.length > SHOW ? `<div class="acts"><button class="btn" data-more>Show ${
+      Math.min(25, pool.length-SHOW)} more — ${pool.length-SHOW} left</button></div>` : ""}`;
+}
+
+async function reviewBatch(action) {
+  const terms = [...SEL];
+  if (!terms.length) return;
+  banner("ok", `${action === "approve" ? "signing off" : "declining"} ${terms.length}…`);
+  const r = await fetch("/api/audit/ingredients/review", {method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({terms, action})});
+  const j = await r.json();
+  if (!r.ok) { banner("err", j.error || "review failed"); return; }
+  ING = j.ingredients; SEL.clear(); renderIngredients();
+  const skipped = (j.skipped || []).length;
+  banner(skipped ? "stale" : "ok",
+    `${j.done.length} ${action === "approve" ? "signed off" : "declined"}`
+    + (skipped ? ` · ${skipped} skipped: ${j.skipped.map(s => s[0]+" ("+s[1]+")").join("; ")}` : "")
+    + (action === "approve" ? " — live in build/ingest.py now" : ""));
+}
+
+document.addEventListener("click", async (ev) => {
+  const t = ev.target;
+  if (t.closest("#tabs button")) {
+    const b = t.closest("button");
+    [...$("#tabs").children].forEach(c => c.setAttribute("aria-pressed", c === b));
+    $("#hd").firstChild.textContent = b.dataset.view === "ingredients"
+      ? "Ingredient mappings " : "Patch layer audit ";
+    if (b.dataset.view === "ingredients") {
+      if (!ING) ING = await (await fetch("/api/audit/ingredients")).json();
+      renderIngredients();
+    } else {
+      if (!$(".why")) $("#out").insertAdjacentHTML("beforebegin", LAYER_INTRO);
+      render();
+    }
+    return;
+  }
+  if (!ING || !$("#tabs button[data-view=ingredients][aria-pressed=true]")) return;
+  if (t.closest("[data-filter]")) {
+    FILTER = t.closest("[data-filter]").dataset.filter; SHOW = 25; SEL.clear();
+    renderIngredients(); return;
+  }
+  if (t.closest("[data-more]"))  { SHOW += 25; renderIngredients(); return; }
+  if (t.closest("[data-all]"))   { shown().forEach(e => SEL.add(e.term)); renderIngredients(); return; }
+  if (t.closest("[data-none]"))  { SEL.clear(); renderIngredients(); return; }
+  if (t.closest("[data-approve]"))  { await reviewBatch("approve"); return; }
+  if (t.closest("[data-declineb]")) { await reviewBatch("decline"); return; }
+  const row = t.closest("tr[data-term]");
+  if (row) {
+    const term = row.dataset.term;
+    SEL.has(term) ? SEL.delete(term) : SEL.add(term);
+    renderIngredients();
+  }
+});
+
 fetch("/api/audit").then(r => r.json()).then(async (d) => {
   DATA = d;
   VOCAB = await (await fetch("/api/audit/vocabulary")).json();

@@ -5,9 +5,13 @@
 <link rel="stylesheet" href="audit.css">
 <div class="wrap">
   <header class="ahead">
-    <h1>Patch layer audit <span id="sub"></span></h1>
+    <h1 id="hd">Patch layer audit <span id="sub"></span></h1>
     <a class="lnk" href="/">← avoidance graph</a>
   </header>
+  <div class="tabs" id="tabs">
+    <button data-view="layer" aria-pressed="true">Patch layer</button>
+    <button data-view="ingredients" aria-pressed="false">Ingredient mappings</button>
+  </div>
   <div id="banner"></div>
   <div class="key" id="key"></div>
   <p class="why">What does this tool say about an ingredient, and how much of that answer

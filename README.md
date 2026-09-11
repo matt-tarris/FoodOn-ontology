@@ -897,6 +897,29 @@ two ingredients into one.
 Current state: **273 proposed, 42 declined, 10 abstained**. If every proposal were
 approved, 71% of the queued uses would map.
 
+### Approving in batches
+
+The **Ingredient mappings** tab of `audit.html` reviews them. The queue is ordered by
+**use**, because the vocabulary is steeply headed — the top 20 terms carry about a third
+of it — so working top-down buys the most coverage per decision and working
+alphabetically buys the least.
+
+Select rows, then approve or decline the selection. Filters split the queue by what kind
+of decision it needs: *has a proposal* (273), *risky candidate*, *nothing proposed*,
+*proposed decline* (42). **`Select all shown` is scoped to the current filter on
+purpose** — a button that took all 500 regardless of what was on screen would make it
+trivial to wave through the 30 risky ones along with the easy 273.
+
+Approving **re-checks that the target still resolves**. A proposal was validated when it
+was made, and the vendor ontology is the one thing this project expects to be swapped;
+signing off a mapping that no longer resolves would put a dead entry in the ingestion
+path, where it fails silently and quietly stops protecting whoever relied on it. The
+skipped ones come back named.
+
+Approval takes effect immediately — `build/ingest.py` reads the signed mappings on its
+next run, and no `.ttl` regeneration is involved, because the ingredient map feeds
+ingestion rather than the patch layer.
+
 The risk flag fires when a **dropped word is itself a food**. An earlier version flagged
 anything collapsing onto a generic noun, which buried `chili oil` and `goat cheese` under
 warnings about `maldon` and `distilled`. It still over-flags some brand names; that costs
