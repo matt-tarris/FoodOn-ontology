@@ -29,7 +29,8 @@ def annotations_for(roots):
 
       no FoodOn class   `annotation_only`. There is nothing to point an edge at.
       weaker than
-      containment       `may_contain`, `cross_reactive`, `disputed`. A FoodOn class
+      containment       `may_contain`, `shared_compound`, `cross_reactive`,
+                        `disputed`. A FoodOn class
                         exists, but the closure means "treat this as containing the
                         query" and none of these claims say that — `may_contain` is a
                         producer's feedstock choice, and `cross_reactive` states the
@@ -57,7 +58,8 @@ def annotations_for(roots):
                     "iri": o.get("target_class"),
                     "source": o.get("source")})
     # containment-adjacent first, then alphabetically, so the ordering is stable
-    order = {"may_contain": 0, "disputed": 1, "cross_reactive": 2}
+    order = {"may_contain": 0, "shared_compound": 1, "disputed": 2,
+             "cross_reactive": 3}
     out.sort(key=lambda a: (order.get(a["claim"], 3), a["term"]))
     return out
 

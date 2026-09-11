@@ -161,10 +161,11 @@ guards, the evidence and the reviewer, and the same facts again as a machine-rea
 the round trip both ways — a hand-edit to the generated file, or a decision that
 fails to export, breaks the build.
 
-**Only `contains` is emitted as `RO:0001000`.** Three claim types are not
+**Only `contains` is emitted as `RO:0001000`.** Four claim types are not
 containment and get their own declared object properties, each with an
 `rdfs:comment` saying so plainly: `local:mayDeriveFrom` (feedstock is a producer
-choice), `local:crossReactiveWith` (the allergen protein is *not* present),
+choice), `local:sharesCompoundWith` (the same molecule reached another way),
+`local:crossReactiveWith` (the allergen protein is *not* present),
 `local:disputedAvoidance`. Emitting these as `derives from` would tell a
 corn-avoider that citric acid contains corn.
 
@@ -423,18 +424,46 @@ not hypothetical: `part_of` was drafted as `forward` and made a soy query return
 lobster and its 73-node subtree.
 
 **Only `contains` enters the closure.** The closure means one thing — treat this as
-containing the query — so the three weaker claim types in `config/overrides.json` are
+containing the query — so the four weaker claim types in `config/overrides.json` are
 reported beside the graph rather than drawn in it. Their own definitions say why:
 `may_contain` is "feedstock is a producer choice", so corn-derived citric acid is
 corn-derived *at some producers* and asserting containment states a fact about the
 substance that is not true; `cross_reactive` says outright that "the allergen protein
 is NOT present", which as a containment edge is wrong in the direction that needlessly
-excludes safe food; `disputed` has "no established containment basis". All three used
+excludes safe food; `disputed` has "no established containment basis";
+`shared_compound` is the intolerance case below. All of them used
 to be injected exactly like `contains`, which is what `test/allergen_run.py` was
 failing on — 11 terms reached by traversal that only a weaker claim supported. Nothing
 is dropped: they surface under *Reported, not traversed* with the claim, the reason and
 the reviewer's note, and `test/override_run.py` asserts both halves — a `contains`
 override must reach the graph, and a weaker one must not, but must still be reported.
+
+**Intolerance is not allergy, and the graph says which.** A diner who cannot take
+citrus is often reacting to **citric acid**, not to the fruit proteins — so the
+avoidance is real but the containment is not. Commercial citric acid is *Aspergillus
+niger* fermentation on a sugar feedstock; the project already carries a signed
+`may_contain` linking it to **corn** for that reason. And its FoodOn closure is ten
+*imitation* citrus beverage bases — products formulated with citric acid precisely so
+they contain no citrus. A `contains` edge from citrus would therefore put on a
+citrus-avoider's list the very products that exist to be citrus-free.
+
+The fifth claim type, `shared_compound`, is for exactly this shape: *the query and the
+target share the compound that drives a non-immune intolerance response. Neither
+derives from the other, and no allergen protein is involved; the compound is the same
+molecule whatever its origin.* Three entries carry it — `citric acid` (E330), the
+buffered `citrate salt` forms, and `citric acid esters of mono- and diglycerides`
+(E472c), which smuggles the compound into baked goods where a label gives no hint of
+citrus.
+
+It is attached to **all 19 citrus query roots**, not just the genus: someone with this
+intolerance types `lemon` or `orange` far more often than `citrus`, and a weak claim is
+matched on the resolved root rather than inherited down the hierarchy. No traversal
+change was needed — anything that is not `contains` is already collected and reported —
+so the cost of a new claim type is its definition, its OWL property, a note in the UI
+and a line in the ordering. `test/override_run.py` now also asserts that every claim
+used is **declared** in `claim_types`, because a typo would fall through the
+not-`contains` branch and be reported rather than drawn: safe by luck rather than by
+design.
 
 **Excluded branches are config, not code.** `config/relation_policy.json` lists them
 and `build/traverse.py` reads that list. It used to hardcode the agency root while the

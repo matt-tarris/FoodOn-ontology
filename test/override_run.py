@@ -75,6 +75,21 @@ for o in signed:
         redundant.append(f"{o['query_class']} -> {o['target_label']}: reached by ordinary "
                          f"traversal once other overrides applied; this entry adds nothing")
 
+# 2a-i. every claim used must be DECLARED. The claim vocabulary is what decides
+#     whether an entry enters the closure, and a typo (`may contain`, `shared-compound`)
+#     would silently fall through the not-`contains` branch and be reported instead of
+#     drawn -- safe by luck, not by design. It also keeps the UI honest: web/app.js and
+#     the patch emitter both key off these names, so an undeclared claim reaches the
+#     reader with no explanation of what it means.
+declared = set(ov.get("claim_types") or {}) | {"not_avoidance_relevant"}
+for o in ov["overrides"]:
+    c = o.get("claim")
+    if not c: continue
+    checks += 1
+    if c not in declared:
+        fails.append(f"claim `{c}` is used by {o.get('target_label')} but not declared "
+                     f"in claim_types; declared are {sorted(declared)}")
+
 # 2b. ...and a weaker claim must still be REPORTED, or removing it from the closure
 #     would have quietly deleted a safety note the reviewer signed.
 for o in signed:

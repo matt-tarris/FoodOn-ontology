@@ -57,7 +57,8 @@ for a in json.load(open("data/mined-classified.json"))["signed_off"]:
         continue                      # emitted as a named subClassOf, checked below
     expected_ax.add((cur(a["product"]), "obo:RO_0001000", cur(a["source"])))
 WEAK = {"may_contain": "local:mayDeriveFrom", "cross_reactive": "local:crossReactiveWith",
-        "disputed": "local:disputedAvoidance"}
+        "disputed": "local:disputedAvoidance",
+        "shared_compound": "local:sharesCompoundWith"}
 for o in json.load(open("config/overrides.json"))["overrides"]:
     tgt, claim, typ = o.get("target_class"), o.get("claim"), o.get("type")
     if not tgt or typ == "superseded":

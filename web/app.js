@@ -1221,6 +1221,10 @@ const CLAIM_NOTE = {
   may_contain: "May be derived from it. The feedstock is a producer choice, so this " +
                "is a label to check or a supplier to ask — not a term to treat as " +
                "containing the allergen.",
+  shared_compound: "The same compound, reached another way \u2014 not derived from " +
+                   "it. Relevant to an INTOLERANCE, where the response is to the " +
+                   "molecule and its origin does not matter. It is not in the dish " +
+                   "because the query is, so it stays out of the graph.",
   disputed: "Appears on avoidance lists with no established containment basis.",
   cross_reactive: "Immunologically related, but the allergen protein is NOT present. " +
                   "Relevant to a clinical history, not to what is in the dish.",

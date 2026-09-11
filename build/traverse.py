@@ -192,6 +192,14 @@ class Graph:
         #   cross_reactive  "the allergen protein is NOT present." Containment here is
         #                   wrong in the dangerous direction: it excludes safe food.
         #   disputed        "no established containment basis."
+        #   shared_compound the same molecule reached by two routes. Citric acid is
+        #                   what citrus is named for and is the usual trigger in
+        #                   citrus INTOLERANCE, but commercial citric acid is
+        #                   Aspergillus niger fermentation -- so `contains` would be
+        #                   false, and the ten imitation-citrus beverages in its
+        #                   closure are formulated with it precisely to contain no
+        #                   citrus. Reported, so an intolerance is supported without
+        #                   asserting a derivation that is not there.
         #
         # Every one of them was previously injected exactly like `contains`, which is
         # what test/allergen_run.py was failing on: 11 terms reached by traversal that

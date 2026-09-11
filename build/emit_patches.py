@@ -122,6 +122,7 @@ for a in json.load(open("data/mined-classified.json"))["signed_off"]:
 # ---- 3. overrides -------------------------------------------------------------
 ov = json.load(open("config/overrides.json"))
 WEAK = {"may_contain": BASE + "mayDeriveFrom",
+        "shared_compound": BASE + "sharesCompoundWith",
         "cross_reactive": BASE + "crossReactiveWith",
         "disputed": BASE + "disputedAvoidance"}
 for o in ov["overrides"]:
@@ -263,6 +264,18 @@ Aspergillus fermentation on a sugar feedstock that is often, but not always, cor
 THIS IS NOT CONTAINMENT and must not be treated as obo:RO_0001000. A consumer
 should surface it as a label to check or a supplier to ask.\"\"\"@en ;
     rdfs:seeAlso <{FOODON_IRI}> .
+
+local:sharesCompoundWith a owl:ObjectProperty ;
+    rdfs:label "shares compound with"@en ;
+    rdfs:comment \"\"\"Subject and object share the compound that drives a non-immune
+INTOLERANCE response. Neither derives from the other and no allergen protein is
+involved: the molecule is the same whatever its origin. Citric acid is what citrus is
+named for and is the usual trigger in citrus intolerance, yet commercial citric acid
+is Aspergillus niger fermentation -- and the imitation-citrus beverages built on it
+are formulated that way precisely to contain no citrus. THIS IS NOT CONTAINMENT and
+must not be treated as obo:RO_0001000. A consumer should surface it to someone
+avoiding the subject for an intolerance, and not to someone avoiding it for an
+allergy.\"\"\"@en .
 
 local:crossReactiveWith a owl:ObjectProperty ;
     rdfs:label "cross reactive with"@en ;

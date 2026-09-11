@@ -85,6 +85,18 @@ THIS IS NOT CONTAINMENT and must not be treated as obo:RO_0001000. A consumer
 should surface it as a label to check or a supplier to ask."""@en ;
     rdfs:seeAlso <http://purl.obolibrary.org/obo/foodon.owl> .
 
+local:sharesCompoundWith a owl:ObjectProperty ;
+    rdfs:label "shares compound with"@en ;
+    rdfs:comment """Subject and object share the compound that drives a non-immune
+INTOLERANCE response. Neither derives from the other and no allergen protein is
+involved: the molecule is the same whatever its origin. Citric acid is what citrus is
+named for and is the usual trigger in citrus intolerance, yet commercial citric acid
+is Aspergillus niger fermentation -- and the imitation-citrus beverages built on it
+are formulated that way precisely to contain no citrus. THIS IS NOT CONTAINMENT and
+must not be treated as obo:RO_0001000. A consumer should surface it to someone
+avoiding the subject for an intolerance, and not to someone avoiding it for an
+allergy."""@en .
+
 local:crossReactiveWith a owl:ObjectProperty ;
     rdfs:label "cross reactive with"@en ;
     rdfs:comment """Immunologically related to the subject, but the allergen protein
@@ -2595,7 +2607,7 @@ local:patch-c1085192f1cf a local:Patch ;
 
 
 # =============================================================================
-# Claims that are NOT containment   (14)
+# Claims that are NOT containment   (71)
 # =============================================================================
 # Emitted on local properties, never on RO:0001000. Read the property
 # comments before consuming these. Entries marked DECLINED were reviewed and
@@ -2689,6 +2701,899 @@ local:patch-8149703c6908 a local:Patch ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
+### citrate salt  --sharesCompoundWith-->  grapefruit food product
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00001929 .
+local:patch-daee77c68e7b a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00001929 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  mandarin orange food product
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00002018 .
+local:patch-c1bb0b7759dd a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00002018 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  citrus fruit
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003324 .
+local:patch-0c3d0de906d1 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003324 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  tangerine
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003488 .
+local:patch-d9ea85f76217 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003488 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  grapefruit
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003554 .
+local:patch-b11ec85dc5b5 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003554 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  mandarin orange
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003555 .
+local:patch-48c5de2f1e4d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003555 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  clementine
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003656 .
+local:patch-5ef9a1e5cc00 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003656 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  citron
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003659 .
+local:patch-5972de1393b9 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003659 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  lime
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003661 .
+local:patch-8b6f6aab681a a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003661 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  kumquat
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003686 .
+local:patch-65b28280a8e3 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003686 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  yuzu
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_00003732 .
+local:patch-8f0c82ecf7f2 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003732 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  lemon
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_03315104 .
+local:patch-3a8117aca6c5 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03315104 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  orange
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_03315106 .
+local:patch-751507f44e61 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03315106 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  lemon plant
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_03411275 .
+local:patch-dbadd9a5537d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411275 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  orange plant
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_03411339 .
+local:patch-a200efd873c2 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411339 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  grapefruit plant
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_03411507 .
+local:patch-a612cd41bdbd a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411507 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  pomelo plant
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:FOODON_03412018 .
+local:patch-a24bf3efef5d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03412018 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  Citrus
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:NCBITaxon_2706 .
+local:patch-03d5dc6e8fd0 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:NCBITaxon_2706 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrate salt  --sharesCompoundWith-->  Citrus x paradisi
+#   evidence:   buffered salts of the compound above; same molecule, different counter-ion
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   neutralised forms of the same acid -- sodium, potassium, calcium and
+#   ammonium citrate. Generally better tolerated than the free acid, which is
+#   why this is reported and not treated as equivalent
+obo:CHEBI_50744 local:sharesCompoundWith obo:NCBITaxon_37656 .
+local:patch-d3f476372161 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_50744 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:NCBITaxon_37656 ;
+    local:patchEvidence "buffered salts of the compound above; same molecule, different counter-ion" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "neutralised forms of the same acid -- sodium, potassium, calcium and ammonium citrate. Generally better tolerated than the free acid, which is why this is reported and not treated as equivalent" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  grapefruit food product
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00001929 .
+local:patch-b2240a97122a a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00001929 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  mandarin orange food product
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00002018 .
+local:patch-373893b97a76 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00002018 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  citrus fruit
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003324 .
+local:patch-58cd1b6f3e1d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003324 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  tangerine
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003488 .
+local:patch-32822336b97d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003488 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  grapefruit
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003554 .
+local:patch-9f63430a2831 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003554 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  mandarin orange
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003555 .
+local:patch-d94e0bcbdf51 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003555 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  clementine
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003656 .
+local:patch-d674411ae52d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003656 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  citron
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003659 .
+local:patch-0b1017b410f0 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003659 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  lime
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003661 .
+local:patch-0b1b4ed1789f a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003661 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  kumquat
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003686 .
+local:patch-26e0132138bc a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003686 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  yuzu
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_00003732 .
+local:patch-8af8a7252c65 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003732 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  lemon
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_03315104 .
+local:patch-545fa2ba588a a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03315104 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  orange
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_03315106 .
+local:patch-df4d5e5e681d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03315106 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  lemon plant
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_03411275 .
+local:patch-9e5990b0f39c a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411275 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  orange plant
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_03411339 .
+local:patch-3374fee25aad a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411339 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  grapefruit plant
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_03411507 .
+local:patch-ed946bbae233 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411507 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  pomelo plant
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:FOODON_03412018 .
+local:patch-ca115dc7c009 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03412018 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  Citrus
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:NCBITaxon_2706 .
+local:patch-10e312faa26f a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:NCBITaxon_2706 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid  --sharesCompoundWith-->  Citrus x paradisi
+#   evidence:   citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   the acid citrus is named for, and the usual trigger in citrus intolerance.
+#   Commercial citric acid is Aspergillus niger fermentation, not citrus, so
+#   this is not a derivation -- it is the same molecule from a different
+#   origin
+obo:CHEBI_30769 local:sharesCompoundWith obo:NCBITaxon_37656 .
+local:patch-41f1a3dbb1b1 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:CHEBI_30769 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:NCBITaxon_37656 ;
+    local:patchEvidence "citrus intolerance is commonly a response to the acid rather than to the fruit proteins; the additive (E330) delivers it without any citrus in the product" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "the acid citrus is named for, and the usual trigger in citrus intolerance. Commercial citric acid is Aspergillus niger fermentation, not citrus, so this is not a derivation -- it is the same molecule from a different origin" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
 ### citric acid  --mayDeriveFrom-->  Zea mays subsp. mays
 #   evidence:   manufacturing feedstock varies by producer; not a property of the substance
 #   confidence: medium
@@ -2707,6 +3612,424 @@ local:patch-894fffce8d9c a local:Patch ;
     local:patchClaim "may_contain" ;
     local:patchQuery "Corn" ;
     rdfs:comment "Aspergillus niger fermentation on a sugar feedstock, often corn" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  grapefruit food product
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00001929 .
+local:patch-35143a327ee8 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00001929 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  mandarin orange food product
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00002018 .
+local:patch-67e81ae04516 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00002018 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  citrus fruit
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003324 .
+local:patch-c6af0bb7b9ae a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003324 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  tangerine
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003488 .
+local:patch-3653096b798d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003488 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  grapefruit
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003554 .
+local:patch-8d37df3e687b a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003554 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  mandarin orange
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003555 .
+local:patch-f8def954f762 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003555 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  clementine
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003656 .
+local:patch-891167a517e6 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003656 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  citron
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003659 .
+local:patch-6afcd823db93 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003659 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  lime
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003661 .
+local:patch-e7544d7a77de a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003661 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  kumquat
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003686 .
+local:patch-361758c84d2d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003686 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  yuzu
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_00003732 .
+local:patch-110d195a0831 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_00003732 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  lemon
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_03315104 .
+local:patch-cfc703052da9 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03315104 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  orange
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_03315106 .
+local:patch-90198ca4d492 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03315106 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  lemon plant
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_03411275 .
+local:patch-6ddadf3218ae a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411275 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  orange plant
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_03411339 .
+local:patch-da15983692c0 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411339 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  grapefruit plant
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_03411507 .
+local:patch-13013b84a1c7 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03411507 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  pomelo plant
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:FOODON_03412018 .
+local:patch-aee74dbbe8b0 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:FOODON_03412018 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  Citrus
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:NCBITaxon_2706 .
+local:patch-9d997e75cdc6 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:NCBITaxon_2706 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citric acid esters of mono- and diglycerides of fatty acids  --sharesCompoundWith-->  Citrus x paradisi
+#   evidence:   citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330
+#   confidence: medium
+#   claim:      shared_compound
+#   query:      Citrus
+#   reviewer:   Matt
+#   E472c. An emulsifier built on citric acid, so it carries the compound into
+#   baked goods and fats where a label gives no hint of citrus
+obo:FOODON_03413067 local:sharesCompoundWith obo:NCBITaxon_37656 .
+local:patch-5b7f95777d66 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03413067 ;
+    local:patchProperty local:sharesCompoundWith ;
+    local:patchValue obo:NCBITaxon_37656 ;
+    local:patchEvidence "citric acid ester; the acid is esterified rather than free, so the exposure is lower than E330" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "shared_compound" ;
+    local:patchQuery "Citrus" ;
+    rdfs:comment "E472c. An emulsifier built on citric acid, so it carries the compound into baked goods and fats where a label gives no hint of citrus" ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
