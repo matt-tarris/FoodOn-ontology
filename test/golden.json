@@ -276,6 +276,34 @@
         "neurula embryo"
       ],
       "why": "Egg allergy is to proteins every bird egg carries, so `animal egg` is a root alongside the component-level class. Before the unionOf fix `animal egg` was reachable only through the inverted edge `animal egg is_a shelled egg`; correcting that lost quail, goose, ostrich egg and animal roe until the root was added. The 12 UBERON embryology stages that also sit under `animal egg` are excluded by config/relation_policy.json rather than by narrowing the root -- they are the only non-food members of that subtree."
+    },
+    {
+      "name": "citrus reaches the plant side, and stops at the family",
+      "roots": [
+        "citrus fruit",
+        "Citrus"
+      ],
+      "expect": [
+        "lemon plant",
+        "orange plant",
+        "sour orange plant",
+        "clementine plant",
+        "kumquat plant",
+        "navel orange plant",
+        "blood orange plant",
+        "bergamot orange plant",
+        "oval kumquat plant",
+        "bitter orange marmalade",
+        "lemon tea (dry)"
+      ],
+      "reject": [
+        "prickly ash plant",
+        "japan pepper plant",
+        "sansho (food product)",
+        "uzazi fruit",
+        "citrus family"
+      ],
+      "why": "FoodOn's plant hierarchy has no genus-level citrus class: seventeen plant classes hang off `citrus family`, which is Rutaceae and therefore ABOVE the genus. Six carry `in taxon <species>` and were reachable; eleven did not and were not, so a citrus query returned 308 classes and reached neither `lemon plant` nor `orange plant`. Five signed `in taxon` links in config/taxon-bridges.json close it, one class at a time and on FoodOn's own property. The rejects are why it is done per class rather than by bridging `citrus family` wholesale: Zanthoxylum -- prickly ash, japan pepper, sansho, uzazi -- is in the family and is not citrus, and the family node itself stays out because reaching it would be an ascent."
     }
   ]
 }

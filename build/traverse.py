@@ -41,7 +41,8 @@ ISA = "isa"
 class Graph:
     def __init__(self, index="data/index.json", repairs="data/repairs-classified.json",
                  policy="config/relation_policy.json", overrides="config/overrides.json",
-                 mined="data/mined-classified.json"):
+                 mined="data/mined-classified.json",
+                 taxon_bridges="config/taxon-bridges.json"):
         ix = json.load(open(index))
         self.N = ix["nodes"]
         self.meta = ix["meta"]
@@ -81,6 +82,29 @@ class Graph:
                                    else "http://purl.obolibrary.org/obo/RO_0001000"})
         except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError):
             pass
+        # Missing `in taxon` links on plant classes. A third kind of gap, and it needs
+        # its own file because it is neither a naming convention nor a sentence in a
+        # definition: FoodOn asserts `<X> plant in_taxon <species>` for some members of
+        # a genus and omits it for others, and the omission is invisible until a query
+        # comes up short. The citrus case is 17 plant classes hanging off `citrus
+        # family` -- which is Rutaceae, above the genus, and so unreachable without
+        # ascending -- of which six carry the link and eleven do not.
+        #
+        # Emitted as the ontology's OWN property, RO:0002162, rather than as a local
+        # one. That is the whole point: a consumer with the merged graph gets these
+        # through the same path it already walks for `grapefruit plant`, and the
+        # SPARQL materialiser needs no new branch. ONLY `signed_off` is read.
+        self.taxon_bridges = []
+        try:
+            for b in json.load(open(taxon_bridges))["signed_off"]:
+                if not b.get("taxon") or not b.get("signed_off_by"):
+                    continue
+                self.taxon_bridges.append(b)
+                edges.append({"s": b["class"], "o": b["taxon"], "k": "taxon",
+                              "p": "http://purl.obolibrary.org/obo/RO_0002162"})
+        except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError):
+            pass
+
         if isinstance(overrides, str):
             try: self.overrides = json.load(open(overrides))
             except (FileNotFoundError, json.JSONDecodeError): self.overrides = {"overrides": []}

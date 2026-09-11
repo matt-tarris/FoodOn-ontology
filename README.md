@@ -665,6 +665,72 @@ generator, which now reproduces every pre-existing entry byte-for-byte.
 FoodOn class at all. The resolver says so rather than resolving to something
 approximate.
 
+## A third kind of gap: missing `in taxon`
+
+A `citrus` query used to return 308 classes and reach neither `lemon plant` nor
+`orange plant`. Not a resolution problem and not a missing `derives from` — a missing
+**taxon link**.
+
+FoodOn's plant hierarchy has no genus-level citrus class. Seventeen plant classes hang
+directly off `citrus family`, which is **Rutaceae** and therefore *above* the genus, so
+a citrus query cannot reach them without ascending — and ascending to the family also
+collects *Zanthoxylum*: `prickly ash plant`, `japan pepper plant`, `sansho`,
+`uzazi fruit`. In the family, not citrus. FoodOn's own definition says so.
+
+The route that does work is the one FoodOn already uses for six of the seventeen:
+
+```
+citrus fruit --is a--> grapefruit --in taxon--> Citrus x paradisi --in taxon--> grapefruit plant
+```
+
+`grapefruit` and `grapefruit plant` both carry the species link, so the query walks
+fruit → species → plant. For `lemon`, FoodOn asserts it on the **fruit** and omits it
+on the **plant**. That is the whole bug.
+
+`config/taxon-bridges.json` supplies the omission, one class at a time:
+
+| class | taxon | brings |
+|---|---|---|
+| `lemon plant` | *Citrus x limon* | 3 |
+| `orange plant` | *Citrus sinensis* | 10 — navel, blood, valencia |
+| `sour orange plant` | *Citrus x aurantium* | 3 — bergamot, summer orange |
+| `clementine plant` | *Citrus x clementina* | 1 |
+| `kumquat plant` | *Citrus japonica* | 2 — oval kumquat |
+
+**308 → 324**, and the marmalades, conserves and lemon teas come with them: they
+already had `derives from` edges to the fruit and were stranded behind the same gap.
+
+Two things make this a repair rather than an opinion. The axiom is emitted on
+**`RO:0002162`, the ontology's own property** — not a local one — so a SPARQL consumer
+reaches `lemon plant` by the identical path it already walks to `grapefruit plant`, and
+the materialiser needed no new branch. And the binomial is checkable: `test/run.py`
+asserts the eleven classes arrive and the four *Zanthoxylum* stay out, `test/patch_run.py`
+asserts the same thing again **through SPARQL**, 5/5 bridges honoured and 4/4 excluded.
+
+Ten more are queued in `requires_signoff` rather than applied. Four are synonymy calls
+(`myrtle-leaf orange` → *C. x aurantium*; `palestine sweet lime` → *C. limetta*); five
+are hybrids FoodOn has no taxon for at all (`orangelo`, `oroblanco`, `persian lime`,
+the Citrofortunella group); one — `citrus honey` — is not a taxon question, since the
+honey carries no fruit.
+
+### Two parity holes this exposed
+
+Adding a seventh root to `test/patch_run.py` broke a parity claim that six roots had
+never tested. Both pre-existing, both now printed on every run rather than fixed
+quietly:
+
+- **unpinned correspondences.** The emitter writes `local:sameOrganismAs` only for
+  roots in `data/resolution-store.json`. `citrus fruit` is not pinned, so its pairing
+  with `citrus fruit food product` — worth 50 classes — is not exported, and a SPARQL
+  consumer under-reports it while the app does not. Closing it means `expand_roots`
+  over all 39,894 classes at emit time (~5 min, ~4,400 triples) or materialising the
+  pairing in SPARQL.
+- **nested-filler subsumption.** 564 edges the index extracts from `unionOf` and
+  restriction fillers that a plain `rdfs:subClassOf` path cannot see. Costs a citrus
+  query one class, `imitation orange juice drink`.
+
+Which fix is right is a decision, not a bug fix, so neither is taken here.
+
 ## Bridges awaiting review
 
 FoodOn omits `derives from` on 62% of its `<X> food product` classes.

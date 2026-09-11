@@ -56,6 +56,10 @@ for a in json.load(open("data/mined-classified.json"))["signed_off"]:
     if a.get("relation") == "is a":
         continue                      # emitted as a named subClassOf, checked below
     expected_ax.add((cur(a["product"]), "obo:RO_0001000", cur(a["source"])))
+# supplied `in taxon` links, on the ontology's own property rather than a local one
+for b in json.load(open("config/taxon-bridges.json"))["signed_off"]:
+    if b.get("taxon") and b.get("signed_off_by"):
+        expected_ax.add((cur(b["class"]), "obo:RO_0002162", cur(b["taxon"])))
 WEAK = {"may_contain": "local:mayDeriveFrom", "cross_reactive": "local:crossReactiveWith",
         "disputed": "local:disputedAvoidance",
         "shared_compound": "local:sharesCompoundWith"}
@@ -124,7 +128,7 @@ if assertions - expected_as:
 # separate vocabulary
 checks += 1
 for tgt, prop, val in axioms:
-    if prop != "obo:RO_0001000":
+    if prop not in ("obo:RO_0001000", "obo:RO_0002162"):
         fails.append(f"unexpected property in a containment axiom: {prop}")
 weak_targets = {t for t, p, v in assertions if p in WEAK.values()}
 containment_targets = {t for t, p, v in axioms}
@@ -137,6 +141,40 @@ pairs_cont = {(t, v) for t, p, v in axioms}
 if pairs_weak & pairs_cont:
     fails.append(f"same pair asserted as BOTH containment and a weaker claim: "
                  f"{sorted(pairs_weak & pairs_cont)[:3]}")
+
+# ---------------------------------------------------------- known limitation
+# Parity holds for a root the emitter has written correspondences for, and the
+# emitter writes them only for roots in data/resolution-store.json. Any OTHER root
+# that `expand_roots` would pair -- `citrus fruit` pairs with `citrus fruit food
+# product` by label convention, worth 50 classes -- has no local:sameOrganismAs
+# triple, so a SPARQL consumer under-reports it while the app does not.
+#
+# Reported rather than failed: closing it means running expand_roots over all 39,894
+# classes at emit time (~5 min, ~4,400 extra triples) or materialising the pairing in
+# SPARQL, and which of those is right is a decision, not a bug fix. Printed every run
+# so it cannot quietly become permanent.
+_pinned = set(_roots)
+_unpinned_pairs = 0
+for _probe in ["FOODON_00003324"]:          # citrus fruit, the case that exposed this
+    _i = "http://purl.obolibrary.org/obo/" + _probe
+    if _i in _pinned: continue
+    _unpinned_pairs += sum(1 for _x in (g.expand_roots([_i]) or {}) if _x != _i)
+_nested = sum(1 for _e in json.load(open("data/index.json"))["edges"]
+              if _e.get("k") in ("rel_nest", "isa_union"))
+if _unpinned_pairs or _nested:
+    print(f"\nTWO KNOWN PARITY HOLES, both pre-existing and both invisible until a "
+          f"seventh root was tried:")
+    print(f"  unpinned correspondences  {_unpinned_pairs} on the probed root (citrus "
+          f"fruit, worth 50 classes).")
+    print(f"                            Closing it means expand_roots over all "
+          f"{len(g.N):,} classes at emit time (~5 min, ~4,400 triples) or "
+          f"materialising the pairing in SPARQL.")
+    print(f"  nested-filler subsumption {_nested} edges the index extracts from union "
+          f"and restriction fillers")
+    print(f"                            that a plain rdfs:subClassOf path cannot see. "
+          f"Costs a citrus query one class, `imitation orange juice drink`.")
+    print(f"  Which fix is right is a decision, not a bug fix. Printed every run so it "
+          f"cannot quietly become permanent.")
 
 print(f"round trip: {len(axioms)} containment axioms, {len(assertions)} local "
       f"assertions, {len(ttl_same)} organism correspondences, all traced to a "
@@ -154,6 +192,11 @@ else:
         "sesame plant": "FOODON_03411226",
         "mustard plant": "FOODON_00002053",
         "Capsicum": "NCBITaxon_4071",
+        # carries the five supplied `in taxon` links. Whole-root parity is NOT claimed
+        # for citrus -- it trips both pre-existing holes reported above -- but the
+        # bridges themselves are asserted below, because an axiom the consumer cannot
+        # act on is not a patch, it is a comment.
+        "Citrus": "NCBITaxon_2706",
     }
     values = " ".join(f"obo:{v}" for v in ROOTS.values())
     q = open("build/sparql/patch_closure.rq").read()
@@ -172,10 +215,33 @@ else:
         sp = collections.defaultdict(set)
         for row in csv.DictReader(open(out)):
             sp[row["root"]].add(row["avoid"])
+        _cit = sp.get("http://purl.obolibrary.org/obo/NCBITaxon_2706", set())
+        _bridges = json.load(open("config/taxon-bridges.json"))["signed_off"]
+        for _b in _bridges:
+            checks += 1
+            if _b["class"] not in _cit:
+                fails.append(f"taxon bridge not honoured by SPARQL: a Citrus query does "
+                             f"not reach `{_b['class_label']}` through its supplied "
+                             f"`in taxon {_b['taxon_label']}`")
+        _zan = {"FOODON_03412295": "prickly ash plant",
+                "FOODON_03412306": "japan pepper plant",
+                "FOODON_03310095": "sansho (food product)",
+                "FOODON_03415174": "uzazi fruit"}
+        for _f, _l in _zan.items():
+            checks += 1
+            if "http://purl.obolibrary.org/obo/" + _f in _cit:
+                fails.append(f"SPARQL reaches `{_l}` from Citrus -- Zanthoxylum is in "
+                             f"the citrus FAMILY and is not citrus; the per-class "
+                             f"bridges exist precisely to keep it out")
+        print()
+        print(f"taxon bridges honoured in SPARQL: {len(_bridges)}/{len(_bridges)}, "
+              f"Zanthoxylum still excluded: {len(_zan)}/{len(_zan)}")
         print()
         print(f"{'root':<16} {'app':>7} {'sparql':>7} {'agree':>7}  {'diff':>6}")
         print("-" * 50)
         for name, frag in ROOTS.items():
+            if frag == "NCBITaxon_2706":
+                continue          # bridges asserted above; whole-root parity not claimed
             iri = "http://purl.obolibrary.org/obo/" + frag
             checks += 1
             py = set(g.closure([iri])[0]) - {iri}

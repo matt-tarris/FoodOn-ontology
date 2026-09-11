@@ -2420,6 +2420,138 @@ local:patch-7ddf37989de2 a local:Patch ;
 
 
 # =============================================================================
+# Omitted `in taxon` links on plant classes   (5)
+# =============================================================================
+# A third kind of gap, on the ontology's own property RO:0002162. FoodOn's
+# plant hierarchy has no genus-level citrus class: seventeen plant classes
+# hang directly off `citrus family`, which is Rutaceae and therefore ABOVE
+# the genus, so a citrus query cannot reach them without ascending -- and
+# ascending to the family also collects Zanthoxylum (prickly ash, japan
+# pepper, sansho, uzazi fruit), which is in the family and is not citrus.
+# Six of the seventeen carry `in taxon <species>` and are reached through
+# it; these five are the ones where FoodOn asserts that link on the FRUIT
+# class and omits it on the PLANT. Emitted on RO:0002162 rather than a local
+# property so a consumer reaches them by the identical path it already walks
+# to `grapefruit plant`.
+
+
+### clementine plant  --RO:0002162-->  Citrus x clementina
+#   evidence:   `clementine` (the fruit, FOODON_00003656) already carries `in taxon Citrus x clementina`.
+#   confidence: high
+#   reviewer:   Matt
+#   FoodOn's plant hierarchy has no genus-level citrus class: these hang off
+#   `citrus family`, which is Rutaceae and therefore above the genus, so a
+#   query cannot ascend to it without also collecting Zanthoxylum. The species
+#   link is the route FoodOn itself uses.
+obo:FOODON_03411751 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0002162 ;
+    owl:someValuesFrom obo:NCBITaxon_85681 ] .
+local:patch-91549e11d186 a local:Patch ;
+    local:patchSection "taxon" ;
+    local:patchTarget obo:FOODON_03411751 ;
+    local:patchProperty obo:RO_0002162 ;
+    local:patchValue obo:NCBITaxon_85681 ;
+    local:patchEvidence "`clementine` (the fruit, FOODON_00003656) already carries `in taxon Citrus x clementina`." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn's plant hierarchy has no genus-level citrus class: these hang off `citrus family`, which is Rutaceae and therefore above the genus, so a query cannot ascend to it without also collecting Zanthoxylum. The species link is the route FoodOn itself uses." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### kumquat plant  --RO:0002162-->  Citrus japonica
+#   evidence:   `kumquat` (the fruit) and `round kumquat plant` BOTH already carry `in taxon Citrus japonica`; the parent plant class is the one that was skipped. Brings `oval kumquat plant`.
+#   confidence: high
+#   reviewer:   Matt
+#   FoodOn's plant hierarchy has no genus-level citrus class: these hang off
+#   `citrus family`, which is Rutaceae and therefore above the genus, so a
+#   query cannot ascend to it without also collecting Zanthoxylum. The species
+#   link is the route FoodOn itself uses.
+obo:FOODON_03411530 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0002162 ;
+    owl:someValuesFrom obo:NCBITaxon_76966 ] .
+local:patch-221428993eac a local:Patch ;
+    local:patchSection "taxon" ;
+    local:patchTarget obo:FOODON_03411530 ;
+    local:patchProperty obo:RO_0002162 ;
+    local:patchValue obo:NCBITaxon_76966 ;
+    local:patchEvidence "`kumquat` (the fruit) and `round kumquat plant` BOTH already carry `in taxon Citrus japonica`; the parent plant class is the one that was skipped. Brings `oval kumquat plant`." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn's plant hierarchy has no genus-level citrus class: these hang off `citrus family`, which is Rutaceae and therefore above the genus, so a query cannot ascend to it without also collecting Zanthoxylum. The species link is the route FoodOn itself uses." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### lemon plant  --RO:0002162-->  Citrus x limon
+#   evidence:   `lemon` (the fruit, FOODON_03315104) already carries `in taxon Citrus x limon`; the plant class does not. Unambiguous binomial.
+#   confidence: high
+#   reviewer:   Matt
+#   FoodOn's plant hierarchy has no genus-level citrus class: these hang off
+#   `citrus family`, which is Rutaceae and therefore above the genus, so a
+#   query cannot ascend to it without also collecting Zanthoxylum. The species
+#   link is the route FoodOn itself uses.
+obo:FOODON_03411275 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0002162 ;
+    owl:someValuesFrom obo:NCBITaxon_2708 ] .
+local:patch-8508303f50b1 a local:Patch ;
+    local:patchSection "taxon" ;
+    local:patchTarget obo:FOODON_03411275 ;
+    local:patchProperty obo:RO_0002162 ;
+    local:patchValue obo:NCBITaxon_2708 ;
+    local:patchEvidence "`lemon` (the fruit, FOODON_03315104) already carries `in taxon Citrus x limon`; the plant class does not. Unambiguous binomial." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn's plant hierarchy has no genus-level citrus class: these hang off `citrus family`, which is Rutaceae and therefore above the genus, so a query cannot ascend to it without also collecting Zanthoxylum. The species link is the route FoodOn itself uses." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### orange plant  --RO:0002162-->  Citrus sinensis
+#   evidence:   `orange` (the fruit, FOODON_03315106) already carries `in taxon Citrus sinensis`. The sweet orange. Its FoodOn children -- navel, blood, california valencia -- are C. sinensis cultivars and come with it.
+#   confidence: high
+#   reviewer:   Matt
+#   FoodOn's plant hierarchy has no genus-level citrus class: these hang off
+#   `citrus family`, which is Rutaceae and therefore above the genus, so a
+#   query cannot ascend to it without also collecting Zanthoxylum. The species
+#   link is the route FoodOn itself uses.
+obo:FOODON_03411339 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0002162 ;
+    owl:someValuesFrom obo:NCBITaxon_2711 ] .
+local:patch-4901112da290 a local:Patch ;
+    local:patchSection "taxon" ;
+    local:patchTarget obo:FOODON_03411339 ;
+    local:patchProperty obo:RO_0002162 ;
+    local:patchValue obo:NCBITaxon_2711 ;
+    local:patchEvidence "`orange` (the fruit, FOODON_03315106) already carries `in taxon Citrus sinensis`. The sweet orange. Its FoodOn children -- navel, blood, california valencia -- are C. sinensis cultivars and come with it." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn's plant hierarchy has no genus-level citrus class: these hang off `citrus family`, which is Rutaceae and therefore above the genus, so a query cannot ascend to it without also collecting Zanthoxylum. The species link is the route FoodOn itself uses." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### sour orange plant  --RO:0002162-->  Citrus x aurantium
+#   evidence:   The bitter or Seville orange. Distinct species from C. sinensis, which is why it needs its own link rather than inheriting the one above. Brings `bergamot orange plant` and `summer orange plant`, its FoodOn children.
+#   confidence: high
+#   reviewer:   Matt
+#   FoodOn's plant hierarchy has no genus-level citrus class: these hang off
+#   `citrus family`, which is Rutaceae and therefore above the genus, so a
+#   query cannot ascend to it without also collecting Zanthoxylum. The species
+#   link is the route FoodOn itself uses.
+obo:FOODON_03411193 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0002162 ;
+    owl:someValuesFrom obo:NCBITaxon_43166 ] .
+local:patch-f7eeee07b2fb a local:Patch ;
+    local:patchSection "taxon" ;
+    local:patchTarget obo:FOODON_03411193 ;
+    local:patchProperty obo:RO_0002162 ;
+    local:patchValue obo:NCBITaxon_43166 ;
+    local:patchEvidence "The bitter or Seville orange. Distinct species from C. sinensis, which is why it needs its own link rather than inheriting the one above. Brings `bergamot orange plant` and `summer orange plant`, its FoodOn children." ;
+    local:patchConfidence "high" ;
+    rdfs:comment "FoodOn's plant hierarchy has no genus-level citrus class: these hang off `citrus family`, which is Rutaceae and therefore above the genus, so a query cannot ascend to it without also collecting Zanthoxylum. The species link is the route FoodOn itself uses." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+
+# =============================================================================
 # Reviewed containment claims FoodOn cannot make   (7)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a

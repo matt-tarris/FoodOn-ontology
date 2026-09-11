@@ -1,0 +1,179 @@
+{
+  "version": "2026-09-11",
+  "status": "REVIEWED",
+  "ontology_version": "2025-12-30",
+  "reviewed_by": "Matt",
+  "reviewed_date": "2026-09-11",
+  "note": "Missing `in taxon` (RO:0002162) links on FoodOn plant classes.\n\nWHY THIS FILE EXISTS. FoodOn's plant hierarchy has no genus-level citrus class: 17 plant classes hang directly off `citrus family`, which is Rutaceae and therefore ABOVE the genus. A citrus query cannot ascend to it -- that is the no-ascent invariant, and relaxing it would pull in Zanthoxylum (prickly ash, sansho, japan pepper, uzazi), which is in the family and is not citrus.\n\nThe route that does work is the one FoodOn already uses for six of those seventeen: `grapefruit plant in_taxon Citrus x paradisi`. The fruit class `grapefruit` carries the same link, so a query that reaches the fruit reaches the species, and the species reaches the plant. Every class below is one where FoodOn asserts that link on the FRUIT and omits it on the PLANT. Supplying it is a repair, not a new opinion: the binomial is a checkable botanical fact and the traversal machinery is unchanged.\n\n`requires_signoff` holds the ones where the species is a judgement call or absent from FoodOn entirely. They are NOT read by the traversal.",
+  "signed_off": [
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411275",
+      "class_label": "lemon plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_2708",
+      "taxon_label": "Citrus x limon",
+      "confidence": "high",
+      "evidence": "`lemon` (the fruit, FOODON_03315104) already carries `in taxon Citrus x limon`; the plant class does not. Unambiguous binomial.",
+      "would_add_classes": 3,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-11"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411339",
+      "class_label": "orange plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_2711",
+      "taxon_label": "Citrus sinensis",
+      "confidence": "high",
+      "evidence": "`orange` (the fruit, FOODON_03315106) already carries `in taxon Citrus sinensis`. The sweet orange. Its FoodOn children -- navel, blood, california valencia -- are C. sinensis cultivars and come with it.",
+      "would_add_classes": 10,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-11"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411193",
+      "class_label": "sour orange plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_43166",
+      "taxon_label": "Citrus x aurantium",
+      "confidence": "high",
+      "evidence": "The bitter or Seville orange. Distinct species from C. sinensis, which is why it needs its own link rather than inheriting the one above. Brings `bergamot orange plant` and `summer orange plant`, its FoodOn children.",
+      "would_add_classes": 3,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-11"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411751",
+      "class_label": "clementine plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_85681",
+      "taxon_label": "Citrus x clementina",
+      "confidence": "high",
+      "evidence": "`clementine` (the fruit, FOODON_00003656) already carries `in taxon Citrus x clementina`.",
+      "would_add_classes": 1,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-11"
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411530",
+      "class_label": "kumquat plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_76966",
+      "taxon_label": "Citrus japonica",
+      "confidence": "high",
+      "evidence": "`kumquat` (the fruit) and `round kumquat plant` BOTH already carry `in taxon Citrus japonica`; the parent plant class is the one that was skipped. Brings `oval kumquat plant`.",
+      "would_add_classes": 2,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-11"
+    }
+  ],
+  "requires_signoff": [
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414218",
+      "class_label": "myrtle-leaf orange plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_43166",
+      "taxon_label": "Citrus x aurantium",
+      "confidence": "medium",
+      "would_add_classes": 1,
+      "question": "Citrus myrtifolia is usually treated as a variety of C. x aurantium rather than a species of its own. FoodOn has no myrtifolia class. Bridging to the parent species is defensible but it is a synonymy call, not a lookup."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414976",
+      "class_label": "palestine sweet lime plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_414735",
+      "taxon_label": "Citrus limetta",
+      "confidence": "medium",
+      "would_add_classes": 1,
+      "question": "Palestine sweet lime is C. limettioides, which FoodOn does not carry. It is frequently synonymised with C. limetta and just as frequently kept apart."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414306",
+      "class_label": "australian sunrise lime plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_416196",
+      "taxon_label": "Citrus australasica",
+      "confidence": "medium",
+      "would_add_classes": 1,
+      "question": "A finger lime x calamondin hybrid. C. australasica is one parent, not the plant itself, so this link would be an approximation of a hybrid by one side of its cross."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412468",
+      "class_label": "king orange plant",
+      "taxon": "http://purl.obolibrary.org/obo/NCBITaxon_85571",
+      "taxon_label": "Citrus reticulata",
+      "confidence": "medium",
+      "would_add_classes": 1,
+      "question": "King orange is C. nobilis, absent from FoodOn, and is variously placed under C. reticulata or kept separate as a mandarin x orange hybrid."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03411067",
+      "class_label": "lime (citrus) plant",
+      "taxon": null,
+      "taxon_label": null,
+      "confidence": "none",
+      "would_add_classes": 4,
+      "question": "NO CANDIDATE. This is a grouping of eight lime species, not one species, and FoodOn has no Citrus aurantiifolia. 25 of its 29 classes are already reached through their own species; the grouping node and three children are not. Note FoodOn points `lime` (the fruit) at `in taxon lime (citrus) plant` -- a FoodOn class, not a taxon -- which the species-rank guard correctly refuses."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03415046",
+      "class_label": "persian lime plant",
+      "taxon": null,
+      "taxon_label": null,
+      "confidence": "none",
+      "would_add_classes": 1,
+      "question": "NO CANDIDATE. C. x latifolia is absent from FoodOn."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414845",
+      "class_label": "citrofortunella hybrids plant",
+      "taxon": null,
+      "taxon_label": null,
+      "confidence": "none",
+      "would_add_classes": 4,
+      "question": "NO CANDIDATE. x Citrofortunella is an intergeneric hybrid group; neither it nor its members (calamondin, limequat, nippon orangequat) has an NCBITaxon class in FoodOn."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414354",
+      "class_label": "orangelo plant",
+      "taxon": null,
+      "taxon_label": null,
+      "confidence": "none",
+      "would_add_classes": 1,
+      "question": "NO CANDIDATE. A grapefruit x sweet orange hybrid with no taxon class in FoodOn."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03414971",
+      "class_label": "oroblanco plant",
+      "taxon": null,
+      "taxon_label": null,
+      "confidence": "none",
+      "would_add_classes": 1,
+      "question": "NO CANDIDATE. A pomelo x grapefruit hybrid with no taxon class in FoodOn."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03301034",
+      "class_label": "citrus honey",
+      "taxon": null,
+      "taxon_label": null,
+      "confidence": "none",
+      "would_add_classes": 1,
+      "question": "NOT A TAXON BRIDGE. Honey `derives from` the blossom of `citrus family`, so it hangs off the family rather than the genus. Whether a citrus avoider should be shown citrus honey is a separate judgement -- the honey carries no fruit -- and belongs in config/overrides.json as a claim, not here."
+    }
+  ],
+  "declined": [
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412295",
+      "class_label": "prickly ash plant",
+      "reason": "Zanthoxylum, not Citrus. In the citrus FAMILY and not a citrus. FoodOn's own definition says so: 'a genus of about 250 species ... in the citrus or rue family, Rutaceae'. Declining it is the point of doing this per class instead of bridging `citrus family` wholesale -- that shortcut would have added this plus japan pepper, sansho and uzazi fruit."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03412306",
+      "class_label": "japan pepper plant",
+      "reason": "Zanthoxylum piperitum. Rutaceae, not Citrus. Under `prickly ash plant`."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03310095",
+      "class_label": "sansho (food product)",
+      "reason": "The ground fruit of Zanthoxylum piperitum. Rutaceae, not Citrus."
+    },
+    {
+      "class": "http://purl.obolibrary.org/obo/FOODON_03415174",
+      "class_label": "uzazi fruit",
+      "reason": "Zanthoxylum tessmannii, per FoodOn's own definition. Rutaceae, not Citrus."
+    }
+  ]
+}

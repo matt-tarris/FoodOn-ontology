@@ -119,6 +119,22 @@ for a in json.load(open("data/mined-classified.json"))["signed_off"]:
         rationale=a.get("rationale"),
         note="Extracted from FoodOn's own definition text and signed off per class.")
 
+# ---- 2b. missing `in taxon` links ---------------------------------------------
+# Emitted on RO:0002162, the ontology's own property, not a local one. FoodOn asserts
+# this link for six of the seventeen plant classes under `citrus family` and omits it
+# for the rest; supplying the omission means a consumer reaches `lemon plant` by the
+# identical path it already walks to `grapefruit plant`, and the SPARQL materialiser
+# needs no new branch to understand it.
+RO_IN_TAXON = "http://purl.obolibrary.org/obo/RO_0002162"
+for b in json.load(open("config/taxon-bridges.json"))["signed_off"]:
+    add("taxon", b["class"], RO_IN_TAXON, b["taxon"], "restriction",
+        evidence=b.get("evidence"), confidence=b.get("confidence", "high"),
+        creator=b.get("signed_off_by") or "Matt",
+        note="FoodOn's plant hierarchy has no genus-level citrus class: these hang off "
+             "`citrus family`, which is Rutaceae and therefore above the genus, so a "
+             "query cannot ascend to it without also collecting Zanthoxylum. The "
+             "species link is the route FoodOn itself uses.")
+
 # ---- 3. overrides -------------------------------------------------------------
 ov = json.load(open("config/overrides.json"))
 WEAK = {"may_contain": BASE + "mayDeriveFrom",
@@ -375,6 +391,17 @@ SECTIONS = [
   "annuum L.'; pasta's reads 'an unleavened dough of wheat flour'. Each of these was "
   "extracted, passed five guards, and signed off against that one class's own "
   "sentence. Prose is not an axiom, so a human ruling is recorded per class."),
+ ("taxon", "Omitted `in taxon` links on plant classes",
+  "A third kind of gap, on the ontology's own property RO:0002162. FoodOn's plant "
+  "hierarchy has no genus-level citrus class: seventeen plant classes hang directly "
+  "off `citrus family`, which is Rutaceae and therefore ABOVE the genus, so a citrus "
+  "query cannot reach them without ascending -- and ascending to the family also "
+  "collects Zanthoxylum (prickly ash, japan pepper, sansho, uzazi fruit), which is in "
+  "the family and is not citrus. Six of the seventeen carry `in taxon <species>` and "
+  "are reached through it; these five are the ones where FoodOn asserts that link on "
+  "the FRUIT class and omits it on the PLANT. Emitted on RO:0002162 rather than a "
+  "local property so a consumer reaches them by the identical path it already walks "
+  "to `grapefruit plant`."),
  ("contains", "Reviewed containment claims FoodOn cannot make",
   "FoodOn parents processed ingredients by function -- `tahini is_a condiment`, "
   "`casein is_a protein extract` -- and asserts no source. These are the cases where "

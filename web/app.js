@@ -27,6 +27,9 @@ const relStyle = (e) => {
   if (e.provenance === "override") return { color: "var(--override)", dash: "7 4" };
   if (e.provenance === "repair")   return { color: "var(--repair)",   dash: "7 4" };
   if (e.provenance === "mined")    return { color: "var(--mined)",    dash: "6 3" };
+  // a supplied `in taxon` link: the taxon hue, because that is what the edge MEANS,
+  // with the patched dash, because it is not FoodOn's own assertion
+  if (e.provenance === "taxon")    return { color: "var(--taxon)",    dash: "7 4" };
   return REL_STYLE[e.relation_label] || { color: "var(--isa)", dash: "2 3" };
 };
 const EXAMPLES = ["corn", "nightshade", "allium", "gluten", "tree nut", "soy", "paprika", "edamame"];
