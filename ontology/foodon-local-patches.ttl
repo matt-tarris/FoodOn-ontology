@@ -4655,44 +4655,1612 @@ obo:UBERON_0000922 local:excludedFromTraversal true .
 # alone against 630 with the pair. Computed per root by taxon pivot or label
 # convention, not listed by hand.
 
-### barley plant  <->  Hordeum vulgare   [taxon pivot]
-obo:FOODON_03411230 local:sameOrganismAs obo:NCBITaxon_4513 .
-### chicken egg  <->  Gallus gallus   [taxon pivot]
-obo:FOODON_03316061 local:sameOrganismAs obo:NCBITaxon_9031 .
+### Acacia  <->  acacia food product   [label convention]
+obo:NCBITaxon_3808 local:sameOrganismAs obo:FOODON_00003834 .
+### Acronychia  <->  acronychia plant   [label convention]
+obo:NCBITaxon_43714 local:sameOrganismAs obo:FOODON_03414747 .
+### Actinidia  <->  actinidia plant   [label convention]
+obo:NCBITaxon_3624 local:sameOrganismAs obo:FOODON_03415177 .
+### Alaska blueberry  <->  alaska blueberry plant   [label convention]
+obo:FOODON_00004208 local:sameOrganismAs obo:FOODON_03414474 .
+### Allium  <->  allium species   [label convention]
+obo:NCBITaxon_4678 local:sameOrganismAs obo:FOODON_03414302 .
+### Amaranth  <->  amaranth plant   [label convention]
+obo:CHEBI_34533 local:sameOrganismAs obo:FOODON_03411717 .
+### Amarelle cherry  <->  Amarelle cherry plant   [label convention]
+obo:FOODON_00004213 local:sameOrganismAs obo:FOODON_00004217 .
+### Ampelocissus frutescens  <->  ampelocissus frutescens plant   [label convention]
+obo:NCBITaxon_165297 local:sameOrganismAs obo:FOODON_03414822 .
+### Angelica  <->  angelica food product   [label convention]
+obo:NCBITaxon_40948 local:sameOrganismAs obo:FOODON_00003030 .
+### Angelica  <->  angelica plant   [label convention]
+obo:NCBITaxon_40948 local:sameOrganismAs obo:FOODON_03411377 .
+### Anjou pear plant  <->  anjou pear   [label convention (stripped)]
+obo:FOODON_03412081 local:sameOrganismAs obo:FOODON_00004230 .
+### Aponogeton  <->  aponogeton plant   [label convention]
+obo:NCBITaxon_51593 local:sameOrganismAs obo:FOODON_03414748 .
+### Asparagus  <->  asparagus plant   [label convention]
+obo:NCBITaxon_4685 local:sameOrganismAs obo:FOODON_03411415 .
+### Bison  <->  bison food product   [label convention]
+obo:NCBITaxon_9900 local:sameOrganismAs obo:FOODON_02020838 .
+### Blumea  <->  blumea plant   [label convention]
+obo:NCBITaxon_72901 local:sameOrganismAs obo:FOODON_03415111 .
+### Bosc pear  <->  Bosc pear plant   [label convention]
+obo:FOODON_00003588 local:sameOrganismAs obo:FOODON_03412080 .
+### Boscia  <->  boscia plant   [label convention]
+obo:NCBITaxon_202622 local:sameOrganismAs obo:FOODON_03412838 .
+### Bowenia  <->  bowenia plant   [label convention]
+obo:NCBITaxon_13364 local:sameOrganismAs obo:FOODON_03414720 .
+### Brassica  <->  brassica food product   [label convention]
+obo:NCBITaxon_3705 local:sameOrganismAs obo:FOODON_00003341 .
+### Brassica  <->  brassica species   [label convention]
+obo:NCBITaxon_3705 local:sameOrganismAs obo:FOODON_03413372 .
+### Brie cheese food product  <->  brie cheese   [label convention (stripped)]
+obo:FOODON_00001028 local:sameOrganismAs obo:FOODON_03303508 .
+### Canada goose  <->  Canada goose food product   [label convention]
+obo:FOODON_02022574 local:sameOrganismAs obo:FOODON_02022572 .
+### Canthium  <->  canthium plant   [label convention]
+obo:NCBITaxon_58501 local:sameOrganismAs obo:FOODON_03412798 .
+### Carissa  <->  carissa plant   [label convention]
+obo:NCBITaxon_84860 local:sameOrganismAs obo:FOODON_03414267 .
+### Cassytha  <->  cassytha plant   [label convention]
+obo:NCBITaxon_121072 local:sameOrganismAs obo:FOODON_03414659 .
+### Cavendish banana  <->  Cavendish banana food product   [label convention]
+obo:FOODON_03316257 local:sameOrganismAs obo:FOODON_00001756 .
+### Cayratia  <->  cayratia plant   [label convention]
+obo:NCBITaxon_149348 local:sameOrganismAs obo:FOODON_03414755 .
+### Chlorella  <->  chlorella food product   [label convention]
+obo:NCBITaxon_3071 local:sameOrganismAs obo:FOODON_03000009 .
+### Chrysophyllum  <->  chrysophyllum plant   [label convention]
+obo:NCBITaxon_13424 local:sameOrganismAs obo:FOODON_03412843 .
+### Cordia  <->  cordia plant   [label convention]
+obo:NCBITaxon_79331 local:sameOrganismAs obo:FOODON_03414660 .
+### Costus  <->  costus plant   [label convention]
+obo:NCBITaxon_4631 local:sameOrganismAs obo:FOODON_03414758 .
+### Cucumis  <->  cucumis species   [label convention]
+obo:NCBITaxon_3655 local:sameOrganismAs obo:FOODON_03414459 .
+### Curculigo  <->  curculigo plant   [label convention]
+obo:NCBITaxon_4675 local:sameOrganismAs obo:FOODON_03414759 .
+### Cycas  <->  cycas plant   [label convention]
+obo:NCBITaxon_3395 local:sameOrganismAs obo:FOODON_03414722 .
+### Dacryodes  <->  dacryodes plant   [label convention]
+obo:NCBITaxon_173691 local:sameOrganismAs obo:FOODON_03412769 .
+### Dialium  <->  dialium plant   [label convention]
+obo:NCBITaxon_53868 local:sameOrganismAs obo:FOODON_03412928 .
+### Dolichos  <->  dolichos plant   [label convention]
+obo:NCBITaxon_3839 local:sameOrganismAs obo:FOODON_03412330 .
+### Dracontomelon  <->  dracontomelon plant   [label convention]
+obo:NCBITaxon_289702 local:sameOrganismAs obo:FOODON_03415176 .
+### Elaeocarpus  <->  elaeocarpus plant   [label convention]
+obo:NCBITaxon_26005 local:sameOrganismAs obo:FOODON_03414663 .
+### Elatostema  <->  elatostema plant   [label convention]
+obo:NCBITaxon_226089 local:sameOrganismAs obo:FOODON_03414765 .
+### Ensete  <->  ensete plant   [label convention]
+obo:NCBITaxon_4638 local:sameOrganismAs obo:FOODON_03414271 .
+### Eucalyptus  <->  eucalyptus plant   [label convention]
+obo:NCBITaxon_3932 local:sameOrganismAs obo:FOODON_03412661 .
+### Eugenia  <->  eugenia plant   [label convention]
+obo:NCBITaxon_119950 local:sameOrganismAs obo:FOODON_03412921 .
+### Exocarpos  <->  exocarpos plant   [label convention]
+obo:NCBITaxon_43238 local:sameOrganismAs obo:FOODON_03414787 .
+### Flacourtia  <->  flacourtia plant   [label convention]
+obo:NCBITaxon_112818 local:sameOrganismAs obo:FOODON_03414666 .
+### Grevillea  <->  grevillea plant   [label convention]
+obo:NCBITaxon_83716 local:sameOrganismAs obo:FOODON_03414771 .
+### Grewia  <->  grewia plant   [label convention]
+obo:NCBITaxon_82407 local:sameOrganismAs obo:FOODON_03412804 .
+### Guarea  <->  guarea plant   [label convention]
+obo:NCBITaxon_43908 local:sameOrganismAs obo:FOODON_03412805 .
+### Hibiscus  <->  hibiscus plant   [label convention]
+obo:NCBITaxon_47605 local:sameOrganismAs obo:FOODON_03412082 .
+### Hippopotamus  <->  hippopotamus food product   [label convention]
+obo:NCBITaxon_9832 local:sameOrganismAs obo:FOODON_02021502 .
+### Horsfieldia  <->  horsfieldia plant   [label convention]
+obo:NCBITaxon_224858 local:sameOrganismAs obo:FOODON_03414773 .
+### Lepidozamia  <->  lepidozamia plant   [label convention]
+obo:NCBITaxon_133429 local:sameOrganismAs obo:FOODON_03414723 .
+### Limburger cheese  <->  Limburger cheese food product   [label convention]
+obo:FOODON_03303664 local:sameOrganismAs obo:FOODON_00001128 .
+### Livistona  <->  livistona plant   [label convention]
+obo:NCBITaxon_115490 local:sameOrganismAs obo:FOODON_03414700 .
+### Lycium  <->  lycium plant   [label convention]
+obo:NCBITaxon_24646 local:sameOrganismAs obo:FOODON_03415103 .
+### Macadamia  <->  macadamia plant   [label convention]
+obo:NCBITaxon_4329 local:sameOrganismAs obo:FOODON_03411451 .
+### Mimusops  <->  mimusops plant   [label convention]
+obo:NCBITaxon_233713 local:sameOrganismAs obo:FOODON_03412811 .
+### Morello cherry  <->  Morello cherry plant   [label convention]
+obo:FOODON_00004212 local:sameOrganismAs obo:FOODON_03412506 .
+### Moringa  <->  moringa food product   [label convention]
+obo:NCBITaxon_3734 local:sameOrganismAs obo:FOODON_00004368 .
+### Octopus  <->  octopus food product   [label convention]
+obo:NCBITaxon_6643 local:sameOrganismAs obo:FOODON_03316989 .
+### Pangium edule  <->  pangium edule plant   [label convention]
+obo:NCBITaxon_112823 local:sameOrganismAs obo:FOODON_00004311 .
+### Phaseolus vulgaris  <->  phaseolus vulgaris plant   [label convention]
+obo:NCBITaxon_3885 local:sameOrganismAs obo:FOODON_03411555 .
+### Rubus  <->  rubus plant   [label convention]
+obo:NCBITaxon_23216 local:sameOrganismAs obo:FOODON_03412819 .
+### Sclerocarya  <->  sclerocarya plant   [label convention]
+obo:NCBITaxon_289765 local:sameOrganismAs obo:FOODON_03412822 .
+### Senna  <->  senna plant   [label convention]
+obo:NCBITaxon_53922 local:sameOrganismAs obo:FOODON_03412056 .
+### Sesbania  <->  sesbania plant   [label convention]
+obo:NCBITaxon_3894 local:sameOrganismAs obo:FOODON_03411736 .
+### Solanaceae  <->  solanaceae plant   [label convention]
+obo:NCBITaxon_4070 local:sameOrganismAs obo:FOODON_03414934 .
+### Solanum  <->  solanum plant   [label convention]
+obo:NCBITaxon_4107 local:sameOrganismAs obo:FOODON_03415104 .
+### Sorbus  <->  sorbus plant   [label convention]
+obo:NCBITaxon_23222 local:sameOrganismAs obo:FOODON_03414357 .
+### Sorghum  <->  sorghum food product   [label convention]
+obo:NCBITaxon_4557 local:sameOrganismAs obo:FOODON_00001187 .
+### Sorghum  <->  sorghum plant   [label convention]
+obo:NCBITaxon_4557 local:sameOrganismAs obo:FOODON_03411448 .
+### Strychnos  <->  strychnos plant   [label convention]
+obo:NCBITaxon_26496 local:sameOrganismAs obo:FOODON_03412930 .
+### Syzygium  <->  syzygium plant   [label convention]
+obo:NCBITaxon_178174 local:sameOrganismAs obo:FOODON_03414677 .
+### Syzygium cumini  <->  Syzygium cumini plant   [label convention]
+obo:NCBITaxon_260142 local:sameOrganismAs obo:FOODON_03411651 .
+### Terminalia  <->  terminalia plant   [label convention]
+obo:NCBITaxon_39992 local:sameOrganismAs obo:FOODON_03414790 .
+### Tinda plant  <->  tinda   [label convention (stripped)]
+obo:FOODON_00003178 local:sameOrganismAs obo:FOODON_03000161 .
+### Trianthema  <->  trianthema plant   [label convention]
+obo:NCBITaxon_3547 local:sameOrganismAs obo:FOODON_03414791 .
+### Turkey  <->  turkey food product   [label convention]
+obo:GAZ_00000558 local:sameOrganismAs obo:FOODON_02020403 .
+### Tylophora  <->  tylophora plant   [label convention]
+obo:NCBITaxon_52863 local:sameOrganismAs obo:FOODON_03414793 .
+### Typhonium  <->  typhonium plant   [label convention]
+obo:NCBITaxon_175767 local:sameOrganismAs obo:FOODON_03414794 .
+### Vanilla  <->  vanilla plant   [label convention]
+obo:NCBITaxon_51238 local:sameOrganismAs obo:FOODON_03411355 .
+### Verbena  <->  verbena plant   [label convention]
+obo:NCBITaxon_22002 local:sameOrganismAs obo:FOODON_03413479 .
+### Vitex  <->  vitex plant   [label convention]
+obo:NCBITaxon_54476 local:sameOrganismAs obo:FOODON_03412933 .
+### Ximenia  <->  ximenia plant   [label convention]
+obo:NCBITaxon_50173 local:sameOrganismAs obo:FOODON_03414676 .
+### abalone  <->  abalone food product   [label convention]
+obo:FOODON_03411408 local:sameOrganismAs obo:FOODON_00001575 .
+### absinthe  <->  absinthe plant   [label convention]
+obo:FOODON_00003229 local:sameOrganismAs obo:FOODON_03415065 .
+### acerola  <->  acerola food product   [label convention]
+obo:FOODON_00003593 local:sameOrganismAs obo:FOODON_00002001 .
+### acerola  <->  acerola plant   [label convention]
+obo:FOODON_00003593 local:sameOrganismAs obo:FOODON_03411360 .
+### acorn squash  <->  acorn squash plant   [label convention]
+obo:FOODON_00003599 local:sameOrganismAs obo:FOODON_03412064 .
+### adzuki bean  <->  adzuki bean food product   [label convention]
+obo:FOODON_03315361 local:sameOrganismAs obo:FOODON_00002431 .
+### adzuki bean  <->  adzuki bean plant   [label convention]
+obo:FOODON_03315361 local:sameOrganismAs obo:FOODON_03411110 .
+### agar  <->  agar food product   [label convention]
+obo:CHEBI_2509 local:sameOrganismAs obo:FOODON_03301524 .
+### agar  <->  agar plant   [label convention]
+obo:CHEBI_2509 local:sameOrganismAs obo:FOODON_03411033 .
+### agave  <->  agave food product   [label convention]
+obo:FOODON_00005198 local:sameOrganismAs obo:FOODON_00002423 .
+### agave  <->  agave plant   [label convention]
+obo:FOODON_00005198 local:sameOrganismAs obo:FOODON_03411535 .
+### akee  <->  akee plant   [label convention]
+obo:FOODON_00003489 local:sameOrganismAs obo:FOODON_03411690 .
+### alaska pea  <->  alaska pea plant   [label convention]
+obo:FOODON_00003790 local:sameOrganismAs obo:FOODON_03411326 .
+### albacore  <->  albacore food product   [label convention]
+obo:FOODON_03411506 local:sameOrganismAs obo:FOODON_00001578 .
+### alewife  <->  alewife food product   [label convention]
+obo:FOODON_03411402 local:sameOrganismAs obo:FOODON_00001581 .
+### alfalfa  <->  alfalfa food product   [label convention]
+obo:FOODON_03301342 local:sameOrganismAs obo:FOODON_00001582 .
+### alfalfa  <->  alfalfa plant   [label convention]
+obo:FOODON_03301342 local:sameOrganismAs obo:FOODON_03411359 .
+### allspice  <->  allspice plant   [label convention]
+obo:FOODON_00002667 local:sameOrganismAs obo:FOODON_03411356 .
+### almond  <->  almond food product   [label convention]
+obo:FOODON_00003523 local:sameOrganismAs obo:FOODON_00001587 .
+### american cheese  <->  american cheese food product   [label convention]
+obo:FOODON_03000480 local:sameOrganismAs obo:FOODON_03000479 .
+### amphibian  <->  amphibian food product   [label convention]
+obo:FOODON_03411624 local:sameOrganismAs obo:FOODON_00004281 .
+### anchovy  <->  anchovy food product   [label convention]
+obo:FOODON_03316282 local:sameOrganismAs obo:FOODON_00001589 .
+### animal  <->  animal food product   [label convention]
+obo:FOODON_00003004 local:sameOrganismAs obo:FOODON_00004242 .
+### animal fat  <->  animal fat food product   [label convention]
+obo:FOODON_02010033 local:sameOrganismAs obo:FOODON_03310719 .
+### antelope  <->  antelope food product   [label convention]
+obo:FOODON_03411481 local:sameOrganismAs obo:FOODON_02020814 .
+### apple  <->  apple food product   [label convention]
+obo:FOODON_00002473 local:sameOrganismAs obo:FOODON_00001611 .
+### apple wine  <->  apple wine food product   [label convention]
+obo:FOODON_03301134 local:sameOrganismAs obo:FOODON_00001614 .
+### apricot  <->  apricot food product   [label convention]
+obo:FOODON_00003476 local:sameOrganismAs obo:FOODON_00001615 .
+### arrowhead  <->  arrowhead plant   [label convention]
+obo:FOODON_03000042 local:sameOrganismAs obo:FOODON_03411716 .
+### arrowleaf elephant ear  <->  arrowleaf elephant ear plant   [label convention]
+obo:FOODON_03000159 local:sameOrganismAs obo:FOODON_03411499 .
+### arrowroot  <->  arrowroot plant   [label convention]
+obo:FOODON_00003602 local:sameOrganismAs obo:FOODON_03412400 .
+### arrowroot flour  <->  arrowroot flour food product   [label convention]
+obo:FOODON_03000469 local:sameOrganismAs obo:FOODON_03000491 .
+### asafoetida  <->  asafoetida plant   [label convention]
+obo:FOODON_00002936 local:sameOrganismAs obo:FOODON_03412171 .
+### asparagus bean  <->  asparagus bean food product   [label convention]
+obo:FOODON_03000097 local:sameOrganismAs obo:FOODON_00002773 .
+### asparagus bean  <->  asparagus bean plant   [label convention]
+obo:FOODON_03000097 local:sameOrganismAs obo:FOODON_03411724 .
+### atlantic halibut  <->  atlantic halibut food product   [label convention]
+obo:FOODON_03411877 local:sameOrganismAs obo:FOODON_00001621 .
+### atlantic herring  <->  atlantic herring food product   [label convention]
+obo:FOODON_03411586 local:sameOrganismAs obo:FOODON_00001622 .
+### avocado  <->  avocado food product   [label convention]
+obo:FOODON_00003600 local:sameOrganismAs obo:FOODON_00001625 .
+### avocado  <->  avocado plant   [label convention]
+obo:FOODON_00003600 local:sameOrganismAs obo:FOODON_03411470 .
+### baby lima bean  <->  baby lima bean plant   [label convention]
+obo:FOODON_03302061 local:sameOrganismAs obo:FOODON_03411185 .
+### badea  <->  badea food product   [label convention]
+obo:FOODON_00005661 local:sameOrganismAs obo:FOODON_00005660 .
+### bakery  <->  bakery food product   [label convention]
+obo:ENVO_00003864 local:sameOrganismAs obo:FOODON_00001626 .
+### bambara groundnut  <->  bambara groundnut food product   [label convention]
+obo:FOODON_00002775 local:sameOrganismAs obo:FOODON_00001197 .
+### bambara groundnut  <->  bambara groundnut plant   [label convention]
+obo:FOODON_00002775 local:sameOrganismAs obo:FOODON_03413418 .
+### banana  <->  banana food product   [label convention]
+obo:FOODON_00004183 local:sameOrganismAs obo:FOODON_00001628 .
+### banana  <->  banana plant   [label convention]
+obo:FOODON_00004183 local:sameOrganismAs obo:FOODON_03414270 .
+### banana passionfruit  <->  banana passionfruit food product   [label convention]
+obo:FOODON_00003608 local:sameOrganismAs obo:FOODON_00001629 .
+### banana passionfruit  <->  banana passionfruit plant   [label convention]
+obo:FOODON_00003608 local:sameOrganismAs obo:FOODON_03412028 .
+### banana pepper  <->  banana pepper plant   [label convention]
+obo:FOODON_03000126 local:sameOrganismAs obo:FOODON_03413722 .
+### barramundi  <->  barramundi food product   [label convention]
+obo:FOODON_03412872 local:sameOrganismAs obo:FOODON_00002698 .
+### bean  <->  bean food product   [label convention]
+obo:FOODON_00002753 local:sameOrganismAs obo:FOODON_00001635 .
+### bean  <->  bean plant   [label convention]
+obo:FOODON_00002753 local:sameOrganismAs obo:FOODON_03411567 .
+### bear  <->  bear food product   [label convention]
+obo:FOODON_03412406 local:sameOrganismAs obo:FOODON_02021765 .
+### bearded seal  <->  bearded seal food product   [label convention]
+obo:FOODON_02022130 local:sameOrganismAs obo:FOODON_02022128 .
+### beautyberry  <->  beautyberry food product   [label convention]
+obo:FOODON_00004393 local:sameOrganismAs obo:FOODON_00004392 .
+### beaver  <->  beaver food product   [label convention]
+obo:FOODON_03411325 local:sameOrganismAs obo:FOODON_02021599 .
+### beefalo  <->  beefalo food product   [label convention]
+obo:FOODON_03412407 local:sameOrganismAs obo:FOODON_02020983 .
+### belgian carrot  <->  belgian carrot food product   [label convention]
+obo:FOODON_00003770 local:sameOrganismAs obo:FOODON_00001639 .
+### belgian carrot  <->  belgian carrot plant   [label convention]
+obo:FOODON_00003770 local:sameOrganismAs obo:FOODON_03411095 .
+### bell pepper  <->  bell pepper food product   [label convention]
+obo:FOODON_00003546 local:sameOrganismAs obo:FOODON_00003013 .
+### bell pepper  <->  bell pepper plant   [label convention]
+obo:FOODON_00003546 local:sameOrganismAs obo:FOODON_03412628 .
+### berry  <->  berry food product   [label convention]
+obo:FOODON_00003521 local:sameOrganismAs obo:FOODON_00001640 .
+### berry  <->  berry plant   [label convention]
+obo:FOODON_00003521 local:sameOrganismAs obo:FOODON_03411231 .
+### beverage  <->  beverage food product   [label convention]
+obo:FOODON_00003202 local:sameOrganismAs obo:FOODON_03301977 .
+### bilberry  <->  bilberry food product   [label convention]
+obo:FOODON_00004640 local:sameOrganismAs obo:FOODON_00004717 .
+### bilberry  <->  bilberry plant   [label convention]
+obo:FOODON_00004640 local:sameOrganismAs obo:FOODON_03412013 .
+### bison  <->  bison food product   [label convention]
+obo:FOODON_02020840 local:sameOrganismAs obo:FOODON_02020838 .
+### black bear  <->  black bear food product   [label convention]
+obo:FOODON_02022533 local:sameOrganismAs obo:FOODON_02022531 .
+### black chokeberry  <->  black chokeberry plant   [label convention]
+obo:FOODON_00004585 local:sameOrganismAs obo:FOODON_03413455 .
+### black crowberry  <->  black crowberry plant   [label convention]
+obo:FOODON_00003100 local:sameOrganismAs obo:FOODON_03414263 .
+### black currant  <->  black currant food product   [label convention]
+obo:FOODON_00003606 local:sameOrganismAs obo:FOODON_00002458 .
+### black currant  <->  black currant plant   [label convention]
+obo:FOODON_00003606 local:sameOrganismAs obo:FOODON_03411192 .
+### black fungus  <->  black fungus food product   [label convention]
+obo:FOODON_03411741 local:sameOrganismAs obo:FOODON_03301078 .
+### black gram bean  <->  black gram bean plant   [label convention]
+obo:FOODON_03309936 local:sameOrganismAs obo:FOODON_03411588 .
+### black olive  <->  black olive food product   [label convention]
+obo:FOODON_00003025 local:sameOrganismAs obo:FOODON_00001648 .
+### black olive  <->  black olive plant   [label convention]
+obo:FOODON_00003025 local:sameOrganismAs obo:FOODON_03411170 .
+### black radish  <->  black radish plant   [label convention]
+obo:FOODON_00003612 local:sameOrganismAs obo:FOODON_03412959 .
+### black raspberry  <->  black raspberry food product   [label convention]
+obo:FOODON_00003490 local:sameOrganismAs obo:FOODON_00001651 .
+### black raspberry  <->  black raspberry plant   [label convention]
+obo:FOODON_00003490 local:sameOrganismAs obo:FOODON_03411618 .
+### black walnut  <->  black walnut food product   [label convention]
+obo:FOODON_00003611 local:sameOrganismAs obo:FOODON_00001652 .
+### blackberry  <->  blackberry plant   [label convention]
+obo:FOODON_00003487 local:sameOrganismAs obo:FOODON_03414206 .
+### blackeyed pea  <->  blackeyed pea plant   [label convention]
+obo:FOODON_00003491 local:sameOrganismAs obo:FOODON_03411100 .
+### blood  <->  blood food product   [label convention]
+obo:UBERON_0000178 local:sameOrganismAs obo:FOODON_00002837 .
+### blood cockle  <->  blood cockle food product   [label convention]
+obo:FOODON_03414142 local:sameOrganismAs obo:FOODON_00004128 .
+### blood orange  <->  blood orange plant   [label convention]
+obo:FOODON_00004198 local:sameOrganismAs obo:FOODON_03414313 .
+### blue elderberry  <->  blue elderberry food product   [label convention]
+obo:FOODON_00004600 local:sameOrganismAs obo:FOODON_00004599 .
+### blue runner  <->  blue runner food product   [label convention]
+obo:FOODON_03411778 local:sameOrganismAs obo:FOODON_00001655 .
+### blue-green algae  <->  blue-green algae food product   [label convention]
+obo:FOODON_03411746 local:sameOrganismAs obo:FOODON_03301418 .
+### blueberry  <->  blueberry food product   [label convention]
+obo:FOODON_00003541 local:sameOrganismAs obo:FOODON_00001656 .
+### blueberry  <->  blueberry plant   [label convention]
+obo:FOODON_00003541 local:sameOrganismAs obo:FOODON_03411491 .
+### bluefin tuna  <->  bluefin tuna food product   [label convention]
+obo:FOODON_03411120 local:sameOrganismAs obo:FOODON_00001658 .
+### bluefish  <->  bluefish food product   [label convention]
+obo:FOODON_03411512 local:sameOrganismAs obo:FOODON_00001659 .
+### blueleaf huckleberry  <->  blueleaf huckleberry food product   [label convention]
+obo:FOODON_00004592 local:sameOrganismAs obo:FOODON_00004591 .
+### bonito  <->  bonito food product   [label convention]
+obo:FOODON_03411264 local:sameOrganismAs obo:FOODON_00001660 .
+### bony fish  <->  bony fish food product   [label convention]
+obo:FOODON_03411365 local:sameOrganismAs obo:FOODON_00001661 .
+### borojó  <->  borojó food product   [label convention]
+obo:FOODON_00004785 local:sameOrganismAs obo:FOODON_00004784 .
+### boysenberry  <->  boysenberry food product   [label convention]
+obo:FOODON_00003556 local:sameOrganismAs obo:FOODON_00001662 .
+### boysenberry  <->  boysenberry plant   [label convention]
+obo:FOODON_00003556 local:sameOrganismAs obo:FOODON_03411063 .
+### brain  <->  brain food product   [label convention]
+obo:UBERON_0000955 local:sameOrganismAs obo:FOODON_00003152 .
+### bramble berry  <->  bramble berry food product   [label convention]
+obo:FOODON_00003775 local:sameOrganismAs obo:FOODON_00003028 .
+### bramble berry  <->  bramble berry plant   [label convention]
+obo:FOODON_00003775 local:sameOrganismAs obo:FOODON_03411121 .
+### bread  <->  bread food product   [label convention]
+obo:FOODON_03000288 local:sameOrganismAs obo:FOODON_00001183 .
+### breadfruit  <->  breadfruit food product   [label convention]
+obo:FOODON_00003628 local:sameOrganismAs obo:FOODON_00005226 .
+### breadfruit  <->  breadfruit plant   [label convention]
+obo:FOODON_00003628 local:sameOrganismAs obo:FOODON_03411504 .
+### breadnut  <->  breadnut plant   [label convention]
+obo:FOODON_03000044 local:sameOrganismAs obo:FOODON_03411722 .
+### broad bean  <->  broad bean food product   [label convention]
+obo:FOODON_03301227 local:sameOrganismAs obo:FOODON_00001665 .
+### broad bean  <->  broad bean plant   [label convention]
+obo:FOODON_03301227 local:sameOrganismAs obo:FOODON_03411367 .
+### broth or stock  <->  broth or stock food product   [label convention]
+obo:FOODON_03420170 local:sameOrganismAs obo:FOODON_00001668 .
+### brown bean  <->  brown bean food product   [label convention]
+obo:FOODON_00002749 local:sameOrganismAs obo:FOODON_00002769 .
+### brown rice kernel  <->  brown rice kernel food product   [label convention]
+obo:FOODON_00003436 local:sameOrganismAs obo:FOODON_03301136 .
+### brown trout  <->  brown trout food product   [label convention]
+obo:FOODON_03411479 local:sameOrganismAs obo:FOODON_00001669 .
+### brussels sprout  <->  brussels sprout food product   [label convention]
+obo:FOODON_03311885 local:sameOrganismAs obo:FOODON_00001670 .
+### brussels sprout  <->  brussels sprout plant   [label convention]
+obo:FOODON_03311885 local:sameOrganismAs obo:FOODON_03411611 .
+### buffalo  <->  buffalo food product   [label convention]
+obo:FOODON_03411476 local:sameOrganismAs obo:FOODON_02021000 .
+### buffalofish  <->  buffalofish food product   [label convention]
+obo:FOODON_03411085 local:sameOrganismAs obo:FOODON_00001672 .
+### bullocks heart  <->  bullocks heart food product   [label convention]
+obo:FOODON_00005141 local:sameOrganismAs obo:FOODON_00005140 .
+### butterfly mackerel  <->  butterfly mackerel food product   [label convention]
+obo:FOODON_03412314 local:sameOrganismAs obo:FOODON_00001674 .
+### butterhead lettuce  <->  butterhead lettuce plant   [label convention]
+obo:FOODON_00003509 local:sameOrganismAs obo:FOODON_03412084 .
+### butternut squash  <->  butternut squash plant   [label convention]
+obo:FOODON_00005354 local:sameOrganismAs obo:FOODON_03412509 .
+### cabbage head  <->  cabbage head food product   [label convention]
+obo:FOODON_00003406 local:sameOrganismAs obo:FOODON_00001677 .
+### cabbage juice  <->  cabbage juice food product   [label convention]
+obo:FOODON_03302943 local:sameOrganismAs obo:FOODON_00001675 .
+### california blackberry  <->  california blackberry food product   [label convention]
+obo:FOODON_00004589 local:sameOrganismAs obo:FOODON_00004588 .
+### california blackberry  <->  california blackberry plant   [label convention]
+obo:FOODON_00004589 local:sameOrganismAs obo:FOODON_03414207 .
+### california valencia orange  <->  california valencia orange plant   [label convention]
+obo:FOODON_00003619 local:sameOrganismAs obo:FOODON_03411056 .
+### camembert cheese  <->  camembert cheese food product   [label convention]
+obo:FOODON_03302995 local:sameOrganismAs obo:FOODON_00001025 .
+### canary bean  <->  canary bean food product   [label convention]
+obo:FOODON_00004674 local:sameOrganismAs obo:FOODON_00004673 .
+### candy  <->  candy food product   [label convention]
+obo:FOODON_03301051 local:sameOrganismAs obo:FOODON_00001214 .
+### cape hake  <->  cape hake food product   [label convention]
+obo:FOODON_03413889 local:sameOrganismAs obo:FOODON_00001679 .
+### cape spiny lobster  <->  cape spiny lobster food product   [label convention]
+obo:FOODON_03412166 local:sameOrganismAs obo:FOODON_00001680 .
+### caper  <->  caper food product   [label convention]
+obo:FOODON_00003493 local:sameOrganismAs obo:FOODON_00001681 .
+### caper  <->  caper plant   [label convention]
+obo:FOODON_00003493 local:sameOrganismAs obo:FOODON_03411247 .
+### capon  <->  capon food product   [label convention]
+obo:FOODON_03411711 local:sameOrganismAs obo:FOODON_02020065 .
+### caramel candy  <->  caramel candy food product   [label convention]
+obo:FOODON_03302881 local:sameOrganismAs obo:FOODON_00001682 .
+### carp  <->  carp food product   [label convention]
+obo:FOODON_03412617 local:sameOrganismAs obo:FOODON_00001684 .
+### carp or minnow family  <->  carp or minnow family food product   [label convention]
+obo:FOODON_03411921 local:sameOrganismAs obo:FOODON_00001685 .
+### carrot juice  <->  carrot juice food product   [label convention]
+obo:FOODON_03302213 local:sameOrganismAs obo:FOODON_00001686 .
+### casaba melon  <->  casaba melon plant   [label convention]
+obo:FOODON_00004210 local:sameOrganismAs obo:FOODON_03411102 .
+### cashew nut  <->  cashew nut food product   [label convention]
+obo:FOODON_00003615 local:sameOrganismAs obo:FOODON_00001688 .
+### cassava  <->  cassava food product   [label convention]
+obo:FOODON_00003409 local:sameOrganismAs obo:FOODON_00001692 .
+### cassava  <->  cassava plant   [label convention]
+obo:FOODON_00003409 local:sameOrganismAs obo:FOODON_03411352 .
+### castor bean  <->  castor bean food product   [label convention]
+obo:FOODON_03310303 local:sameOrganismAs obo:FOODON_00002402 .
+### castor bean  <->  castor bean plant   [label convention]
+obo:FOODON_03310303 local:sameOrganismAs obo:FOODON_03411703 .
+### cauliflower (pickled)  <->  cauliflower (pickled) food product   [label convention]
+obo:FOODON_03311755 local:sameOrganismAs obo:FOODON_00001702 .
+### cephalopod  <->  cephalopod food product   [label convention]
+obo:FOODON_03412116 local:sameOrganismAs obo:FOODON_00001707 .
+### cereal grain  <->  cereal grain food product   [label convention]
+obo:FOODON_03301941 local:sameOrganismAs obo:FOODON_00001093 .
+### channel catfish  <->  channel catfish food product   [label convention]
+obo:FOODON_03411899 local:sameOrganismAs obo:FOODON_00001711 .
+### chayote  <->  chayote plant   [label convention]
+obo:FOODON_00003653 local:sameOrganismAs obo:FOODON_03411730 .
+### cheddar cheese  <->  cheddar cheese food product   [label convention]
+obo:FOODON_03302458 local:sameOrganismAs obo:FOODON_00001027 .
+### cheese  <->  cheese food product   [label convention]
+obo:FOODON_03000287 local:sameOrganismAs obo:FOODON_00001013 .
+### cherry  <->  cherry food product   [label convention]
+obo:FOODON_00003478 local:sameOrganismAs obo:FOODON_00001717 .
+### cherry  <->  cherry plant   [label convention]
+obo:FOODON_00003478 local:sameOrganismAs obo:FOODON_03411306 .
+### cherry juice  <->  cherry juice food product   [label convention]
+obo:FOODON_03301144 local:sameOrganismAs obo:FOODON_00001718 .
+### chestnut  <->  chestnut food product   [label convention]
+obo:FOODON_00003563 local:sameOrganismAs obo:FOODON_00001722 .
+### chewing gum  <->  chewing gum food product   [label convention]
+obo:FOODON_03310643 local:sameOrganismAs obo:FOODON_00001723 .
+### chia seed  <->  chia seed food product   [label convention]
+obo:FOODON_00002961 local:sameOrganismAs obo:FOODON_03000179 .
+### chicken  <->  chicken food product   [label convention]
+obo:FOODON_03411457 local:sameOrganismAs obo:FOODON_02020149 .
 ### chicken egg  <->  chicken egg food product   [label convention]
 obo:FOODON_03316061 local:sameOrganismAs obo:FOODON_00001275 .
+### chicken egg white  <->  chicken egg white food product   [label convention]
+obo:FOODON_02020155 local:sameOrganismAs obo:FOODON_03304840 .
+### chicken egg yolk  <->  chicken egg yolk food product   [label convention]
+obo:FOODON_02020157 local:sameOrganismAs obo:FOODON_03315772 .
+### chicken pie  <->  chicken pie food product   [label convention]
+obo:FOODON_03307577 local:sameOrganismAs obo:FOODON_00001726 .
+### chicken salad  <->  chicken salad food product   [label convention]
+obo:FOODON_03306092 local:sameOrganismAs obo:FOODON_00001727 .
+### chicken soup  <->  chicken soup food product   [label convention]
+obo:FOODON_03306286 local:sameOrganismAs obo:FOODON_00001728 .
+### chickpea  <->  chickpea food product   [label convention]
+obo:FOODON_03306811 local:sameOrganismAs obo:FOODON_00001199 .
+### chickpea  <->  chickpea plant   [label convention]
+obo:FOODON_03306811 local:sameOrganismAs obo:FOODON_00002918 .
+### chinese yam  <->  chinese yam plant   [label convention]
+obo:FOODON_00003081 local:sameOrganismAs obo:FOODON_00003079 .
+### chinook salmon  <->  chinook salmon food product   [label convention]
+obo:FOODON_03411132 local:sameOrganismAs obo:FOODON_00001731 .
+### chocolate  <->  chocolate food product   [label convention]
+obo:FOODON_03307240 local:sameOrganismAs obo:FOODON_00001280 .
+### chocolate candy  <->  chocolate candy food product   [label convention]
+obo:FOODON_03301007 local:sameOrganismAs obo:FOODON_00001733 .
+### chokeberry  <->  chokeberry food product   [label convention]
+obo:FOODON_00005232 local:sameOrganismAs obo:FOODON_00004582 .
+### chokeberry  <->  chokeberry plant   [label convention]
+obo:FOODON_00005232 local:sameOrganismAs obo:FOODON_03414951 .
+### chokecherry  <->  chokecherry food product   [label convention]
+obo:FOODON_00004222 local:sameOrganismAs obo:FOODON_00004221 .
+### chokecherry  <->  chokecherry plant   [label convention]
+obo:FOODON_00004222 local:sameOrganismAs obo:FOODON_03412044 .
+### chum salmon  <->  chum salmon food product   [label convention]
+obo:FOODON_03411115 local:sameOrganismAs obo:FOODON_00001736 .
+### cinnamon  <->  cinnamon food product   [label convention]
+obo:FOODON_03301175 local:sameOrganismAs obo:FOODON_00001738 .
+### cinnamon  <->  cinnamon plant   [label convention]
+obo:FOODON_03301175 local:sameOrganismAs obo:FOODON_03411472 .
+### citron  <->  citron food product   [label convention]
+obo:FOODON_00003659 local:sameOrganismAs obo:FOODON_00001740 .
+### citron  <->  citron plant   [label convention]
+obo:FOODON_00003659 local:sameOrganismAs obo:FOODON_03411211 .
+### citrus fruit  <->  citrus fruit food product   [label convention]
+obo:FOODON_00003324 local:sameOrganismAs obo:FOODON_00001151 .
+### clementine  <->  clementine plant   [label convention]
+obo:FOODON_00003656 local:sameOrganismAs obo:FOODON_03411751 .
+### clingstone peach  <->  clingstone peach food product   [label convention]
+obo:FOODON_00003481 local:sameOrganismAs obo:FOODON_00001743 .
+### cloudberry  <->  cloudberry food product   [label convention]
+obo:FOODON_00003480 local:sameOrganismAs obo:FOODON_00001744 .
+### cloudberry  <->  cloudberry plant   [label convention]
+obo:FOODON_00003480 local:sameOrganismAs obo:FOODON_03412029 .
+### clove  <->  clove food product   [label convention]
+obo:BTO_0000262 local:sameOrganismAs obo:FOODON_00001745 .
+### clove  <->  clove plant   [label convention]
+obo:BTO_0000262 local:sameOrganismAs obo:FOODON_03411255 .
+### cockle  <->  cockle food product   [label convention]
+obo:FOODON_03411317 local:sameOrganismAs obo:FOODON_00001746 .
+### cocoa  <->  cocoa food product   [label convention]
+obo:FOODON_03301072 local:sameOrganismAs obo:FOODON_03315302 .
+### coconut  <->  coconut food product   [label convention]
+obo:FOODON_00003449 local:sameOrganismAs obo:FOODON_03316908 .
+### cod  <->  cod food product   [label convention]
+obo:FOODON_03411423 local:sameOrganismAs obo:FOODON_00001750 .
+### codling  <->  codling food product   [label convention]
+obo:FOODON_03411291 local:sameOrganismAs obo:FOODON_00001751 .
+### coho salmon  <->  coho salmon food product   [label convention]
+obo:FOODON_03411117 local:sameOrganismAs obo:FOODON_00001752 .
+### cold-pack cheese  <->  cold-pack cheese food product   [label convention]
+obo:FOODON_03301742 local:sameOrganismAs obo:FOODON_00001754 .
+### common bean  <->  common bean food product   [label convention]
+obo:FOODON_00003403 local:sameOrganismAs obo:FOODON_00001757 .
+### common bean  <->  common bean plant   [label convention]
+obo:FOODON_00003403 local:sameOrganismAs obo:FOODON_03411999 .
+### cookie  <->  cookie food product   [label convention]
+obo:FOODON_03301585 local:sameOrganismAs obo:FOODON_00001762 .
 ### coriander  <->  coriander food product   [label convention]
 obo:FOODON_03310370 local:sameOrganismAs obo:FOODON_00001763 .
 ### coriander  <->  coriander plant   [label convention]
 obo:FOODON_03310370 local:sameOrganismAs obo:FOODON_03411381 .
+### cow  <->  cow food product   [label convention]
+obo:FOODON_02020892 local:sameOrganismAs obo:FOODON_00001041 .
+### cow whey  <->  cow whey food product   [label convention]
+obo:FOODON_03305064 local:sameOrganismAs obo:FOODON_00002359 .
+### cowpea  <->  cowpea plant   [label convention]
+obo:FOODON_00003414 local:sameOrganismAs obo:FOODON_03411200 .
+### crab  <->  crab food product   [label convention]
+obo:FOODON_02021446 local:sameOrganismAs obo:FOODON_02021444 .
+### crabapple  <->  crabapple plant   [label convention]
+obo:FOODON_00003651 local:sameOrganismAs obo:FOODON_00003126 .
+### cranberry  <->  cranberry food product   [label convention]
+obo:FOODON_00003657 local:sameOrganismAs obo:FOODON_00001786 .
+### cranberry  <->  cranberry plant   [label convention]
+obo:FOODON_00003657 local:sameOrganismAs obo:FOODON_03414209 .
+### cranberry bean  <->  cranberry bean food product   [label convention]
+obo:FOODON_03302067 local:sameOrganismAs obo:FOODON_00002772 .
+### cranberry bean  <->  cranberry bean plant   [label convention]
+obo:FOODON_03302067 local:sameOrganismAs obo:FOODON_03411186 .
+### cream dressing  <->  cream dressing food product   [label convention]
+obo:FOODON_03305265 local:sameOrganismAs obo:FOODON_00001790 .
+### cricket  <->  cricket food product   [label convention]
+obo:FOODON_02022050 local:sameOrganismAs obo:FOODON_00004713 .
+### crustacean  <->  crustacean food product   [label convention]
+obo:FOODON_03411374 local:sameOrganismAs obo:FOODON_00001792 .
+### cucumber  <->  cucumber food product   [label convention]
+obo:FOODON_00003415 local:sameOrganismAs obo:FOODON_00001795 .
+### cucumber  <->  cucumber plant   [label convention]
+obo:FOODON_00003415 local:sameOrganismAs obo:FOODON_03411404 .
+### cupuaçu fruit  <->  cupuaçu fruit food product   [label convention]
+obo:FOODON_00003617 local:sameOrganismAs obo:FOODON_00003221 .
+### curry leaf  <->  curry leaf food product   [label convention]
+obo:FOODON_03000122 local:sameOrganismAs obo:FOODON_03000432 .
+### cusk  <->  cusk food product   [label convention]
+obo:FOODON_03412143 local:sameOrganismAs obo:FOODON_00001798 .
+### cuttlefish  <->  cuttlefish food product   [label convention]
+obo:FOODON_03411644 local:sameOrganismAs obo:FOODON_00001799 .
+### dairy  <->  dairy food product   [label convention]
+obo:ENVO_00003862 local:sameOrganismAs obo:FOODON_00001256 .
+### deep sea lobster  <->  deep sea lobster food product   [label convention]
+obo:FOODON_03412232 local:sameOrganismAs obo:FOODON_00001804 .
+### deer  <->  deer food product   [label convention]
+obo:FOODON_03411583 local:sameOrganismAs obo:FOODON_02021409 .
+### devilfish  <->  devilfish food product   [label convention]
+obo:FOODON_02021907 local:sameOrganismAs obo:FOODON_00001807 .
+### dogfish  <->  dogfish food product   [label convention]
+obo:FOODON_03411913 local:sameOrganismAs obo:FOODON_00001819 .
+### dogwood berry  <->  dogwood berry food product   [label convention]
+obo:FOODON_00004669 local:sameOrganismAs obo:FOODON_00004668 .
+### dolphinfish  <->  dolphinfish food product   [label convention]
+obo:FOODON_03411917 local:sameOrganismAs obo:FOODON_00001820 .
+### domestic yak  <->  domestic yak food product   [label convention]
+obo:FOODON_02020875 local:sameOrganismAs obo:FOODON_02020872 .
+### donkey  <->  donkey food product   [label convention]
+obo:FOODON_02021535 local:sameOrganismAs obo:FOODON_00002446 .
+### doughnut  <->  doughnut food product   [label convention]
+obo:FOODON_03301938 local:sameOrganismAs obo:FOODON_00001821 .
+### drupelet berry  <->  drupelet berry food product   [label convention]
+obo:FOODON_00003477 local:sameOrganismAs obo:FOODON_00003026 .
+### duck  <->  duck food product   [label convention]
+obo:FOODON_03411316 local:sameOrganismAs obo:FOODON_02020114 .
+### duck egg  <->  duck egg food product   [label convention]
+obo:FOODON_00004428 local:sameOrganismAs obo:FOODON_00001822 .
+### echinoderm  <->  echinoderm food product   [label convention]
+obo:FOODON_03412115 local:sameOrganismAs obo:FOODON_00003318 .
+### eel  <->  eel food product   [label convention]
+obo:FOODON_03411278 local:sameOrganismAs obo:FOODON_00001826 .
+### eggplant  <->  eggplant food product   [label convention]
+obo:FOODON_00003618 local:sameOrganismAs obo:FOODON_00001830 .
+### eggplant  <->  eggplant plant   [label convention]
+obo:FOODON_00003618 local:sameOrganismAs obo:FOODON_03411458 .
+### elderberry  <->  elderberry food product   [label convention]
+obo:FOODON_00003678 local:sameOrganismAs obo:FOODON_00002437 .
+### elderberry  <->  elderberry plant   [label convention]
+obo:FOODON_00003678 local:sameOrganismAs obo:FOODON_03414211 .
+### elephant  <->  elephant food product   [label convention]
+obo:FOODON_02021525 local:sameOrganismAs obo:FOODON_02021523 .
+### elk  <->  elk food product   [label convention]
+obo:FOODON_02021419 local:sameOrganismAs obo:FOODON_00002438 .
+### emu  <->  emu food product   [label convention]
+obo:FOODON_02020096 local:sameOrganismAs obo:FOODON_02020094 .
+### endive  <->  endive plant   [label convention]
+obo:FOODON_00002439 local:sameOrganismAs obo:FOODON_03411314 .
+### english walnut  <->  english walnut food product   [label convention]
+obo:FOODON_00004148 local:sameOrganismAs obo:FOODON_00001833 .
+### european bittersweet  <->  european bittersweet plant   [label convention]
+obo:FOODON_03413645 local:sameOrganismAs obo:FOODON_03411076 .
+### evaporated milk  <->  evaporated milk food product   [label convention]
+obo:FOODON_03301505 local:sameOrganismAs obo:FOODON_00001085 .
+### feta cheese  <->  feta cheese food product   [label convention]
+obo:FOODON_03307280 local:sameOrganismAs obo:FOODON_00004106 .
+### field pea  <->  field pea plant   [label convention]
+obo:FOODON_00003560 local:sameOrganismAs obo:FOODON_03411486 .
+### fig  <->  fig food product   [label convention]
+obo:FOODON_00003266 local:sameOrganismAs obo:FOODON_00001851 .
+### fig  <->  fig plant   [label convention]
+obo:FOODON_00003266 local:sameOrganismAs obo:FOODON_03411302 .
+### fish egg  <->  fish egg food product   [label convention]
+obo:FOODON_00004319 local:sameOrganismAs obo:FOODON_00001250 .
+### flaxseed  <->  flaxseed food product   [label convention]
+obo:FOODON_00003683 local:sameOrganismAs obo:FOODON_00001859 .
+### florida stone crab  <->  florida stone crab food product   [label convention]
+obo:FOODON_03411944 local:sameOrganismAs obo:FOODON_00001861 .
+### flour  <->  flour food product   [label convention]
+obo:FOODON_00004510 local:sameOrganismAs obo:FOODON_00001056 .
+### fordhook lima bean  <->  fordhook lima bean plant   [label convention]
+obo:FOODON_03302069 local:sameOrganismAs obo:FOODON_03411562 .
+### fox grape  <->  fox grape plant   [label convention]
+obo:FOODON_00005184 local:sameOrganismAs obo:FOODON_03412001 .
+### fragrant grenadilla  <->  fragrant grenadilla food product   [label convention]
+obo:FOODON_00005643 local:sameOrganismAs obo:FOODON_00005642 .
+### freshwater drum  <->  freshwater drum food product   [label convention]
+obo:FOODON_03411796 local:sameOrganismAs obo:FOODON_00001876 .
+### freshwater fish  <->  freshwater fish food product   [label convention]
+obo:FOODON_03413361 local:sameOrganismAs obo:FOODON_00001249 .
+### frigate tuna  <->  frigate tuna food product   [label convention]
+obo:FOODON_03411787 local:sameOrganismAs obo:FOODON_00001877 .
+### frog  <->  frog food product   [label convention]
+obo:FOODON_02020038 local:sameOrganismAs obo:FOODON_00002443 .
+### frozen yogurt  <->  frozen yogurt food product   [label convention]
+obo:FOODON_03307445 local:sameOrganismAs obo:FOODON_00001881 .
+### fructose  <->  fructose food product   [label convention]
+obo:CHEBI_28757 local:sameOrganismAs obo:FOODON_03301305 .
+### fruit  <->  fruit food product   [label convention]
+obo:PO_0009001 local:sameOrganismAs obo:FOODON_03315615 .
+### fruit butter  <->  fruit butter food product   [label convention]
+obo:FOODON_03301507 local:sameOrganismAs obo:FOODON_00001885 .
+### fruit jelly  <->  fruit jelly food product   [label convention]
+obo:FOODON_03301811 local:sameOrganismAs obo:FOODON_00001888 .
+### fruit pie  <->  fruit pie food product   [label convention]
+obo:FOODON_03307431 local:sameOrganismAs obo:FOODON_00001890 .
+### fruit salad  <->  fruit salad food product   [label convention]
+obo:FOODON_03305148 local:sameOrganismAs obo:FOODON_00001891 .
+### fudge  <->  fudge food product   [label convention]
+obo:FOODON_03301728 local:sameOrganismAs obo:FOODON_00001893 .
+### fungus  <->  fungus food product   [label convention]
+obo:FOODON_03411261 local:sameOrganismAs obo:FOODON_00001143 .
+### gazelle  <->  gazelle food product   [label convention]
+obo:FOODON_02021111 local:sameOrganismAs obo:FOODON_02021109 .
+### gelatin dessert  <->  gelatin dessert food product   [label convention]
+obo:FOODON_03305342 local:sameOrganismAs obo:FOODON_00001899 .
+### ginseng  <->  ginseng food product   [label convention]
+obo:FOODON_03301402 local:sameOrganismAs obo:FOODON_00001904 .
+### ginseng  <->  ginseng plant   [label convention]
+obo:FOODON_03301402 local:sameOrganismAs obo:FOODON_03411673 .
+### ginseng plant  <->  ginseng plant food product   [label convention]
+obo:FOODON_03411673 local:sameOrganismAs obo:FOODON_00001905 .
+### giraffe  <->  giraffe food product   [label convention]
+obo:FOODON_02021486 local:sameOrganismAs obo:FOODON_02021484 .
+### glaze  <->  glaze food product   [label convention]
+obo:FOODON_03315146 local:sameOrganismAs obo:FOODON_00001906 .
+### glutinous rice  <->  glutinous rice food product   [label convention]
+obo:FOODON_00003352 local:sameOrganismAs obo:FOODON_03307561 .
+### goat  <->  goat food product   [label convention]
+obo:FOODON_03411328 local:sameOrganismAs obo:FOODON_00004420 .
+### goat milk cheese  <->  goat milk cheese food product   [label convention]
+obo:FOODON_03303655 local:sameOrganismAs obo:FOODON_00001129 .
+### goji berry  <->  goji berry food product   [label convention]
+obo:FOODON_00004360 local:sameOrganismAs obo:FOODON_00004359 .
+### goldenberry  <->  goldenberry food product   [label convention]
+obo:FOODON_00004573 local:sameOrganismAs obo:FOODON_00004572 .
+### goose  <->  goose food product   [label convention]
+obo:FOODON_03411253 local:sameOrganismAs obo:FOODON_02020373 .
+### gooseberry  <->  gooseberry food product   [label convention]
+obo:FOODON_00003543 local:sameOrganismAs obo:FOODON_00001914 .
+### gooseberry  <->  gooseberry plant   [label convention]
+obo:FOODON_00003543 local:sameOrganismAs obo:FOODON_03411394 .
+### gorgonzola cheese  <->  gorgonzola cheese food product   [label convention]
+obo:FOODON_03303502 local:sameOrganismAs obo:FOODON_00001031 .
+### gouda cheese  <->  gouda cheese food product   [label convention]
+obo:FOODON_03303514 local:sameOrganismAs obo:FOODON_00001029 .
+### grape juice  <->  grape juice food product   [label convention]
+obo:FOODON_03301127 local:sameOrganismAs obo:FOODON_00001926 .
+### grape vinegar  <->  grape vinegar food product   [label convention]
+obo:FOODON_03307365 local:sameOrganismAs obo:FOODON_00001928 .
+### grapefruit  <->  grapefruit food product   [label convention]
+obo:FOODON_00003554 local:sameOrganismAs obo:FOODON_00001929 .
+### grapefruit  <->  grapefruit plant   [label convention]
+obo:FOODON_00003554 local:sameOrganismAs obo:FOODON_03411507 .
+### gray mullet  <->  gray mullet food product   [label convention]
+obo:FOODON_03411287 local:sameOrganismAs obo:FOODON_00001932 .
+### great northern bean  <->  great northern bean food product   [label convention]
+obo:FOODON_03310058 local:sameOrganismAs obo:FOODON_00001933 .
+### great northern bean  <->  great northern bean plant   [label convention]
+obo:FOODON_03310058 local:sameOrganismAs obo:FOODON_03411027 .
+### green algae  <->  green algae food product   [label convention]
+obo:FOODON_03412502 local:sameOrganismAs obo:FOODON_03000008 .
+### green kidney bean  <->  green kidney bean plant   [label convention]
+obo:FOODON_03302071 local:sameOrganismAs obo:FOODON_03411658 .
+### green olive  <->  green olive food product   [label convention]
+obo:FOODON_03301269 local:sameOrganismAs obo:FOODON_00001936 .
+### green olive  <->  green olive plant   [label convention]
+obo:FOODON_03301269 local:sameOrganismAs obo:FOODON_03411169 .
+### green sea turtle  <->  green sea turtle food product   [label convention]
+obo:FOODON_02021572 local:sameOrganismAs obo:FOODON_02021570 .
+### greenland halibut  <->  greenland halibut food product   [label convention]
+obo:FOODON_03411589 local:sameOrganismAs obo:FOODON_00001937 .
+### ground cherry  <->  ground cherry plant   [label convention]
+obo:FOODON_00005186 local:sameOrganismAs obo:FOODON_03412519 .
+### grouper  <->  grouper food product   [label convention]
+obo:FOODON_03411496 local:sameOrganismAs obo:FOODON_00001938 .
+### guar plant  <->  guar plant food product   [label convention]
+obo:FOODON_03411334 local:sameOrganismAs obo:FOODON_00004340 .
+### guava  <->  guava food product   [label convention]
+obo:FOODON_00003622 local:sameOrganismAs obo:FOODON_00001940 .
+### guava  <->  guava plant   [label convention]
+obo:FOODON_00003622 local:sameOrganismAs obo:FOODON_03411333 .
+### guinea fowl  <->  guinea fowl food product   [label convention]
+obo:FOODON_03411125 local:sameOrganismAs obo:FOODON_02020637 .
+### haddock  <->  haddock food product   [label convention]
+obo:FOODON_03411441 local:sameOrganismAs obo:FOODON_00001941 .
+### halibut  <->  halibut food product   [label convention]
+obo:FOODON_03411532 local:sameOrganismAs obo:FOODON_00001942 .
+### ham  <->  ham food product   [label convention]
+obo:FOODON_00005591 local:sameOrganismAs obo:FOODON_00002502 .
+### ham salad  <->  ham salad food product   [label convention]
+obo:FOODON_03306091 local:sameOrganismAs obo:FOODON_00001943 .
+### hard candy  <->  hard candy food product   [label convention]
+obo:FOODON_03303780 local:sameOrganismAs obo:FOODON_00001944 .
+### hard cheese  <->  hard cheese food product   [label convention]
+obo:FOODON_03301738 local:sameOrganismAs obo:FOODON_00001945 .
+### hazelnut  <->  hazelnut food product   [label convention]
+obo:FOODON_00002933 local:sameOrganismAs obo:FOODON_00002932 .
+### heart  <->  heart food product   [label convention]
+obo:UBERON_0000948 local:sameOrganismAs obo:FOODON_00003151 .
+### herring  <->  herring food product   [label convention]
+obo:FOODON_03411414 local:sameOrganismAs obo:FOODON_00001950 .
+### hickory nut  <->  hickory nut food product   [label convention]
+obo:FOODON_00003089 local:sameOrganismAs obo:FOODON_00004435 .
+### hippopotamus  <->  hippopotamus food product   [label convention]
+obo:FOODON_02021504 local:sameOrganismAs obo:FOODON_02021502 .
+### honey  <->  honey food product   [label convention]
+obo:UBERON_0036016 local:sameOrganismAs obo:FOODON_00001178 .
+### honeydew melon  <->  honeydew melon plant   [label convention]
+obo:FOODON_00003598 local:sameOrganismAs obo:FOODON_03411582 .
+### hops  <->  hops plant   [label convention]
+obo:FOODON_00003800 local:sameOrganismAs obo:FOODON_03411517 .
+### horned melon  <->  horned melon plant   [label convention]
+obo:FOODON_00003658 local:sameOrganismAs obo:FOODON_03412842 .
+### horse  <->  horse food product   [label convention]
+obo:FOODON_02021548 local:sameOrganismAs obo:FOODON_02021543 .
+### horseradish  <->  horseradish plant   [label convention]
+obo:FOODON_03316284 local:sameOrganismAs obo:FOODON_03411146 .
+### horseradish plant  <->  horseradish plant food product   [label convention]
+obo:FOODON_03411146 local:sameOrganismAs obo:FOODON_00001953 .
+### horseradish root  <->  horseradish root food product   [label convention]
+obo:FOODON_00003698 local:sameOrganismAs obo:FOODON_03316911 .
+### hot pepper  <->  hot pepper food product   [label convention]
+obo:FOODON_00003545 local:sameOrganismAs obo:FOODON_00001956 .
+### hot pepper  <->  hot pepper plant   [label convention]
+obo:FOODON_00003545 local:sameOrganismAs obo:FOODON_03411643 .
+### hubbard squash  <->  hubbard squash plant   [label convention]
+obo:FOODON_03000075 local:sameOrganismAs obo:FOODON_03412511 .
+### huckleberry  <->  huckleberry food product   [label convention]
+obo:FOODON_00003544 local:sameOrganismAs obo:FOODON_00001957 .
+### huckleberry  <->  huckleberry plant   [label convention]
+obo:FOODON_00003544 local:sameOrganismAs obo:FOODON_03411064 .
+### hungarian wax pepper  <->  hungarian wax pepper food product   [label convention]
+obo:FOODON_03000130 local:sameOrganismAs obo:FOODON_00001959 .
+### hungarian wax pepper  <->  hungarian wax pepper plant   [label convention]
+obo:FOODON_03000130 local:sameOrganismAs obo:FOODON_03411353 .
+### hyacinth bean  <->  hyacinth bean food product   [label convention]
+obo:FOODON_03309749 local:sameOrganismAs obo:FOODON_00001208 .
+### hyacinth bean  <->  hyacinth bean plant   [label convention]
+obo:FOODON_03309749 local:sameOrganismAs obo:FOODON_03411725 .
+### ice  <->  ice food product   [label convention]
+obo:ENVO_01001125 local:sameOrganismAs obo:FOODON_03301926 .
+### ice cream  <->  ice cream food product   [label convention]
+obo:FOODON_00004500 local:sameOrganismAs obo:FOODON_00001045 .
+### imitation vinegar  <->  imitation vinegar food product   [label convention]
+obo:FOODON_03307918 local:sameOrganismAs obo:FOODON_00001971 .
+### inconnu  <->  inconnu food product   [label convention]
+obo:FOODON_03412302 local:sameOrganismAs obo:FOODON_00001972 .
+### insect  <->  insect food product   [label convention]
+obo:FOODON_03411220 local:sameOrganismAs obo:FOODON_00001177 .
+### irish moss  <->  irish moss food product   [label convention]
+obo:FOODON_03411742 local:sameOrganismAs obo:FOODON_00004689 .
+### italian prune plum  <->  italian prune plum plant   [label convention]
+obo:FOODON_00003813 local:sameOrganismAs obo:FOODON_03412125 .
+### ivy gourd  <->  ivy gourd food product   [label convention]
+obo:FOODON_00004468 local:sameOrganismAs obo:FOODON_00002998 .
+### ivy gourd  <->  ivy gourd plant   [label convention]
+obo:FOODON_00004468 local:sameOrganismAs obo:FOODON_03412420 .
+### jackfruit  <->  jackfruit food product   [label convention]
+obo:FOODON_00003457 local:sameOrganismAs obo:FOODON_00003456 .
+### jalapeno pepper  <->  jalapeno pepper food product   [label convention]
+obo:FOODON_00003494 local:sameOrganismAs obo:FOODON_00001976 .
+### jalapeno pepper  <->  jalapeno pepper plant   [label convention]
+obo:FOODON_00003494 local:sameOrganismAs obo:FOODON_03411666 .
+### jam  <->  jam food product   [label convention]
+obo:FOODON_03309973 local:sameOrganismAs obo:FOODON_00001227 .
+### java apple  <->  java apple plant   [label convention]
+obo:FOODON_00003626 local:sameOrganismAs obo:FOODON_03413395 .
+### jelly candy  <->  jelly candy food product   [label convention]
+obo:FOODON_03316471 local:sameOrganismAs obo:FOODON_00001977 .
+### jerusalem artichoke  <->  jerusalem artichoke food product   [label convention]
+obo:FOODON_00003706 local:sameOrganismAs obo:FOODON_00001979 .
+### jerusalem artichoke  <->  jerusalem artichoke plant   [label convention]
+obo:FOODON_00003706 local:sameOrganismAs obo:FOODON_03411038 .
+### jewfish  <->  jewfish food product   [label convention]
+obo:FOODON_03411756 local:sameOrganismAs obo:FOODON_00001980 .
+### jojoba bean  <->  jojoba bean food product   [label convention]
+obo:FOODON_00003795 local:sameOrganismAs obo:FOODON_00003182 .
+### kangaroo  <->  kangaroo food product   [label convention]
+obo:FOODON_03412092 local:sameOrganismAs obo:FOODON_02021468 .
+### kefir  <->  kefir food product   [label convention]
+obo:FOODON_03310290 local:sameOrganismAs obo:FOODON_00001086 .
+### kegani crab  <->  kegani crab food product   [label convention]
+obo:FOODON_03411961 local:sameOrganismAs obo:FOODON_00001984 .
+### kelp  <->  kelp food product   [label convention]
+obo:FOODON_03411744 local:sameOrganismAs obo:FOODON_00001985 .
+### kidney  <->  kidney food product   [label convention]
+obo:UBERON_0002113 local:sameOrganismAs obo:FOODON_00002821 .
+### kidney bean  <->  kidney bean food product   [label convention]
+obo:FOODON_00002761 local:sameOrganismAs obo:FOODON_00001986 .
+### kidney bean  <->  kidney bean plant   [label convention]
+obo:FOODON_00002761 local:sameOrganismAs obo:FOODON_03411113 .
+### king crab  <->  king crab food product   [label convention]
+obo:FOODON_03411498 local:sameOrganismAs obo:FOODON_00001987 .
+### kiwifruit  <->  kiwifruit food product   [label convention]
+obo:FOODON_00004387 local:sameOrganismAs obo:FOODON_00002495 .
+### kola nut  <->  kola nut food product   [label convention]
+obo:FOODON_00003667 local:sameOrganismAs obo:FOODON_00001753 .
+### konjac  <->  konjac plant   [label convention]
+obo:FOODON_03414400 local:sameOrganismAs obo:FOODON_03412637 .
+### krill  <->  krill food product   [label convention]
+obo:FOODON_03412844 local:sameOrganismAs obo:FOODON_00001989 .
+### kumquat  <->  kumquat food product   [label convention]
+obo:FOODON_00003686 local:sameOrganismAs obo:FOODON_00001990 .
+### kumquat  <->  kumquat plant   [label convention]
+obo:FOODON_00003686 local:sameOrganismAs obo:FOODON_03411530 .
+### lake herring  <->  lake herring food product   [label convention]
+obo:FOODON_03411118 local:sameOrganismAs obo:FOODON_00001991 .
+### lamb  <->  lamb food product   [label convention]
+obo:FOODON_03411669 local:sameOrganismAs obo:FOODON_02021125 .
+### leek  <->  leek plant   [label convention]
+obo:FOODON_00003670 local:sameOrganismAs obo:FOODON_03411308 .
+### legume  <->  legume food product   [label convention]
+obo:FOODON_03310646 local:sameOrganismAs obo:FOODON_00001264 .
+### lemon  <->  lemon food product   [label convention]
+obo:FOODON_03315104 local:sameOrganismAs obo:FOODON_00001995 .
+### lemon  <->  lemon plant   [label convention]
+obo:FOODON_03315104 local:sameOrganismAs obo:FOODON_03411275 .
+### lentil  <->  lentil food product   [label convention]
+obo:FOODON_03310641 local:sameOrganismAs obo:FOODON_00001997 .
+### lentil  <->  lentil plant   [label convention]
+obo:FOODON_03310641 local:sameOrganismAs obo:FOODON_03411268 .
+### licorice plant  <->  licorice plant food product   [label convention]
+obo:FOODON_03412048 local:sameOrganismAs obo:FOODON_00002496 .
+### lima bean  <->  lima bean food product   [label convention]
+obo:FOODON_03302053 local:sameOrganismAs obo:FOODON_00002000 .
+### lima bean  <->  lima bean plant   [label convention]
+obo:FOODON_03302053 local:sameOrganismAs obo:FOODON_03411397 .
+### limpet  <->  limpet food product   [label convention]
+obo:FOODON_03412279 local:sameOrganismAs obo:FOODON_00002444 .
+### lingonberry  <->  lingonberry food product   [label convention]
+obo:FOODON_00003542 local:sameOrganismAs obo:FOODON_00002003 .
+### lingonberry  <->  lingonberry plant   [label convention]
+obo:FOODON_00003542 local:sameOrganismAs obo:FOODON_03411019 .
+### lipid  <->  lipid food product   [label convention]
+obo:CHEBI_18059 local:sameOrganismAs obo:FOODON_00002664 .
+### liqueur  <->  liqueur food product   [label convention]
+obo:FOODON_03301008 local:sameOrganismAs obo:FOODON_00002005 .
+### liver  <->  liver food product   [label convention]
+obo:UBERON_0002107 local:sameOrganismAs obo:FOODON_00002819 .
+### lobster  <->  lobster food product   [label convention]
+obo:FOODON_03411505 local:sameOrganismAs obo:FOODON_00002007 .
+### lobster tail  <->  lobster tail food product   [label convention]
+obo:FOODON_02021459 local:sameOrganismAs obo:FOODON_00000070 .
+### loganberry  <->  loganberry food product   [label convention]
+obo:FOODON_00003479 local:sameOrganismAs obo:FOODON_00002008 .
+### loganberry  <->  loganberry plant   [label convention]
+obo:FOODON_00003479 local:sameOrganismAs obo:FOODON_03411401 .
+### longtail tuna  <->  longtail tuna food product   [label convention]
+obo:FOODON_03411004 local:sameOrganismAs obo:FOODON_00002009 .
+### loquat  <->  loquat food product   [label convention]
+obo:FOODON_00003672 local:sameOrganismAs obo:FOODON_03309756 .
+### loquat  <->  loquat plant   [label convention]
+obo:FOODON_00003672 local:sameOrganismAs obo:FOODON_03411244 .
+### lotus plant  <->  lotus plant food product   [label convention]
+obo:FOODON_03411216 local:sameOrganismAs obo:FOODON_00003113 .
+### lumpfish  <->  lumpfish food product   [label convention]
+obo:FOODON_03411823 local:sameOrganismAs obo:FOODON_00002011 .
+### lung  <->  lung food product   [label convention]
+obo:UBERON_0002048 local:sameOrganismAs obo:FOODON_00002822 .
+### lupine bean  <->  lupine bean food product   [label convention]
+obo:FOODON_00003737 local:sameOrganismAs obo:FOODON_00002012 .
+### lupine bean  <->  lupine bean plant   [label convention]
+obo:FOODON_00003737 local:sameOrganismAs obo:FOODON_03411701 .
+### lychee  <->  lychee food product   [label convention]
+obo:FOODON_00003099 local:sameOrganismAs obo:FOODON_00002006 .
+### lychee  <->  lychee plant   [label convention]
+obo:FOODON_00003099 local:sameOrganismAs obo:FOODON_03411212 .
+### macadamia nut  <->  macadamia nut food product   [label convention]
+obo:FOODON_00003003 local:sameOrganismAs obo:FOODON_00004093 .
+### mackerel  <->  mackerel food product   [label convention]
+obo:FOODON_03411043 local:sameOrganismAs obo:FOODON_00002015 .
+### mafurra nut  <->  mafurra nut food product   [label convention]
+obo:FOODON_00004343 local:sameOrganismAs obo:FOODON_00004431 .
+### malabar snapper  <->  malabar snapper food product   [label convention]
+obo:FOODON_03411805 local:sameOrganismAs obo:FOODON_00002016 .
+### mamey sapote  <->  mamey sapote plant   [label convention]
+obo:FOODON_00005317 local:sameOrganismAs obo:FOODON_03414238 .
+### mandarin orange  <->  mandarin orange food product   [label convention]
+obo:FOODON_00003555 local:sameOrganismAs obo:FOODON_00002018 .
+### mango  <->  mango food product   [label convention]
+obo:FOODON_00003538 local:sameOrganismAs obo:FOODON_00002020 .
+### mango  <->  mango plant   [label convention]
+obo:FOODON_00003538 local:sameOrganismAs obo:FOODON_03411270 .
+### mangosteen  <->  mangosteen food product   [label convention]
+obo:FOODON_00003568 local:sameOrganismAs obo:FOODON_00003110 .
+### margarine  <->  margarine food product   [label convention]
+obo:FOODON_03301672 local:sameOrganismAs obo:FOODON_00002022 .
+### marionberry  <->  marionberry plant   [label convention]
+obo:FOODON_00004629 local:sameOrganismAs obo:FOODON_00004628 .
+### marlin  <->  marlin food product   [label convention]
+obo:FOODON_03411243 local:sameOrganismAs obo:FOODON_00002024 .
+### mayonnaise  <->  mayonnaise food product   [label convention]
+obo:FOODON_03301440 local:sameOrganismAs obo:FOODON_00001234 .
+### meat salad  <->  meat salad food product   [label convention]
+obo:FOODON_03316331 local:sameOrganismAs obo:FOODON_00002028 .
+### meat sausage  <->  meat sausage food product   [label convention]
+obo:FOODON_03315904 local:sameOrganismAs obo:FOODON_00001007 .
+### melon  <->  melon food product   [label convention]
+obo:FOODON_00003597 local:sameOrganismAs obo:FOODON_00002029 .
+### melon  <->  melon plant   [label convention]
+obo:FOODON_00003597 local:sameOrganismAs obo:FOODON_03411283 .
+### milkfish  <->  milkfish food product   [label convention]
+obo:FOODON_03411909 local:sameOrganismAs obo:FOODON_00002037 .
+### mineral water  <->  mineral water food product   [label convention]
+obo:FOODON_03301328 local:sameOrganismAs obo:FOODON_00002041 .
+### miniature tomato  <->  miniature tomato plant   [label convention]
+obo:FOODON_00003773 local:sameOrganismAs obo:FOODON_03411608 .
+### miracle berry  <->  miracle berry food product   [label convention]
+obo:FOODON_00003671 local:sameOrganismAs obo:FOODON_00002042 .
+### miso  <->  miso food product   [label convention]
+obo:FOODON_00003208 local:sameOrganismAs obo:FOODON_00001070 .
 ### mollusc  <->  mollusc food product   [label convention]
 obo:FOODON_03412112 local:sameOrganismAs obo:FOODON_00002044 .
-### nut food product  <->  nut   [label convention (stripped)]
-obo:FOODON_00001172 local:sameOrganismAs obo:FOODON_03303171 .
-### oat plant  <->  oat   [label convention (stripped)]
-obo:FOODON_03414319 local:sameOrganismAs obo:FOODON_00003429 .
-### rye plant  <->  Secale cereale   [taxon pivot]
-obo:FOODON_03411313 local:sameOrganismAs obo:NCBITaxon_4550 .
+### moose  <->  moose food product   [label convention]
+obo:FOODON_02021400 local:sameOrganismAs obo:FOODON_02021397 .
+### moth bean  <->  moth bean food product   [label convention]
+obo:FOODON_03309719 local:sameOrganismAs obo:FOODON_00002692 .
+### moth bean  <->  moth bean plant   [label convention]
+obo:FOODON_03309719 local:sameOrganismAs obo:FOODON_03411920 .
+### mountain huckleberry  <->  mountain huckleberry food product   [label convention]
+obo:FOODON_00004595 local:sameOrganismAs obo:FOODON_00004594 .
+### mulberry  <->  mulberry food product   [label convention]
+obo:FOODON_00003676 local:sameOrganismAs obo:FOODON_00003134 .
+### mulberry  <->  mulberry plant   [label convention]
+obo:FOODON_00003676 local:sameOrganismAs obo:FOODON_03411501 .
+### mung bean  <->  mung bean food product   [label convention]
+obo:FOODON_03301275 local:sameOrganismAs obo:FOODON_00002046 .
+### mung bean  <->  mung bean plant   [label convention]
+obo:FOODON_03301275 local:sameOrganismAs obo:FOODON_03411395 .
+### muskmelon  <->  muskmelon plant   [label convention]
+obo:FOODON_00003596 local:sameOrganismAs obo:FOODON_03412067 .
+### muskrat  <->  muskrat food product   [label convention]
+obo:FOODON_02021610 local:sameOrganismAs obo:FOODON_02021608 .
+### mussel  <->  mussel food product   [label convention]
+obo:FOODON_03411223 local:sameOrganismAs obo:FOODON_00002051 .
+### mustard seed  <->  mustard seed food product   [label convention]
+obo:FOODON_00003420 local:sameOrganismAs obo:FOODON_00001230 .
+### naranjilla  <->  naranjilla plant   [label convention]
+obo:FOODON_00003688 local:sameOrganismAs obo:FOODON_03412062 .
+### natal plum  <->  natal plum plant   [label convention]
+obo:FOODON_00003680 local:sameOrganismAs obo:FOODON_03411482 .
+### navel orange  <->  navel orange plant   [label convention]
+obo:FOODON_00003579 local:sameOrganismAs obo:FOODON_00002508 .
+### navy bean  <->  navy bean food product   [label convention]
+obo:FOODON_00002685 local:sameOrganismAs obo:FOODON_00002055 .
+### navy bean  <->  navy bean plant   [label convention]
+obo:FOODON_00002685 local:sameOrganismAs obo:FOODON_03411560 .
+### needlefish  <->  needlefish food product   [label convention]
+obo:FOODON_03411411 local:sameOrganismAs obo:FOODON_00002445 .
+### norway lobster  <->  norway lobster food product   [label convention]
+obo:FOODON_03411956 local:sameOrganismAs obo:FOODON_00002059 .
+### nut  <->  nut food product   [label convention]
+obo:FOODON_03303171 local:sameOrganismAs obo:FOODON_00001172 .
+### nutria  <->  nutria food product   [label convention]
+obo:FOODON_02021629 local:sameOrganismAs obo:FOODON_02021627 .
+### oat  <->  oat food product   [label convention]
+obo:FOODON_00003429 local:sameOrganismAs obo:FOODON_00001189 .
+### oat  <->  oat plant   [label convention]
+obo:FOODON_00003429 local:sameOrganismAs obo:FOODON_03414319 .
+### octopus  <->  octopus food product   [label convention]
+obo:FOODON_03411514 local:sameOrganismAs obo:FOODON_03316989 .
+### oheloberry  <->  oheloberry plant   [label convention]
+obo:FOODON_00002872 local:sameOrganismAs obo:FOODON_03411688 .
+### olallieberry  <->  olallieberry plant   [label convention]
+obo:FOODON_00003749 local:sameOrganismAs obo:FOODON_03412609 .
+### olive  <->  olive food product   [label convention]
+obo:FOODON_03317509 local:sameOrganismAs obo:FOODON_00002066 .
+### olive  <->  olive plant   [label convention]
+obo:FOODON_03317509 local:sameOrganismAs obo:FOODON_03411299 .
+### onion  <->  onion food product   [label convention]
+obo:FOODON_03316347 local:sameOrganismAs obo:FOODON_00002069 .
+### onion  <->  onion plant   [label convention]
+obo:FOODON_03316347 local:sameOrganismAs obo:FOODON_03411300 .
+### onion soup  <->  onion soup food product   [label convention]
+obo:FOODON_03304821 local:sameOrganismAs obo:FOODON_00002068 .
+### opossum  <->  opossum food product   [label convention]
+obo:FOODON_03411450 local:sameOrganismAs obo:FOODON_02022562 .
+### orange  <->  orange food product   [label convention]
+obo:FOODON_03315106 local:sameOrganismAs obo:FOODON_00002071 .
+### orange  <->  orange plant   [label convention]
+obo:FOODON_03315106 local:sameOrganismAs obo:FOODON_03411339 .
+### orange  <->  orange food product   [label convention]
+obo:PATO_0000953 local:sameOrganismAs obo:FOODON_00002071 .
+### orange  <->  orange plant   [label convention]
+obo:PATO_0000953 local:sameOrganismAs obo:FOODON_03411339 .
+### oriental blue crab  <->  oriental blue crab food product   [label convention]
+obo:FOODON_03412214 local:sameOrganismAs obo:FOODON_00002074 .
+### ostrich  <->  ostrich food product   [label convention]
+obo:FOODON_02020785 local:sameOrganismAs obo:FOODON_00004339 .
+### otaheite gooseberry  <->  otaheite gooseberry plant   [label convention]
+obo:FOODON_00003721 local:sameOrganismAs obo:FOODON_03412360 .
+### owl  <->  owl food product   [label convention]
+obo:FOODON_03414489 local:sameOrganismAs obo:FOODON_02022494 .
+### oyster  <->  oyster food product   [label convention]
+obo:FOODON_03411224 local:sameOrganismAs obo:FOODON_00001292 .
+### pacific salmon  <->  pacific salmon food product   [label convention]
+obo:FOODON_03411126 local:sameOrganismAs obo:FOODON_00002075 .
+### paddlefish  <->  paddlefish food product   [label convention]
+obo:FOODON_03411412 local:sameOrganismAs obo:FOODON_00002076 .
+### palinurid spiny lobster  <->  palinurid spiny lobster food product   [label convention]
+obo:FOODON_03411075 local:sameOrganismAs obo:FOODON_00002077 .
+### papaya  <->  papaya food product   [label convention]
+obo:FOODON_00003540 local:sameOrganismAs obo:FOODON_00002081 .
+### papaya  <->  papaya plant   [label convention]
+obo:FOODON_00003540 local:sameOrganismAs obo:FOODON_03411249 .
+### papaya leaf  <->  papaya leaf food product   [label convention]
+obo:FOODON_00003642 local:sameOrganismAs obo:FOODON_00002082 .
+### parsnip  <->  parsnip food product   [label convention]
+obo:FOODON_00003693 local:sameOrganismAs obo:FOODON_00002085 .
+### parsnip  <->  parsnip plant   [label convention]
+obo:FOODON_00003693 local:sameOrganismAs obo:FOODON_03411483 .
+### pasilla pepper  <->  pasilla pepper plant   [label convention]
+obo:FOODON_00005363 local:sameOrganismAs obo:FOODON_03412560 .
+### passion fruit  <->  passion fruit food product   [label convention]
+obo:FOODON_00003675 local:sameOrganismAs obo:FOODON_00005455 .
+### pasta  <->  pasta food product   [label convention]
+obo:FOODON_03306347 local:sameOrganismAs obo:FOODON_00001211 .
+### pasteurized process cheese  <->  pasteurized process cheese food product   [label convention]
+obo:FOODON_03301740 local:sameOrganismAs obo:FOODON_00002091 .
+### pasteurized process cheese spread  <->  pasteurized process cheese spread food product   [label convention]
+obo:FOODON_03303047 local:sameOrganismAs obo:FOODON_00002092 .
+### pastry  <->  pastry food product   [label convention]
+obo:FOODON_03315272 local:sameOrganismAs obo:FOODON_00001212 .
+### pawpaw  <->  pawpaw plant   [label convention]
+obo:FOODON_00003710 local:sameOrganismAs obo:FOODON_03411202 .
+### pea  <->  pea food product   [label convention]
+obo:FOODON_03301300 local:sameOrganismAs obo:FOODON_00002813 .
+### pea  <->  pea plant   [label convention]
+obo:FOODON_03301300 local:sameOrganismAs obo:FOODON_03411338 .
+### pea soup  <->  pea soup food product   [label convention]
+obo:FOODON_03304927 local:sameOrganismAs obo:FOODON_00002093 .
+### peach  <->  peach food product   [label convention]
+obo:FOODON_03315502 local:sameOrganismAs obo:FOODON_00002095 .
+### peach butter  <->  peach butter food product   [label convention]
+obo:FOODON_03302503 local:sameOrganismAs obo:FOODON_00002094 .
+### peanut  <->  peanut food product   [label convention]
+obo:FOODON_00003206 local:sameOrganismAs obo:FOODON_00002099 .
+### peanut  <->  peanut plant   [label convention]
+obo:FOODON_00003206 local:sameOrganismAs obo:FOODON_03411337 .
+### peanut candy  <->  peanut candy food product   [label convention]
+obo:FOODON_03310296 local:sameOrganismAs obo:FOODON_00002097 .
+### pear  <->  pear food product   [label convention]
+obo:FOODON_00003041 local:sameOrganismAs obo:FOODON_00002101 .
+### pear  <->  pear plant   [label convention]
+obo:FOODON_00003041 local:sameOrganismAs obo:FOODON_03411344 .
+### pear juice  <->  pear juice food product   [label convention]
+obo:FOODON_03301294 local:sameOrganismAs obo:FOODON_00002102 .
+### pear tomato  <->  pear tomato plant   [label convention]
+obo:FOODON_00003570 local:sameOrganismAs obo:FOODON_03411107 .
+### pennywort juice  <->  pennywort juice food product   [label convention]
+obo:FOODON_00004112 local:sameOrganismAs obo:FOODON_00004111 .
+### peppercorn  <->  peppercorn food product   [label convention]
+obo:FOODON_03310070 local:sameOrganismAs obo:FOODON_00003287 .
+### peppermint  <->  peppermint food product   [label convention]
+obo:FOODON_03303920 local:sameOrganismAs obo:FOODON_00002112 .
+### peppermint  <->  peppermint plant   [label convention]
+obo:FOODON_03303920 local:sameOrganismAs obo:FOODON_03411449 .
+### perch  <->  perch food product   [label convention]
+obo:FOODON_03411557 local:sameOrganismAs obo:FOODON_00002113 .
+### persimmon  <->  persimmon food product   [label convention]
+obo:FOODON_00003723 local:sameOrganismAs obo:FOODON_00002497 .
+### persimmon  <->  persimmon plant   [label convention]
+obo:FOODON_00003723 local:sameOrganismAs obo:FOODON_03411447 .
+### pheasant  <->  pheasant food product   [label convention]
+obo:FOODON_03411460 local:sameOrganismAs obo:FOODON_02020656 .
+### pie  <->  pie food product   [label convention]
+obo:FOODON_00002476 local:sameOrganismAs obo:FOODON_00002114 .
+### pig  <->  pig food product   [label convention]
+obo:FOODON_02021651 local:sameOrganismAs obo:FOODON_00002663 .
+### pigeon  <->  pigeon food product   [label convention]
+obo:FOODON_02020081 local:sameOrganismAs obo:FOODON_02020079 .
+### pigeon pea  <->  pigeon pea food product   [label convention]
+obo:FOODON_00002781 local:sameOrganismAs obo:FOODON_00002780 .
+### pigeon pea  <->  pigeon pea plant   [label convention]
+obo:FOODON_00002781 local:sameOrganismAs obo:FOODON_03412010 .
+### pike  <->  pike food product   [label convention]
+obo:FOODON_03411293 local:sameOrganismAs obo:FOODON_00002116 .
+### pineapple  <->  pineapple food product   [label convention]
+obo:FOODON_00003459 local:sameOrganismAs obo:FOODON_00002119 .
+### pineapple  <->  pineapple plant   [label convention]
+obo:FOODON_00003459 local:sameOrganismAs obo:FOODON_03411484 .
+### pineapple guava  <->  pineapple guava plant   [label convention]
+obo:FOODON_00005319 local:sameOrganismAs obo:FOODON_03412767 .
+### pink bean  <->  pink bean food product   [label convention]
+obo:FOODON_03310060 local:sameOrganismAs obo:FOODON_00002768 .
+### pinto bean  <->  pinto bean food product   [label convention]
+obo:FOODON_03309759 local:sameOrganismAs obo:FOODON_00002122 .
+### pinto bean  <->  pinto bean plant   [label convention]
+obo:FOODON_03309759 local:sameOrganismAs obo:FOODON_03411368 .
+### pistachio nut  <->  pistachio nut food product   [label convention]
+obo:FOODON_00003691 local:sameOrganismAs obo:FOODON_00003690 .
+### pizza  <->  pizza food product   [label convention]
+obo:FOODON_00003928 local:sameOrganismAs obo:FOODON_03310775 .
+### plantain  <->  plantain plant   [label convention]
+obo:FOODON_00003784 local:sameOrganismAs obo:FOODON_03413712 .
+### pleuronectiform fish  <->  pleuronectiform fish food product   [label convention]
+obo:FOODON_03411023 local:sameOrganismAs obo:FOODON_00002160 .
+### plum  <->  plum plant   [label convention]
+obo:FOODON_00003483 local:sameOrganismAs obo:FOODON_03411206 .
+### plum tomato  <->  plum tomato plant   [label convention]
+obo:FOODON_00003756 local:sameOrganismAs obo:FOODON_03413742 .
+### polar bear  <->  polar bear food product   [label convention]
+obo:FOODON_02022543 local:sameOrganismAs obo:FOODON_02022541 .
+### pome fruit  <->  pome fruit plant   [label convention]
+obo:PO_0030110 local:sameOrganismAs obo:FOODON_03411599 .
+### pomegranate  <->  pomegranate food product   [label convention]
+obo:FOODON_00003679 local:sameOrganismAs obo:FOODON_00003065 .
+### pomegranate  <->  pomegranate plant   [label convention]
+obo:FOODON_00003679 local:sameOrganismAs obo:FOODON_03411162 .
+### pomfret  <->  pomfret food product   [label convention]
+obo:FOODON_03412571 local:sameOrganismAs obo:FOODON_00002162 .
+### pompano  <->  pompano food product   [label convention]
+obo:FOODON_03411475 local:sameOrganismAs obo:FOODON_00002163 .
+### porgy  <->  porgy food product   [label convention]
+obo:FOODON_03411234 local:sameOrganismAs obo:FOODON_00002164 .
+### pork chop  <->  pork chop food product   [label convention]
+obo:FOODON_00004490 local:sameOrganismAs obo:FOODON_00001049 .
+### potato  <->  potato food product   [label convention]
+obo:FOODON_03315354 local:sameOrganismAs obo:FOODON_00001148 .
+### potato  <->  potato plant   [label convention]
+obo:FOODON_03315354 local:sameOrganismAs obo:FOODON_03411218 .
+### potato salad  <->  potato salad food product   [label convention]
+obo:FOODON_03304708 local:sameOrganismAs obo:FOODON_00001289 .
+### potato soup  <->  potato soup food product   [label convention]
+obo:FOODON_03304928 local:sameOrganismAs obo:FOODON_00002166 .
+### poultry  <->  poultry food product   [label convention]
+obo:FOODON_00004298 local:sameOrganismAs obo:FOODON_00001283 .
+### prairie turnip  <->  prairie turnip plant   [label convention]
+obo:FOODON_03000157 local:sameOrganismAs obo:FOODON_03414493 .
+### prune  <->  prune food product   [label convention]
+obo:FOODON_00003537 local:sameOrganismAs obo:FOODON_00002176 .
+### prune juice  <->  prune juice food product   [label convention]
+obo:FOODON_03303632 local:sameOrganismAs obo:FOODON_00002177 .
+### pudding  <->  pudding food product   [label convention]
+obo:FOODON_03301660 local:sameOrganismAs obo:FOODON_00002178 .
+### pumpkin  <->  pumpkin food product   [label convention]
+obo:FOODON_00003486 local:sameOrganismAs obo:FOODON_00002180 .
+### pumpkin  <->  pumpkin plant   [label convention]
+obo:FOODON_00003486 local:sameOrganismAs obo:FOODON_03411456 .
+### purple crowberry  <->  purple crowberry plant   [label convention]
+obo:FOODON_00003104 local:sameOrganismAs obo:FOODON_03414264 .
+### quail  <->  quail food product   [label convention]
+obo:FOODON_03411346 local:sameOrganismAs obo:FOODON_02020719 .
+### quail egg  <->  quail egg food product   [label convention]
+obo:FOODON_02020722 local:sameOrganismAs obo:FOODON_00002181 .
+### quince  <->  quince food product   [label convention]
+obo:FOODON_00003724 local:sameOrganismAs obo:FOODON_00002182 .
+### quince  <->  quince plant   [label convention]
+obo:FOODON_00003724 local:sameOrganismAs obo:FOODON_03411298 .
+### rabbit  <->  rabbit food product   [label convention]
+obo:FOODON_03411323 local:sameOrganismAs obo:FOODON_02021510 .
+### radish  <->  radish food product   [label convention]
+obo:FOODON_00003431 local:sameOrganismAs obo:FOODON_00002184 .
+### radish  <->  radish plant   [label convention]
+obo:FOODON_00003431 local:sameOrganismAs obo:FOODON_03411315 .
+### rainbow trout  <->  rainbow trout food product   [label convention]
+obo:FOODON_03411109 local:sameOrganismAs obo:FOODON_00002185 .
+### rapeseed  <->  rapeseed food product   [label convention]
+obo:FOODON_00003407 local:sameOrganismAs obo:FOODON_00002187 .
+### rapeseed  <->  rapeseed plant   [label convention]
+obo:FOODON_00003407 local:sameOrganismAs obo:FOODON_03411248 .
+### raspberry  <->  raspberry food product   [label convention]
+obo:FOODON_00003433 local:sameOrganismAs obo:FOODON_00002190 .
+### raspberry  <->  raspberry plant   [label convention]
+obo:FOODON_00003433 local:sameOrganismAs obo:FOODON_03411494 .
+### red algae  <->  red algae food product   [label convention]
+obo:FOODON_03411743 local:sameOrganismAs obo:FOODON_03000275 .
+### red crowberry  <->  red crowberry plant   [label convention]
+obo:FOODON_00003103 local:sameOrganismAs obo:FOODON_03414265 .
+### red currant  <->  red currant food product   [label convention]
+obo:FOODON_00003766 local:sameOrganismAs obo:FOODON_00002459 .
+### red currant  <->  red currant plant   [label convention]
+obo:FOODON_00003766 local:sameOrganismAs obo:FOODON_03411055 .
+### red kidney bean  <->  red kidney bean plant   [label convention]
+obo:FOODON_03309779 local:sameOrganismAs obo:FOODON_03411659 .
+### red leaf lettuce  <->  red leaf lettuce plant   [label convention]
+obo:FOODON_03000018 local:sameOrganismAs obo:FOODON_00003511 .
+### red onion  <->  red onion plant   [label convention]
+obo:FOODON_00003516 local:sameOrganismAs obo:FOODON_03413748 .
+### red raspberry  <->  red raspberry plant   [label convention]
+obo:FOODON_00003729 local:sameOrganismAs obo:FOODON_03411096 .
+### red snapper  <->  red snapper food product   [label convention]
+obo:FOODON_03411089 local:sameOrganismAs obo:FOODON_00002194 .
+### reindeer  <->  reindeer food product   [label convention]
+obo:FOODON_02021436 local:sameOrganismAs obo:FOODON_02021433 .
+### relish  <->  relish food product   [label convention]
+obo:FOODON_03304648 local:sameOrganismAs obo:FOODON_00002198 .
+### reptile  <->  reptile food product   [label convention]
+obo:FOODON_03411625 local:sameOrganismAs obo:FOODON_00004282 .
+### rice  <->  rice food product   [label convention]
+obo:FOODON_00004327 local:sameOrganismAs obo:FOODON_00001185 .
+### rice  <->  rice plant   [label convention]
+obo:FOODON_00004327 local:sameOrganismAs obo:FOODON_03411322 .
+### rice bean  <->  rice bean food product   [label convention]
+obo:FOODON_03309987 local:sameOrganismAs obo:FOODON_00002204 .
+### rice bean  <->  rice bean plant   [label convention]
+obo:FOODON_03309987 local:sameOrganismAs obo:FOODON_03411702 .
+### rice cereal  <->  rice cereal food product   [label convention]
+obo:FOODON_03310609 local:sameOrganismAs obo:FOODON_00002205 .
+### ringed seal  <->  ringed seal food product   [label convention]
+obo:FOODON_02022553 local:sameOrganismAs obo:FOODON_02022551 .
+### river herring  <->  river herring food product   [label convention]
+obo:FOODON_03411348 local:sameOrganismAs obo:FOODON_00002209 .
+### rockfish  <->  rockfish food product   [label convention]
+obo:FOODON_03412893 local:sameOrganismAs obo:FOODON_00002441 .
+### romano cheese  <->  romano cheese food product   [label convention]
+obo:FOODON_03000473 local:sameOrganismAs obo:FOODON_00004344 .
+### royal royce strawberry  <->  royal royce strawberry plant   [label convention]
+obo:FOODON_00004623 local:sameOrganismAs obo:FOODON_00004622 .
+### ruffed grouse  <->  ruffed grouse food product   [label convention]
+obo:FOODON_02022168 local:sameOrganismAs obo:FOODON_02022166 .
+### rutabaga  <->  rutabaga food product   [label convention]
+obo:FOODON_00003440 local:sameOrganismAs obo:FOODON_00003439 .
+### rutabaga  <->  rutabaga plant   [label convention]
+obo:FOODON_00003440 local:sameOrganismAs obo:FOODON_03411413 .
+### rye cracker  <->  rye cracker food product   [label convention]
+obo:FOODON_03302871 local:sameOrganismAs obo:FOODON_00002215 .
+### sablefish  <->  sablefish food product   [label convention]
+obo:FOODON_03411437 local:sameOrganismAs obo:FOODON_00002216 .
+### safflower plant  <->  safflower plant food product   [label convention]
+obo:FOODON_03411548 local:sameOrganismAs obo:FOODON_00002499 .
+### saithe  <->  saithe food product   [label convention]
+obo:FOODON_03411440 local:sameOrganismAs obo:FOODON_00002218 .
+### sake  <->  sake food product   [label convention]
+obo:FOODON_03301670 local:sameOrganismAs obo:FOODON_00001076 .
+### salad  <->  salad food product   [label convention]
+obo:FOODON_03316042 local:sameOrganismAs obo:FOODON_00002219 .
+### salmon  <->  salmon food product   [label convention]
+obo:FOODON_00003473 local:sameOrganismAs obo:FOODON_00002220 .
+### salmonberry  <->  salmonberry plant   [label convention]
+obo:FOODON_00003689 local:sameOrganismAs obo:FOODON_03414259 .
+### sandwich  <->  sandwich food product   [label convention]
+obo:FOODON_03301906 local:sameOrganismAs obo:FOODON_00002222 .
+### sardine  <->  sardine food product   [label convention]
+obo:FOODON_03411558 local:sameOrganismAs obo:FOODON_00002223 .
+### sauger  <->  sauger food product   [label convention]
+obo:FOODON_03411670 local:sameOrganismAs obo:FOODON_00002224 .
+### saurel  <->  saurel food product   [label convention]
+obo:FOODON_03411090 local:sameOrganismAs obo:FOODON_00002225 .
+### saury  <->  saury food product   [label convention]
+obo:FOODON_03412484 local:sameOrganismAs obo:FOODON_00002226 .
+### scallion  <->  scallion food product   [label convention]
+obo:FOODON_00003697 local:sameOrganismAs obo:FOODON_00002695 .
+### scallion  <->  scallion plant   [label convention]
+obo:FOODON_00003697 local:sameOrganismAs obo:FOODON_03411478 .
+### scallop  <->  scallop food product   [label convention]
+obo:FOODON_02020805 local:sameOrganismAs obo:FOODON_00002227 .
+### sea lettuce  <->  sea lettuce food product   [label convention]
+obo:FOODON_03412476 local:sameOrganismAs obo:FOODON_00004693 .
+### sea turtle  <->  sea turtle food product   [label convention]
+obo:FOODON_02021585 local:sameOrganismAs obo:FOODON_02021581 .
+### seal  <->  seal food product   [label convention]
+obo:FOODON_02021565 local:sameOrganismAs obo:FOODON_02021563 .
+### seaweed  <->  seaweed food product   [label convention]
+obo:FOODON_03412266 local:sameOrganismAs obo:FOODON_03000436 .
+### serrano pepper  <->  serrano pepper plant   [label convention]
+obo:FOODON_03000128 local:sameOrganismAs obo:FOODON_03412563 .
+### shallot  <->  shallot food product   [label convention]
+obo:FOODON_00003748 local:sameOrganismAs obo:FOODON_00002234 .
+### shallot  <->  shallot plant   [label convention]
+obo:FOODON_00003748 local:sameOrganismAs obo:FOODON_03411538 .
+### shark  <->  shark food product   [label convention]
+obo:FOODON_03411342 local:sameOrganismAs obo:FOODON_00002235 .
+### shea fruit  <->  shea fruit food product   [label convention]
+obo:FOODON_00003692 local:sameOrganismAs obo:FOODON_00003197 .
+### sheep  <->  sheep food product   [label convention]
+obo:FOODON_03411183 local:sameOrganismAs obo:FOODON_02021251 .
+### sheep milk cheese  <->  sheep milk cheese food product   [label convention]
+obo:FOODON_03310968 local:sameOrganismAs obo:FOODON_00001130 .
 ### shrimp  <->  shrimp food product   [label convention]
 obo:FOODON_03411237 local:sameOrganismAs obo:FOODON_00002239 .
 ### shrimp  <->  shrimp species   [label convention]
 obo:FOODON_03411237 local:sameOrganismAs obo:FOODON_00005670 .
-### snow pea plant  <->  Lathyrus oleraceus subsp. oleraceus   [taxon pivot]
-obo:FOODON_03412466 local:sameOrganismAs obo:NCBITaxon_208194 .
-### solanaceae plant  <->  Solanaceae   [label convention (stripped)]
-obo:FOODON_03414934 local:sameOrganismAs obo:NCBITaxon_4070 .
-### soybean plant  <->  Glycine max   [taxon pivot]
-obo:FOODON_03411452 local:sameOrganismAs obo:NCBITaxon_3847 .
-### soybean plant  <->  soybean   [label convention (stripped)]
-obo:FOODON_03411452 local:sameOrganismAs obo:FOODON_03301415 .
-### tomato  <->  Solanum lycopersicum   [taxon pivot]
-obo:FOODON_03301453 local:sameOrganismAs obo:NCBITaxon_4081 .
+### siluriform fish  <->  siluriform fish food product   [label convention]
+obo:FOODON_03411598 local:sameOrganismAs obo:FOODON_00002240 .
+### sitka deer  <->  sitka deer food product   [label convention]
+obo:FOODON_02022157 local:sameOrganismAs obo:FOODON_02022155 .
+### skipjack tuna  <->  skipjack tuna food product   [label convention]
+obo:FOODON_03411376 local:sameOrganismAs obo:FOODON_00002241 .
+### skunk currant  <->  skunk currant plant   [label convention]
+obo:FOODON_00003071 local:sameOrganismAs obo:FOODON_03414950 .
+### smelt  <->  smelt food product   [label convention]
+obo:FOODON_03413821 local:sameOrganismAs obo:FOODON_00002242 .
+### smoked meat  <->  smoked meat food product   [label convention]
+obo:FOODON_03309581 local:sameOrganismAs obo:FOODON_00001225 .
+### snail  <->  snail food product   [label convention]
+obo:FOODON_03412114 local:sameOrganismAs obo:FOODON_00002244 .
+### snapper  <->  snapper food product   [label convention]
+obo:FOODON_03411510 local:sameOrganismAs obo:FOODON_00002246 .
+### snow crab  <->  snow crab food product   [label convention]
+obo:FOODON_03411497 local:sameOrganismAs obo:FOODON_00002247 .
+### sockeye salmon  <->  sockeye salmon food product   [label convention]
+obo:FOODON_02021848 local:sameOrganismAs obo:FOODON_00002248 .
+### soft candy  <->  soft candy food product   [label convention]
+obo:FOODON_03311418 local:sameOrganismAs obo:FOODON_00002251 .
+### soft drink  <->  soft drink food product   [label convention]
+obo:FOODON_03310815 local:sameOrganismAs obo:FOODON_00002253 .
+### sour cherry  <->  sour cherry plant   [label convention]
+obo:FOODON_00003534 local:sameOrganismAs obo:FOODON_03411052 .
+### soursop  <->  soursop food product   [label convention]
+obo:FOODON_00002937 local:sameOrganismAs obo:FOODON_00003789 .
+### soursop  <->  soursop plant   [label convention]
+obo:FOODON_00002937 local:sameOrganismAs obo:FOODON_03411480 .
+### south american sapote  <->  south american sapote food product   [label convention]
+obo:FOODON_00005634 local:sameOrganismAs obo:FOODON_00005633 .
+### soybean  <->  soybean food product   [label convention]
+obo:FOODON_03301415 local:sameOrganismAs obo:FOODON_00002266 .
+### soybean  <->  soybean plant   [label convention]
+obo:FOODON_03301415 local:sameOrganismAs obo:FOODON_03411452 .
+### spaghetti squash  <->  spaghetti squash plant   [label convention]
+obo:FOODON_03000077 local:sameOrganismAs obo:FOODON_03412508 .
+### spice  <->  spice food product   [label convention]
+obo:FOODON_03306052 local:sameOrganismAs obo:FOODON_03303380 .
+### sponge gourd  <->  sponge gourd plant   [label convention]
+obo:FOODON_03000109 local:sameOrganismAs obo:FOODON_03411721 .
+### sprat  <->  sprat food product   [label convention]
+obo:FOODON_03411235 local:sameOrganismAs obo:FOODON_00002270 .
+### squab  <->  squab food product   [label convention]
+obo:FOODON_03000301 local:sameOrganismAs obo:FOODON_02020751 .
+### squash  <->  squash food product   [label convention]
+obo:FOODON_00003539 local:sameOrganismAs obo:FOODON_00002271 .
+### squash  <->  squash plant   [label convention]
+obo:FOODON_00003539 local:sameOrganismAs obo:FOODON_03411208 .
+### squashberry  <->  squashberry plant   [label convention]
+obo:FOODON_00003719 local:sameOrganismAs obo:FOODON_03414478 .
+### squirrel  <->  squirrel food product   [label convention]
+obo:FOODON_03411389 local:sameOrganismAs obo:FOODON_02021618 .
+### star anise  <->  star anise food product   [label convention]
+obo:FOODON_00003502 local:sameOrganismAs obo:FOODON_00003094 .
+### star anise  <->  star anise plant   [label convention]
+obo:FOODON_00003502 local:sameOrganismAs obo:FOODON_03411464 .
+### star apple  <->  star apple plant   [label convention]
+obo:FOODON_00003569 local:sameOrganismAs obo:FOODON_03412036 .
+### star fruit  <->  star fruit food product   [label convention]
+obo:FOODON_00003101 local:sameOrganismAs obo:FOODON_00003102 .
+### starch  <->  starch food product   [label convention]
+obo:CHEBI_28017 local:sameOrganismAs obo:FOODON_03301000 .
+### steller sea lion  <->  steller sea lion food product   [label convention]
+obo:FOODON_02022110 local:sameOrganismAs obo:FOODON_02022108 .
+### strawberry  <->  strawberry food product   [label convention]
+obo:FOODON_00003443 local:sameOrganismAs obo:FOODON_00002282 .
+### strawberry  <->  strawberry plant   [label convention]
+obo:FOODON_00003443 local:sameOrganismAs obo:FOODON_03411393 .
+### strawberry guava  <->  strawberry guava food product   [label convention]
+obo:FOODON_00004224 local:sameOrganismAs obo:FOODON_00004226 .
+### strawberry guava  <->  strawberry guava plant   [label convention]
+obo:FOODON_00004224 local:sameOrganismAs obo:FOODON_03411649 .
+### sturgeon  <->  sturgeon food product   [label convention]
+obo:FOODON_03411465 local:sameOrganismAs obo:FOODON_00002284 .
+### sugar beet  <->  sugar beet food product   [label convention]
+obo:FOODON_00003412 local:sameOrganismAs obo:FOODON_00002289 .
+### sugar beet  <->  sugar beet plant   [label convention]
+obo:FOODON_00003412 local:sameOrganismAs obo:FOODON_03411370 .
+### surinam cherry  <->  surinam cherry plant   [label convention]
+obo:FOODON_00003117 local:sameOrganismAs obo:FOODON_03411657 .
+### sweet cherry  <->  sweet cherry plant   [label convention]
+obo:FOODON_00003413 local:sameOrganismAs obo:FOODON_03411091 .
+### sweet onion  <->  sweet onion plant   [label convention]
+obo:FOODON_00003714 local:sameOrganismAs obo:FOODON_03413721 .
+### sweet pea  <->  sweet pea food product   [label convention]
+obo:FOODON_00003561 local:sameOrganismAs obo:FOODON_00002296 .
+### sweet pea  <->  sweet pea plant   [label convention]
+obo:FOODON_00003561 local:sameOrganismAs obo:FOODON_03411487 .
+### sweet potato  <->  sweet potato food product   [label convention]
+obo:FOODON_00003445 local:sameOrganismAs obo:FOODON_00002297 .
+### sweet potato  <->  sweet potato plant   [label convention]
+obo:FOODON_00003445 local:sameOrganismAs obo:FOODON_03411106 .
+### sweet yellow bell pepper  <->  sweet yellow bell pepper plant   [label convention]
+obo:FOODON_00003548 local:sameOrganismAs obo:FOODON_00004846 .
+### swine  <->  swine food product   [label convention]
+obo:FOODON_03411136 local:sameOrganismAs obo:FOODON_00001132 .
+### swiss cheese  <->  swiss cheese food product   [label convention]
+obo:FOODON_03303659 local:sameOrganismAs obo:FOODON_00001032 .
+### swordfish  <->  swordfish food product   [label convention]
+obo:FOODON_02021998 local:sameOrganismAs obo:FOODON_00002307 .
+### tamarillo  <->  tamarillo food product   [label convention]
+obo:FOODON_00003730 local:sameOrganismAs obo:FOODON_00003291 .
+### tangelo  <->  tangelo food product   [label convention]
+obo:FOODON_00003731 local:sameOrganismAs obo:FOODON_00004371 .
+### tangelo  <->  tangelo plant   [label convention]
+obo:FOODON_00003731 local:sameOrganismAs obo:FOODON_03411473 .
+### tangerine  <->  tangerine plant   [label convention]
+obo:FOODON_00003488 local:sameOrganismAs obo:FOODON_03414217 .
+### tempeh  <->  tempeh food product   [label convention]
+obo:FOODON_03304999 local:sameOrganismAs obo:FOODON_00001050 .
+### tofu  <->  tofu food product   [label convention]
+obo:FOODON_00004697 local:sameOrganismAs obo:FOODON_03309664 .
 ### tomato  <->  tomato food product   [label convention]
 obo:FOODON_03301453 local:sameOrganismAs obo:FOODON_00001164 .
 ### tomato  <->  tomato plant   [label convention]
 obo:FOODON_03301453 local:sameOrganismAs obo:FOODON_03411276 .
-### tomato plant  <->  Solanum lycopersicum   [taxon pivot]
-obo:FOODON_03411276 local:sameOrganismAs obo:NCBITaxon_4081 .
+### tomato juice  <->  tomato juice food product   [label convention]
+obo:FOODON_03301454 local:sameOrganismAs obo:FOODON_00002316 .
+### tomato soup  <->  tomato soup food product   [label convention]
+obo:FOODON_03304909 local:sameOrganismAs obo:FOODON_00002317 .
+### tongue  <->  tongue food product   [label convention]
+obo:UBERON_0001723 local:sameOrganismAs obo:FOODON_03315582 .
+### tripe  <->  tripe food product   [label convention]
+obo:FOODON_03420192 local:sameOrganismAs obo:FOODON_03315155 .
+### tropical fruit  <->  tropical fruit food product   [label convention]
+obo:FOODON_00003567 local:sameOrganismAs obo:FOODON_00002689 .
+### trout  <->  trout food product   [label convention]
+obo:FOODON_03411258 local:sameOrganismAs obo:FOODON_00002319 .
+### truffle  <->  truffle food product   [label convention]
+obo:FOODON_03308494 local:sameOrganismAs obo:FOODON_00003286 .
+### tuna  <->  tuna food product   [label convention]
+obo:FOODON_03411269 local:sameOrganismAs obo:FOODON_00002320 .
+### turbot  <->  turbot food product   [label convention]
+obo:FOODON_03411240 local:sameOrganismAs obo:FOODON_00002321 .
+### turkey  <->  turkey food product   [label convention]
+obo:FOODON_02020418 local:sameOrganismAs obo:FOODON_02020403 .
+### turkey egg  <->  turkey egg food product   [label convention]
+obo:FOODON_02020406 local:sameOrganismAs obo:FOODON_03304839 .
+### turkey pie  <->  turkey pie food product   [label convention]
+obo:FOODON_03307578 local:sameOrganismAs obo:FOODON_00002322 .
+### turnip  <->  turnip food product   [label convention]
+obo:FOODON_00003447 local:sameOrganismAs obo:FOODON_00002324 .
+### turnip  <->  turnip plant   [label convention]
+obo:FOODON_00003447 local:sameOrganismAs obo:FOODON_03411238 .
+### turtle  <->  turtle food product   [label convention]
+obo:FOODON_03411242 local:sameOrganismAs obo:FOODON_00004280 .
+### turtle egg  <->  turtle egg food product   [label convention]
+obo:FOODON_02021593 local:sameOrganismAs obo:FOODON_00002325 .
+### valiant strawberry  <->  valiant strawberry plant   [label convention]
+obo:FOODON_00004626 local:sameOrganismAs obo:FOODON_00004625 .
+### vanilla bean  <->  vanilla bean food product   [label convention]
+obo:FOODON_00003738 local:sameOrganismAs obo:FOODON_00002328 .
+### veal  <->  veal food product   [label convention]
+obo:FOODON_00003083 local:sameOrganismAs obo:FOODON_02021288 .
+### vegetable  <->  vegetable food product   [label convention]
+obo:FOODON_00003816 local:sameOrganismAs obo:FOODON_00001261 .
+### vegetable oil  <->  vegetable oil food product   [label convention]
+obo:FOODON_03305263 local:sameOrganismAs obo:FOODON_00001087 .
+### vegetable salad  <->  vegetable salad food product   [label convention]
+obo:FOODON_03307695 local:sameOrganismAs obo:FOODON_00002334 .
+### vegetable soup  <->  vegetable soup food product   [label convention]
+obo:FOODON_03304911 local:sameOrganismAs obo:FOODON_00002335 .
+### velvet bean  <->  velvet bean food product   [label convention]
+obo:FOODON_00002786 local:sameOrganismAs obo:FOODON_00004156 .
+### velvet bean  <->  velvet bean plant   [label convention]
+obo:FOODON_00002786 local:sameOrganismAs obo:FOODON_03413403 .
+### vinegar  <->  vinegar food product   [label convention]
+obo:FOODON_03301705 local:sameOrganismAs obo:FOODON_00001073 .
+### walnut  <->  walnut food product   [label convention]
+obo:FOODON_03301364 local:sameOrganismAs obo:FOODON_00002338 .
+### walrus  <->  walrus food product   [label convention]
+obo:FOODON_02022139 local:sameOrganismAs obo:FOODON_02022137 .
+### water  <->  water food product   [label convention]
+obo:CHEBI_15377 local:sameOrganismAs obo:FOODON_00002340 .
+### water buffalo  <->  water buffalo food product   [label convention]
+obo:FOODON_02021042 local:sameOrganismAs obo:FOODON_02021040 .
+### watercress  <->  watercress plant   [label convention]
+obo:FOODON_00003064 local:sameOrganismAs obo:FOODON_03411492 .
+### watermelon  <->  watermelon food product   [label convention]
+obo:FOODON_00003673 local:sameOrganismAs obo:FOODON_00002343 .
+### watermelon  <->  watermelon plant   [label convention]
+obo:FOODON_00003673 local:sameOrganismAs obo:FOODON_00001155 .
+### wax bean  <->  wax bean food product   [label convention]
+obo:FOODON_00003011 local:sameOrganismAs obo:FOODON_00002344 .
+### wax bean  <->  wax bean plant   [label convention]
+obo:FOODON_00003011 local:sameOrganismAs obo:FOODON_03411351 .
+### welsh onion  <->  welsh onion plant   [label convention]
+obo:FOODON_00003172 local:sameOrganismAs obo:FOODON_03412418 .
+### whale  <->  whale food product   [label convention]
+obo:FOODON_03411343 local:sameOrganismAs obo:FOODON_00002345 .
+### wheat bread  <->  wheat bread food product   [label convention]
+obo:FOODON_03302200 local:sameOrganismAs obo:FOODON_00002351 .
+### wheat cereal  <->  wheat cereal food product   [label convention]
+obo:FOODON_03312031 local:sameOrganismAs obo:FOODON_00002352 .
+### wheat cracker  <->  wheat cracker food product   [label convention]
+obo:FOODON_03307113 local:sameOrganismAs obo:FOODON_00002353 .
+### whelk  <->  whelk food product   [label convention]
+obo:FOODON_03411633 local:sameOrganismAs obo:FOODON_02021476 .
+### white bean  <->  white bean food product   [label convention]
+obo:FOODON_03301232 local:sameOrganismAs obo:FOODON_00003314 .
+### white currant  <->  white currant plant   [label convention]
+obo:FOODON_00005249 local:sameOrganismAs obo:FOODON_03412752 .
+### white rice  <->  white rice food product   [label convention]
+obo:FOODON_00003787 local:sameOrganismAs obo:FOODON_03311818 .
+### white-winged scoter duck  <->  white-winged scoter duck food product   [label convention]
+obo:FOODON_02022517 local:sameOrganismAs obo:FOODON_02022515 .
+### whiting  <->  whiting food product   [label convention]
+obo:FOODON_03411640 local:sameOrganismAs obo:FOODON_00002363 .
+### whole  <->  whole plant   [label convention]
+obo:FOODON_03430131 local:sameOrganismAs obo:PO_0000003 .
+### wild boar  <->  wild boar food product   [label convention]
+obo:FOODON_00004286 local:sameOrganismAs obo:FOODON_00004423 .
+### winged bean  <->  winged bean food product   [label convention]
+obo:FOODON_03310299 local:sameOrganismAs obo:FOODON_00001202 .
+### winged bean  <->  winged bean plant   [label convention]
+obo:FOODON_03310299 local:sameOrganismAs obo:FOODON_03411726 .
+### wolffish  <->  wolffish food product   [label convention]
+obo:FOODON_03411519 local:sameOrganismAs obo:FOODON_00002366 .
+### wood apple  <->  wood apple food product   [label convention]
+obo:FOODON_00003750 local:sameOrganismAs obo:FOODON_00002367 .
+### wood apple  <->  wood apple plant   [label convention]
+obo:FOODON_00003750 local:sameOrganismAs obo:FOODON_03412845 .
+### yam  <->  yam food product   [label convention]
+obo:FOODON_00003448 local:sameOrganismAs obo:FOODON_00002368 .
+### yam  <->  yam plant   [label convention]
+obo:FOODON_00003448 local:sameOrganismAs obo:FOODON_03413396 .
+### yeast  <->  yeast food product   [label convention]
+obo:FOODON_03411345 local:sameOrganismAs obo:FOODON_00002369 .
+### yellow bean  <->  yellow bean food product   [label convention]
+obo:FOODON_03000093 local:sameOrganismAs obo:FOODON_03000092 .
+### yellow bean  <->  yellow bean plant   [label convention]
+obo:FOODON_03000093 local:sameOrganismAs obo:FOODON_00002887 .
+### yellow onion  <->  yellow onion plant   [label convention]
+obo:FOODON_00003517 local:sameOrganismAs obo:FOODON_03414314 .
+### yellow perch  <->  yellow perch food product   [label convention]
+obo:FOODON_03411177 local:sameOrganismAs obo:FOODON_00002370 .
+### yellowfin tuna  <->  yellowfin tuna food product   [label convention]
+obo:FOODON_03411074 local:sameOrganismAs obo:FOODON_00002371 .
+### youngberry  <->  youngberry food product   [label convention]
+obo:FOODON_00003566 local:sameOrganismAs obo:FOODON_00002372 .
+### youngberry  <->  youngberry plant   [label convention]
+obo:FOODON_00003566 local:sameOrganismAs obo:FOODON_03411388 .
+### yuzu  <->  yuzu food product   [label convention]
+obo:FOODON_00003732 local:sameOrganismAs obo:FOODON_00003322 .
+### zebra  <->  zebra food product   [label convention]
+obo:FOODON_02021556 local:sameOrganismAs obo:FOODON_00002449 .
 
 
 # --- pinned free-text resolutions -------------------------------------------

@@ -147,6 +147,11 @@ a.iri .ext{font-size:9px;opacity:.75;transform:translateY(-1px)}
 .empty p{max-width:400px}
 .controls{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap;z-index:5}
 .controls button{background:rgba(255,255,255,.94);font-size:12px;padding:5px 10px}
+/* the controls bar is a flex row, so its items STRETCH to the tallest one -- the
+   button. An inline-block pill stretched that way keeps its 1px padding and leaves
+   the text sitting at the top of a 30px box. Centre it inside its own height rather
+   than centring the row, so a wrapped second row still aligns to its own buttons. */
+.controls .pill{display:flex;align-items:center}
 /* sits one row up: the lineage breadcrumb owns the bottom strip. Held at a fixed
    offset rather than moved on hover, so the controls never shift under the pointer */
 .filters{position:absolute;bottom:60px;left:12px;background:rgba(255,255,255,.94);

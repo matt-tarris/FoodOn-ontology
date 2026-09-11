@@ -177,19 +177,27 @@ pol = json.load(open("config/relation_policy.json"))
 store = json.load(open("data/resolution-store.json"))
 
 # ---- parallel-hierarchy correspondences --------------------------------------
-# Computed per root, one at a time: expand_roots on a SET returns the union, and
-# cross-joining that against every root in the set invents pairs that do not hold
-# (`barley plant sameOrganismAs Secale cereale`, from the five-root gluten query).
+# THE WHOLE RELATION, not the part under a pinned root. This used to walk only the
+# roots in data/resolution-store.json, which meant the export was parity-correct for
+# pinned queries and quietly wrong for every other one: `citrus fruit` is not pinned,
+# so its pairing with `citrus fruit food product` was never written and a SPARQL
+# consumer under-reported that root by 50 classes while the application did not.
+#
+# It is computed by Graph.all_correspondences() rather than re-derived here, so the
+# rule the application applies and the rule the export states cannot drift apart --
+# which is the failure this whole file exists to prevent.
+#
+# The taxon-pivot half of the correspondence is NOT here. `local:pivotsTo` already
+# carries it and patch_closure.rq already walks it in phase one, so emitting it again
+# would be 2,587 triples saying what the graph says.
 sys.path.insert(0, "build")
 from traverse import Graph as _G
 _g = _G()
-_ROOTS = sorted({r for e in store["entries"].values()
-                 if e.get("status") == "resolved" for r in (e.get("roots") or [])})
-_EXPAND = {}
-for _r in _ROOTS:
-    _exp = _g.expand_roots([_r]) or {}
-    _EXPAND[_r] = {k: (v[0] if isinstance(v, (list, tuple)) else v)
-                   for k, v in _exp.items() if k != _r}
+_CORR = _g.all_correspondences()
+_EXPAND = collections.defaultdict(dict)
+for (_a, _b), _why in _CORR.items():
+    _EXPAND[_a][_b] = _why
+_ROOTS = sorted(_EXPAND)
 
 # ------------------------------------------------------------------ write it out
 w = []

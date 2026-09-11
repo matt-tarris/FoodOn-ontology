@@ -272,11 +272,7 @@ class Graph:
         """
         import re
         BINOMIAL = re.compile(r"^[A-Z][a-z]+(?: x)? [a-z][a-z-]+")
-        by_label = {}
-        for i, v in self.N.items():
-            l = (v.get("l") or "").lower()
-            if l and not v.get("dep") and i not in self.excluded:
-                by_label.setdefault(l, i)
+        by_label = self._label_index()
 
         added = {}
         for r in roots:
@@ -297,6 +293,58 @@ class Graph:
                     if cand and cand not in roots:
                         added.setdefault(cand, ("label convention (stripped)", r))
         return added
+
+    # ------------------------------------------------------------------ labels
+    def _label_index(self):
+        """lowercase label -> IRI, built once.
+
+        This used to be rebuilt inside expand_roots on every call, which cost 7.75ms
+        a query -- invisible for one query and the reason a full scan of all 39,894
+        classes looked like a five-minute job when it is actually 0.04s. The scan is
+        what the patch emitter needs, so the cost mattered more than it looked.
+        """
+        if getattr(self, "_by_label", None) is None:
+            self._by_label = {}
+            for i, v in self.N.items():
+                l = (v.get("l") or "").lower()
+                if l and not v.get("dep") and i not in self.excluded:
+                    self._by_label.setdefault(l, i)
+        return self._by_label
+
+    def all_correspondences(self):
+        """Every LABEL-CONVENTION correspondence in the ontology, not just the ones
+        under a pinned root. {(a, b): why}, directed as expand_roots returns them.
+
+        Why this exists. expand_roots answers "what pairs with THIS root", which is
+        all a query needs; the exported patch layer needs the whole relation, because
+        a consumer may start from any class. The emitter used to walk only the roots
+        in data/resolution-store.json, so `citrus fruit` -- not pinned -- lost its
+        pairing with `citrus fruit food product` and a SPARQL consumer under-reported
+        it by 50 classes while the application did not. One rule, computed one way,
+        is the point: this method and expand_roots must not be able to disagree.
+
+        The TAXON-PIVOT half of expand_roots is deliberately not included. It is
+        already carried by `local:pivotsTo`, which patch_closure.rq walks in phase
+        one, so emitting it again here would double the file to say the same thing.
+        """
+        by_label = self._label_index()
+        out = {}
+        for i, v in self.N.items():
+            if v.get("dep") or i in self.excluded:
+                continue
+            base = (v.get("l") or "").lower()
+            if not base:
+                continue
+            for suffix in ("species", "plant", "food product"):
+                c = by_label.get(f"{base} {suffix}")
+                if c and c != i:
+                    out.setdefault((i, c), "label convention")
+            for suffix in (" species", " plant", " food product"):
+                if base.endswith(suffix):
+                    c = by_label.get(base[: -len(suffix)])
+                    if c and c != i:
+                        out.setdefault((i, c), "label convention (stripped)")
+        return out
 
     def edges_for_scoring(self):
         """IRIs that act as a derivation source, for resolver scoring."""

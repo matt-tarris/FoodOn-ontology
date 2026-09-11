@@ -713,23 +713,39 @@ are hybrids FoodOn has no taxon for at all (`orangelo`, `oroblanco`, `persian li
 the Citrofortunella group); one — `citrus honey` — is not a taxon question, since the
 honey carries no fruit.
 
-### Two parity holes this exposed
+### Two parity holes this exposed, one of them closed
 
 Adding a seventh root to `test/patch_run.py` broke a parity claim that six roots had
-never tested. Both pre-existing, both now printed on every run rather than fixed
-quietly:
+never tested. Both pre-existing.
 
-- **unpinned correspondences.** The emitter writes `local:sameOrganismAs` only for
-  roots in `data/resolution-store.json`. `citrus fruit` is not pinned, so its pairing
-  with `citrus fruit food product` — worth 50 classes — is not exported, and a SPARQL
-  consumer under-reports it while the app does not. Closing it means `expand_roots`
-  over all 39,894 classes at emit time (~5 min, ~4,400 triples) or materialising the
-  pairing in SPARQL.
-- **nested-filler subsumption.** 564 edges the index extracts from `unionOf` and
-  restriction fillers that a plain `rdfs:subClassOf` path cannot see. Costs a citrus
-  query one class, `imitation orange juice drink`.
+**Unpinned correspondences — fixed.** The emitter wrote `local:sameOrganismAs` only
+for roots in `data/resolution-store.json`, so the export was parity-correct for pinned
+queries and quietly wrong for every other one. `citrus fruit` is not pinned, so its
+pairing with `citrus fruit food product` — worth 50 classes — was never written, and a
+SPARQL consumer under-reported that root while the app did not.
 
-Which fix is right is a decision, not a bug fix, so neither is taken here.
+It now emits the whole relation: **19 correspondences → 803**. The five-minute
+estimate for that scan was wrong, and wrong in an instructive way — `expand_roots`
+rebuilt its 39,894-entry label index on *every call*, so measuring it by calling it
+2,000 times measured the rebuild, not the work. Hoisting the index makes the full scan
+**0.04s**, and made each query's `expand_roots` 60× faster as a side effect (7.75ms →
+0.12ms).
+
+The rule now lives in one place, `Graph.all_correspondences()`, which both the emitter
+and the test call — the application's rule and the exported rule cannot drift apart,
+which is the failure this whole layer exists to prevent. `patch_run.py` asserts parity
+on `citrus fruit` **because it is unpinned**: that root is the regression test.
+
+The taxon-pivot half is deliberately not emitted. `local:pivotsTo` already carries it
+and `patch_closure.rq` already walks it, so emitting it again would be 2,587 triples
+saying what the graph says.
+
+**Nested-filler subsumption — open.** 564 classes whose parent the index extracts from
+a `unionOf` or restriction filler, which a plain `rdfs:subClassOf` path cannot see. It
+costs a citrus query exactly one class, `imitation orange juice drink`. `patch_run.py`
+attributes divergence to it **by structure, not by name** — a class is excused only if
+the index actually reached it that way — so any other divergence still fails, and the
+count is printed on every run.
 
 ## Bridges awaiting review
 
