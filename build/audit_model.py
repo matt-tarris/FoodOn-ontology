@@ -619,8 +619,13 @@ def ingredients(limit=None):
     q = spec.get("requires_signoff", [])
     q.sort(key=lambda e: -e.get("uses", 0))
     queued_uses = sum(e.get("uses", 0) for e in q)
+    signed = spec.get("mappings", [])
+    sl = {e["term"]: e.get("shortlist") for e in q if e.get("shortlist")}
+    for m in signed:
+        if m.get("shortlist") is None and m["term"] in sl:
+            m["shortlist"] = sl[m["term"]]
     return dict(
-        signed=spec.get("mappings", []),
+        signed=signed,
         queue=q[:limit] if limit else q,
         queued_total=len(q),
         queued_uses=queued_uses,
@@ -654,11 +659,27 @@ def review_ingredients(terms, action, who="Matt", target=None, reason=None,
     from resolve import Resolver
     r = Resolver()
     done, skipped = [], []
+    signed_by = {m["term"]: m for m in spec["mappings"]}
     for t in terms:
         e = by.get(t)
         if e is None:
-            skipped.append((t, "not in the queue"))
-            continue
+            # Already signed? Then this is a CORRECTION. A mapping signed in good faith
+            # and later found coarse -- `apple cider vinegar` to `cider vinegar` when
+            # `apple vinegar food product` was the better class -- has to be fixable
+            # without hand-editing the file the interface exists to replace.
+            prev = signed_by.get(t)
+            if prev is None:
+                skipped.append((t, "not in the queue and not already signed"))
+                continue
+            if action == "decline":
+                spec["mappings"] = [m for m in spec["mappings"] if m["term"] != t]
+                spec["declined"].append(dict(term=t, uses=prev.get("uses"),
+                                             reason=reason or "withdrawn on review",
+                                             was=prev.get("maps_to"),
+                                             declined_by=who, declined_date=TODAY()))
+                done.append(t)
+                continue
+            e = dict(prev, correcting=True)
         if action == "decline":
             spec["declined"].append(dict(term=t, uses=e.get("uses"),
                                          reason=reason or e.get("declined_reason")
@@ -677,10 +698,20 @@ def review_ingredients(terms, action, who="Matt", target=None, reason=None,
             if r.g.N[iri].get("dep"):
                 skipped.append((t, f"{r.g.label(iri)} is deprecated upstream"))
                 continue
+            if iri in r.g.excluded:
+                skipped.append((t, f"{r.g.label(iri)} is in an excluded branch -- 6,087 "
+                                   f"code-list classes sit outside the traversal, so a "
+                                   f"mapping to one would never match a query"))
+                continue
+            prev = signed_by.get(t)
+            spec["mappings"] = [m for m in spec["mappings"] if m["term"] != t]
             spec["mappings"].append(dict(
                 term=t, maps_to_iri=iri, maps_to=r.g.label(iri), uses=e.get("uses"),
                 root_labels=[r.g.label(iri)], chosen_from_shortlist=True,
                 proposed_by=e.get("proposed_by"),
+                **({"corrected_from": prev.get("maps_to"),
+                    "corrected_from_iri": prev.get("maps_to_iri"),
+                    "originally_signed": prev.get("signed_off_date")} if prev else {}),
                 signed_off_by=who, signed_off_date=TODAY()))
             done.append(t)
             continue

@@ -922,6 +922,24 @@ shortlist is filtered to namespaces a food can live in — PATO carries `red` an
 as *qualities*, and they were arriving as candidates for `red wine vinegar`, where
 clicking one would map an ingredient to the colour of itself.
 
+**Specificity outranks the proposal.** A class whose label contains *every* word of the
+term leads the shortlist, because a proposal got where it is by *discarding* words.
+`rice vinegar` was proposed as `vinegar` — correct but coarse — while
+`FOODON:03307370 rice wine vinegar` sits directly under `wine vinegar` and says exactly
+what the recipe said. Substring search never found it: `rice vinegar` is not a substring
+of `rice wine vinegar`. Word-subset search is, and it ranks by fewest extra words.
+
+**Excluded-branch classes are never offered.** 6,087 EFSA and GS1 code-list classes sit
+outside the traversal by policy, so a mapping to one would be a mapping that silently
+never fires. They are filtered out of every shortlist and refused on approval, with the
+reason given.
+
+**A signed mapping can be corrected.** One signed in good faith and later found coarse
+has to be fixable in the interface rather than by hand-editing the file the interface
+exists to replace. The *signed* filter lists them with their current class pre-selected
+and the alternatives under it; a correction records `corrected_from` and keeps the
+original sign-off date.
+
 A chosen id is stored **as an IRI and used as one**. Re-resolving its label at ingest
 time would put the resolver's scoring back in the path, so a reviewer's override could
 quietly land somewhere else after an unrelated change.

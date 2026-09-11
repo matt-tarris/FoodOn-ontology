@@ -160,6 +160,39 @@ try:
             if got["roots"] != [alt]:
                 fails.append(f"ingest did not use the chosen id: {got['roots']}")
 
+    # CORRECTING an already-signed mapping. One signed in good faith and later found
+    # coarse -- `apple cider vinegar` to `cider vinegar` where `apple vinegar food
+    # product` was the better class -- must be fixable here, not by hand-editing the
+    # file this interface exists to replace.
+    sig = A.ingredients()["signed"]
+    if sig:
+        m0 = sig[0]
+        alt = next((c["iri"] for c in (m0.get("shortlist") or [])
+                    if c["iri"] != m0.get("maps_to_iri")), None)
+        if alt:
+            checks += 1
+            A.review_ingredients([m0["term"]], "approve", who="test",
+                                 choices={m0["term"]: alt})
+            now = next(x for x in A.ingredients()["signed"] if x["term"] == m0["term"])
+            if now.get("maps_to_iri") != alt:
+                fails.append("correcting a signed mapping did not take")
+            elif not now.get("corrected_from"):
+                fails.append("a correction did not record what it replaced")
+            checks += 1
+            if len(A.ingredients()["signed"]) != len(sig):
+                fails.append("correcting a mapping duplicated or dropped it")
+
+    # an excluded-branch class can never match a query, so it must be refused
+    checks += 1
+    exq = next((e for e in A.ingredients()["queue"] if e.get("shortlist")), None)
+    if exq:
+        excluded_iri = next((i for i in A.Graph().excluded), None)
+        out_x = A.review_ingredients([exq["term"]], "approve", who="test",
+                                     choices={exq["term"]: excluded_iri})
+        if out_x["done"]:
+            fails.append("approved a mapping to an excluded-branch class, which can "
+                         "never match a query")
+
     # an id that is not a class in this release must be refused
     checks += 1
     nope = A.review_ingredients([after["queue"][0]["term"]], "approve", who="test",

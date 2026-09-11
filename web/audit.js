@@ -437,6 +437,7 @@ const CHOICE = {};             // term -> the FoodOn iri the reviewer picked
 const LAYER_INTRO = document.querySelector(".why").outerHTML;
 
 const FILTERS = {
+  signed:    {label: "signed \u2014 correct one", fn: e => !!e.signed_off_by},
   oneclick:  {label: "one click",          fn: e => (e.shortlist||[]).length === 1},
   choose:    {label: "needs a choice",     fn: e => (e.shortlist||[]).length > 1},
   nocand:    {label: "no class in FoodOn", fn: e => !(e.shortlist||[]).length && !e.declined_reason},
@@ -444,7 +445,11 @@ const FILTERS = {
   all:       {label: "everything",       fn: () => true},
 };
 
-const shown = () => (ING.queue || []).filter(FILTERS[FILTER].fn).slice(0, SHOW);
+// signed mappings are reviewable too: one signed in good faith and later found coarse
+// has to be fixable here rather than by hand-editing the file this interface replaces
+const pool = () => (FILTER === "signed" ? (ING.signed || []) : (ING.queue || []))
+  .filter(FILTERS[FILTER].fn);
+const shown = () => pool().slice(0, SHOW);
 
 /* The final call is a human picking a CLASS, not approving a string. The model's
  * narrowing leads the list as the recommendation; the alternatives sit under it so the
@@ -453,7 +458,7 @@ const shown = () => (ING.queue || []).filter(FILTERS[FILTER].fn).slice(0, SHOW);
  * FoodOn's own `tree nut` reaches 2 classes and looks perfect. */
 function ingRow(e) {
   const sl = e.shortlist || [];
-  const chosen = CHOICE[e.term] ?? (sl.length ? sl[0].iri : null);
+  const chosen = CHOICE[e.term] ?? e.maps_to_iri ?? (sl.length ? sl[0].iri : null);
   const risky = (e.candidates || []).filter(
     c => c.risky && (!e.proposed || c.term === e.proposed));
   const opts = sl.map((c, i) => `
@@ -463,7 +468,7 @@ function ingRow(e) {
       <span class="olab">${esc(c.label)}</span>
       <span class="ids">${esc(c.curie)}</span>
       <span class="cnt">${c.closure} in closure</span>
-      ${i === 0 && e.proposed ? '<span class="rec">recommended</span>' : ""}
+      ${c.recommended ? '<span class="rec">recommended</span>' : ""}
       ${c.excluded ? '<span class="riskflag">excluded branch</span>' : ""}
       <span class="how">${esc(c.why)}</span>
     </label>`).join("");
@@ -472,7 +477,9 @@ function ingRow(e) {
     <td><span class="term">${esc(e.term)}</span>
       ${risky.length ? `<span class="riskflag">${esc(risky[0].warning)}</span>` : ""}</td>
     <td class="uses">${(e.uses || 0).toLocaleString()}</td>
-    <td>${sl.length ? `<div class="opts">${opts}</div>`
+    <td>${e.signed_off_by ? `<div class="ids" style="margin-bottom:4px">now: <b>${
+        esc(e.maps_to || "?")}</b>${e.corrected_from ? ` (was ${esc(e.corrected_from)})` : ""}</div>` : ""}
+      ${sl.length ? `<div class="opts">${opts}</div>`
       : e.declined_reason
         ? `<span class="noprop">not an ingredient</span><div class="ids">${esc(e.declined_reason)}</div>`
         : `<span class="noprop">${esc(e.proposed_note || "FoodOn has no class for this")}</span>`}</td>
@@ -482,7 +489,7 @@ function ingRow(e) {
 function renderIngredients() {
   const q = ING.queue || [];
   const list = shown();
-  const pool = q.filter(FILTERS[FILTER].fn);
+  const inPool = pool();
   $("#sub").textContent =
     `${ING.queued_total.toLocaleString()} terms awaiting review · `
     + `${ING.queued_uses.toLocaleString()} ingredient uses · `
@@ -503,9 +510,9 @@ function renderIngredients() {
     <div class="batchbar">
       <div class="filters2">${Object.entries(FILTERS).map(([k,v]) =>
         `<button data-filter="${k}" aria-pressed="${k===FILTER}">${esc(v.label)} (${
-          q.filter(v.fn).length})</button>`).join("")}</div>
+          (k === "signed" ? (ING.signed||[]) : q).filter(v.fn).length})</button>`).join("")}</div>
       <span class="spacer"></span>
-      <span class="count">showing <b>${list.length}</b> of ${pool.length}
+      <span class="count">showing <b>${list.length}</b> of ${inPool.length}
         · <b>${SEL.size}</b> selected</span>
       <button class="btn" data-all>Select all shown</button>
       <button class="btn" data-none>Clear</button>
@@ -528,7 +535,8 @@ async function reviewBatch(action) {
   banner("ok", `${action === "approve" ? "signing off" : "declining"} ${terms.length}…`);
   const choices = {};
   for (const t of terms) {
-    const e = (ING.queue || []).find(x => x.term === t);
+    const e = (ING.queue || []).find(x => x.term === t)
+           || (ING.signed || []).find(x => x.term === t);
     const sl = (e && e.shortlist) || [];
     const iri = CHOICE[t] ?? (sl.length ? sl[0].iri : null);
     if (iri) choices[t] = iri;
