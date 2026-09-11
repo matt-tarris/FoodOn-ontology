@@ -383,7 +383,7 @@ function GraphView({ graph, expanded, onToggle, onSelect, selected, showLow, rev
       // hybrids of citrus paradisi, not elsewhere mentioned") would otherwise set a
       // ring gap of ~380px and a canvas nothing could read. Past the cap the planner
       // takes over and drops what will not fit, which is the graceful direction.
-      return ls.length ? Math.min(180, ls[Math.floor(ls.length * 0.6)]) : 0;
+      return ls.length ? Math.min(180, ls[Math.floor(ls.length * 0.45)]) : 0;
     })();
     // The outer circumference has to give every leaf a legible slice of arc. 15px
     // per leaf is the label line-height; below that the outer ring starts to

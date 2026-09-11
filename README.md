@@ -65,10 +65,18 @@ whose own comment said it existed "so the rings stay far enough apart for an int
 node's label to run outward without immediately meeting the next one". It never did
 that: on a citrus query the rings land 62px apart and the median label is 93px, so a
 typical name ran a ring and a half outward, straight across the nodes sitting there —
-`Citrus limonia` printed over its neighbour. The floor is now the **60th percentile of
+`Citrus limonia` printed over its neighbour. The floor is now the **45th percentile of
 the query's own label lengths** (capped at 180px, or one query of EFSA code-list names
-would set a gap nothing could read). Measured on citrus expanded to 149 nodes: labels
-shown went **73 → 139** with zero crossings, at 2.2× the radius. Sizing it to the pane made a 2-node `paprika` query fill the canvas
+would set a gap nothing could read). Measured on citrus expanded to 149 nodes:
+
+| ring gap | radius | labels shown | crossings |
+|---|---|---|---|
+| 62px, flat | 248 | 73 | many |
+| 124px, measured | 494 | 133 | 0 |
+
+More labels *and* none of them overlapping, because wider rings let the planner admit
+candidates it used to have to drop. The percentile is the dial: higher spreads the rings
+further and admits more labels, at the price of a larger drawing scaled down to fit. Sizing it to the pane made a 2-node `paprika` query fill the canvas
 with two nodes 660px apart and their labels turned vertical. At four leaves or fewer the
 labels are counter-rotated back to horizontal, because the radial form buys nothing at
 that size.
