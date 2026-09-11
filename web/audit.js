@@ -70,7 +70,9 @@ function decHTML(d, card) {
     `<button class="btn go" data-act="signoff" data-kind="${d.kind}" data-id="${esc(d.id)}">Sign off</button>`,
     `<button class="btn" data-act="decline" data-kind="${d.kind}" data-id="${esc(d.id)}">Decline</button>`);
   else if (d.kind === "override") acts.push(
-    `<button class="btn" data-act="edit_override" data-id="${d.id}">Edit</button>`);
+    `<button class="btn" data-act="edit_override" data-id="${d.id}">Edit text</button>`,
+    d.etype === "superseded" ? "" :
+    `<button class="btn" data-act="retire" data-id="${d.id}">Retire</button>`);
   return `<div class="dec" data-row>
     <div><span class="claim ${CC[d.claim]||""}">${esc(d.claim)}</span></div>
     <div><b>${esc(d.tgt_label || EM)}</b>${d.src_label ? ` ${ARR} ${esc(d.src_label)}` : ""}
@@ -109,6 +111,7 @@ function card(c) {
       ${c.decisions.length ? c.decisions.map(d => decHTML(d, c)).join("")
         : `<p>No local decision touches this ingredient ${EM} the answer is FoodOn${RSQ}s, unedited.</p>`}
       <div class="acts">
+        <button class="btn go" data-act="statement">State a relationship</button>
         <button class="btn" data-act="add_override" data-roots="${esc(JSON.stringify(c.root_iris))}"
                 data-name="${esc(c.name)}">Add a claim for ${esc(c.name)}</button>
         ${c.pin ? `<button class="btn" data-act="edit_pin" data-query="${esc(c.name)}">Edit the pin</button>` : ""}
@@ -198,6 +201,31 @@ document.addEventListener("click", (ev) => {
   const slot = row ? row.querySelector("[data-form]")
                    : b.closest(".body").querySelector("[data-cardform]");
   if (slot.dataset.open === act) { slot.innerHTML = ""; slot.dataset.open = ""; return; }
+  if (act === "statement") {
+    slot.innerHTML = statementForm({});
+    slot.dataset.open = act;
+    const f = slot.querySelector("form");
+    f.querySelector("[data-cancel]").onclick = () => { slot.innerHTML=""; slot.dataset.open=""; };
+    wireStatement(f);
+    return;
+  }
+  if (act === "retire") {
+    slot.innerHTML = `<form class="ed"><label>why it is being retired *
+      <textarea name="reason" required></textarea></label>
+      <p class="sample">The entry stays on the record as <code>superseded</code>. To
+      repoint a relationship, retire it and state the new one \u2014 both halves survive,
+      which is the only version an audit can check.</p>
+      <div class="msg" data-msg></div>
+      <div class="acts"><button class="btn go" type="submit">Retire</button>
+        <button class="btn" type="button" data-cancel>Cancel</button></div></form>`;
+    slot.dataset.open = act;
+    const f = slot.querySelector("form");
+    f.querySelector("[data-cancel]").onclick = () => { slot.innerHTML=""; slot.dataset.open=""; };
+    f.onsubmit = async (e) => { e.preventDefault();
+      await send("retire", {id: b.dataset.id, reason: f.reason.value},
+                 f.querySelector("[data-msg]")); };
+    return;
+  }
   let prefill = {};
   if (act === "edit_override") {
     const d = allDecisions().find(x => x.kind === "override" && String(x.id) === b.dataset.id);
@@ -225,6 +253,124 @@ document.addEventListener("click", (ev) => {
     await send(act === "decline" ? "decline" : act, payload, msg);
   };
 });
+
+
+/* ------------------------------------------------------- the statement editor
+ * The first edit form offered `reason`, `confidence` and `review_note`: prose about a
+ * relationship, with no way to state the relationship. This is the missing vocabulary.
+ * A reviewer says SUBJECT - PREDICATE - OBJECT and the predicate decides which of the
+ * six decision files it lands in, so nobody has to know that a `derives from` is claim
+ * `contains` in overrides.json while an `in taxon` is a signed entry in
+ * taxon-bridges.json.
+ *
+ * The preview is the part that makes a relationship editable rather than merely
+ * writable: it says which ingredients change and by how much BEFORE anything is saved.
+ * It caught my own mistyped IRI while this was being built -- `fermented beverage` in
+ * place of `pasta food product`, which read as "gluten gains Barbera wine". */
+let VOCAB = null;
+
+function picker(name, value, label) {
+  return `<label>${esc(label)}
+    <input class="pick" name="${name}" autocomplete="off" placeholder="type a class name…"
+           value="${esc(value||"")}" data-iri="">
+    <div class="hits" hidden></div></label>`;
+}
+
+function statementForm(prefill) {
+  const p = prefill || {};
+  const opts = Object.entries(VOCAB.predicates).map(([k, v]) =>
+    `<option value="${esc(k)}"${k===p.predicate?" selected":""}>${esc(v.label)}${
+      v.enters ? "" : "  (reported, not traversed)"}</option>`).join("");
+  return `<form class="ed stmt">
+    ${picker("subject", p.subject_label, "subject")}
+    <label>relationship<select name="predicate">${opts}</select>
+      <div class="phelp"></div></label>
+    ${picker("object", p.object_label, "object")}
+    <div class="two">
+      <label>confidence<select name="confidence">
+        ${["high","medium","low"].map(c=>`<option${c===(p.confidence||"medium")?" selected":""}>${c}</option>`).join("")}
+      </select></label>
+      <label>evidence or source<input name="source" value="${esc(p.source||"")}"></label>
+    </div>
+    <label>why this is right *<textarea name="reason" required>${esc(p.reason||"")}</textarea></label>
+    <div class="prev" data-prev>Fill both ends to see what this changes.</div>
+    <div class="msg" data-msg></div>
+    <div class="acts"><button class="btn go" type="submit">Save statement</button>
+      <button class="btn" type="button" data-cancel>Cancel</button></div></form>`;
+}
+
+function wireStatement(form, onSave) {
+  const help = form.querySelector(".phelp");
+  const sel = form.predicate;
+  const showHelp = () => {
+    const v = VOCAB.predicates[sel.value];
+    help.innerHTML = `<b>${esc(v.subject)}</b> ${ARR} <b>${esc(v.object)}</b> &middot; ${esc(v.obo)}
+      <div>${esc(v.help)}</div>`;
+  };
+  sel.onchange = () => { showHelp(); doPreview(); };
+  showHelp();
+
+  form.querySelectorAll(".pick").forEach(inp => {
+    const box = inp.parentElement.querySelector(".hits");
+    let timer;
+    inp.oninput = () => {
+      inp.dataset.iri = "";
+      clearTimeout(timer);
+      timer = setTimeout(async () => {
+        if (inp.value.trim().length < 2) { box.hidden = true; return; }
+        const r = await fetch("/api/audit/lookup?q=" + encodeURIComponent(inp.value));
+        const {hits} = await r.json();
+        box.innerHTML = hits.map(h =>
+          `<button type="button" class="hit" data-iri="${esc(h.iri)}" data-label="${esc(h.label)}">
+             <b>${esc(h.label)}</b> <span class="ids">${esc(h.curie)}</span>
+             <span class="cnt">${h.closure} in closure</span>
+             ${h.excluded ? '<span class="warn">excluded branch</span>' : ""}
+             <span class="how">${esc(h.how)}</span></button>`).join("")
+          || '<div class="hit none">no class matches</div>';
+        box.hidden = false;
+      }, 160);
+    };
+    box.onclick = (e) => {
+      const b = e.target.closest(".hit[data-iri]");
+      if (!b) return;
+      inp.value = b.dataset.label; inp.dataset.iri = b.dataset.iri;
+      box.hidden = true; doPreview();
+    };
+  });
+
+  const prev = form.querySelector("[data-prev]");
+  async function doPreview() {
+    const s = form.subject.dataset.iri, o = form.object.dataset.iri;
+    if (!s || !o) { prev.className = "prev"; prev.textContent =
+      "Pick both ends from the list to see what this changes."; return; }
+    prev.className = "prev busy"; prev.textContent = "checking\u2026";
+    const r = await fetch("/api/audit/preview", {method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({predicate: form.predicate.value, subject: s, object: o})});
+    const j = await r.json();
+    if (!r.ok) { prev.className = "prev bad"; prev.textContent = j.error; return; }
+    if (j.changes && j.changes.length) {
+      prev.className = "prev hit";
+      prev.innerHTML = "<b>This would change:</b>" + j.changes.map(c =>
+        `<div>${esc(c.ingredient)} <b>${c.gained?"+"+c.gained:"\u2212"+c.lost}</b>
+         <span class="ids">${esc(c.sample.slice(0,3).join(", "))}</span></div>`).join("");
+    } else {
+      prev.className = "prev";
+      prev.textContent = j.note || "No pinned ingredient changes.";
+    }
+  }
+  form.oninput = (e) => { if (e.target.name === "reason") return; };
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const msg = form.querySelector("[data-msg]");
+    const s = form.subject.dataset.iri, o = form.object.dataset.iri;
+    if (!s || !o) { msg.textContent = "pick both ends from the suggestion list"; return; }
+    await send("statement", {predicate: form.predicate.value, subject: s, object: o,
+      reason: form.reason.value, confidence: form.confidence.value,
+      source: form.source.value}, msg);
+  };
+}
+
 const allDecisions = () => DATA.cards.flatMap(c => c.decisions).concat(DATA.rest);
 
 function render() {
@@ -274,6 +420,7 @@ function render() {
 
 fetch("/api/audit").then(r => r.json()).then(async (d) => {
   DATA = d;
+  VOCAB = await (await fetch("/api/audit/vocabulary")).json();
   const h = await (await fetch("/api/health")).json().catch(() => ({}));
   DATA.claim_types = h.claim_types || {contains:1, may_contain:1, shared_compound:1,
                                        cross_reactive:1, disputed:1, not_avoidance_relevant:1};

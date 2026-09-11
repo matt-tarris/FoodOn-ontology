@@ -173,6 +173,8 @@ def apply_edit(action, p, who="Matt"):
     if action == "edit_override":  return _edit_override(p, who)
     if action == "add_override":   return _add_override(p, who)
     if action == "edit_pin":       return _edit_pin(p, who)
+    if action == "statement":      return write_statement(p, who)
+    if action == "retire":         return retire(p.get("id"), p.get("reason") or "", who)
     raise EditError(f"unknown action: {action}")
 
 
@@ -316,3 +318,284 @@ def regenerate(files):
         if r.returncode != 0:
             return log, True
     return log, True
+
+
+# ===========================================================================
+# The statement layer
+# ===========================================================================
+# Six files, six field vocabularies, and a reviewer who wants to say one thing:
+# "tahini derives from sesame plant". The audit UI's first edit form asked which of
+# `reason`, `review_note` and `confidence` to change -- prose about a relationship it
+# gave no way to state. This is that missing vocabulary.
+#
+# Every decision in the layer is SUBJECT - PREDICATE - OBJECT. The predicate decides
+# which file the statement lands in, so a reviewer never picks a file, and the shape of
+# `config/mined-signoff.json` stops being something anyone has to know.
+#
+# `enters` is the property that matters for safety: a statement that enters the closure
+# changes what a diner is told to avoid, and one that does not is reported beside the
+# graph. It is carried here rather than inferred at each call site because getting it
+# wrong in either direction is the failure this project exists to prevent.
+
+PREDICATES = {
+    "derives from": dict(
+        label="derives from", enters=True, obo="RO:0001000", lands=OVERRIDES,
+        claim="contains", subject="the product", object="the source it is made from",
+        help="Avoidance travels source to product: a query for the OBJECT will reach "
+             "the SUBJECT. FoodOn omits this on 62% of its `<X> food product` classes."),
+    "is a": dict(
+        label="is a", enters=True, obo="rdfs:subClassOf", lands=MINED_SIGNOFF,
+        claim="is a", subject="the narrower class", object="its parent",
+        help="A missing subsumption. Use only where FoodOn's own definition states it; "
+             "a wrong parent widens every query that passes through."),
+    "in taxon": dict(
+        label="in taxon", enters=True, obo="RO:0002162", lands=TAXON,
+        claim="in taxon", subject="the FoodOn class", object="its species-rank taxon",
+        help="The route FoodOn itself uses to tie a plant to the taxonomy. The object "
+             "must be a binomial: a genus or family would silently widen the query."),
+    "may derive from": dict(
+        label="may derive from", enters=False, obo="local:mayDeriveFrom", lands=OVERRIDES,
+        claim="may_contain", subject="the substance", object="the query it may come from",
+        help="Feedstock is a producer's choice, not a property of the substance. "
+             "Reported beside the graph, never in it."),
+    "shares compound with": dict(
+        label="shares compound with", enters=False, obo="local:sharesCompoundWith",
+        lands=OVERRIDES, claim="shared_compound", subject="the compound",
+        object="the ingredient it shares it with",
+        help="The same molecule reached another way. For an INTOLERANCE, where the "
+             "response is to the molecule and its origin does not matter."),
+    "cross reactive with": dict(
+        label="cross reactive with", enters=False, obo="local:crossReactiveWith",
+        lands=OVERRIDES, claim="cross_reactive", subject="the food",
+        object="the allergen it is related to",
+        help="Immunologically related, allergen protein NOT present. As containment "
+             "this is wrong in the direction that needlessly excludes safe food."),
+    "disputed for": dict(
+        label="disputed for", enters=False, obo="local:disputedAvoidance", lands=OVERRIDES,
+        claim="disputed", subject="the food", object="the avoidance it appears under",
+        help="On avoidance lists without an established containment basis. Recorded so "
+             "the claim is visible and auditable."),
+    "not relevant for": dict(
+        label="not relevant for", enters=False, obo="local:notAvoidanceRelevantFor",
+        lands=OVERRIDES, claim="not_avoidance_relevant", entry_type="remove",
+        subject="the class to suppress", object="the query it should not appear in",
+        help="OWL cannot retract, so an upstream axiom that is defensible and wrong for "
+             "avoidance is suppressed declaratively. The largest edits in this layer are "
+             "these -- check them hardest."),
+}
+
+
+def vocabulary():
+    g = Graph()
+    return dict(predicates=PREDICATES,
+                claim_types=_read(OVERRIDES).get("claim_types", {}),
+                classes=len(g.N), ontology=g.meta["version"])
+
+
+def lookup(q, limit=12, graph=None):
+    """Find a class by what a person would type. Labels first, then synonyms.
+
+    Pasting an IRI was the only way to name a class in the first editor, which is a
+    reasonable thing to ask of a script and not of a reviewer. Closure size rides along
+    because it is the number that decides whether a candidate is the right grain:
+    FoodOn's own `tree nut` class looks perfect and reaches 2 classes.
+    """
+    from resolve import Resolver
+    r = Resolver(graph=graph, store=None)
+    g = r.g
+    q = (q or "").strip().lower()
+    if len(q) < 2:
+        return []
+    hits, seen = [], set()
+
+    def push(iri, how):
+        if iri in seen or iri not in g.N or g.N[iri].get("dep"):
+            return
+        seen.add(iri)
+        hits.append(dict(iri=iri, label=g.label(iri), how=how,
+                         curie=iri.rsplit("/", 1)[-1].replace("_", ":", 1),
+                         excluded=iri in g.excluded))
+
+    if q in r.label_ix:
+        push(r.label_ix[q], "exact label")
+    for lab, iri in r.label_ix.items():
+        if len(hits) >= limit * 3: break
+        if lab.startswith(q): push(iri, "label")
+    for lab, iri in r.label_ix.items():
+        if len(hits) >= limit * 3: break
+        if q in lab: push(iri, "label contains")
+    for syn, iris in r.syn_ix.items():
+        if len(hits) >= limit * 3: break
+        if q in syn:
+            for i in iris[:2]: push(i, f"synonym: {syn}")
+    hits = hits[:limit]
+    for h in hits:
+        h["closure"] = len(g.closure([h["iri"]])[0])
+    return hits
+
+
+def _candidate_graph(stmt, g):
+    """A graph with the statement applied, without writing anything.
+
+    The same mutations traverse.py makes when it loads a decision file, so a preview
+    cannot drift from what saving would do -- a preview computed a second way is a
+    second implementation to keep honest.
+    """
+    import copy as _c
+    h = _c.copy(g)
+    h.derive = _c.deepcopy(g.derive); h.children = _c.deepcopy(g.children)
+    h.suppress = _c.deepcopy(g.suppress)
+    p = PREDICATES[stmt["predicate"]]
+    s, o = stmt["subject"], stmt["object"]
+    if p["claim"] == "contains":
+        h.derive[o].append((s, "http://purl.obolibrary.org/obo/RO_0001000", "override", "high"))
+    elif p["claim"] == "is a":
+        h.children[o].append((s, "isa", "isa", "high"))
+    elif p["claim"] == "in taxon":
+        h.derive[o].append((s, "http://purl.obolibrary.org/obo/RO_0002162", "rel", "high"))
+    elif p["claim"] == "not_avoidance_relevant":
+        h.suppress[o].add(s)
+    return h
+
+
+def preview(stmt, graph=None):
+    """Which pinned ingredients does this statement change, and by how much?
+
+    The question a reviewer actually has before signing anything, and the one the
+    decision files answer only after a rebuild. A weak claim reports no closure change
+    because that is precisely what it means.
+    """
+    g = graph or Graph()
+    L = lambda i: (g.N.get(i, {}) or {}).get("l") or i
+    p = PREDICATES.get(stmt.get("predicate"))
+    if not p:
+        raise EditError(f"unknown predicate: {stmt.get('predicate')}")
+    for side in ("subject", "object"):
+        if not stmt.get(side):
+            raise EditError(f"`{side}` is required: a statement needs both ends")
+        if stmt[side] not in g.N:
+            raise EditError(f"{stmt[side]} is not a class in this FoodOn release")
+    if p["claim"] == "in taxon":
+        import re as _re
+        if not _re.match(r"^[A-Z][a-z]+(?: x)? [a-z][a-z-]+", L(stmt["object"])):
+            raise EditError(f"`{L(stmt['object'])}` is not a species-rank binomial; a "
+                            f"genus or family here silently widens every query that "
+                            f"reaches it")
+    out = dict(enters=p["enters"], changes=[], note=None)
+    # A suppression does not ENTER the closure and very much CHANGES it -- the two
+    # largest edits in this layer are suppressions. Reporting "no closure changes" for
+    # the only decisions that remove food from an avoidance list would have been the
+    # worst thing this preview could say.
+    suppresses = p["claim"] == "not_avoidance_relevant"
+    if not p["enters"] and not suppresses:
+        out["note"] = ("Reported beside the graph, never in it, so no closure changes. "
+                       "It will appear under `Reported, not traversed` for "
+                       + L(stmt["object"]) + ".")
+        return out
+    # Already in force? Then "nothing changes" is true and misleading -- the reviewer
+    # is looking at a decision whose effect the card above already shows.
+    already = False
+    s_, o_ = stmt["subject"], stmt["object"]
+    if suppresses:
+        already = s_ in (g.suppress.get(o_) or set())
+    elif p["claim"] == "is a":
+        already = any(c[0] == s_ for c in g.children.get(o_, ()))
+    else:
+        already = any(c[0] == s_ for c in g.derive.get(o_, ()))
+    if already:
+        out["note"] = ("This statement is already in force, so nothing moves. The card "
+                       "above shows what it does today.")
+        out["already"] = True
+        return out
+
+    h = _candidate_graph(stmt, g)
+    store = _read(STORE)["entries"]
+    groups = {}
+    for q, e in store.items():
+        if e.get("status") == "resolved":
+            groups.setdefault(tuple(e["roots"]), []).append(q)
+    for roots, qs in groups.items():
+        rs = list(roots)
+        before = set(g.closure(rs)[0]); after = set(h.closure(rs)[0])
+        gained, lost = after - before, before - after
+        if gained or lost:
+            out["changes"].append(dict(
+                ingredient=min(qs, key=len), gained=len(gained), lost=len(lost),
+                sample=sorted(L(x) for x in (gained or lost))[:6]))
+    out["changes"].sort(key=lambda c: -(c["gained"] + c["lost"]))
+    if not out["changes"]:
+        out["note"] = ("No pinned ingredient's answer changes. The statement is still "
+                       "recorded -- it may matter to a query that is not pinned, or to "
+                       "a later one -- but nothing a diner asks for today moves.")
+    return out
+
+
+def write_statement(st, who="Matt"):
+    """Record a statement in whichever file its predicate belongs to.
+
+    The reviewer names a relationship; the storage is derived. Before this, adding a
+    bridge meant knowing that a `derives from` goes in overrides.json as claim
+    `contains` while an `in taxon` goes in taxon-bridges.json under `signed_off` -- six
+    file shapes to hold what is, in the end, eight kinds of sentence.
+    """
+    p = PREDICATES.get(st.get("predicate"))
+    if not p:
+        raise EditError(f"unknown predicate: {st.get('predicate')}")
+    why, = _need(st, "reason")
+    preview(st)                      # validates both ends, rank guard, class existence
+    g = Graph()
+    L = lambda i: (g.N.get(i, {}) or {}).get("l") or i
+    subj, obj = st["subject"], st["object"]
+    conf = st.get("confidence", "medium")
+
+    if p["lands"] == TAXON:
+        d = _read(TAXON)
+        if any(x["class"] == subj for x in d["signed_off"]):
+            raise EditError(f"`{L(subj)}` already has a signed taxon link; edit that one")
+        d["requires_signoff"] = [x for x in d["requires_signoff"] if x["class"] != subj]
+        d["signed_off"].append(dict(**{"class": subj, "class_label": L(subj),
+            "taxon": obj, "taxon_label": L(obj), "confidence": conf, "evidence": why,
+            "signed_off_by": who, "signed_off_date": TODAY()}))
+        _write(TAXON, d)
+        return [TAXON]
+
+    if p["lands"] == MINED_SIGNOFF:
+        d = _read(MINED_SIGNOFF)
+        d["decisions"][subj] = {"apply": True, "confidence": conf,
+                                "label": f"{L(subj)} -> {L(obj)}", "rationale": why}
+        d["reviewed_by"] = who; d["reviewed_date"] = TODAY()
+        _write(MINED_SIGNOFF, d)
+        return [MINED_SIGNOFF, MINED_CLASSIFIED]
+
+    d = _read(OVERRIDES)
+    d["overrides"].append({
+        "type": p.get("entry_type", "add"), "claim": p["claim"], "status": "REVIEWED",
+        "query_class": L(obj), "query_roots": [obj], "query_root_labels": [L(obj)],
+        "target_label": L(subj), "target_class": subj, "in_foodon": True,
+        "confidence": conf, "reason": why, "source": st.get("source"),
+        "reviewed_by": who, "reviewed_date": TODAY(),
+        "review_note": st.get("review_note")})
+    _write(OVERRIDES, d)
+    return [OVERRIDES]
+
+
+def retire(ident, why, who="Matt"):
+    """Mark an override superseded rather than deleting it.
+
+    This is how a relationship gets REPOINTED. Editing target or roots in place would
+    rewrite history: the entry would claim to have always said the new thing, and
+    test/override_run.py would still pass. Retiring and restating leaves both halves on
+    the record, which is the only version an audit can check.
+    """
+    d = _read(OVERRIDES)
+    try:
+        o = d["overrides"][int(ident)]
+    except (IndexError, ValueError):
+        raise EditError("no such override")
+    if o.get("type") == "superseded":
+        raise EditError("already retired")
+    o["type"] = "superseded"
+    o["superseded_reason"] = why
+    o["reviewed_by"] = who; o["reviewed_date"] = TODAY()
+    _write(OVERRIDES, d)
+    return [OVERRIDES]

@@ -855,6 +855,43 @@ not have, a pin root label that does not resolve, a claim with no query root, an
 it and adding a new one keeps the trail. `test/audit_run.py` asserts those guards and
 the arithmetic behind the bars.
 
+### Statements, not files
+
+The first edit form offered `reason`, `confidence` and `review_note` — prose *about* a
+relationship, with no way to state one. Six files with six field vocabularies stood
+between a reviewer and the sentence they wanted to write.
+
+Every decision in the layer is **subject — predicate — object**, and the predicate
+decides which file it lands in, so nobody picks a file:
+
+| predicate | enters the closure | lands in |
+|---|---|---|
+| `derives from` `RO:0001000` | yes | `overrides.json` as `contains` |
+| `is a` | yes | `mined-signoff.json` |
+| `in taxon` `RO:0002162` | yes | `taxon-bridges.json` |
+| `may derive from` / `shares compound with` / `cross reactive with` / `disputed for` | no | `overrides.json` |
+| `not relevant for` | suppresses | `overrides.json` as `remove` |
+
+Both ends are chosen by **typing a name**, not by pasting an IRI: the picker searches
+labels then synonyms and shows each candidate's closure size, because that is the
+number that decides whether a candidate is the right grain — FoodOn's own `tree nut`
+class looks perfect and reaches 2 classes.
+
+**Nothing is saved without a preview.** `/api/audit/preview` applies the statement to an
+in-memory graph — the same mutations `traverse.py` makes when it loads a decision file,
+so a preview cannot drift from what saving does — and reports which pinned ingredients
+change and by how much. It earns its place: while this was being built it caught a
+mistyped IRI of mine, `fermented beverage` where `pasta food product` was meant, which
+read on screen as *"gluten gains Barbera wine"*.
+
+The rank guard runs in the preview too: `lemon plant in taxon Citrus` is refused,
+because a genus there silently widens every query beneath it.
+
+**Repointing is retire-and-restate.** Editing a claim's target in place would rewrite
+history — the entry would claim to have always said the new thing, and every test would
+still pass. `Retire` marks it `superseded` with a reason and leaves both halves on the
+record.
+
 ### Two defects this view found in the data
 
 **`remove` entries spelled the field `query_root` while `add` entries spelled it

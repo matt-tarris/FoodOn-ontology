@@ -150,6 +150,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == "/api/audit/preview":
+            try:
+                return self._send(audit_model.preview(self._body(), graph=GRAPH))
+            except audit_model.EditError as e:
+                return self._send({"error": str(e)}, 400)
         if parsed.path == "/api/audit/edit":
             try:
                 p = self._body()
@@ -181,6 +186,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == "/api/audit/lookup":
+            qs = urllib.parse.parse_qs(parsed.query)
+            return self._send({"hits": audit_model.lookup((qs.get("q") or [""])[0],
+                                                          graph=GRAPH)})
+        if parsed.path == "/api/audit/vocabulary":
+            return self._send(audit_model.vocabulary())
         if parsed.path == "/api/audit":
             return self._send(audit_data())
         if parsed.path == "/api/health":

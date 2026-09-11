@@ -79,3 +79,26 @@ table.rest th{text-align:left;font-size:11px;text-transform:uppercase;letter-spa
 table.rest td{padding:7px 12px;border-top:1px solid #f0ede8;vertical-align:top}
 input.f{max-width:340px;margin-bottom:10px;font:inherit;font-size:12.5px;padding:7px 10px;
         border:1px solid var(--line);border-radius:7px;background:#fff}
+
+/* statement editor */
+form.stmt{position:relative}
+.phelp{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+.phelp b{color:var(--ink);font-weight:600}
+label{position:relative}
+.hits{position:absolute;z-index:20;left:0;right:0;top:100%;background:#fff;
+      border:1px solid var(--line);border-radius:7px;box-shadow:0 6px 20px rgba(0,0,0,.08);
+      max-height:260px;overflow:auto;margin-top:3px}
+.hit{display:block;width:100%;text-align:left;border:none;border-bottom:1px solid #f2efea;
+     background:none;padding:7px 10px;font:inherit;font-size:12.5px;cursor:pointer;border-radius:0}
+.hit:hover{background:#faf8f5}
+.hit .cnt{color:var(--muted);font-size:11px;margin-left:6px}
+.hit .how{color:#a8a49c;font-size:11px;float:right}
+.hit .warn{color:#9a3d2f;font-size:11px;margin-left:6px}
+.hit.none{color:var(--muted);cursor:default}
+.prev{font-size:12.5px;padding:9px 11px;border-radius:7px;background:#f6f5f2;
+      border:1px solid var(--line);color:var(--muted);line-height:1.5}
+.prev.busy{opacity:.6}
+.prev.hit{background:#f2f7fc;border-color:#c6d6e8;color:var(--ink)}
+.prev.bad{background:#fdf3f1;border-color:#e8c5bd;color:#8a3a2f}
+.prev b{font-weight:600}
+.prev .ids{display:inline}

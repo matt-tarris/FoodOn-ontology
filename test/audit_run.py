@@ -108,6 +108,48 @@ for k, v in orig.items():
     setattr(A, k, v)
 shutil.rmtree(work)
 
+# ---- the statement layer -----------------------------------------------------
+# A predicate must land somewhere real, and must be honest about whether it enters the
+# closure -- that flag is what the UI uses to tell a reviewer whether a mistake here
+# reaches a diner.
+for name, p in A.PREDICATES.items():
+    checks += 1
+    if not os.path.exists(p["lands"]):
+        fails.append(f"predicate `{name}` lands in {p['lands']}, which does not exist")
+    checks += 1
+    if p["enters"] and p["claim"] not in ("contains", "is a", "in taxon"):
+        fails.append(f"predicate `{name}` claims to enter the closure as `{p['claim']}`, "
+                     f"which build/traverse.py does not traverse")
+    checks += 1
+    if not p["enters"] and p["claim"] in ("contains", "is a", "in taxon"):
+        fails.append(f"predicate `{name}` is marked reported-only but its claim "
+                     f"`{p['claim']}` does enter the closure")
+
+# the preview must count a suppression's REMOVALS. It reported "no closure changes"
+# for the only decisions that take food off an avoidance list until this was asserted.
+_ex = lambda lab: next(i for i, v in A.Graph().N.items() if (v.get("l") or "").lower() == lab)
+checks += 1
+try:
+    pv = A.preview(dict(predicate="not relevant for", subject=_ex("almond"),
+                        object=_ex("nut producing plant")))
+    if not any(c["lost"] for c in pv["changes"]):
+        fails.append("preview of a suppression counted no removals")
+except Exception as e:
+    fails.append(f"preview of a suppression raised {type(e).__name__}: {e}")
+
+# rank guard on the taxon predicate: a genus here widens every query beneath it
+checks += 1
+try:
+    A.preview(dict(predicate="in taxon", subject=_ex("lemon plant"),
+                   object=_ex("citrus")if False else "http://purl.obolibrary.org/obo/NCBITaxon_2706"))
+    fails.append("preview accepted a genus as an `in taxon` object")
+except A.EditError:
+    pass
+
+checks += 1
+if not A.lookup("sesame plant"):
+    fails.append("lookup found nothing for an exact class label")
+
 print(f"{len(d['cards'])} ingredient dossiers, "
       f"{sum(len(c['decisions']) for c in d['cards'])} decisions attributed, "
       f"{len(d['rest'])} not tied to one ingredient")
