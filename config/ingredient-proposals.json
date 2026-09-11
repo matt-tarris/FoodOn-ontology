@@ -1,0 +1,411 @@
+{
+ "red pepper flakes": "chili pepper",
+ "red wine vinegar": "wine vinegar",
+ "parmesan": "parmesan cheese",
+ "white wine vinegar": "wine vinegar",
+ "apple cider vinegar": "cider vinegar",
+ "dijon mustard": "mustard",
+ "unseasoned rice vinegar": "vinegar",
+ "sherry vinegar": "wine vinegar",
+ "cilantro leaves tender stems": "coriander",
+ "nonstick vegetable oil spray": {
+  "decline": "not a food: an aerosol release agent"
+ },
+ "flat-leaf parsley": "parsley",
+ "cardamom": "cardamom seed",
+ "basil": "basil leaf",
+ "orange zest": "orange",
+ "distilled white vinegar": "vinegar",
+ "lime wedges": "lime",
+ "persian cucumbers": "cucumber",
+ "skinless": {
+  "decline": "a preparation word, not an ingredient"
+ },
+ "parsley leaves tender stems": "parsley",
+ "cilantro leaves": "coriander",
+ "corn tortillas": "tortilla",
+ "unsalted": {
+  "decline": "a grade word, not an ingredient"
+ },
+ "plain -milk greek yogurt": "greek yogurt",
+ "lemon wedges": "lemon",
+ "skin-on": {
+  "decline": "a preparation word, not an ingredient"
+ },
+ "kosher salt black pepper": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ },
+ "simple syrup": "sugar",
+ "chicken stock": "chicken broth",
+ "panko": "breadcrumbs",
+ "mozzarella": "mozzarella cheese",
+ "bourbon": "whiskey",
+ "salt pepper": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ },
+ "lime zest": "lime",
+ "salt black pepper": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ },
+ "boneless": {
+  "decline": "a preparation word, not an ingredient"
+ },
+ "serrano chile": "serrano pepper",
+ "fresno chile": "chili pepper",
+ "english hothouse cucumber": "cucumber",
+ "oil- anchovy": "anchovy",
+ "mirin": "mirin japanese",
+ "lemongrass": "lemongrass stalk",
+ "golden raisins": "raisin",
+ "deep-fry thermometer": {
+  "decline": "equipment"
+ },
+ "chiles de arbol": "chili pepper",
+ "white miso": "miso",
+ "sea salt cracked black pepper": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ },
+ "sriracha": "chili sauce",
+ "serrano chiles": "serrano pepper",
+ "ricotta": "ricotta cheese",
+ "country-style bread": "bread",
+ "ketchup": "tomato ketchup",
+ "semisweet chocolate": "chocolate",
+ "agave nectar": "agave",
+ "feta": "feta cheese",
+ "rice vinegar": "vinegar",
+ "sea salt black pepper": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ },
+ "pomegranate seeds": "pomegranate",
+ "squeezed lemon juice": "lemon juice",
+ "cream tartar": "tartaric acid",
+ "jalapenos": "jalapeno pepper",
+ "aleppo-style pepper": "chili pepper",
+ "red chile": "chili pepper",
+ "goat cheese": "goat milk cheese food product",
+ "pecorino": "pecorino cheese",
+ "half- -half": "half and half",
+ "plain -milk yogurt": "yogurt",
+ "grain mustard": "mustard",
+ "smoked spanish paprika": "paprika (ground)",
+ "star anise pods": "star anise",
+ "flat-leaf parsley leaves": "parsley",
+ "inch ginger": "ginger",
+ "thick-cut bacon": "bacon",
+ "blanched hazelnuts": "hazelnut",
+ "active dry yeast": "yeast",
+ "prepared horseradish": "horseradish",
+ "zest lemon": "lemon",
+ "angostura bitters": "bitters",
+ "caraway seeds": "caraway",
+ "gochujang": null,
+ "almond extract": "almond",
+ "harissa paste": "chili pepper",
+ "juice lemon": "lemon",
+ "baby arugula": "arugula",
+ "garam masala": "spice",
+ "campari": null,
+ "-milk ricotta": "ricotta cheese",
+ "pomegranate molasses": "molasses",
+ "frozen peas": "pea",
+ "squeezed lime juice": "lime juice",
+ "sharp cheddar": "cheddar cheese",
+ "guajillo chiles": "chili pepper",
+ "baguette": "bread",
+ "skirt steak": "beef",
+ "cannellini beans": "common bean",
+ "ice water": "water",
+ "hard-boiled eggs": "chicken egg",
+ "rotisserie chicken": "chicken",
+ "crumbled feta": "feta cheese",
+ "littleneck clams": "clam",
+ "cremini mushrooms": "brown mushroom",
+ "red chiles": "chili pepper",
+ "cayenne": "cayenne pepper",
+ "white vinegar": "vinegar",
+ "all purpose flour": "wheat flour",
+ "rose water": "water",
+ "blanched almonds": "almond",
+ "bone-in": {
+  "decline": "a preparation word, not an ingredient"
+ },
+ "slivered almonds": "almond",
+ "envelope active dry yeast": "yeast",
+ "candy thermometer": {
+  "decline": "equipment"
+ },
+ "torn mint leaves": "mint",
+ "bread flour": "wheat flour",
+ "neutral vegetable oil": "vegetable oil",
+ "baby yukon gold potatoes": "potato",
+ "fresno chiles": "chili pepper",
+ "mezcal": null,
+ "juice lime": "lime",
+ "ice cubes": "water",
+ "sichuan peppercorns": "sichuan pepper",
+ "gruyere": "gruyere cheese",
+ "slab bacon": "bacon",
+ "new potatoes": "potato",
+ "cardamom pods": "cardamom seed",
+ "cooked rice": "rice",
+ "castelvetrano olives": "olive",
+ "white sesame seeds": "sesame seed",
+ "kalamata olives": "olive",
+ "sweet italian sausage": "sausage",
+ "parmigiano-reggiano": "parmesan cheese",
+ "allspice berries": "allspice",
+ "graham crackers": "cracker",
+ "basmati rice": "rice",
+ "ricotta salata": "ricotta cheese",
+ "fingerling potatoes": "potato",
+ "torn basil leaves": "basil leaf",
+ "red radishes": "radish",
+ "seasoned rice vinegar": "vinegar",
+ "old bay seasoning": "spice",
+ "nutritional yeast": "yeast",
+ "tequila blanco": "tequila",
+ "preserved lemon": "lemon",
+ "matcha": "green tea",
+ "cheddar": "cheddar cheese",
+ "flat-leaf parsley leaves tender stems": "parsley",
+ "green thai chiles": "chili pepper",
+ "zest juice lemon": "lemon",
+ "cooked quinoa": "quinoa",
+ "habanero chile": "chili pepper",
+ "crusty bread": "bread",
+ "yellow mustard seeds": "mustard seed",
+ "aperol": null,
+ "skin-on salmon": "salmon",
+ "grams unsalted butter": "butter",
+ "sweet paprika": "paprika (ground)",
+ "ancho chile powder": "chili pepper (ground)",
+ "ramps": "wild leek",
+ "chili oil": "chili pepper",
+ "rigatoni": "pasta",
+ "ancho chiles": "chili pepper",
+ "persian cucumber": "cucumber",
+ "pea shoots": "pea",
+ "homemade chicken stock": "chicken broth",
+ "diamond crystal kosher salt": "salt",
+ "bittersweet": {
+  "decline": "a chocolate grade with no food word attached"
+ },
+ "x": {
+  "decline": "parser residue"
+ },
+ "vegetable oil cooking spray": {
+  "decline": "not a food: an aerosol release agent"
+ },
+ "black pepper taste": {
+  "decline": "`to taste` residue"
+ },
+ "black mustard seeds": "mustard seed",
+ "semisweet chocolate chips": "chocolate",
+ "pecorino romano": "pecorino cheese",
+ "red beets": "beet",
+ "sweet vermouth": "vermouth",
+ "steamed rice": "rice",
+ "strips orange zest": "orange",
+ "baby bok choy": "bok choy",
+ "zest orange": "orange",
+ "maldon sea salt": "salt",
+ "organic plain -milk kefir": "kefir",
+ "parmigiano-reggiano cheese": "parmesan cheese",
+ "chinese five-spice powder": "five-spice powder",
+ "sea salt flakes": "salt",
+ "regular soy sauce": "soy sauce",
+ "low-sodium vegetable broth": "broth",
+ "frozen spinach": "spinach",
+ "sharp cheddar cheese": "cheddar cheese",
+ "seedless watermelon": "watermelon",
+ "white rum": "rum",
+ "thick country-style bread": "bread",
+ "rye whiskey": "whiskey",
+ "handful cilantro": "coriander",
+ "bonito flakes": "bonito",
+ "skin-on hazelnuts": "hazelnut",
+ "instant pot": {
+  "decline": "equipment"
+ },
+ "grapefruit zest": "grapefruit",
+ "white balsamic vinegar": "balsamic vinegar",
+ "white miso paste": "miso",
+ "red-pepper flakes": "chili pepper",
+ "fl": {
+  "decline": "unit residue"
+ },
+ "ml": {
+  "decline": "unit residue"
+ },
+ "coconut sugar": "sugar",
+ "instant espresso powder": "espresso",
+ "purple cabbage": "cabbage",
+ "strips lemon zest": "lemon",
+ "rose petals": "rose",
+ "filtered water": "water",
+ "brown mustard seeds": "mustard seed",
+ "bucatini": "pasta",
+ "semisweet": {
+  "decline": "a chocolate grade with no food word attached"
+ },
+ "chipotle chile powder": "chili pepper (ground)",
+ "cleaned squid": "squid",
+ "metal skewers": {
+  "decline": "equipment"
+ },
+ "pecan halves": "pecan",
+ "matzo meal": "matzoth",
+ "grain dijon mustard": "mustard",
+ "hanger steak": "beef",
+ "crumbled blue cheese": "blue cheese",
+ "pearl onions": "onion",
+ "nonstick vegetable cooking spray": {
+  "decline": "not a food: an aerosol release agent"
+ },
+ "kaffir lime leaves": "kaffir lime",
+ "kosher": {
+  "decline": "a grade word, not an ingredient"
+ },
+ "red-wine vinegar": "wine vinegar",
+ "frozen puff pastry": "pastry",
+ "guanciale": null,
+ "anchovy in oil": "anchovy",
+ "fish sauce nam pla": "fish sauce",
+ "nuoc nam": null,
+ "celery ribs": "celery",
+ "shishito peppers": "pepper",
+ "juice limes": "lime",
+ "habanero chiles": "chili pepper",
+ "canned tomatoes": "tomato",
+ "-thick country-style bread": "bread",
+ "hibiscus flowers": "hibiscus",
+ "ginger beer": "beer",
+ "coconut aminos": "coconut",
+ "sriracha sauce": "chili sauce",
+ "broccoli rabe": "broccoli",
+ "beef stock": "beef broth",
+ "fresno": "chili pepper",
+ "skin-on almonds": "almond",
+ "oil- calabrian chiles": "chili pepper",
+ "vegetable oil frying": {
+  "decline": "`for frying` residue"
+ },
+ "cheesecloth": {
+  "decline": "equipment"
+ },
+ "panko bread crumbs": "breadcrumbs",
+ "short-grain brown rice": "brown rice kernel",
+ "fine-grind cornmeal": "cornmeal",
+ "baby spinach leaves": "spinach",
+ "shaved parmesan": "parmesan cheese",
+ "self-rising flour": "wheat flour",
+ "ramekins": {
+  "decline": "equipment"
+ },
+ "schmaltz": "chicken fat",
+ "oil- anchovies": "anchovy",
+ "pasilla chiles": "chili pepper",
+ "malted milk powder": "milk",
+ "one": {
+  "decline": "parser residue"
+ },
+ "chile flakes": "chili pepper",
+ "firmly light brown sugar": "brown sugar",
+ "poblano chiles": "chili pepper",
+ "light": {
+  "decline": "a grade word, not an ingredient"
+ },
+ "zest lime": "lime",
+ "jalapeno chile": "jalapeno pepper",
+ "green garlic": "garlic",
+ "brown rice": "brown rice kernel",
+ "orange bitters": "bitters",
+ "coffee": "coffee bean",
+ "neutral oil": "vegetable oil",
+ "unflavored powdered gelatin": "gelatin",
+ "lemon twist": "lemon",
+ "low-moisture mozzarella": "mozzarella cheese",
+ "smoked salmon": "salmon",
+ "extra-firm tofu": "tofu",
+ "frisee": null,
+ "squeezed orange juice": "orange juice",
+ "burrata": "mozzarella cheese",
+ "cornichons": null,
+ "sun gold": {
+  "decline": "a tomato cultivar name with no food word attached"
+ },
+ "light agave nectar": "agave",
+ "sanding sugar": "sugar",
+ "haricots verts": "green bean",
+ "mini seedless": {
+  "decline": "a size word; the food was lost before this point"
+ },
+ "tabasco sauce": "chili sauce",
+ "yellow miso paste": "miso",
+ "very ripe bananas": "banana",
+ "golden beets": "beet",
+ "prepared pizza dough": "dough",
+ "baby artichokes": "artichoke",
+ "pie pan": {
+  "decline": "equipment"
+ },
+ "grand marnier": null,
+ "morita chiles": "chili pepper",
+ "dill fronds": "dill",
+ "juice lemons": "lemon",
+ "scotch bonnet pepper": "chili pepper",
+ "potato ricer": {
+  "decline": "equipment"
+ },
+ "pumpkin puree": "pumpkin",
+ "-grain mustard": "mustard",
+ "orecchiette": "pasta",
+ "brioche buns": "bread",
+ "tart pan removable bottom": {
+  "decline": "equipment"
+ },
+ "crumbled queso fresco": "queso fresco",
+ "springform pan": {
+  "decline": "equipment"
+ },
+ "special equipment spice mill": {
+  "decline": "equipment"
+ },
+ "dark": {
+  "decline": "a grade word, not an ingredient"
+ },
+ "chile de arbol": "chili pepper",
+ "vegan butter": "margarine",
+ "white chia seeds": "chia seed",
+ "serrano": "serrano pepper",
+ "room-temperature unsalted butter": "butter",
+ "kosher salt pepper": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ },
+ "lemon rind": "lemon",
+ "tart cherries": "cherry",
+ "thai chiles": "chili pepper",
+ "walnut halves": "walnut",
+ "desiccated coconut": "coconut",
+ "cooked white rice": "white rice",
+ "smoked trout": "trout",
+ "turkey stock": "turkey",
+ "honeycrisp": {
+  "decline": "an apple cultivar name with no food word attached"
+ },
+ "other long pasta": "pasta",
+ "red chile flakes": "chili pepper",
+ "soba noodles": "noodle",
+ "furikake": null,
+ "salt pepper taste": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ },
+ "fine sea salt black pepper": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ },
+ "cooked chicken": "chicken",
+ "sea salt pepper": {
+  "decline": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped"
+ }
+}

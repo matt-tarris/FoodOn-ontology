@@ -20,7 +20,7 @@ right (`bread flour` is flour), but they are flagged and they are never the only
 import json, re, sys, collections, os
 
 sys.path.insert(0, "build")
-from ingest import normalise, strip_qualifiers, lines_from, MAP_FILE
+from ingest import normalise, strip_qualifiers, lines_from, terms as split_terms, MAP_FILE
 from resolve import Resolver
 
 VEHICLE = {"oil", "powder", "sauce", "broth", "stock", "juice", "butter", "flour",
@@ -43,8 +43,7 @@ def res(t):
 uses = collections.Counter()
 for _rec, lines in lines_from(corpus):
     for l in lines:
-        t = normalise(l)
-        if t:
+        for t in split_terms(l):
             uses[t] += 1
 total = sum(uses.values())
 

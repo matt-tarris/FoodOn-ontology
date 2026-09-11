@@ -873,6 +873,30 @@ unseasoned rice vinegar 127       ->  vinegar    ** dropping `rice` loses the fo
 parmesan                197       ->  (no candidate, needs a human)
 ```
 
+### The proposals
+
+`build/propose_ingredient_map.py` attaches a model's answers to the queue **under
+contract**: the model proposes a *term*, and `build/resolve.py` must then find it. A
+proposal the resolver cannot find is refused and recorded as refused — it never reaches
+a reviewer as a recommendation.
+
+That guard is not theoretical. On the first pass it refused **22 of my own proposals**:
+`rice vinegar`, `basil plant`, `goat cheese`, `mirin`, `bread crumb`, `vegetable broth`
+— all things a cook would name and FoodOn does not carry. What it has instead is
+`mirin japanese`, `basil leaf`, `goat milk cheese food product`, `breadcrumbs`. Without
+the guard those 22 would have entered the queue looking exactly as confident as the 273
+that were right.
+
+Abstention is a first-class answer: `null` where FoodOn has nothing (`gochujang`,
+`furikake`, `guanciale` — the ingredient quarantines its recipe), and a decline where
+the line is not an ingredient at all. 42 of the 500 are declines, and they are the
+parser's failures rather than the ontology's: `deep-fry thermometer`, `springform pan`,
+`skinless`, `fl`, `ml`, and nine lines like `kosher salt black pepper` where *and* welded
+two ingredients into one.
+
+Current state: **273 proposed, 42 declined, 10 abstained**. If every proposal were
+approved, 71% of the queued uses would map.
+
 The risk flag fires when a **dropped word is itself a food**. An earlier version flagged
 anything collapsing onto a generic noun, which buried `chili oil` and `goat cheese` under
 warnings about `maldon` and `distilled`. It still over-flags some brand names; that costs

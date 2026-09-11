@@ -20,7 +20,7 @@ What is left is the judgement queue: 8,894 terms, 36% of uses, headed by `red pe
 flakes`, `flaky sea salt`, `parmesan`, `dijon mustard`. Those are decisions, not
 lookups, and they go in config/ingredient-map.json where a person signs them off.
 """
-import json, re, os, ast, collections, sys
+import json, re, os, ast, collections, sys, unicodedata
 
 sys.path.insert(0, "build")
 
@@ -47,7 +47,12 @@ QUAL = (r"kosher|unsalted|salted|extra-?virgin|virgin|all-?purpose|granulated|po
         r"skinless|bone-?in|lean|raw|organic|free-?range|unbleached|bleached|instant|"
         r"quick-?cooking|old-?fashioned|store-?bought|homemade|good|best|quality|plain|"
         r"natural|creamy|crunchy|smooth|seasoned|unseasoned|dry|wet|day-?old|ripe|unripe")
-STOP = r"of|or|and|the|a|an|into|for|with|to|plus|into|each|any|more"
+STOP = r"of|and|the|a|an|into|for|with|to|plus|each|any|more"
+# `or` is NOT a stop word. Removing it welded alternatives together: "sherry vinegar or
+# red wine vinegar" became `sherry vinegar red wine vinegar`, "kosher salt or sea salt"
+# became `kosher salt sea salt`. Alternatives are split instead, and BOTH are returned:
+# the cook may use either, so an avoidance filter has to consider either.
+ALT = re.compile(r"\bor\b|\bplus\b|/")
 
 _qual_re = re.compile(r"\b(?:" + QUAL + r")\b")
 
@@ -55,6 +60,13 @@ _qual_re = re.compile(r"\b(?:" + QUAL + r")\b")
 def normalise(line):
     """A cookbook line down to a food term. Deterministic, and lossy on purpose."""
     s = str(line).lower()
+    # Fold accents rather than delete them. The first cut stripped every non-ASCII
+    # character, which turned jalape\u00f1o into `jalape o`, cr\u00e8me fra\u00eeche into
+    # `cr me fra che` and chiles de \u00e1rbol into `chiles de rbol` -- three real
+    # ingredients arriving in the review queue as nonsense that no reviewer could map.
+    s = "".join(c for c in unicodedata.normalize("NFKD", s)
+                if not unicodedata.combining(c))
+    s = s.replace("\u2019", "'").replace("\u2018", "'")
     s = re.sub(r"\([^)]*\)", " ", s)                       # (about 3 lb. total)
     s = re.sub(r"^[\s\d" + FRAC + r"/\.\-–]+", "", s)  # 1 1/2
     s = s.split(",")[0]                                     # ", finely chopped"
@@ -67,8 +79,25 @@ def normalise(line):
     for _ in range(4):
         s = re.sub(r"\b(?:" + PREP + r")\b", " ", s)
     s = re.sub(r"\b(?:" + STOP + r")\b", " ", s)
-    s = re.sub(r"[^a-z\s\-]", " ", s)
+    s = re.sub(r"[^a-z\s\-']", " ", s)
     return re.sub(r"\s+", " ", s).strip()
+
+
+def terms(line):
+    """One line may name more than one ingredient. Returns every alternative.
+
+    "sherry vinegar or red wine vinegar" is two, and a filter must consider both --
+    the cook picks one and the diner does not know which. Recall-first, the same rule
+    the traversal uses.
+    """
+    raw = str(line).split(",")[0]
+    parts = [p for p in ALT.split(raw) if p and p.strip()]
+    out = []
+    for p in parts:
+        t = normalise(p)
+        if t and t not in out:
+            out.append(t)
+    return out or ([normalise(line)] if normalise(line) else [])
 
 
 def strip_qualifiers(term):
