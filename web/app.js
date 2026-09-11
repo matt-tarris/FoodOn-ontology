@@ -349,20 +349,58 @@ function GraphView({ graph, expanded, onToggle, onSelect, selected, showLow, rev
     const root = d3.hierarchy(toTree(rootId));
 
     const leafCount = Math.max(1, root.leaves().length);
+
+    /* Label text is measured BEFORE the layout, because the ring spacing depends on
+     * it. It used to be computed after, and the ring floor was a guessed 62px whose
+     * own comment said it existed "so the rings stay far enough apart for an internal
+     * node's label to run outward without immediately meeting the next one" -- which
+     * it did not do: on a citrus query the rings land 62px apart and the median label
+     * is 93px, so a typical label runs a ring and a half outward, straight across the
+     * nodes and labels sitting there. `Citrus limonia` crossing its neighbour was that
+     * arithmetic, not a placement bug. */
+    for (const d of nodes) {
+      const base = trimLabel(d.label, labelTier(d) <= 2 ? 42 : 30);
+      // a category keeps its name and count; an uncategorised cluster states only
+      // the count, which is the one fact about it that is certainly true
+      d.labelText = d.kind === "cluster"
+                    ? (d.category ? base + " \u00b7 " + d.count : base)
+                  : d.hidden ? base + "  +" + d.hidden : base;
+    }
+    const LINE = 12;            // perpendicular room one line of text needs
+    const textLen = (d) => {
+      const fs = (TYPE_SIZE[nodeRole(d)] || TYPE_SIZE.derivative);
+      return d.labelText.length * fs * 0.53 + 12;
+    };
+    /* The 60th percentile, not the longest. Sizing to the longest label lets one
+     * `citric acid esters of mono- and diglycerides` set the scale for the whole
+     * drawing, and the drawing is scaled to fit the pane, so every other label pays
+     * for it in pixels on screen. At the 60th percentile most labels clear the next
+     * ring outright and the tail is handled where it should be -- by the placement
+     * planner below, which drops a label rather than drawing it across a node. */
+    const ringRoom = (() => {
+      const ls = nodes.map(textLen).sort((a, b) => a - b);
+      // capped: a query whose labels are mostly EFSA code-list names ("14330 - other
+      // hybrids of citrus paradisi, not elsewhere mentioned") would otherwise set a
+      // ring gap of ~380px and a canvas nothing could read. Past the cap the planner
+      // takes over and drops what will not fit, which is the graceful direction.
+      return ls.length ? Math.min(180, ls[Math.floor(ls.length * 0.6)]) : 0;
+    })();
     // The outer circumference has to give every leaf a legible slice of arc. 15px
     // per leaf is the label line-height; below that the outer ring starts to
     // overprint itself, so the drawing grows and the view pans instead of cramming.
     /* Exact now, not an approximation: every leaf sits at outerR, so the outer
      * circumference must give each one 15px of arc (one line of text). Plus a floor
-     * of 62px per ring, so the rings stay far enough apart for an internal node's
-     * label to run outward without immediately meeting the next one.
+     * of one ring per label-length, so the rings stay far enough apart for an
+     * internal node's label to run outward without immediately meeting the next one.
+     * That floor is measured from the labels this query actually has, not guessed.
      *
      * The pane size is deliberately NOT part of this. It used to be, and it made a
      * 2-node paprika query fill the whole canvas: two nodes 660px apart with their
      * labels turned vertical. Size the drawing to its content and let the fit
      * transform scale it — up as well as down. */
     const needed = (leafCount * 15) / (2 * Math.PI);
-    const outerR = Math.max(120, needed, 62 * root.height);
+    const ringFloor = Math.max(62, ringRoom + 16);
+    const outerR = Math.max(120, needed, ringFloor * root.height);
     /* d3.cluster, not d3.tree: a dendrogram, which puts every LEAF on the outer ring.
      * The leaves are the answer to the query — the things you must not serve — and on
      * the rim they all sit at the maximum radius, where the circumference is greatest
@@ -422,19 +460,6 @@ function GraphView({ graph, expanded, onToggle, onSelect, selected, showLow, rev
      * both being staggered into a two-line smudge.
      */
     const TAU2 = 2 * Math.PI;
-    for (const d of nodes) {
-      const base = trimLabel(d.label, labelTier(d) <= 2 ? 42 : 30);
-      // a category keeps its name and count; an uncategorised cluster states only
-      // the count, which is the one fact about it that is certainly true
-      d.labelText = d.kind === "cluster"
-                    ? (d.category ? base + " \u00b7 " + d.count : base)
-                  : d.hidden ? base + "  +" + d.hidden : base;
-    }
-    const LINE = 12;            // perpendicular room one line of text needs
-    const textLen = (d) => {
-      const fs = (TYPE_SIZE[nodeRole(d)] || TYPE_SIZE.derivative);
-      return d.labelText.length * fs * 0.53 + 12;
-    };
     /* The centre node is the one label that is NOT laid along a ray — it sits
      * horizontally above the node — so the arc test cannot see it. Model it as a box
      * and reject any radial label whose text would run through it. */
@@ -452,6 +477,28 @@ function GraphView({ graph, expanded, onToggle, onSelect, selected, showLow, rev
         const t = s0 + ((s1 - s0) * k) / 6, x = ux * t, y = uy * t;
         if (x >= rootBox.x0 && x <= rootBox.x1 && y >= rootBox.y0 && y <= rootBox.y1)
           return true;
+      }
+      return false;
+    };
+    /* A label must also clear every NODE, not just every other label. The planner
+     * only ever compared labels with labels, so a name could be drawn straight
+     * through a circle on the next ring out and nothing objected -- which is what
+     * `Citrus limonia` was doing to its neighbour. Wider rings above fix the typical
+     * case by geometry; this catches the tail that is longer than the ring gap.
+     *
+     * Exact, not sampled: a node at (angle, rad) lies at distance rad*cos(dAngle)
+     * along the label's ray and rad*|sin(dAngle)| away from it, so the test is two
+     * comparisons and needs no stepping along the text. */
+    const hitsNode = (d) => {
+      const s0 = d.rad + radius(d) + 6, s1 = s0 + textLen(d), half = LINE / 2;
+      for (const p of nodes) {
+        if (p === d || p.rad == null || p.rad === 0) continue;
+        let da = Math.abs(p.angle - d.angle);
+        da = Math.min(da, TAU2 - da);
+        if (da >= Math.PI / 2) continue;
+        const along = p.rad * Math.cos(da), off = p.rad * Math.sin(da);
+        if (along < s0 || along > s1) continue;
+        if (off < radius(p) + half) return true;
       }
       return false;
     };
@@ -473,7 +520,7 @@ function GraphView({ graph, expanded, onToggle, onSelect, selected, showLow, rev
           return Math.abs(p.rad - d.rad) >= textLen(inner);
         });
         // tier 0 is never dropped: a +n badge or a root with no name is a dead end
-        if ((clears && !hitsRootBox(d)) || labelTier(d) === 0) {
+        if ((clears && !hitsRootBox(d) && !hitsNode(d)) || labelTier(d) === 0) {
           keepLabel.add(d.iri); placedL.push(d);
         }
       }

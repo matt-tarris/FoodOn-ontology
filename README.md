@@ -59,14 +59,26 @@ actually in it. `size([2π, R])` splits the circle evenly between the root's chi
 which gave nightshade's 17-term `solanaceae plant` the same half of the canvas as its
 130-term `Solanaceae`.
 
-The drawing is sized to its content — arc per leaf, and a 62px floor per ring — and
-never to the pane. Sizing it to the pane made a 2-node `paprika` query fill the canvas
+The drawing is sized to its content — arc per leaf, and a ring gap measured from the
+labels this query actually has — and never to the pane. That gap used to be a flat 62px
+whose own comment said it existed "so the rings stay far enough apart for an internal
+node's label to run outward without immediately meeting the next one". It never did
+that: on a citrus query the rings land 62px apart and the median label is 93px, so a
+typical name ran a ring and a half outward, straight across the nodes sitting there —
+`Citrus limonia` printed over its neighbour. The floor is now the **60th percentile of
+the query's own label lengths** (capped at 180px, or one query of EFSA code-list names
+would set a gap nothing could read). Measured on citrus expanded to 149 nodes: labels
+shown went **73 → 139** with zero crossings, at 2.2× the radius. Sizing it to the pane made a 2-node `paprika` query fill the canvas
 with two nodes 660px apart and their labels turned vertical. At four leaves or fewer the
 labels are counter-rotated back to horizontal, because the radial form buys nothing at
 that size.
 
-**Labels are placed by geometry, not by a budget.** Candidates are considered in
-priority order — roots, clusters and collapsed parents first, then grouping classes,
+**Labels are placed by geometry, not by a budget.** A label must clear every other
+label *and every node* — the planner only ever compared labels with labels, so a name
+could be drawn straight through a circle on the next ring out and nothing objected.
+Wider rings fix the typical case by geometry; the node test catches the tail that is
+longer than the gap, and drops it rather than printing over a node. Candidates are
+considered in priority order — roots, clusters and collapsed parents first, then grouping classes,
 organisms, multi-path nodes, leaves — and one is admitted only if it clears every label
 already placed, testing arc distance and radial run length. Tier order is what makes it
 behave: when a ray is contested the more useful name wins it. That matters because
