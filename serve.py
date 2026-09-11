@@ -180,7 +180,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 p = self._body()
                 out = audit_model.review_ingredients(
                     p.get("terms") or [], p.get("action"), who=p.get("who") or "Matt",
-                    target=p.get("target"), reason=p.get("reason"))
+                    target=p.get("target"), reason=p.get("reason"),
+                    choices=p.get("choices"))
             except audit_model.EditError as e:
                 return self._send({"error": str(e)}, 400)
             except Exception:

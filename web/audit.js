@@ -432,39 +432,50 @@ function render() {
  * selected all 500 regardless of what was on screen would make it trivial to approve
  * the 30 risky ones and the 75 with no candidate along with the easy 273.
  * ====================================================================== */
-let ING = null, SEL = new Set(), FILTER = "proposed", SHOW = 25;
+let ING = null, SEL = new Set(), FILTER = "oneclick", SHOW = 25;
+const CHOICE = {};             // term -> the FoodOn iri the reviewer picked
 const LAYER_INTRO = document.querySelector(".why").outerHTML;
 
 const FILTERS = {
-  proposed:  {label: "has a proposal",   fn: e => !!e.proposed},
-  risky:     {label: "risky candidate",  fn: e => (e.candidates||[]).some(c => c.risky)},
-  nocand:    {label: "nothing proposed", fn: e => !e.proposed && !e.declined_reason},
+  oneclick:  {label: "one click",          fn: e => (e.shortlist||[]).length === 1},
+  choose:    {label: "needs a choice",     fn: e => (e.shortlist||[]).length > 1},
+  nocand:    {label: "no class in FoodOn", fn: e => !(e.shortlist||[]).length && !e.declined_reason},
   declined:  {label: "proposed decline", fn: e => !!e.declined_reason},
   all:       {label: "everything",       fn: () => true},
 };
 
 const shown = () => (ING.queue || []).filter(FILTERS[FILTER].fn).slice(0, SHOW);
 
+/* The final call is a human picking a CLASS, not approving a string. The model's
+ * narrowing leads the list as the recommendation; the alternatives sit under it so the
+ * reviewer can overrule without leaving the page. Every row carries the id and the
+ * closure size, which is the number that decides whether a class is the right grain --
+ * FoodOn's own `tree nut` reaches 2 classes and looks perfect. */
 function ingRow(e) {
-  // Only warn when the PROPOSAL is the risky one. Flagging every risky candidate made
-  // `red wine vinegar -> wine vinegar` -- a good answer -- carry a red warning about a
-  // worse answer nobody proposed, which teaches a reviewer to ignore the colour.
+  const sl = e.shortlist || [];
+  const chosen = CHOICE[e.term] ?? (sl.length ? sl[0].iri : null);
   const risky = (e.candidates || []).filter(
     c => c.risky && (!e.proposed || c.term === e.proposed));
-  const cands = (e.candidates || []).filter(c => c.term !== e.proposed).slice(0, 2);
+  const opts = sl.map((c, i) => `
+    <label class="opt${chosen === c.iri ? " on" : ""}">
+      <input type="radio" name="pick-${esc(e.term)}" value="${esc(c.iri)}"
+             ${chosen === c.iri ? "checked" : ""} data-pick="${esc(e.term)}">
+      <span class="olab">${esc(c.label)}</span>
+      <span class="ids">${esc(c.curie)}</span>
+      <span class="cnt">${c.closure} in closure</span>
+      ${i === 0 && e.proposed ? '<span class="rec">recommended</span>' : ""}
+      ${c.excluded ? '<span class="riskflag">excluded branch</span>' : ""}
+      <span class="how">${esc(c.why)}</span>
+    </label>`).join("");
   return `<tr class="${SEL.has(e.term) ? "sel" : ""}" data-term="${esc(e.term)}">
     <td><input type="checkbox" data-cb ${SEL.has(e.term) ? "checked" : ""}></td>
     <td><span class="term">${esc(e.term)}</span>
-      ${cands.length ? `<div class="cands">also possible: ${cands.map(c =>
-        `<b>${esc(c.term)}</b> (${c.closure})`).join(", ")}</div>` : ""}</td>
+      ${risky.length ? `<span class="riskflag">${esc(risky[0].warning)}</span>` : ""}</td>
     <td class="uses">${(e.uses || 0).toLocaleString()}</td>
-    <td>${e.proposed
-      ? `<span class="prop">${esc(e.proposed)}</span>
-         <div class="ids">${esc((e.proposed_roots || []).join(", "))} · ${e.proposed_closure} classes</div>`
+    <td>${sl.length ? `<div class="opts">${opts}</div>`
       : e.declined_reason
         ? `<span class="noprop">not an ingredient</span><div class="ids">${esc(e.declined_reason)}</div>`
-        : `<span class="noprop">${esc(e.proposed_note || "nothing proposed")}</span>`}
-      ${risky.length ? `<span class="riskflag">${esc(risky[0].warning)}</span>` : ""}</td>
+        : `<span class="noprop">${esc(e.proposed_note || "FoodOn has no class for this")}</span>`}</td>
   </tr>`;
 }
 
@@ -515,9 +526,16 @@ async function reviewBatch(action) {
   const terms = [...SEL];
   if (!terms.length) return;
   banner("ok", `${action === "approve" ? "signing off" : "declining"} ${terms.length}…`);
+  const choices = {};
+  for (const t of terms) {
+    const e = (ING.queue || []).find(x => x.term === t);
+    const sl = (e && e.shortlist) || [];
+    const iri = CHOICE[t] ?? (sl.length ? sl[0].iri : null);
+    if (iri) choices[t] = iri;
+  }
   const r = await fetch("/api/audit/ingredients/review", {method:"POST",
     headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({terms, action})});
+    body: JSON.stringify({terms, action, choices})});
   const j = await r.json();
   if (!r.ok) { banner("err", j.error || "review failed"); return; }
   ING = j.ingredients; SEL.clear(); renderIngredients();
@@ -554,6 +572,13 @@ document.addEventListener("click", async (ev) => {
   if (t.closest("[data-none]"))  { SEL.clear(); renderIngredients(); return; }
   if (t.closest("[data-approve]"))  { await reviewBatch("approve"); return; }
   if (t.closest("[data-declineb]")) { await reviewBatch("decline"); return; }
+  if (t.closest("[data-pick]")) {
+    const inp = t.closest("label").querySelector("[data-pick]");
+    CHOICE[inp.dataset.pick] = inp.value;
+    SEL.add(inp.dataset.pick);      // choosing a class is intent; select the row too
+    renderIngredients();
+    return;
+  }
   const row = t.closest("tr[data-term]");
   if (row) {
     const term = row.dataset.term;

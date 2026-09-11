@@ -633,7 +633,8 @@ def ingredients(limit=None):
     )
 
 
-def review_ingredients(terms, action, who="Matt", target=None, reason=None):
+def review_ingredients(terms, action, who="Matt", target=None, reason=None,
+                       choices=None):
     """Approve or decline a batch of mapping proposals.
 
     Approving re-checks that the target still resolves. A proposal was validated when
@@ -665,9 +666,28 @@ def review_ingredients(terms, action, who="Matt", target=None, reason=None):
                                          declined_by=who, declined_date=TODAY()))
             done.append(t)
             continue
+        # A CHOSEN CLASS BEATS A PROPOSED TERM. The reviewer picked a FoodOn id off
+        # the shortlist; storing the term instead would re-resolve it at ingest time
+        # and could land somewhere else entirely if the resolver's scoring shifts.
+        iri = (choices or {}).get(t)
+        if iri:
+            if iri not in r.g.N:
+                skipped.append((t, f"{iri} is not a class in this FoodOn release"))
+                continue
+            if r.g.N[iri].get("dep"):
+                skipped.append((t, f"{r.g.label(iri)} is deprecated upstream"))
+                continue
+            spec["mappings"].append(dict(
+                term=t, maps_to_iri=iri, maps_to=r.g.label(iri), uses=e.get("uses"),
+                root_labels=[r.g.label(iri)], chosen_from_shortlist=True,
+                proposed_by=e.get("proposed_by"),
+                signed_off_by=who, signed_off_date=TODAY()))
+            done.append(t)
+            continue
         maps_to = target or e.get("proposed")
         if not maps_to:
-            skipped.append((t, "no proposal to approve; give a target or decline it"))
+            skipped.append((t, "nothing chosen and nothing proposed; pick a class or "
+                               "decline it"))
             continue
         res = r.resolve(maps_to)
         if res["status"] != "resolved":

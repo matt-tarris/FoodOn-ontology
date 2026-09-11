@@ -904,11 +904,33 @@ The **Ingredient mappings** tab of `audit.html` reviews them. The queue is order
 of it — so working top-down buys the most coverage per decision and working
 alphabetically buys the least.
 
-Select rows, then approve or decline the selection. Filters split the queue by what kind
-of decision it needs: *has a proposal* (273), *risky candidate*, *nothing proposed*,
-*proposed decline* (42). **`Select all shown` is scoped to the current filter on
-purpose** — a button that took all 500 regardless of what was on screen would make it
-trivial to wave through the 30 risky ones along with the easy 273.
+**The final call is a human picking a class, not approving a string.** Every row shows
+a shortlist of actual FoodOn classes — id, label, closure size — with the model's
+narrowing leading as *recommended* and the alternatives under it, so a reviewer can
+overrule without leaving the page:
+
+```
+red wine vinegar   229 uses
+  (*) wine vinegar    FOODON:03301228    4 in closure   RECOMMENDED
+  ( ) vinegar         FOODON:03301705   37 in closure   dropping `red wine`
+  ( ) red wine        FOODON:03310272   20 in closure   lexical: `red wine`
+```
+
+Closure size is on every row because it is the number that decides whether a class is
+the right grain: FoodOn's own `tree nut` reaches 2 classes and looks perfect. The
+shortlist is filtered to namespaces a food can live in — PATO carries `red` and `white`
+as *qualities*, and they were arriving as candidates for `red wine vinegar`, where
+clicking one would map an ingredient to the colour of itself.
+
+A chosen id is stored **as an IRI and used as one**. Re-resolving its label at ingest
+time would put the resolver's scoring back in the path, so a reviewer's override could
+quietly land somewhere else after an unrelated change.
+
+Filters split the queue by the kind of decision it needs: *one click* (172, a single
+candidate), *needs a choice* (250), *no class in FoodOn* (54), *proposed decline* (42).
+**`Select all shown` is scoped to the current filter on purpose** — a button that took
+all 500 regardless of what was on screen would make it trivial to wave through the ones
+needing a judgement along with the obvious ones.
 
 Approving **re-checks that the target still resolves**. A proposal was validated when it
 was made, and the vendor ontology is the one thing this project expects to be swapped;

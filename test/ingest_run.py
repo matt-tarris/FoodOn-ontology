@@ -141,6 +141,33 @@ try:
     if not any(m["term"] == target and m.get("signed_off_by") for m in after["signed"]):
         fails.append("an approved term did not arrive in `mappings` with a signature")
 
+    # A CHOSEN CLASS BEATS THE PROPOSAL, and survives into ingestion as the id.
+    # Storing the label and re-resolving it would put the resolver's scoring back in
+    # the path, so a reviewer's override could silently land somewhere else later.
+    pick = next((e for e in after["queue"] if len(e.get("shortlist") or []) > 1), None)
+    if pick:
+        alt = pick["shortlist"][1]["iri"]          # deliberately NOT the recommendation
+        checks += 1
+        A.review_ingredients([pick["term"]], "approve", who="test",
+                             choices={pick["term"]: alt})
+        m = next((x for x in A.ingredients()["signed"] if x["term"] == pick["term"]), None)
+        if not m or m.get("maps_to_iri") != alt:
+            fails.append(f"the chosen class was not stored for `{pick['term']}`")
+        else:
+            probe = Ingestor(mapping={pick["term"]: m})
+            got = probe.line(pick["term"])
+            checks += 1
+            if got["roots"] != [alt]:
+                fails.append(f"ingest did not use the chosen id: {got['roots']}")
+
+    # an id that is not a class in this release must be refused
+    checks += 1
+    nope = A.review_ingredients([after["queue"][0]["term"]], "approve", who="test",
+                                choices={after["queue"][0]["term"]:
+                                         "http://purl.obolibrary.org/obo/FOODON_99999999"})
+    if nope["done"] or not nope["skipped"]:
+        fails.append("approved a mapping to a class this release does not have")
+
     # a target that does not resolve must be skipped, not written
     checks += 1
     t2 = next(e["term"] for e in after["queue"] if e.get("proposed"))

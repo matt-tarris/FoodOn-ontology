@@ -151,6 +151,14 @@ class Ingestor:
         # 1. a signed human decision always wins
         m = self.map.get(term) or self.map.get(strip_qualifiers(term))
         if m:
+            # An id chosen off the shortlist is used AS IS. Re-resolving its label
+            # would put the resolver's scoring back in the path and could land
+            # somewhere else -- the point of choosing a class is that the choice sticks.
+            if m.get("maps_to_iri"):
+                return dict(out, stage="signed map", status="resolved",
+                            term=m.get("maps_to") or m["maps_to_iri"],
+                            roots=[m["maps_to_iri"]],
+                            root_labels=m.get("root_labels") or [m.get("maps_to")])
             res = self._resolve(m["maps_to"])
             if res["status"] == "resolved":
                 return dict(out, stage="signed map", status="resolved",
