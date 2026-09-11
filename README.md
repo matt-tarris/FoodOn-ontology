@@ -75,8 +75,25 @@ would set a gap nothing could read). Measured on citrus expanded to 149 nodes:
 | 124px, measured | 494 | 133 | 0 |
 
 More labels *and* none of them overlapping, because wider rings let the planner admit
-candidates it used to have to drop. The percentile is the dial: higher spreads the rings
-further and admits more labels, at the price of a larger drawing scaled down to fit. Sizing it to the pane made a 2-node `paprika` query fill the canvas
+candidates it used to have to drop.
+
+**Each ring gets the gap its own labels need, not a shared one.** A uniform gap makes an
+empty ring cost exactly as much radius as a full one, and in a dendrogram the inner rings
+are nearly always the empty ones: every leaf is pushed to the rim, so what is left inside
+is the skeleton. Measured on `pepper` — 122 drawn nodes in rings of 1, 1, 2, 2, 5, 7, 25,
+79. **The six innermost rings held 18 nodes between them and took 973px of radius**, which
+is the hole in the middle of that drawing. A ring carrying two labels or fewer has the
+angle to itself and cannot realistically be blocked, so it gets the 62px minimum; a
+crowded ring keeps its full allowance.
+
+| query | radius before | radius after | on-screen scale | labels | crossings |
+|---|---|---|---|---|---|
+| `pepper` | 1297 | **802** | 0.25 → **0.37** | 108/122 | 0 |
+| `citrus` | 494 | **401** | 0.55 → **0.64** | 124/149 | 0 |
+
+None of this is what keeps labels off nodes — the clearance test does that, at any
+spacing. Ring gaps only decide how many labels survive, so compressing an empty ring
+costs nothing and buys back the radius. Sizing it to the pane made a 2-node `paprika` query fill the canvas
 with two nodes 660px apart and their labels turned vertical. At four leaves or fewer the
 labels are counter-rotated back to horizontal, because the radial form buys nothing at
 that size.

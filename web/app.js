@@ -424,6 +424,45 @@ function GraphView({ graph, expanded, onToggle, onSelect, selected, showLow, rev
       .nodeSize([(2 * Math.PI) / leafCount, ringStep])
       .separation((a, b) => (a.parent === b.parent ? 1 : 1.8))
       (root);
+    /* ---- ring gaps, per ring rather than one gap for all of them ----
+     * A uniform gap makes an empty ring cost exactly as much radius as a full one,
+     * and in a dendrogram the inner rings are nearly always the empty ones: every
+     * leaf is pushed to the rim, so what is left inside is the skeleton. Measured on
+     * `pepper` — 122 drawn nodes, rings of 1, 1, 2, 2, 5, 7, 25, 79. The six innermost
+     * rings held 18 nodes between them and took 973px of radius, which is the hole in
+     * the middle of that drawing.
+     *
+     * A ring's gap is the room its OWN labels need, because those are what run
+     * outward into the next ring. Where a ring carries two labels or fewer they have
+     * the angle to themselves and cannot realistically be blocked, so it gets the bare
+     * minimum. Correctness does not rest on this: the node-clearance test in the
+     * planner is what guarantees no label is drawn across a node, at any spacing. The
+     * gap only decides how many labels survive, so compressing an empty ring costs
+     * nothing and buys back the radius.
+     */
+    {
+      const RING_MIN = 62;
+      const ringOf = (d) => Math.round(d.y / ringStep);
+      const maxRing = Math.max(...root.descendants().map(ringOf));
+      const atRing = Array.from({ length: maxRing + 1 }, () => []);
+      root.each((d) => {
+        const n = byIriNode.get(d.data.iri);
+        if (n) atRing[ringOf(d)].push(textLen(n));
+      });
+      const gaps = atRing.map((ls) => {
+        if (ls.length <= 2) return RING_MIN;
+        const sorted = ls.slice().sort((a, b) => a - b);
+        return Math.max(RING_MIN,
+                        Math.min(180, sorted[Math.floor(sorted.length * 0.45)]) + 16);
+      });
+      const radiusOf = [0];
+      for (let k = 1; k <= maxRing; k++) radiusOf[k] = radiusOf[k - 1] + gaps[k - 1];
+      // the rim still owes every leaf its slice of arc; pay any shortfall into the
+      // OUTERMOST gap, so the compression stays where the emptiness was
+      if (maxRing > 0 && radiusOf[maxRing] < needed)
+        radiusOf[maxRing] = needed;
+      root.each((d) => { d.y = radiusOf[ringOf(d)]; });
+    }
     // nodeSize leaves the angular extent unbounded (separation adds gaps between
     // non-siblings), so rescale onto the circle. Linear, so the proportional
     // allocation survives; the seam is left one leaf-step wide.
