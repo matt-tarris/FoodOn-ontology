@@ -818,6 +818,72 @@ three groups:
 The third group is the one that matters for safety and is the largest: `egg or egg
 component` returns 1,147 classes in the app and 162 in SPARQL.
 
+## Ingesting recipes
+
+`build/ingest.py` turns a cookbook line into a FoodOn class, or into nothing. Measured
+on **5,000 real recipes** — 54,004 ingredient uses, 9,087 distinct terms after
+normalisation:
+
+| stage | | cumulative |
+|---|---|---|
+| normalise | quantity, unit, parenthetical, preparation | 48.4% of uses |
+| strip culinary qualifiers | grade and state words FoodOn does not label | **68.6%** |
+| ~~head noun~~ | the last word of whatever is left | ~~89.7%~~ **removed** |
+
+**The head-noun stage is deliberately absent, and it is the only thing that would take
+this past 90%.** It got there by dropping the modifier that carried the food:
+
+```
+chili oil            -> oil        a nightshade-avoider is served chili oil
+ancho chile powder   -> powder
+goat cheese          -> cheese
+squeezed lemon juice -> juice
+```
+
+1,921 ingredient uses collapse that way. For a filter whose job is keeping food off a
+plate the trade runs backwards — an unresolved ingredient **quarantines** a recipe, a
+wrongly resolved one **passes** it. 68% that abstains is worth more than 90% that
+guesses, so `ingest.py` has three outcomes and no fourth: resolved, unresolved,
+ambiguous.
+
+The qualifier stage is where the volume is and it costs nothing: `kosher salt` (3,205
+uses), `unsalted butter` (1,147), `all-purpose flour` (647), `granulated sugar` (321)
+all resolve once grade words come off. Whole corpus in about five seconds.
+
+### The review queue
+
+What is left is judgement, not lookup, and it goes in `config/ingredient-map.json`.
+`build/seed_ingredient_map.py` builds the queue from a corpus, ordered by **use** —
+the vocabulary is steeply headed, so 500 terms carry 15% of the corpus on top of the
+68% already handled.
+
+Nothing it writes is active. Proposals land in `requires_signoff`; `ingest.py` reads
+only entries carrying `signed_off_by`, and `test/ingest_run.py` asserts that an unsigned
+mapping cannot take effect. A pipeline that applied its own suggestions would make the
+review theatre.
+
+Each proposal arrives with candidates already resolved, so the reviewer answers *is
+`red pepper flakes` chili pepper?* rather than going to look it up — and a candidate
+that would drop a food says so:
+
+```
+red pepper flakes       322 uses  ->  red pepper
+dijon mustard           143       ->  mustard
+unseasoned rice vinegar 127       ->  vinegar    ** dropping `rice` loses the food
+parmesan                197       ->  (no candidate, needs a human)
+```
+
+The risk flag fires when a **dropped word is itself a food**. An earlier version flagged
+anything collapsing onto a generic noun, which buried `chili oil` and `goat cheese` under
+warnings about `maldon` and `distilled`. It still over-flags some brand names; that costs
+a glance, not a mistake.
+
+Kept separate from `data/resolution-store.json` on purpose. That file pins what a
+**diner** means by a word — 53 entries carrying long arguments about allergen scope.
+This one records what a **recipe writer** means, runs to hundreds of mostly-mechanical
+entries, and wants a different review burden. Merging them would bury the reasoned
+decisions in the routine ones.
+
 ## Auditing the patch layer
 
 `http://localhost:8790/audit.html`, served by the same process as the graph.
