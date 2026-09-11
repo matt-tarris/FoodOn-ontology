@@ -75,6 +75,16 @@ for o in signed:
         redundant.append(f"{o['query_class']} -> {o['target_label']}: reached by ordinary "
                          f"traversal once other overrides applied; this entry adds nothing")
 
+# 2a-0. ONE spelling for the query root. `remove` entries used to carry `query_root`
+#     (singular) while `add` entries carried `query_roots`, and every consumer had to
+#     remember the fallback. The two that forgot lost peanut/tree-nut and beef/dairy --
+#     the largest suppressions in the layer -- from output that looked complete.
+for o in ov["overrides"]:
+    checks += 1
+    if o.get("query_root") or o.get("query_root_label"):
+        fails.append(f"{o.get('target_label')} uses the singular `query_root`; the field "
+                     f"is `query_roots` so one read reaches every entry")
+
 # 2a-i. every claim used must be DECLARED. The claim vocabulary is what decides
 #     whether an entry enters the closure, and a typo (`may contain`, `shared-compound`)
 #     would silently fall through the not-`contains` branch and be reported instead of
@@ -150,9 +160,11 @@ for o in superseded:
 for o in signed:
     if o.get("type") != "remove": continue
     checks += 1
-    nodes, _ = g.closure([o["query_root"]])
+    _roots = o.get("query_roots") or ([o["query_root"]] if o.get("query_root") else [])
+    nodes, _ = g.closure(_roots)
     if o["target_class"] in nodes:
-        fails.append(f"SIGNED remove had no effect: {o['query_root_label']} still reaches "
+        _rl = (o.get("query_root_labels") or [o.get("query_root_label")])[0]
+        fails.append(f"SIGNED remove had no effect: {_rl} still reaches "
                      f"{o['target_label']}")
 
 by = collections.Counter(o["claim"] for o in ov["overrides"])

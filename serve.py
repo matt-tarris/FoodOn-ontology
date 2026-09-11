@@ -6,12 +6,20 @@ against, so the UI can never disagree with the tests about what a query returns.
 
   /api/query?q=<term>   resolution + full graph
   /api/health           versions of every artefact in play
+  /api/audit            what the local layer does to each ingredient
+  /api/audit/edit       POST: write one decision, regenerate, hot-reload
+  /api/audit/rebuild    POST: the ROBOT merge, for SPARQL parity
   /                     static files from web/
+
+The audit endpoints write to the governed decision files and NEVER to the .ttl. The
+.ttl is generated from those files, and test/patch_run.py fails on a hand-edit, so an
+editor that wrote Turtle would be writing something the next build throws away.
 """
-import json, sys, urllib.parse, http.server, socketserver, traceback, time
+import json, sys, urllib.parse, http.server, socketserver, traceback, time, subprocess
 
 sys.path.insert(0, "build")
 from resolve import Resolver
+import audit_model
 
 print("loading ontology index...", flush=True)
 _t = time.time()
@@ -21,6 +29,28 @@ print(f"ready in {time.time()-_t:.1f}s  "
       f"({len(GRAPH.N):,} classes, FoodOn {GRAPH.meta['version']})", flush=True)
 
 _cache = {}
+_audit = {"data": None, "sparql_stale": False, "log": []}
+
+
+def reload_graph():
+    """Re-read every decision file into a fresh Graph, in place.
+
+    An edit that does not reach the running server is an edit the user cannot see the
+    effect of, and this app exists to show effects. Cheap enough to do on every write:
+    the index is already on disk, so this is 0.1s, not the 19s ROBOT merge -- which is
+    a separate button because it is a separate cost.
+    """
+    global RESOLVER, GRAPH
+    RESOLVER = Resolver()
+    GRAPH = RESOLVER.g
+    _cache.clear()
+    _audit["data"] = None
+
+
+def audit_data():
+    if _audit["data"] is None:
+        _audit["data"] = audit_model.build(full=GRAPH)
+    return dict(_audit["data"], sparql_stale=_audit["sparql_stale"], log=_audit["log"])
 
 def annotations_for(roots):
     """Signed claims that are deliberately NOT edges in the graph.
@@ -114,13 +144,52 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _body(self):
+        n = int(self.headers.get("Content-Length") or 0)
+        return json.loads(self.rfile.read(n) or b"{}")
+
+    def do_POST(self):
+        parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == "/api/audit/edit":
+            try:
+                p = self._body()
+                files = audit_model.apply_edit(p.get("action"), p.get("payload") or {},
+                                               who=p.get("who") or "Matt")
+            except audit_model.EditError as e:
+                return self._send({"error": str(e)}, 400)
+            except Exception:
+                traceback.print_exc()
+                return self._send({"error": "edit failed; see the server log"}, 500)
+            log, stale = audit_model.regenerate(files)
+            _audit["log"] = log
+            if not all(x["ok"] for x in log):
+                return self._send({"error": "the decision was written but regenerating "
+                                            "failed; the app still shows the old graph",
+                                   "files": files, "log": log}, 500)
+            _audit["sparql_stale"] = stale
+            reload_graph()
+            return self._send({"ok": True, "files": files, "log": log,
+                               "audit": audit_data()})
+        if parsed.path == "/api/audit/rebuild":
+            r = subprocess.run(["./tools/apply_patches.sh"], capture_output=True, text=True)
+            ok = r.returncode == 0
+            if ok:
+                _audit["sparql_stale"] = False
+            return self._send({"ok": ok, "out": (r.stdout or r.stderr)[-4000:]},
+                              200 if ok else 500)
+        return self._send({"error": "not found"}, 404)
+
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == "/api/audit":
+            return self._send(audit_data())
         if parsed.path == "/api/health":
             return self._send({
                 "ok": True,
                 "classes": len(GRAPH.N),
                 "foodon_version": GRAPH.meta["version"],
+                "claim_types": GRAPH.overrides.get("claim_types") or {},
+                "entry_types": GRAPH.overrides.get("entry_types") or {},
                 "relation_policy": GRAPH.policy["version"],
                 "policy_status": GRAPH.policy.get("status"),
                 "store_entries": len(RESOLVER.store.get("entries", {})),

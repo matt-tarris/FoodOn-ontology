@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Patch layer audit</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="audit.css">
+<div class="wrap">
+  <header class="ahead">
+    <h1>Patch layer audit <span id="sub"></span></h1>
+    <a class="lnk" href="/">← avoidance graph</a>
+  </header>
+  <div id="banner"></div>
+  <div class="key" id="key"></div>
+  <p class="why">What does this tool say about an ingredient, and how much of that answer
+  is ours rather than FoodOn's? Each row runs the query twice — once against the full
+  graph, once against a graph with the whole local layer switched off. Edits here write
+  to the governed decision files; the <code>.ttl</code> is regenerated from them.</p>
+  <div id="out">loading…</div>
+</div>
+<script src="audit.js"></script>

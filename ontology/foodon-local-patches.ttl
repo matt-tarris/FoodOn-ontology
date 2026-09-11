@@ -4381,7 +4381,6 @@ local:patch-f119275e262c a local:Patch ;
 ### milk  --notAvoidanceRelevantFor-->  bovine meat food product
 #   confidence: high
 #   claim:      not_avoidance_relevant
-#   query:      bovine meat food product
 #   reviewer:   Matt
 #   `bovine meat food product is_a cow food product`, and `cow food product`
 #   carries `in taxon Bos taurus`. The species pivot then walks back down from
@@ -4401,7 +4400,6 @@ local:patch-e0d6f777300f a local:Patch ;
     local:patchValue obo:FOODON_00001134 ;
     local:patchConfidence "high" ;
     local:patchClaim "not_avoidance_relevant" ;
-    local:patchQuery "bovine meat food product" ;
     rdfs:comment "`bovine meat food product is_a cow food product`, and `cow food product` carries `in taxon Bos taurus`. The species pivot then walks back down from the taxon and reaches everything else bovine, including `cow milk`, `cheddar cheese` and 675 more dairy classes -- so a BEEF query told a diner to avoid milk. Beef and milk are separate avoidances: FALCPA lists milk as an allergen and beef not at all, and someone who avoids beef for religious or dietary reasons is usually not avoiding dairy. Suppressing `milk` for this root takes the closure from 1,555 to 785 and dairy from 677 to 25, while keeping beef steak, ground beef patty, beef jerky, beef broth and beef liver." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
@@ -4409,7 +4407,6 @@ local:patch-e0d6f777300f a local:Patch ;
 ### peanut plant  --notAvoidanceRelevantFor-->  nut producing plant
 #   confidence: high
 #   claim:      not_avoidance_relevant
-#   query:      nut producing plant
 #   reviewer:   Matt
 #   FoodOn asserts `peanut plant is_a nut producing plant`, defensible
 #   botanically but wrong for allergens: FALCPA treats peanut and tree nut as
@@ -4426,7 +4423,6 @@ local:patch-225d55b2b91c a local:Patch ;
     local:patchValue obo:FOODON_03411213 ;
     local:patchConfidence "high" ;
     local:patchClaim "not_avoidance_relevant" ;
-    local:patchQuery "nut producing plant" ;
     rdfs:comment "FoodOn asserts `peanut plant is_a nut producing plant`, defensible botanically but wrong for allergens: FALCPA treats peanut and tree nut as SEPARATE allergens. Without this a tree-nut query returns peanut and its 91-node closure. The two FoodOn sub-branches that exclude peanut cover only 4 of 7 major tree nuts between them, so there is no clean class to resolve to instead. Confirmed by Matt 2026-09-09: disconnect in both directions." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .

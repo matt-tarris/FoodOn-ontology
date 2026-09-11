@@ -818,6 +818,58 @@ three groups:
 The third group is the one that matters for safety and is the largest: `egg or egg
 component` returns 1,147 classes in the app and 162 in SPARQL.
 
+## Auditing the patch layer
+
+`http://localhost:8790/audit.html`, served by the same process as the graph.
+
+The layer is 233 decisions across six files. A list of them answers *what did we
+change*; a kitchen needs *what does this tool say about beef, and how much of that is
+ours*. So each row runs the query **twice** — once against the full graph, once against
+a `Graph(repairs=None, mined=None, taxon_bridges=None, overrides=[])` — and reports the
+difference:
+
+```
+beef       1,555 -> 785    -770      the dairy suppression
+tree nut     481 -> 399    +9 / -91  the peanut separation, 1 queued
+gluten       854 -> 864    +10
+mollusc      555 -> 555    unchanged
+```
+
+Two things that only this framing made visible. **The layer is overwhelmingly a
+suppression layer** — across 21 ingredients it adds 27 classes and suppresses 861, and
+the two `remove` overrides account for 861 of that. Every conversation about this
+project has been about *adding* bridges. And **14 of 21 ingredients need no audit at
+all**: they return exactly what FoodOn returns, so they collapse into a separate
+section and the real audit surface is seven ingredients.
+
+**Edits write to the governed decision files, never to the `.ttl`.** The `.ttl` is
+generated from them and `test/patch_run.py` fails on a hand-edit, so an editor that
+wrote Turtle would be writing what the next build discards. Saving runs
+`emit_patches.py` and reloads the served graph in ~0.3s; the ROBOT merge that SPARQL
+consumers need is a separate button, because it is a separate 19s cost, and a banner
+says when the exported graph is behind.
+
+The write path refuses what it should: an undeclared claim type, a target FoodOn does
+not have, a pin root label that does not resolve, a claim with no query root, and
+**repointing an existing claim** — target and roots are a claim's identity, so retiring
+it and adding a new one keeps the trail. `test/audit_run.py` asserts those guards and
+the arithmetic behind the bars.
+
+### Two defects this view found in the data
+
+**`remove` entries spelled the field `query_root` while `add` entries spelled it
+`query_roots`.** Consumers that read one spelling silently dropped the other, which is
+how the two largest decisions in the layer — peanut/tree-nut and beef/dairy — went
+missing from an audit that otherwise looked complete. The field is now plural
+everywhere, readers tolerate both, and `override_run` asserts the data stays uniform.
+
+**The 53 pinned resolutions lived as `E(...)` calls in a Python script**, so the part
+of the layer edited most often was the part no interface could reach. They are now
+`config/resolution-pins.json`; `build/build_resolution_store.py` is the loader, and it
+resolves each root **label** to an IRI so a class FoodOn relabels fails the build loudly
+rather than silently pinning nothing. The migration was verified byte-identical against
+the committed store.
+
 ## Bridges awaiting review
 
 FoodOn omits `derives from` on 62% of its `<X> food product` classes.

@@ -14,15 +14,19 @@
       "type": "remove",
       "claim": "not_avoidance_relevant",
       "status": "REVIEWED",
-      "query_root": "http://purl.obolibrary.org/obo/FOODON_03411213",
-      "query_root_label": "nut producing plant",
       "target_class": "http://purl.obolibrary.org/obo/FOODON_03411337",
       "target_label": "peanut plant",
       "reason": "FoodOn asserts `peanut plant is_a nut producing plant`, defensible botanically but wrong for allergens: FALCPA treats peanut and tree nut as SEPARATE allergens. Without this a tree-nut query returns peanut and its 91-node closure. The two FoodOn sub-branches that exclude peanut cover only 4 of 7 major tree nuts between them, so there is no clean class to resolve to instead. Confirmed by Matt 2026-09-09: disconnect in both directions.",
       "source": "FDA FALCPA allergen list treats peanut and tree nuts separately",
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-09",
-      "reverse_direction_note": "The peanut -> tree nut direction needs no override and deliberately has none. peanut's closure already contains no tree nut, because the only link is an UPWARD is_a edge the invariant never traverses. A symmetric override would also be unsafe: peanut sits INSIDE nut food product's closure, so suppressing that closure from a peanut query would delete the peanut results themselves. Enforced structurally and guarded by tests in test/resolution_run.py."
+      "reverse_direction_note": "The peanut -> tree nut direction needs no override and deliberately has none. peanut's closure already contains no tree nut, because the only link is an UPWARD is_a edge the invariant never traverses. A symmetric override would also be unsafe: peanut sits INSIDE nut food product's closure, so suppressing that closure from a peanut query would delete the peanut results themselves. Enforced structurally and guarded by tests in test/resolution_run.py.",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411213"
+      ],
+      "query_root_labels": [
+        "nut producing plant"
+      ]
     },
     {
       "type": "add",
@@ -603,15 +607,19 @@
       "claim": "not_avoidance_relevant",
       "status": "REVIEWED",
       "query_class": null,
-      "query_root": "http://purl.obolibrary.org/obo/FOODON_00001134",
-      "query_root_label": "bovine meat food product",
       "target_class": "http://purl.obolibrary.org/obo/UBERON_0001913",
       "target_label": "milk",
       "reason": "`bovine meat food product is_a cow food product`, and `cow food product` carries `in taxon Bos taurus`. The species pivot then walks back down from the taxon and reaches everything else bovine, including `cow milk`, `cheddar cheese` and 675 more dairy classes -- so a BEEF query told a diner to avoid milk. Beef and milk are separate avoidances: FALCPA lists milk as an allergen and beef not at all, and someone who avoids beef for religious or dietary reasons is usually not avoiding dairy. Suppressing `milk` for this root takes the closure from 1,555 to 785 and dairy from 677 to 25, while keeping beef steak, ground beef patty, beef jerky, beef broth and beef liver.",
       "source": "the same pattern as the peanut/tree-nut remove: ontologically real, wrong for avoidance",
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-10",
-      "reverse_direction_note": "The milk -> beef direction needs no override and has none: a milk query resolves to `milk`, whose closure contains no beef, because reaching beef would require ascending to Bos taurus and the invariant never ascends."
+      "reverse_direction_note": "The milk -> beef direction needs no override and has none: a milk query resolves to `milk`, whose closure contains no beef, because reaching beef would require ascending to Bos taurus and the invariant never ascends.",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00001134"
+      ],
+      "query_root_labels": [
+        "bovine meat food product"
+      ]
     },
     {
       "type": "add",

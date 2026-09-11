@@ -197,8 +197,16 @@ class Graph:
         self.suppress = collections.defaultdict(set)
         for ov in self.overrides.get("overrides", []):
             if ov.get("type") == "remove" and ov.get("reviewed_by"):
-                if ov.get("query_root") and ov.get("target_class"):
-                    self.suppress[ov["query_root"]].add(ov["target_class"])
+                # plural since 2026-09-11. The singular `query_root` lived only on
+                # `remove` entries, and a consumer that read one spelling silently
+                # dropped the other -- which is how the two most consequential
+                # decisions in the layer, peanut/tree-nut and beef/dairy, went missing
+                # from an audit that looked complete. Tolerated on read, asserted
+                # uniform by test/override_run.py.
+                for _r in (ov.get("query_roots") or
+                           ([ov["query_root"]] if ov.get("query_root") else [])):
+                    if ov.get("target_class"):
+                        self.suppress[_r].add(ov["target_class"])
 
         # `add` overrides hang off the query's RESOLVED ROOTS. An earlier version
         # indexed them on the query label ("Corn"), a key the traversal never visits,
