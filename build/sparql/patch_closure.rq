@@ -32,7 +32,15 @@ WHERE {
   # PHASE 1, taxonomic. is_a descent from the co-roots, and the rank-guarded species
   # pivot from anything so reached. A class-level query ("allium") has to descend to
   # its member organisms before derivative traversal means anything.
-  ?coroot (^rdfs:subClassOf|local:pivotsTo)* ?member .
+  #
+  # `^local:weaklyUnder` descends the parents FoodOn states only inside a class
+  # expression -- an operand of `X subClassOf (A or B)`, or a named class in a
+  # restriction filler. No rdfs:subClassOf triple exists for those and no reasoner
+  # will infer one, so without this the walk silently stops short: `imitation orange
+  # juice drink` is defined under `diluted orange beverage` that way, and a citrus
+  # query missed it. Read the property's comment before consuming it -- it is
+  # recall-first, not classification.
+  ?coroot (^rdfs:subClassOf|local:pivotsTo|^local:weaklyUnder)* ?member .
 
   # PHASE 2, derivative. From every member, follow the propagating relations and
   # descend is_a again from whatever they reach. One uniform walk over both phases

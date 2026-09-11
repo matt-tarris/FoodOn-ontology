@@ -740,12 +740,46 @@ The taxon-pivot half is deliberately not emitted. `local:pivotsTo` already carri
 and `patch_closure.rq` already walks it, so emitting it again would be 2,587 triples
 saying what the graph says.
 
-**Nested-filler subsumption — open.** 564 classes whose parent the index extracts from
-a `unionOf` or restriction filler, which a plain `rdfs:subClassOf` path cannot see. It
-costs a citrus query exactly one class, `imitation orange juice drink`. `patch_run.py`
-attributes divergence to it **by structure, not by name** — a class is excused only if
-the index actually reached it that way — so any other divergence still fails, and the
-count is printed on every run.
+**Nested-filler subsumption — fixed.** FoodOn states some parents and some ingredient
+links only *inside* a class expression: a named class sitting in a restriction filler,
+or an operand of `X ⊑ (A ⊔ B)`. No `rdfs:subClassOf` triple exists for those and **no
+reasoner will infer one** — `X ⊑ A ⊔ B` says every X is an A or a B and refuses to say
+which. The application extracts them anyway on its weaker edge kinds (`rel_nest`,
+`isa_union`) because recall-first wants them; SPARQL walking `rdfs:subClassOf` saw none
+of it.
+
+563 of them are now exported: 149 weak subsumptions on a new `local:weaklyUnder`, and
+414 nested propagating relations folded into the `local:propagatesTo` the materialiser
+already writes. Taken **from `data/index.json`, not re-derived in SPARQL** — the
+extraction rule is 60 lines of tree-walking with a direction rule that has been wrong
+before, and a second implementation of it would be a second thing to keep correct.
+
+Each weak subsumption is emitted **twice**, which is exactly how an ordinary subclass
+edge is consumed: `patch_closure.rq` descends `^rdfs:subClassOf` in phase one and
+`local:propagatesTo` in phase two, so a weak parent must be walkable in both. With only
+the phase-one form, `citrus fruit` reached `imitation orange juice drink` and `Citrus`
+did not — from `Citrus` the same class sits one `derives from` further along.
+
+### How far parity actually holds
+
+`test/patch_run.py` asserts **eight** roots at exact parity, each chosen for a
+mechanism: the species pivot, a union filler, a supplied `in taxon` link, an *unpinned*
+root, a class defined inside a class expression. Twice now, adding a ninth revealed a
+hole the eight could not see — so `build/audit/parity_sweep.py` sweeps every pinned
+root instead. It is a diagnostic, not a test.
+
+**29 of 38 roots at exact parity.** The nine that do not are unrelated to the two holes
+above — verified: none of their diverging classes touches a nested edge — and fall into
+three groups:
+
+| | roots | direction |
+|---|---|---|
+| `remove` overrides suppress a subtree; the SPARQL filter only walks `propagatesTo*` ancestors, not `rdfs:subClassOf` descendants | `nut producing plant` | over-reports |
+| terminal namespaces (CHEBI stops expansion in the app; the query knows nothing of them) | `sulfites`, `coriander plant` | over-reports |
+| multi-root allergens whose co-roots and override edges the query does not compose | `egg or egg component`, `chicken egg`, `animal egg`, `mammal`, `bovine meat food product`, `mollusc` | under-reports |
+
+The third group is the one that matters for safety and is the largest: `egg or egg
+component` returns 1,147 classes in the app and 162 in SPARQL.
 
 ## Bridges awaiting review
 

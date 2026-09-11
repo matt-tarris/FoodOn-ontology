@@ -139,6 +139,17 @@ taxonomic phase of a query -- it fires from a class reached by is_a descent from
 root, never from a derivative. Declared here so the vocabulary is documented in one
 place."""@en .
 
+local:weaklyUnder a owl:ObjectProperty ;
+    rdfs:label "weakly under"@en ;
+    rdfs:comment """The subject is treated as falling under the object for avoidance,
+on evidence WEAKER THAN A SUBSUMPTION. Two sources, neither of which any reasoner will
+turn into rdfs:subClassOf: a named class sitting inside a restriction filler, and an
+operand of `X subClassOf (A or B)` -- which says every X is an A or a B and refuses to
+say which. Recall-first: every X is under one of them, so treating it as under each is
+the direction that does not drop food from an avoidance list. Do NOT read it as
+containment or as classification; it exists so a consumer descends where the
+application descends."""@en .
+
 local:propagatesTo a owl:ObjectProperty ;
     rdfs:label "propagates avoidance to"@en ;
     rdfs:comment """Materialised, not asserted here. One hop of avoidance, always
@@ -6261,6 +6272,1301 @@ obo:FOODON_00003566 local:sameOrganismAs obo:FOODON_03411388 .
 obo:FOODON_00003732 local:sameOrganismAs obo:FOODON_00003322 .
 ### zebra  <->  zebra food product   [label convention]
 obo:FOODON_02021556 local:sameOrganismAs obo:FOODON_00002449 .
+
+
+# --- classes reached through a NESTED class expression -----------------------
+# FoodOn states some parents and some ingredient links INSIDE a class
+# expression -- a named class sitting in a restriction filler, or an operand
+# of `X subClassOf (A or B)`. No rdfs:subClassOf triple exists for these,
+# and no reasoner will infer one: `X <= A or B` says every X is an A or a B
+# and refuses to say which, and a class inside a filler is neither parent
+# nor child. The application extracts them anyway, on its own weaker edge
+# kinds (`rel_nest`, `isa_union`), because recall-first wants `imitation
+# orange juice drink` reachable from a citrus query. A SPARQL consumer
+# walking rdfs:subClassOf cannot see any of it, so it under-reported
+# wherever they occur.
+# Taken FROM data/index.json rather than re-derived in SPARQL. The
+# extraction rule is 60 lines of tree-walking with a direction rule that has
+# been wrong before -- reading union operands as parents once collapsed fish
+# and shellfish into one 4,508-class query -- and a second implementation of
+# it in SPARQL would be a second thing to keep correct. One rule, one place.
+
+### antelope  -> venison   [rel_nest]
+obo:FOODON_00002935 local:weaklyUnder obo:FOODON_03411481 .
+obo:FOODON_03411481 local:propagatesTo obo:FOODON_00002935 .
+### beverage  -> 37300 - herbal and other non-tea infusions (efsa foodex2)   [rel_nest]
+obo:FOODON_03543730 local:weaklyUnder obo:FOODON_00003202 .
+obo:FOODON_00003202 local:propagatesTo obo:FOODON_03543730 .
+### blood  -> blood meal   [rel_nest]
+obo:FOODON_00001564 local:weaklyUnder obo:UBERON_0000178 .
+obo:UBERON_0000178 local:propagatesTo obo:FOODON_00001564 .
+### Bos taurus  -> blood meal   [rel_nest]
+obo:FOODON_00001564 local:weaklyUnder obo:NCBITaxon_9913 .
+obo:NCBITaxon_9913 local:propagatesTo obo:FOODON_00001564 .
+### bottle  -> bottled beer food product   [rel_nest]
+obo:FOODON_00001064 local:weaklyUnder obo:FOODON_03490214 .
+obo:FOODON_03490214 local:propagatesTo obo:FOODON_00001064 .
+### Brassica juncea  -> mustard seed   [rel_nest]
+obo:FOODON_00003420 local:weaklyUnder obo:NCBITaxon_3707 .
+obo:NCBITaxon_3707 local:propagatesTo obo:FOODON_00003420 .
+### Brassica nigra  -> mustard seed   [rel_nest]
+obo:FOODON_00003420 local:weaklyUnder obo:NCBITaxon_3710 .
+obo:NCBITaxon_3710 local:propagatesTo obo:FOODON_00003420 .
+### Brassica rapa subsp. chinensis  -> chinese cabbage head   [rel_nest]
+obo:FOODON_00003662 local:weaklyUnder obo:NCBITaxon_93385 .
+obo:NCBITaxon_93385 local:propagatesTo obo:FOODON_00003662 .
+### Brassica rapa subsp. pekinensis  -> chinese cabbage head   [rel_nest]
+obo:FOODON_00003662 local:weaklyUnder obo:NCBITaxon_51351 .
+obo:NCBITaxon_51351 local:propagatesTo obo:FOODON_00003662 .
+### cacao food product  -> 34020 - coffee, cocoa, tea and infusions (efsa foodex2)   [rel_nest]
+obo:FOODON_03543402 local:weaklyUnder obo:FOODON_00001215 .
+obo:FOODON_00001215 local:propagatesTo obo:FOODON_03543402 .
+### calf meat food product  -> USDA SR lamb, veal, and game products (1700)   [rel_nest]
+obo:FOODON_03401287 local:weaklyUnder obo:FOODON_00001678 .
+obo:FOODON_00001678 local:propagatesTo obo:FOODON_03401287 .
+### can (container)  -> bottled beer food product   [rel_nest]
+obo:FOODON_00001064 local:weaklyUnder obo:FOODON_03490204 .
+obo:FOODON_03490204 local:propagatesTo obo:FOODON_00001064 .
+### can (container)  -> food (packed in high pressurised containers)   [rel_nest]
+obo:FOODON_03317139 local:weaklyUnder obo:FOODON_03490204 .
+obo:FOODON_03490204 local:propagatesTo obo:FOODON_03317139 .
+### Canada  -> biscuit (quick bread)   [rel_nest]
+obo:FOODON_03301884 local:weaklyUnder obo:GAZ_00002560 .
+obo:GAZ_00002560 local:propagatesTo obo:FOODON_03301884 .
+### cantaloupe  -> cantaloupe (whole or pieces)   [isa_union]
+obo:FOODON_03000243 local:weaklyUnder obo:FOODON_00003577 .
+obo:FOODON_00003577 local:propagatesTo obo:FOODON_03000243 .
+### cardamom seed  -> cardamom seed (whole or pieces)   [isa_union]
+obo:FOODON_03000246 local:weaklyUnder obo:FOODON_00003792 .
+obo:FOODON_00003792 local:propagatesTo obo:FOODON_03000246 .
+### carrot root (raw)  -> carrot food product   [rel_nest]
+obo:FOODON_00001687 local:weaklyUnder obo:FOODON_03301570 .
+obo:FOODON_03301570 local:propagatesTo obo:FOODON_00001687 .
+### carrot top (raw)  -> carrot food product   [rel_nest]
+obo:FOODON_00001687 local:weaklyUnder obo:FOODON_03311353 .
+obo:FOODON_03311353 local:propagatesTo obo:FOODON_00001687 .
+### chia seed  -> chia seed (whole or pieces)   [isa_union]
+obo:FOODON_03000241 local:weaklyUnder obo:FOODON_00002961 .
+obo:FOODON_00002961 local:propagatesTo obo:FOODON_03000241 .
+### coelenterate  -> aquatic invertebrate animal (excluding shellfish)   [isa_union]
+obo:FOODON_03411142 local:weaklyUnder obo:FOODON_03412409 .
+obo:FOODON_03412409 local:propagatesTo obo:FOODON_03411142 .
+### coffee based beverage product  -> 34020 - coffee, cocoa, tea and infusions (efsa foodex2)   [rel_nest]
+obo:FOODON_03543402 local:weaklyUnder obo:FOODON_00001139 .
+obo:FOODON_00001139 local:propagatesTo obo:FOODON_03543402 .
+### concentration of dietary fibre in material entity  -> high fibre food material   [rel_nest]
+obo:FOODON_00004103 local:weaklyUnder obo:CDNO_0200035 .
+obo:CDNO_0200035 local:propagatesTo obo:FOODON_00004103 .
+### concentration of fructose in material entity  -> high fructose food material   [rel_nest]
+obo:FOODON_00004102 local:weaklyUnder obo:CDNO_0200014 .
+obo:CDNO_0200014 local:propagatesTo obo:FOODON_00004102 .
+### concentration of methylmercury compound in material entity  -> high mercury food material   [rel_nest]
+obo:FOODON_00004101 local:weaklyUnder obo:CDNO_0200525 .
+obo:CDNO_0200525 local:propagatesTo obo:FOODON_00004101 .
+### corn flour  -> tamale   [rel_nest]
+obo:FOODON_03304758 local:weaklyUnder obo:FOODON_03302500 .
+obo:FOODON_03302500 local:propagatesTo obo:FOODON_03304758 .
+### cornmeal  -> pupusa (dish)   [rel_nest]
+obo:FOODON_00003052 local:weaklyUnder obo:FOODON_03310257 .
+obo:FOODON_03310257 local:propagatesTo obo:FOODON_00003052 .
+### crustacean  -> fermented fish or seafood food product   [rel_nest]
+obo:FOODON_00001054 local:weaklyUnder obo:FOODON_03411374 .
+obo:FOODON_03411374 local:propagatesTo obo:FOODON_00001054 .
+### crustacean food product  -> seafood newburg (dish)   [rel_nest]
+obo:FOODON_03304511 local:weaklyUnder obo:FOODON_00001792 .
+obo:FOODON_00001792 local:propagatesTo obo:FOODON_03304511 .
+### cucumber plant  -> cucumber (raw)   [rel_nest]
+obo:FOODON_03301545 local:weaklyUnder obo:FOODON_03411404 .
+obo:FOODON_03411404 local:propagatesTo obo:FOODON_03301545 .
+### curry leaf  -> curry leaf (whole or pieces)   [isa_union]
+obo:FOODON_03000225 local:weaklyUnder obo:FOODON_03000122 .
+obo:FOODON_03000122 local:propagatesTo obo:FOODON_03000225 .
+### dairy food product  -> USDA SR dairy and egg products (0100)   [rel_nest]
+obo:FOODON_03401271 local:weaklyUnder obo:FOODON_00001256 .
+obo:FOODON_00001256 local:propagatesTo obo:FOODON_03401271 .
+### deer  -> venison   [rel_nest]
+obo:FOODON_00002935 local:weaklyUnder obo:FOODON_03411583 .
+obo:FOODON_03411583 local:propagatesTo obo:FOODON_00002935 .
+### dehydration or drying  -> blood meal   [rel_nest]
+obo:FOODON_00001564 local:weaklyUnder obo:FOODON_03470116 .
+obo:FOODON_03470116 local:propagatesTo obo:FOODON_00001564 .
+### diluted orange beverage  -> imitation orange juice drink   [rel_nest]
+obo:FOODON_03306017 local:weaklyUnder obo:FOODON_00001816 .
+obo:FOODON_00001816 local:propagatesTo obo:FOODON_03306017 .
+### echinoderm  -> aquatic invertebrate animal (excluding shellfish)   [isa_union]
+obo:FOODON_03411142 local:weaklyUnder obo:FOODON_03412115 .
+obo:FOODON_03412115 local:propagatesTo obo:FOODON_03411142 .
+### edible seed food product  -> 07  pulses, seeds, kernels, nuts and products (eurocode2)   [rel_nest]
+obo:FOODON_03400730 local:weaklyUnder obo:FOODON_03304497 .
+obo:FOODON_03304497 local:propagatesTo obo:FOODON_03400730 .
+### edible seed food product  -> 13  nuts (efg)   [isa_union]
+obo:FOODON_03400703 local:weaklyUnder obo:FOODON_03304497 .
+obo:FOODON_03304497 local:propagatesTo obo:FOODON_03400703 .
+### edible seed food product  -> nut, seed or kernel (eurofir)   [rel_nest]
+obo:FOODON_03400823 local:weaklyUnder obo:FOODON_03304497 .
+obo:FOODON_03304497 local:propagatesTo obo:FOODON_03400823 .
+### edible seed food product  -> USDA SR nut and seed products (1200)   [rel_nest]
+obo:FOODON_03401282 local:weaklyUnder obo:FOODON_03304497 .
+obo:FOODON_03304497 local:propagatesTo obo:FOODON_03401282 .
+### egg (without shell)  -> egg drop soup   [rel_nest]
+obo:FOODON_03304915 local:weaklyUnder obo:FOODON_03420225 .
+obo:FOODON_03420225 local:propagatesTo obo:FOODON_03304915 .
+### egg food product  -> USDA SR dairy and egg products (0100)   [rel_nest]
+obo:FOODON_03401271 local:weaklyUnder obo:FOODON_00001274 .
+obo:FOODON_00001274 local:propagatesTo obo:FOODON_03401271 .
+### ethyl vanillin  -> synthetic vanilla extract   [rel_nest]
+obo:FOODON_00002396 local:weaklyUnder obo:CHEBI_48408 .
+obo:CHEBI_48408 local:propagatesTo obo:FOODON_00002396 .
+### ethyl vanillin  -> vanilla bean extract   [rel_nest]
+obo:FOODON_03316764 local:weaklyUnder obo:CHEBI_48408 .
+obo:CHEBI_48408 local:propagatesTo obo:FOODON_03316764 .
+### european cantaloupe plant  -> cantaloupe fruit food product   [rel_nest]
+obo:FOODON_00001288 local:weaklyUnder obo:FOODON_03411471 .
+obo:FOODON_03411471 local:propagatesTo obo:FOODON_00001288 .
+### exoskeleton  -> soybean oil (flavored with extract from lobster shell)   [rel_nest]
+obo:FOODON_03309609 local:weaklyUnder obo:UBERON_0006611 .
+obo:UBERON_0006611 local:propagatesTo obo:FOODON_03309609 .
+### extended maceration  -> red wine must   [rel_nest]
+obo:FOODON_00004051 local:weaklyUnder obo:FOODON_00004073 .
+obo:FOODON_00004073 local:propagatesTo obo:FOODON_00004051 .
+### fish food product  -> 04  fish and fish products (eurocode2)   [rel_nest]
+obo:FOODON_03400727 local:weaklyUnder obo:FOODON_00001248 .
+obo:FOODON_00001248 local:propagatesTo obo:FOODON_03400727 .
+### fish food product  -> seafood or related product (eurofir)   [rel_nest]
+obo:FOODON_03400801 local:weaklyUnder obo:FOODON_00001248 .
+obo:FOODON_00001248 local:propagatesTo obo:FOODON_03400801 .
+### fish food product  -> USDA SR finfish and shellfish products (1500)   [rel_nest]
+obo:FOODON_03401285 local:weaklyUnder obo:FOODON_00001248 .
+obo:FOODON_00001248 local:propagatesTo obo:FOODON_03401285 .
+### fish species  -> fermented fish or seafood food product   [rel_nest]
+obo:FOODON_00001054 local:weaklyUnder obo:FOODON_03411222 .
+obo:FOODON_03411222 local:propagatesTo obo:FOODON_00001054 .
+### flavoring extract  -> soybean oil (flavored with extract from lobster shell)   [rel_nest]
+obo:FOODON_03309609 local:weaklyUnder obo:FOODON_03306145 .
+obo:FOODON_03306145 local:propagatesTo obo:FOODON_03309609 .
+### food cooking  -> bean (rehydrated, cooked)   [rel_nest]
+obo:FOODON_03311840 local:weaklyUnder obo:FOODON_03450002 .
+obo:FOODON_03450002 local:propagatesTo obo:FOODON_03311840 .
+### food cutting process  -> green bean (cut, raw)   [rel_nest]
+obo:FOODON_03302065 local:weaklyUnder obo:FOODON_00000071 .
+obo:FOODON_00000071 local:propagatesTo obo:FOODON_03302065 .
+### food filling process  -> pie filling   [rel_nest]
+obo:FOODON_03306766 local:weaklyUnder obo:FOODON_03460207 .
+obo:FOODON_03460207 local:propagatesTo obo:FOODON_03306766 .
+### food freezing  -> food (precooked, frozen)   [rel_nest]
+obo:FOODON_03305323 local:weaklyUnder obo:FOODON_03470136 .
+obo:FOODON_03470136 local:propagatesTo obo:FOODON_03305323 .
+### food milling  -> bean flour   [rel_nest]
+obo:FOODON_00002413 local:weaklyUnder obo:FOODON_00002415 .
+obo:FOODON_00002415 local:propagatesTo obo:FOODON_00002413 .
+### food milling  -> cornmeal   [rel_nest]
+obo:FOODON_03310257 local:weaklyUnder obo:FOODON_00002415 .
+obo:FOODON_00002415 local:propagatesTo obo:FOODON_03310257 .
+### food peeling  -> fruit peel (anatomical part)   [rel_nest]
+obo:FOODON_03420294 local:weaklyUnder obo:FOODON_03000001 .
+obo:FOODON_03000001 local:propagatesTo obo:FOODON_03420294 .
+### food peeling  -> lemon peel   [rel_nest]
+obo:FOODON_03306143 local:weaklyUnder obo:FOODON_03000001 .
+obo:FOODON_03000001 local:propagatesTo obo:FOODON_03306143 .
+### food peeling  -> root, tuber or bulb, peel only   [rel_nest]
+obo:FOODON_03420261 local:weaklyUnder obo:FOODON_03000001 .
+obo:FOODON_03000001 local:propagatesTo obo:FOODON_03420261 .
+### fruit food product  -> USDA SR fruits and fruit juices (0900)   [rel_nest]
+obo:FOODON_03401279 local:weaklyUnder obo:FOODON_03315615 .
+obo:FOODON_03315615 local:propagatesTo obo:FOODON_03401279 .
+### fruit juice food product  -> USDA SR fruits and fruit juices (0900)   [rel_nest]
+obo:FOODON_03401279 local:weaklyUnder obo:FOODON_00001140 .
+obo:FOODON_00001140 local:propagatesTo obo:FOODON_03401279 .
+### game animal food product  -> USDA SR lamb, veal, and game products (1700)   [rel_nest]
+obo:FOODON_03401287 local:weaklyUnder obo:FOODON_00002477 .
+obo:FOODON_00002477 local:propagatesTo obo:FOODON_03401287 .
+### Gaylussacia  -> huckleberry   [rel_nest]
+obo:FOODON_00003544 local:weaklyUnder obo:NCBITaxon_128891 .
+obo:NCBITaxon_128891 local:propagatesTo obo:FOODON_00003544 .
+### ginger leaf  -> ginger leaf (whole or pieces)   [isa_union]
+obo:FOODON_03000219 local:weaklyUnder obo:FOODON_03000173 .
+obo:FOODON_03000173 local:propagatesTo obo:FOODON_03000219 .
+### golden zucchini plant  -> zucchini food product   [rel_nest]
+obo:FOODON_00002448 local:weaklyUnder obo:FOODON_00003014 .
+obo:FOODON_00003014 local:propagatesTo obo:FOODON_00002448 .
+### grape  -> grape crushing and destemming   [rel_nest]
+obo:FOODON_00004043 local:weaklyUnder obo:FOODON_00003417 .
+obo:FOODON_00003417 local:propagatesTo obo:FOODON_00004043 .
+### grape cluster  -> grape crushing and destemming   [rel_nest]
+obo:FOODON_00004043 local:weaklyUnder obo:FOODON_00003638 .
+obo:FOODON_00003638 local:propagatesTo obo:FOODON_00004043 .
+### gravy or sauce  -> USDA SR soups, sauces, and gravies (0600)   [rel_nest]
+obo:FOODON_03401276 local:weaklyUnder obo:FOODON_00001931 .
+obo:FOODON_00001931 local:propagatesTo obo:FOODON_03401276 .
+### hesperidium fruit  -> citrus fruit food product   [rel_nest]
+obo:FOODON_00001151 local:weaklyUnder obo:PO_0030109 .
+obo:PO_0030109 local:propagatesTo obo:FOODON_00001151 .
+### increased concentration  -> high fibre food material   [rel_nest]
+obo:FOODON_00004103 local:weaklyUnder obo:PATO_0001162 .
+obo:PATO_0001162 local:propagatesTo obo:FOODON_00004103 .
+### increased concentration  -> high fructose food material   [rel_nest]
+obo:FOODON_00004102 local:weaklyUnder obo:PATO_0001162 .
+obo:PATO_0001162 local:propagatesTo obo:FOODON_00004102 .
+### increased concentration  -> high mercury food material   [rel_nest]
+obo:FOODON_00004101 local:weaklyUnder obo:PATO_0001162 .
+obo:PATO_0001162 local:propagatesTo obo:FOODON_00004101 .
+### invertebrate animal  -> vegetarian food material   [rel_nest]
+obo:FOODON_00003194 local:weaklyUnder obo:FOODON_00002452 .
+obo:FOODON_00002452 local:propagatesTo obo:FOODON_00003194 .
+### jar  -> food (packed in high pressurised containers)   [rel_nest]
+obo:FOODON_03317139 local:weaklyUnder obo:FOODON_03490215 .
+obo:FOODON_03490215 local:propagatesTo obo:FOODON_03317139 .
+### lamb meat food product  -> USDA SR lamb, veal, and game products (1700)   [rel_nest]
+obo:FOODON_03401287 local:weaklyUnder obo:FOODON_00001992 .
+obo:FOODON_00001992 local:propagatesTo obo:FOODON_03401287 .
+### langostino amarillo  -> 25090 - squat lobsters (efsa foodex2)   [rel_nest]
+obo:FOODON_03542509 local:weaklyUnder obo:FOODON_03412206 .
+obo:FOODON_03412206 local:propagatesTo obo:FOODON_03542509 .
+### langostino colorado  -> 25090 - squat lobsters (efsa foodex2)   [rel_nest]
+obo:FOODON_03542509 local:weaklyUnder obo:FOODON_03412205 .
+obo:FOODON_03412205 local:propagatesTo obo:FOODON_03542509 .
+### leaf  -> ginkgo biloba supplement   [rel_nest]
+obo:FOODON_03600004 local:weaklyUnder obo:PO_0025034 .
+obo:PO_0025034 local:propagatesTo obo:FOODON_03600004 .
+### limited maceration  -> rosé wine must   [rel_nest]
+obo:FOODON_00004050 local:weaklyUnder obo:FOODON_00004072 .
+obo:FOODON_00004072 local:propagatesTo obo:FOODON_00004050 .
+### lobster (raw)  -> lobster newburg (dish)   [rel_nest]
+obo:FOODON_03308142 local:weaklyUnder obo:FOODON_03301159 .
+obo:FOODON_03301159 local:propagatesTo obo:FOODON_03308142 .
+### lobster meat (canned)  -> lobster newburg (dish)   [rel_nest]
+obo:FOODON_03308142 local:weaklyUnder obo:FOODON_03315683 .
+obo:FOODON_03315683 local:propagatesTo obo:FOODON_03308142 .
+### Lycium barbarum  -> goji berry   [rel_nest]
+obo:FOODON_00004360 local:weaklyUnder obo:NCBITaxon_112863 .
+obo:NCBITaxon_112863 local:propagatesTo obo:FOODON_00004360 .
+### Lycium chinense  -> goji berry   [rel_nest]
+obo:FOODON_00004360 local:weaklyUnder obo:NCBITaxon_112883 .
+obo:NCBITaxon_112883 local:propagatesTo obo:FOODON_00004360 .
+### Malus domestica  -> apple tree   [rel_nest]
+obo:FOODON_03411245 local:weaklyUnder obo:NCBITaxon_3750 .
+obo:NCBITaxon_3750 local:propagatesTo obo:FOODON_03411245 .
+### Malus pumila  -> apple tree   [rel_nest]
+obo:FOODON_03411245 local:weaklyUnder obo:NCBITaxon_283210 .
+obo:NCBITaxon_283210 local:propagatesTo obo:FOODON_03411245 .
+### masa  -> tamale   [rel_nest]
+obo:FOODON_03304758 local:weaklyUnder obo:FOODON_00002529 .
+obo:FOODON_00002529 local:propagatesTo obo:FOODON_03304758 .
+### milk beverage analog  -> milk, milk product or milk substitute (eurofir)   [rel_nest]
+obo:FOODON_03400778 local:weaklyUnder obo:FOODON_00002034 .
+obo:FOODON_00002034 local:propagatesTo obo:FOODON_03400778 .
+### milk or milk based food product  -> milk, milk product or milk substitute (eurofir)   [rel_nest]
+obo:FOODON_03400778 local:weaklyUnder obo:FOODON_00001257 .
+obo:FOODON_00001257 local:propagatesTo obo:FOODON_03400778 .
+### mint leaf  -> mint leaf (whole or pieces)   [isa_union]
+obo:FOODON_03000238 local:weaklyUnder obo:FOODON_03000121 .
+obo:FOODON_03000121 local:propagatesTo obo:FOODON_03000238 .
+### Monostroma  -> aonori (raw)   [rel_nest]
+obo:FOODON_03000277 local:weaklyUnder obo:NCBITaxon_63411 .
+obo:NCBITaxon_63411 local:propagatesTo obo:FOODON_03000277 .
+### mushroom fruitbody  -> mushroom food product   [rel_nest]
+obo:FOODON_00002434 local:weaklyUnder obo:FOODON_00003528 .
+obo:FOODON_00003528 local:propagatesTo obo:FOODON_00002434 .
+### mycelium  -> mushroom food product   [rel_nest]
+obo:FOODON_00002434 local:weaklyUnder obo:FAO_0000011 .
+obo:FAO_0000011 local:propagatesTo obo:FOODON_00002434 .
+### new zealand langostino  -> 25090 - squat lobsters (efsa foodex2)   [rel_nest]
+obo:FOODON_03542509 local:weaklyUnder obo:FOODON_03413485 .
+obo:FOODON_03413485 local:propagatesTo obo:FOODON_03542509 .
+### north american cantaloupe plant  -> cantaloupe fruit food product   [rel_nest]
+obo:FOODON_00001288 local:weaklyUnder obo:FOODON_03414222 .
+obo:FOODON_03414222 local:propagatesTo obo:FOODON_00001288 .
+### nut  -> nut and seed butter   [rel_nest]
+obo:FOODON_03302518 local:weaklyUnder obo:FOODON_03303171 .
+obo:FOODON_03303171 local:propagatesTo obo:FOODON_03302518 .
+### nut food product  -> 07  pulses, seeds, kernels, nuts and products (eurocode2)   [rel_nest]
+obo:FOODON_03400730 local:weaklyUnder obo:FOODON_00001172 .
+obo:FOODON_00001172 local:propagatesTo obo:FOODON_03400730 .
+### nut food product  -> nut, seed or kernel (eurofir)   [rel_nest]
+obo:FOODON_03400823 local:weaklyUnder obo:FOODON_00001172 .
+obo:FOODON_00001172 local:propagatesTo obo:FOODON_03400823 .
+### nut food product  -> USDA SR nut and seed products (1200)   [rel_nest]
+obo:FOODON_03401282 local:weaklyUnder obo:FOODON_00001172 .
+obo:FOODON_00001172 local:propagatesTo obo:FOODON_03401282 .
+### orange juice drink  -> imitation orange juice drink   [rel_nest]
+obo:FOODON_03306017 local:weaklyUnder obo:FOODON_03302250 .
+obo:FOODON_03302250 local:propagatesTo obo:FOODON_03306017 .
+### oregano leaf  -> oregano (whole or pieces)   [isa_union]
+obo:FOODON_03000226 local:weaklyUnder obo:FOODON_03301557 .
+obo:FOODON_03301557 local:propagatesTo obo:FOODON_03000226 .
+### Oryza glaberrima  -> white rice   [rel_nest]
+obo:FOODON_00003787 local:weaklyUnder obo:NCBITaxon_4538 .
+obo:NCBITaxon_4538 local:propagatesTo obo:FOODON_00003787 .
+### Oryza sativa  -> white rice   [rel_nest]
+obo:FOODON_00003787 local:weaklyUnder obo:NCBITaxon_4530 .
+obo:NCBITaxon_4530 local:propagatesTo obo:FOODON_00003787 .
+### pasteurization by heating  -> food (pasteurized)   [rel_nest]
+obo:FOODON_00002654 local:weaklyUnder obo:FOODON_03470135 .
+obo:FOODON_03470135 local:propagatesTo obo:FOODON_00002654 .
+### pasteurization by irradiation  -> food (pasteurized)   [rel_nest]
+obo:FOODON_00002654 local:weaklyUnder obo:FOODON_03470119 .
+obo:FOODON_03470119 local:propagatesTo obo:FOODON_00002654 .
+### Pelophylax lessonae  -> edible frog   [rel_nest]
+obo:FOODON_03413463 local:weaklyUnder obo:NCBITaxon_45623 .
+obo:NCBITaxon_45623 local:propagatesTo obo:FOODON_03413463 .
+### Pelophylax ridibundus  -> edible frog   [rel_nest]
+obo:FOODON_03413463 local:weaklyUnder obo:NCBITaxon_8406 .
+obo:NCBITaxon_8406 local:propagatesTo obo:FOODON_03413463 .
+### pigeon pea  -> stew peas (dish)   [rel_nest]
+obo:FOODON_03304776 local:weaklyUnder obo:FOODON_00002781 .
+obo:FOODON_00002781 local:propagatesTo obo:FOODON_03304776 .
+### pulse food product  -> 07  pulses, seeds, kernels, nuts and products (eurocode2)   [rel_nest]
+obo:FOODON_03400730 local:weaklyUnder obo:FOODON_00001209 .
+obo:FOODON_00001209 local:propagatesTo obo:FOODON_03400730 .
+### red kidney bean  -> stew peas (dish)   [rel_nest]
+obo:FOODON_03304776 local:weaklyUnder obo:FOODON_03309779 .
+obo:FOODON_03309779 local:propagatesTo obo:FOODON_03304776 .
+### rehydration process  -> bean (rehydrated)   [rel_nest]
+obo:FOODON_00002756 local:weaklyUnder obo:FOODON_03460259 .
+obo:FOODON_03460259 local:propagatesTo obo:FOODON_00002756 .
+### rice bran  -> pla-ra   [rel_nest]
+obo:FOODON_00001331 local:weaklyUnder obo:FOODON_03306185 .
+obo:FOODON_03306185 local:propagatesTo obo:FOODON_00001331 .
+### rice powder (roasted)  -> pla-ra   [rel_nest]
+obo:FOODON_00001331 local:weaklyUnder obo:FOODON_00001332 .
+obo:FOODON_00001332 local:propagatesTo obo:FOODON_00001331 .
+### root  -> black cohosh supplement   [rel_nest]
+obo:FOODON_03600000 local:weaklyUnder obo:PO_0009005 .
+obo:PO_0009005 local:propagatesTo obo:FOODON_03600000 .
+### seed  -> nut and seed butter   [rel_nest]
+obo:FOODON_03302518 local:weaklyUnder obo:PO_0009010 .
+obo:PO_0009010 local:propagatesTo obo:FOODON_03302518 .
+### Senegalia senegal  -> gum arabic   [rel_nest]
+obo:FOODON_03412975 local:weaklyUnder obo:NCBITaxon_138043 .
+obo:NCBITaxon_138043 local:propagatesTo obo:FOODON_03412975 .
+### shellfish food product  -> 04  fish and fish products (eurocode2)   [rel_nest]
+obo:FOODON_03400727 local:weaklyUnder obo:FOODON_00001293 .
+obo:FOODON_00001293 local:propagatesTo obo:FOODON_03400727 .
+### shellfish food product  -> seafood newburg (dish)   [rel_nest]
+obo:FOODON_03304511 local:weaklyUnder obo:FOODON_00001293 .
+obo:FOODON_00001293 local:propagatesTo obo:FOODON_03304511 .
+### shellfish food product  -> seafood or related product (eurofir)   [rel_nest]
+obo:FOODON_03400801 local:weaklyUnder obo:FOODON_00001293 .
+obo:FOODON_00001293 local:propagatesTo obo:FOODON_03400801 .
+### shellfish food product  -> USDA SR finfish and shellfish products (1500)   [rel_nest]
+obo:FOODON_03401285 local:weaklyUnder obo:FOODON_00001293 .
+obo:FOODON_00001293 local:propagatesTo obo:FOODON_03401285 .
+### shellfish species  -> fermented fish or seafood food product   [rel_nest]
+obo:FOODON_00001054 local:weaklyUnder obo:FOODON_03411433 .
+obo:FOODON_03411433 local:propagatesTo obo:FOODON_00001054 .
+### Sinapis alba  -> mustard seed   [rel_nest]
+obo:FOODON_00003420 local:weaklyUnder obo:NCBITaxon_3728 .
+obo:NCBITaxon_3728 local:propagatesTo obo:FOODON_00003420 .
+### soup food product  -> USDA SR soups, sauces, and gravies (0600)   [rel_nest]
+obo:FOODON_03401276 local:weaklyUnder obo:FOODON_00002257 .
+obo:FOODON_00002257 local:propagatesTo obo:FOODON_03401276 .
+### steeped beverage product  -> 34020 - coffee, cocoa, tea and infusions (efsa foodex2)   [rel_nest]
+obo:FOODON_03543402 local:weaklyUnder obo:FOODON_00002275 .
+obo:FOODON_00002275 local:propagatesTo obo:FOODON_03543402 .
+### steeped beverage product  -> 37300 - herbal and other non-tea infusions (efsa foodex2)   [rel_nest]
+obo:FOODON_03543730 local:weaklyUnder obo:FOODON_00002275 .
+obo:FOODON_00002275 local:propagatesTo obo:FOODON_03543730 .
+### swine  -> blood meal   [rel_nest]
+obo:FOODON_00001564 local:weaklyUnder obo:FOODON_03411136 .
+obo:FOODON_03411136 local:propagatesTo obo:FOODON_00001564 .
+### Taraxacum kok-saghyz  -> dandelion plant   [rel_nest]
+obo:FOODON_03411428 local:weaklyUnder obo:NCBITaxon_333970 .
+obo:NCBITaxon_333970 local:propagatesTo obo:FOODON_03411428 .
+### Taraxacum officinale  -> dandelion plant   [rel_nest]
+obo:FOODON_03411428 local:weaklyUnder obo:NCBITaxon_50225 .
+obo:NCBITaxon_50225 local:propagatesTo obo:FOODON_03411428 .
+### tea based beverage product  -> 34020 - coffee, cocoa, tea and infusions (efsa foodex2)   [rel_nest]
+obo:FOODON_03543402 local:weaklyUnder obo:FOODON_00001138 .
+obo:FOODON_00001138 local:propagatesTo obo:FOODON_03543402 .
+### timothy plant  -> red clover and timothy fodder silage   [rel_nest]
+obo:FOODON_03310161 local:weaklyUnder obo:FOODON_03412331 .
+obo:FOODON_03412331 local:propagatesTo obo:FOODON_03310161 .
+### Trapa bicornis  -> water caltrop   [rel_nest]
+obo:FOODON_00003571 local:weaklyUnder obo:NCBITaxon_236974 .
+obo:NCBITaxon_236974 local:propagatesTo obo:FOODON_00003571 .
+### Trapa natans  -> water caltrop   [rel_nest]
+obo:FOODON_00003571 local:weaklyUnder obo:NCBITaxon_22666 .
+obo:NCBITaxon_22666 local:propagatesTo obo:FOODON_00003571 .
+### Trifolium pratense  -> red clover and timothy fodder silage   [rel_nest]
+obo:FOODON_03310161 local:weaklyUnder obo:NCBITaxon_57577 .
+obo:NCBITaxon_57577 local:propagatesTo obo:FOODON_03310161 .
+### tunicate  -> aquatic invertebrate animal (excluding shellfish)   [isa_union]
+obo:FOODON_03411142 local:weaklyUnder obo:FOODON_03414466 .
+obo:FOODON_03414466 local:propagatesTo obo:FOODON_03411142 .
+### Ulva  -> aonori (raw)   [rel_nest]
+obo:FOODON_03000277 local:weaklyUnder obo:NCBITaxon_3118 .
+obo:NCBITaxon_3118 local:propagatesTo obo:FOODON_03000277 .
+### United States of America  -> biscuit (quick bread)   [rel_nest]
+obo:FOODON_03301884 local:weaklyUnder obo:GAZ_00002459 .
+obo:GAZ_00002459 local:propagatesTo obo:FOODON_03301884 .
+### Vaccinium  -> huckleberry   [rel_nest]
+obo:FOODON_00003544 local:weaklyUnder obo:NCBITaxon_13749 .
+obo:NCBITaxon_13749 local:propagatesTo obo:FOODON_00003544 .
+### Vachellia seyal  -> gum arabic   [rel_nest]
+obo:FOODON_03412975 local:weaklyUnder obo:NCBITaxon_138044 .
+obo:NCBITaxon_138044 local:propagatesTo obo:FOODON_03412975 .
+### Vanilla planifolia  -> vanilla plant   [rel_nest]
+obo:FOODON_03411355 local:weaklyUnder obo:NCBITaxon_51239 .
+obo:NCBITaxon_51239 local:propagatesTo obo:FOODON_03411355 .
+### Vanilla pompona  -> vanilla plant   [rel_nest]
+obo:FOODON_03411355 local:weaklyUnder obo:NCBITaxon_117957 .
+obo:NCBITaxon_117957 local:propagatesTo obo:FOODON_03411355 .
+### Vanilla x tahitensis  -> vanilla plant   [rel_nest]
+obo:FOODON_03411355 local:weaklyUnder obo:NCBITaxon_669897 .
+obo:NCBITaxon_669897 local:propagatesTo obo:FOODON_03411355 .
+### vanillin  -> synthetic vanilla extract   [rel_nest]
+obo:FOODON_00002396 local:weaklyUnder obo:CHEBI_18346 .
+obo:CHEBI_18346 local:propagatesTo obo:FOODON_00002396 .
+### vanillin  -> vanilla bean extract   [rel_nest]
+obo:FOODON_03316764 local:weaklyUnder obo:CHEBI_18346 .
+obo:CHEBI_18346 local:propagatesTo obo:FOODON_03316764 .
+### vegetable  -> vegetable (whole or pieces)   [isa_union]
+obo:FOODON_03315308 local:weaklyUnder obo:FOODON_00003816 .
+obo:FOODON_00003816 local:propagatesTo obo:FOODON_03315308 .
+### vertebrate animal  -> vegetarian food material   [rel_nest]
+obo:FOODON_00003194 local:weaklyUnder obo:FOODON_03411297 .
+obo:FOODON_03411297 local:propagatesTo obo:FOODON_00003194 .
+### walnut  -> walnut (whole or pieces)   [isa_union]
+obo:FOODON_03316466 local:weaklyUnder obo:FOODON_03301364 .
+obo:FOODON_03301364 local:propagatesTo obo:FOODON_03316466 .
+### west indian gherkin plant  -> cucumber (raw)   [rel_nest]
+obo:FOODON_03301545 local:weaklyUnder obo:FOODON_03413407 .
+obo:FOODON_03413407 local:propagatesTo obo:FOODON_03301545 .
+### white rice flour  -> pupusa (dish)   [rel_nest]
+obo:FOODON_00003052 local:weaklyUnder obo:FOODON_03307541 .
+obo:FOODON_03307541 local:propagatesTo obo:FOODON_00003052 .
+### zucchini plant  -> zucchini food product   [rel_nest]
+obo:FOODON_00002448 local:weaklyUnder obo:FOODON_03411462 .
+obo:FOODON_03411462 local:propagatesTo obo:FOODON_00002448 .
+
+### Actaea racemosa  -> black cohosh supplement   [nested part_of]
+obo:NCBITaxon_64040 local:propagatesTo obo:FOODON_03600000 .
+### animal muscle tissue cut  -> piece of albacore meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022615 .
+### animal muscle tissue cut  -> piece of american shad meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021950 .
+### animal muscle tissue cut  -> piece of animal meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02010107 .
+### animal muscle tissue cut  -> piece of antelope meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020827 .
+### animal muscle tissue cut  -> piece of atlantic cod meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021813 .
+### animal muscle tissue cut  -> piece of atlantic salmon meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022073 .
+### animal muscle tissue cut  -> piece of avian animal meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020062 .
+### animal muscle tissue cut  -> piece of bear meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021771 .
+### animal muscle tissue cut  -> piece of bearded seal meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022134 .
+### animal muscle tissue cut  -> piece of beaver meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021605 .
+### animal muscle tissue cut  -> piece of beef   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02000403 .
+### animal muscle tissue cut  -> piece of beefalo meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020992 .
+### animal muscle tissue cut  -> piece of bison meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020847 .
+### animal muscle tissue cut  -> piece of black bear meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022538 .
+### animal muscle tissue cut  -> piece of blue swimmer crab meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021865 .
+### animal muscle tissue cut  -> piece of buffalo meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021020 .
+### animal muscle tissue cut  -> piece of Canada goose meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022580 .
+### animal muscle tissue cut  -> piece of capon meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020077 .
+### animal muscle tissue cut  -> piece of catfish meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021826 .
+### animal muscle tissue cut  -> piece of chicken meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020205 .
+### animal muscle tissue cut  -> piece of common octopus meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022058 .
+### animal muscle tissue cut  -> piece of crab meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021450 .
+### animal muscle tissue cut  -> piece of cuttlefish meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022028 .
+### animal muscle tissue cut  -> piece of deer meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021416 .
+### animal muscle tissue cut  -> piece of devilfish meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021911 .
+### animal muscle tissue cut  -> piece of domestic yak meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020883 .
+### animal muscle tissue cut  -> piece of donkey meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021540 .
+### animal muscle tissue cut  -> piece of duck meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020138 .
+### animal muscle tissue cut  -> piece of elephant meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021529 .
+### animal muscle tissue cut  -> piece of elk meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021425 .
+### animal muscle tissue cut  -> piece of emu meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_00004471 .
+### animal muscle tissue cut  -> piece of european anchovy meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021885 .
+### animal muscle tissue cut  -> piece of florida pompano meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021937 .
+### animal muscle tissue cut  -> piece of frog meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020042 .
+### animal muscle tissue cut  -> piece of gazelle meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021119 .
+### animal muscle tissue cut  -> piece of giraffe meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021499 .
+### animal muscle tissue cut  -> piece of goat meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021079 .
+### animal muscle tissue cut  -> piece of goose meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020398 .
+### animal muscle tissue cut  -> piece of green sea turtle meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021578 .
+### animal muscle tissue cut  -> piece of guinea fowl meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020649 .
+### animal muscle tissue cut  -> piece of hippopotamus meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021508 .
+### animal muscle tissue cut  -> piece of horse meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021553 .
+### animal muscle tissue cut  -> piece of kangaroo meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021474 .
+### animal muscle tissue cut  -> piece of lamb meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021189 .
+### animal muscle tissue cut  -> piece of lingcod meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021898 .
+### animal muscle tissue cut  -> piece of lobster meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021457 .
+### animal muscle tissue cut  -> piece of monkfish meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021924 .
+### animal muscle tissue cut  -> piece of moose meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021406 .
+### animal muscle tissue cut  -> piece of muskrat meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021615 .
+### animal muscle tissue cut  -> piece of nile tilapia meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021839 .
+### animal muscle tissue cut  -> piece of nutria meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021634 .
+### animal muscle tissue cut  -> piece of octopus meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021394 .
+### animal muscle tissue cut  -> piece of opossum meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022569 .
+### animal muscle tissue cut  -> piece of ostrich meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_00004494 .
+### animal muscle tissue cut  -> piece of owl meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022502 .
+### animal muscle tissue cut  -> piece of pheasant meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020667 .
+### animal muscle tissue cut  -> piece of pigeon meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020091 .
+### animal muscle tissue cut  -> piece of polar bear meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022548 .
+### animal muscle tissue cut  -> piece of pork meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021709 .
+### animal muscle tissue cut  -> piece of poultry meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_03315883 .
+### animal muscle tissue cut  -> piece of pumpkinseed sunfish meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021989 .
+### animal muscle tissue cut  -> piece of quail meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020740 .
+### animal muscle tissue cut  -> piece of rabbit meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021518 .
+### animal muscle tissue cut  -> piece of rainbow smelt meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021963 .
+### animal muscle tissue cut  -> piece of reindeer meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021442 .
+### animal muscle tissue cut  -> piece of ringed seal meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022557 .
+### animal muscle tissue cut  -> piece of ruffed grouse meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022174 .
+### animal muscle tissue cut  -> piece of sea turtle meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021589 .
+### animal muscle tissue cut  -> piece of seal meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021568 .
+### animal muscle tissue cut  -> piece of sheep meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021280 .
+### animal muscle tissue cut  -> piece of shrimp meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021466 .
+### animal muscle tissue cut  -> piece of sitka deer meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022163 .
+### animal muscle tissue cut  -> piece of sockeye salmon meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021852 .
+### animal muscle tissue cut  -> piece of squab meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020763 .
+### animal muscle tissue cut  -> piece of squirrel meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021624 .
+### animal muscle tissue cut  -> piece of steller sea lion meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022114 .
+### animal muscle tissue cut  -> piece of swordfish meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022002 .
+### animal muscle tissue cut  -> piece of tilefish meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022015 .
+### animal muscle tissue cut  -> piece of turkey meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02020463 .
+### animal muscle tissue cut  -> piece of turtle meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021597 .
+### animal muscle tissue cut  -> piece of veal meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021339 .
+### animal muscle tissue cut  -> piece of walrus meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022143 .
+### animal muscle tissue cut  -> piece of water buffalo meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021050 .
+### animal muscle tissue cut  -> piece of whelk meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021483 .
+### animal muscle tissue cut  -> piece of white sucker meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021976 .
+### animal muscle tissue cut  -> piece of white-winged scoter duck meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02022523 .
+### animal muscle tissue cut  -> piece of wild boar meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021644 .
+### animal muscle tissue cut  -> piece of zebra meat   [nested derives from]
+obo:FOODON_02010032 local:propagatesTo obo:FOODON_02021561 .
+### Aves  -> egg drop soup   [nested derives from]
+obo:NCBITaxon_8782 local:propagatesTo obo:FOODON_03304915 .
+### bean (dried)  -> bean (rehydrated)   [nested has input]
+obo:FOODON_00002752 local:propagatesTo obo:FOODON_00002756 .
+### bean (dried)  -> bean flour   [nested has input]
+obo:FOODON_00002752 local:propagatesTo obo:FOODON_00002413 .
+### bean (rehydrated)  -> bean (rehydrated, cooked)   [nested has input]
+obo:FOODON_00002756 local:propagatesTo obo:FOODON_03311840 .
+### bone element  -> animal breast (bone-in)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02022266 .
+### bone element  -> animal breast (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020019 .
+### bone element  -> animal chop (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02010319 .
+### bone element  -> animal roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02010314 .
+### bone element  -> animal thigh (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020012 .
+### bone element  -> animal thigh (skinless, with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02010154 .
+### bone element  -> animal thigh (with skin, with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02010156 .
+### bone element  -> beef bottom round roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000010 .
+### bone element  -> beef bottom round steak (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000006 .
+### bone element  -> beef brisket flat half (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000193 .
+### bone element  -> beef chop (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020981 .
+### bone element  -> beef roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020976 .
+### bone element  -> beef top round roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000023 .
+### bone element  -> beef top round steak (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000016 .
+### bone element  -> bison roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020868 .
+### bone element  -> buffalo roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021036 .
+### bone element  -> chicken breast (bone-in)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_03000385 .
+### bone element  -> chicken breast (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020235 .
+### bone element  -> chicken roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020371 .
+### bone element  -> chicken thigh (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020228 .
+### bone element  -> chicken thigh (skinless, with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020227 .
+### bone element  -> chicken thigh (with skin, with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_00003363 .
+### bone element  -> duck breast (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02022305 .
+### bone element  -> lamb chop (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021249 .
+### bone element  -> lamb leg (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000255 .
+### bone element  -> lamb roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021246 .
+### bone element  -> piece of animal breast (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02010189 .
+### bone element  -> piece of animal breast (with skin, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02022670 .
+### bone element  -> piece of animal meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02010113 .
+### bone element  -> piece of animal meat (with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02010116 .
+### bone element  -> piece of beef (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000405 .
+### bone element  -> piece of beef (with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000408 .
+### bone element  -> piece of chicken breast (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020279 .
+### bone element  -> piece of chicken meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020211 .
+### bone element  -> piece of chicken meat (with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020212 .
+### bone element  -> piece of duck breast (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02022311 .
+### bone element  -> piece of duck breast (with skin, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02022310 .
+### bone element  -> piece of goat meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021080 .
+### bone element  -> piece of goat meat (with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021083 .
+### bone element  -> piece of lamb meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021190 .
+### bone element  -> piece of lamb meat (with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021193 .
+### bone element  -> piece of pork meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021795 .
+### bone element  -> piece of poultry meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020697 .
+### bone element  -> piece of poultry meat (with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020698 .
+### bone element  -> piece of turkey breast (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020543 .
+### bone element  -> piece of turkey meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020469 .
+### bone element  -> piece of turkey meat (with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020470 .
+### bone element  -> piece of veal meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021341 .
+### bone element  -> piece of veal meat (with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021344 .
+### bone element  -> piece(s) of animal meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02010222 .
+### bone element  -> piece(s) of antelope meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020831 .
+### bone element  -> piece(s) of beef (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000414 .
+### bone element  -> piece(s) of bison meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020855 .
+### bone element  -> piece(s) of buffalo meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021023 .
+### bone element  -> piece(s) of chicken meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020310 .
+### bone element  -> piece(s) of deer meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02022292 .
+### bone element  -> piece(s) of elk meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021428 .
+### bone element  -> piece(s) of emu meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020111 .
+### bone element  -> piece(s) of goat meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021094 .
+### bone element  -> piece(s) of lamb meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021205 .
+### bone element  -> piece(s) of ostrich meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021777 .
+### bone element  -> piece(s) of pork meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021717 .
+### bone element  -> piece(s) of poultry meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020717 .
+### bone element  -> piece(s) of squirrel meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02022105 .
+### bone element  -> piece(s) of turkey meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020576 .
+### bone element  -> piece(s) of veal meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021350 .
+### bone element  -> piece(s) of wild boar meat (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021647 .
+### bone element  -> pork brisket point   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000340 .
+### bone element  -> pork chop (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021763 .
+### bone element  -> pork roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021760 .
+### bone element  -> pork shoulder (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000323 .
+### bone element  -> turkey breast (bone-in)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_03000386 .
+### bone element  -> turkey breast (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020499 .
+### bone element  -> turkey roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020635 .
+### bone element  -> turkey thigh (skinless, boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020491 .
+### bone element  -> turkey thigh (skinless, with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020490 .
+### bone element  -> turkey thigh (with skin, with bone)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02020494 .
+### bone element  -> veal breast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02000360 .
+### bone element  -> veal chop (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021388 .
+### bone element  -> veal roast (boneless)   [nested derives from]
+obo:UBERON_0001474 local:propagatesTo obo:FOODON_02021383 .
+### bone marrow  -> bone marrow broth   [nested derives from]
+obo:UBERON_0002371 local:propagatesTo obo:FOODON_03303872 .
+### citrus family  -> citrus fruit food product   [nested derives from]
+obo:FOODON_03411139 local:propagatesTo obo:FOODON_00001151 .
+### field corn kernel (dried)  -> cornmeal   [nested has input]
+obo:FOODON_03309907 local:propagatesTo obo:FOODON_03310257 .
+### food (cooked)  -> food (precooked, frozen)   [nested has input]
+obo:FOODON_00001181 local:propagatesTo obo:FOODON_03305323 .
+### fruit  -> fruit peel (anatomical part)   [nested has input]
+obo:PO_0009001 local:propagatesTo obo:FOODON_03420294 .
+### Ginkgo biloba  -> ginkgo biloba supplement   [nested part_of]
+obo:NCBITaxon_3311 local:propagatesTo obo:FOODON_03600004 .
+### green bean pod  -> green bean (cut, raw)   [nested has input]
+obo:FOODON_03305806 local:propagatesTo obo:FOODON_03302065 .
+### lemon (raw)  -> lemon peel   [nested has input]
+obo:FOODON_03301441 local:propagatesTo obo:FOODON_03306143 .
+### lobster  -> soybean oil (flavored with extract from lobster shell)   [nested part_of]
+obo:FOODON_03411505 local:propagatesTo obo:FOODON_03309609 .
+### red grape cluster  -> red wine must   [nested has specified input]
+obo:FOODON_00004067 local:propagatesTo obo:FOODON_00004051 .
+### red grape cluster  -> rosé wine must   [nested has specified input]
+obo:FOODON_00004067 local:propagatesTo obo:FOODON_00004050 .
+### root, tuber or bulb, with peel  -> root, tuber or bulb, peel only   [nested has input]
+obo:FOODON_03420239 local:propagatesTo obo:FOODON_03420261 .
+### skin of body  -> albacore fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022620 .
+### skin of body  -> albacore fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022622 .
+### skin of body  -> american shad fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021954 .
+### skin of body  -> american shad fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021956 .
+### skin of body  -> animal breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020015 .
+### skin of body  -> animal breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020017 .
+### skin of body  -> animal carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010024 .
+### skin of body  -> animal drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020021 .
+### skin of body  -> animal drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020023 .
+### skin of body  -> animal fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021802 .
+### skin of body  -> animal fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021805 .
+### skin of body  -> animal leg (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020029 .
+### skin of body  -> animal leg (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020031 .
+### skin of body  -> animal thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010153 .
+### skin of body  -> animal thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010155 .
+### skin of body  -> animal wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020025 .
+### skin of body  -> animal wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020027 .
+### skin of body  -> atlantic cod fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021817 .
+### skin of body  -> atlantic cod fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021819 .
+### skin of body  -> atlantic salmon fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022077 .
+### skin of body  -> atlantic salmon fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022079 .
+### skin of body  -> avian animal carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020057 .
+### skin of body  -> buffalo carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021008 .
+### skin of body  -> Canada goose carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022585 .
+### skin of body  -> capon carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020072 .
+### skin of body  -> catfish fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021830 .
+### skin of body  -> catfish fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021832 .
+### skin of body  -> chicken breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020231 .
+### skin of body  -> chicken breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020233 .
+### skin of body  -> chicken carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020168 .
+### skin of body  -> chicken drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020237 .
+### skin of body  -> chicken drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020239 .
+### skin of body  -> chicken leg (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020245 .
+### skin of body  -> chicken leg (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020247 .
+### skin of body  -> chicken thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_00003331 .
+### skin of body  -> chicken thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_00003330 .
+### skin of body  -> chicken wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020241 .
+### skin of body  -> chicken wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020243 .
+### skin of body  -> cow carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020897 .
+### skin of body  -> cuttlefish fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022032 .
+### skin of body  -> cuttlefish fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022034 .
+### skin of body  -> devilfish fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021915 .
+### skin of body  -> devilfish fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021917 .
+### skin of body  -> duck breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022304 .
+### skin of body  -> duck carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020128 .
+### skin of body  -> emu carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020102 .
+### skin of body  -> european anchovy fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021889 .
+### skin of body  -> european anchovy fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021891 .
+### skin of body  -> florida pompano fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021941 .
+### skin of body  -> florida pompano fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021943 .
+### skin of body  -> goat carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021063 .
+### skin of body  -> goose carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020389 .
+### skin of body  -> guinea fowl carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020644 .
+### skin of body  -> lamb carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021131 .
+### skin of body  -> lingcod fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021902 .
+### skin of body  -> lingcod fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021904 .
+### skin of body  -> monkfish fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021928 .
+### skin of body  -> monkfish fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021930 .
+### skin of body  -> nile tilapia fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021843 .
+### skin of body  -> nile tilapia fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021845 .
+### skin of body  -> ostrich carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020791 .
+### skin of body  -> owl carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022507 .
+### skin of body  -> pheasant carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020663 .
+### skin of body  -> pheasant thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020675 .
+### skin of body  -> piece of animal (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010029 .
+### skin of body  -> piece of animal (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010028 .
+### skin of body  -> piece of animal back (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010181 .
+### skin of body  -> piece of animal back (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010183 .
+### skin of body  -> piece of animal breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010185 .
+### skin of body  -> piece of animal breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010187 .
+### skin of body  -> piece of animal drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010179 .
+### skin of body  -> piece of animal drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010177 .
+### skin of body  -> piece of animal leg (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010175 .
+### skin of body  -> piece of animal leg (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010173 .
+### skin of body  -> piece of animal meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010109 .
+### skin of body  -> piece of animal meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010111 .
+### skin of body  -> piece of animal neck (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010193 .
+### skin of body  -> piece of animal neck (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010191 .
+### skin of body  -> piece of animal thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010197 .
+### skin of body  -> piece of animal thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010195 .
+### skin of body  -> piece of animal wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010201 .
+### skin of body  -> piece of animal wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010199 .
+### skin of body  -> piece of buffalo (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021014 .
+### skin of body  -> piece of buffalo (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021013 .
+### skin of body  -> piece of Canada goose breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022591 .
+### skin of body  -> piece of chicken (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020173 .
+### skin of body  -> piece of chicken (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020172 .
+### skin of body  -> piece of chicken back (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020271 .
+### skin of body  -> piece of chicken back (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020273 .
+### skin of body  -> piece of chicken breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020275 .
+### skin of body  -> piece of chicken breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020277 .
+### skin of body  -> piece of chicken drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020269 .
+### skin of body  -> piece of chicken drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020267 .
+### skin of body  -> piece of chicken leg (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020265 .
+### skin of body  -> piece of chicken leg (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020263 .
+### skin of body  -> piece of chicken meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020207 .
+### skin of body  -> piece of chicken meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020209 .
+### skin of body  -> piece of chicken neck (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020283 .
+### skin of body  -> piece of chicken neck (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020281 .
+### skin of body  -> piece of chicken thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020287 .
+### skin of body  -> piece of chicken thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020285 .
+### skin of body  -> piece of chicken wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020291 .
+### skin of body  -> piece of chicken wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020289 .
+### skin of body  -> piece of dark animal meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010207 .
+### skin of body  -> piece of dark animal meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010205 .
+### skin of body  -> piece of dark chicken meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020297 .
+### skin of body  -> piece of dark chicken meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020295 .
+### skin of body  -> piece of dark turkey meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020561 .
+### skin of body  -> piece of dark turkey meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020559 .
+### skin of body  -> piece of duck breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021774 .
+### skin of body  -> piece of duck breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022309 .
+### skin of body  -> piece of duck leg (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022308 .
+### skin of body  -> piece of duck meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022301 .
+### skin of body  -> piece of duck meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020140 .
+### skin of body  -> piece of goat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021069 .
+### skin of body  -> piece of goat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021068 .
+### skin of body  -> piece of goose meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022322 .
+### skin of body  -> piece of goose meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020400 .
+### skin of body  -> piece of guinea fowl meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020651 .
+### skin of body  -> piece of guinea fowl meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020653 .
+### skin of body  -> piece of lamb (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021137 .
+### skin of body  -> piece of lamb (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021136 .
+### skin of body  -> piece of light animal meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010213 .
+### skin of body  -> piece of light animal meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010211 .
+### skin of body  -> piece of light chicken meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020303 .
+### skin of body  -> piece of light chicken meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020301 .
+### skin of body  -> piece of light squab meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020771 .
+### skin of body  -> piece of light turkey meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020567 .
+### skin of body  -> piece of light turkey meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020565 .
+### skin of body  -> piece of pheasant breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020683 .
+### skin of body  -> piece of pheasant leg (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020681 .
+### skin of body  -> piece of pheasant meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022098 .
+### skin of body  -> piece of pheasant meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020669 .
+### skin of body  -> piece of pork meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021791 .
+### skin of body  -> piece of pork meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021793 .
+### skin of body  -> piece of quail breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020748 .
+### skin of body  -> piece of quail meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022100 .
+### skin of body  -> piece of ruffed grouse breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022363 .
+### skin of body  -> piece of sheep (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021266 .
+### skin of body  -> piece of sheep (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021265 .
+### skin of body  -> piece of squab meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020765 .
+### skin of body  -> piece of squab meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020767 .
+### skin of body  -> piece of turkey (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020431 .
+### skin of body  -> piece of turkey (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020430 .
+### skin of body  -> piece of turkey back (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020535 .
+### skin of body  -> piece of turkey back (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020537 .
+### skin of body  -> piece of turkey breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020539 .
+### skin of body  -> piece of turkey breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020541 .
+### skin of body  -> piece of turkey drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020533 .
+### skin of body  -> piece of turkey drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020531 .
+### skin of body  -> piece of turkey leg (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020529 .
+### skin of body  -> piece of turkey leg (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020527 .
+### skin of body  -> piece of turkey meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020465 .
+### skin of body  -> piece of turkey meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020467 .
+### skin of body  -> piece of turkey neck (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020547 .
+### skin of body  -> piece of turkey neck (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020545 .
+### skin of body  -> piece of turkey thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020551 .
+### skin of body  -> piece of turkey thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020549 .
+### skin of body  -> piece of turkey wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020555 .
+### skin of body  -> piece of turkey wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020553 .
+### skin of body  -> piece(s) of animal breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010292 .
+### skin of body  -> piece(s) of animal breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010300 .
+### skin of body  -> piece(s) of animal drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010291 .
+### skin of body  -> piece(s) of animal drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010299 .
+### skin of body  -> piece(s) of animal meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010219 .
+### skin of body  -> piece(s) of animal meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010218 .
+### skin of body  -> piece(s) of animal thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010290 .
+### skin of body  -> piece(s) of animal thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010298 .
+### skin of body  -> piece(s) of animal wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010293 .
+### skin of body  -> piece(s) of animal wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02010301 .
+### skin of body  -> piece(s) of bison meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020852 .
+### skin of body  -> piece(s) of bison meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020851 .
+### skin of body  -> piece(s) of chicken breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020354 .
+### skin of body  -> piece(s) of chicken breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020362 .
+### skin of body  -> piece(s) of chicken drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020353 .
+### skin of body  -> piece(s) of chicken drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020361 .
+### skin of body  -> piece(s) of chicken meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020307 .
+### skin of body  -> piece(s) of chicken meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020306 .
+### skin of body  -> piece(s) of chicken thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020352 .
+### skin of body  -> piece(s) of chicken thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020360 .
+### skin of body  -> piece(s) of chicken wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020355 .
+### skin of body  -> piece(s) of chicken wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020363 .
+### skin of body  -> piece(s) of goat meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021091 .
+### skin of body  -> piece(s) of goat meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021090 .
+### skin of body  -> piece(s) of lamb meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021202 .
+### skin of body  -> piece(s) of lamb meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021201 .
+### skin of body  -> piece(s) of pork meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021715 .
+### skin of body  -> piece(s) of turkey breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020619 .
+### skin of body  -> piece(s) of turkey breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020627 .
+### skin of body  -> piece(s) of turkey drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020618 .
+### skin of body  -> piece(s) of turkey drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020626 .
+### skin of body  -> piece(s) of turkey meat (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020573 .
+### skin of body  -> piece(s) of turkey meat (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020572 .
+### skin of body  -> piece(s) of turkey thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020617 .
+### skin of body  -> piece(s) of turkey thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020625 .
+### skin of body  -> piece(s) of turkey wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020620 .
+### skin of body  -> piece(s) of turkey wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020628 .
+### skin of body  -> pig carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021656 .
+### skin of body  -> pigeon carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020087 .
+### skin of body  -> poultry carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020691 .
+### skin of body  -> pumpkinseed sunfish fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021993 .
+### skin of body  -> pumpkinseed sunfish fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021995 .
+### skin of body  -> quail carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020735 .
+### skin of body  -> quail thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020744 .
+### skin of body  -> rainbow smelt fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021967 .
+### skin of body  -> rainbow smelt fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021969 .
+### skin of body  -> ruffed grouse carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022181 .
+### skin of body  -> sheep carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021260 .
+### skin of body  -> sockeye salmon fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021856 .
+### skin of body  -> sockeye salmon fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021858 .
+### skin of body  -> squab carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020758 .
+### skin of body  -> swordfish fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022006 .
+### skin of body  -> swordfish fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022008 .
+### skin of body  -> tilefish fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022019 .
+### skin of body  -> tilefish fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022021 .
+### skin of body  -> turkey breast (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020495 .
+### skin of body  -> turkey breast (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020497 .
+### skin of body  -> turkey carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020425 .
+### skin of body  -> turkey drumstick (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020501 .
+### skin of body  -> turkey drumstick (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020503 .
+### skin of body  -> turkey leg (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020509 .
+### skin of body  -> turkey leg (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020511 .
+### skin of body  -> turkey thigh (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_00003329 .
+### skin of body  -> turkey thigh (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_00003328 .
+### skin of body  -> turkey wing (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020505 .
+### skin of body  -> turkey wing (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02020507 .
+### skin of body  -> white sucker fillet (skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021980 .
+### skin of body  -> white sucker fillet (with skin)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02021982 .
+### skin of body  -> white-winged scoter duck carcass (raw, skinless)   [nested derives from]
+obo:UBERON_0002097 local:propagatesTo obo:FOODON_02022528 .
 
 
 # --- pinned free-text resolutions -------------------------------------------

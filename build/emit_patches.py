@@ -174,6 +174,7 @@ for o in ov["overrides"]:
                 declined=(typ == "declined"))
 
 pol = json.load(open("config/relation_policy.json"))
+pol_dir = {r["property"]: r["direction"] for r in pol["propagating_relations"]}
 store = json.load(open("data/resolution-store.json"))
 
 # ---- parallel-hierarchy correspondences --------------------------------------
@@ -342,6 +343,17 @@ species-rank taxon. Kept separate from local:propagatesTo because it belongs to 
 taxonomic phase of a query -- it fires from a class reached by is_a descent from the
 root, never from a derivative. Declared here so the vocabulary is documented in one
 place.\"\"\"@en .
+
+local:weaklyUnder a owl:ObjectProperty ;
+    rdfs:label "weakly under"@en ;
+    rdfs:comment \"\"\"The subject is treated as falling under the object for avoidance,
+on evidence WEAKER THAN A SUBSUMPTION. Two sources, neither of which any reasoner will
+turn into rdfs:subClassOf: a named class sitting inside a restriction filler, and an
+operand of `X subClassOf (A or B)` -- which says every X is an A or a B and refuses to
+say which. Recall-first: every X is under one of them, so treating it as under each is
+the direction that does not drop food from an avoidance list. Do NOT read it as
+containment or as classification; it exists so a consumer descends where the
+application descends.\"\"\"@en .
 
 local:propagatesTo a owl:ObjectProperty ;
     rdfs:label "propagates avoidance to"@en ;
@@ -516,6 +528,49 @@ for _r in sorted(_ROOTS, key=lambda x: lbl(x)):
         _seen_pair.add((_r, _k)); _seen_pair.add((_k, _r))
         A(f"### {lbl(_r)}  <->  {lbl(_k)}   [{_why}]")
         A(f"{curie(_r)} local:sameOrganismAs {curie(_k)} .")
+A("")
+
+A("\n# --- classes reached through a NESTED class expression -----------------------")
+A(wrap("FoodOn states some parents and some ingredient links INSIDE a class "
+       "expression -- a named class sitting in a restriction filler, or an operand of "
+       "`X subClassOf (A or B)`. No rdfs:subClassOf triple exists for these, and no "
+       "reasoner will infer one: `X <= A or B` says every X is an A or a B and refuses "
+       "to say which, and a class inside a filler is neither parent nor child. The "
+       "application extracts them anyway, on its own weaker edge kinds (`rel_nest`, "
+       "`isa_union`), because recall-first wants `imitation orange juice drink` "
+       "reachable from a citrus query. A SPARQL consumer walking rdfs:subClassOf "
+       "cannot see any of it, so it under-reported wherever they occur.", indent="# "))
+A(wrap("Taken FROM data/index.json rather than re-derived in SPARQL. The extraction "
+       "rule is 60 lines of tree-walking with a direction rule that has been wrong "
+       "before -- reading union operands as parents once collapsed fish and shellfish "
+       "into one 4,508-class query -- and a second implementation of it in SPARQL "
+       "would be a second thing to keep correct. One rule, one place.", indent="# "))
+A("")
+_IX = json.load(open("data/index.json"))
+_weak, _nestrel = [], []
+for _e in _IX["edges"]:
+    if _e.get("k") not in ("rel_nest", "isa_union"):
+        continue
+    if _e["p"] == "isa":
+        _weak.append((_e["s"], _e["o"], _e["k"]))
+    elif pol_dir.get(_e["p"]) == "inverse":
+        _nestrel.append((_e["o"], _e["s"], _e["p"]))     # source, product
+# Each weak subsumption is emitted TWICE, which mirrors exactly how an ordinary
+# rdfs:subClassOf is consumed. patch_closure.rq descends is_a in phase one (through
+# `^rdfs:subClassOf`) and again in phase two (through local:propagatesTo, which the
+# materialiser writes for every subclass edge). A weak parent has to be walkable in
+# both, or it works only when it happens to fall before the first derivation hop:
+# `citrus fruit` reached `imitation orange juice drink` with only the phase-one form
+# and `Citrus` did not, because from Citrus the same class sits one `derives from`
+# further along.
+for _c, _par, _k in sorted(_weak, key=lambda t: (lbl(t[1]).lower(), lbl(t[0]).lower())):
+    A(f"### {lbl(_par)}  -> {lbl(_c)}   [{_k}]")
+    A(f"{curie(_c)} local:weaklyUnder {curie(_par)} .")
+    A(f"{curie(_par)} local:propagatesTo {curie(_c)} .")
+A("")
+for _src, _prod, _p in sorted(_nestrel, key=lambda t: (lbl(t[0]).lower(), lbl(t[1]).lower())):
+    A(f"### {lbl(_src)}  -> {lbl(_prod)}   [nested {lbl(_p) or _p.rsplit('/',1)[-1]}]")
+    A(f"{curie(_src)} local:propagatesTo {curie(_prod)} .")
 A("")
 
 A("\n# --- pinned free-text resolutions -------------------------------------------")

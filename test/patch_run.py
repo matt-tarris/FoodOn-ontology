@@ -88,6 +88,25 @@ store = json.load(open("data/resolution-store.json"))
 _roots = sorted({r for e in store["entries"].values()
                  if e.get("status") == "resolved" for r in (e.get("roots") or [])})
 expected_same = {frozenset((cur(_a), cur(_b))) for _a, _b in g.all_correspondences()}
+
+# Edges the index extracts from inside a class expression. They trace to
+# data/index.json rather than to a decision file: nobody ruled on them, FoodOn stated
+# them in a shape rdfs:subClassOf cannot hold, and the extraction rule is the
+# governance. Checked BOTH ways like everything else, so a change to the extraction
+# that the export does not follow still fails here.
+_ixe = json.load(open("data/index.json"))["edges"]
+_pdir = {r["property"]: r["direction"]
+         for r in json.load(open("config/relation_policy.json"))["propagating_relations"]}
+for _e in _ixe:
+    if _e.get("k") not in ("rel_nest", "isa_union"):
+        continue
+    if _e["p"] == "isa":
+        # both forms: phase one descends local:weaklyUnder, phase two descends
+        # local:propagatesTo, exactly as an ordinary subclass edge is consumed
+        expected_as.add((cur(_e["s"]), "local:weaklyUnder", cur(_e["o"])))
+        expected_as.add((cur(_e["o"]), "local:propagatesTo", cur(_e["s"])))
+    elif _pdir.get(_e["p"]) == "inverse":
+        expected_as.add((cur(_e["o"]), "local:propagatesTo", cur(_e["s"])))
 ttl_same = {frozenset((t, v)) for t, p, v in assertions if p == "local:sameOrganismAs"}
 assertions = {(t, p, v) for t, p, v in assertions if p != "local:sameOrganismAs"}
 
@@ -149,21 +168,12 @@ if pairs_weak & pairs_cont:
 # classes at emit time (~5 min, ~4,400 extra triples) or materialising the pairing in
 # SPARQL, and which of those is right is a decision, not a bug fix. Printed every run
 # so it cannot quietly become permanent.
-# The unpinned-correspondence hole is CLOSED: the emitter now writes the whole
-# label-convention relation, not the part under a pinned root, and expected_same above
-# is computed from the same Graph method the application uses. Asserting an UNPINNED
-# root below -- `citrus fruit` -- is what keeps it closed.
-_nested_subjects = {_e["s"] for _e in json.load(open("data/index.json"))["edges"]
+# BOTH parity holes are closed, and the two roots that exposed them are asserted
+# below: `citrus fruit` because it is UNPINNED, which is what the correspondence fix
+# was about, and `Citrus` because it reaches a class defined inside a class
+# expression, which is what local:weaklyUnder is about.
+_nested_subjects = {_e["s"] for _e in _ixe
                     if _e.get("k") in ("rel_nest", "isa_union")}
-_nested = len(_nested_subjects)
-if _nested:
-    print(f"\nONE KNOWN PARITY HOLE remains: {_nested} classes with a nested-filler "
-          f"parent.")
-    print(f"  The index extracts these from unionOf and restriction fillers; a plain "
-          f"rdfs:subClassOf")
-    print(f"  path cannot see them, so SPARQL misses `imitation orange juice drink` on "
-          f"a Citrus query.")
-    print(f"  Printed every run so it cannot quietly become permanent.")
 
 print(f"round trip: {len(axioms)} containment axioms, {len(assertions)} local "
       f"assertions, {len(ttl_same)} organism correspondences, all traced to a "
@@ -182,9 +192,9 @@ else:
         "mustard plant": "FOODON_00002053",
         "Capsicum": "NCBITaxon_4071",
         # carries the five supplied `in taxon` links, so the bridges are proven on the
-        # consumer's side below and not merely asserted. Whole-root parity is not
-        # claimed for `Citrus` itself: it is the root that trips the nested-filler
-        # hole above, by exactly one class.
+        # consumer's side below and not merely asserted. It also reaches `imitation
+        # orange juice drink`, which FoodOn defines inside a class expression -- the
+        # case local:weaklyUnder exists for.
         "Citrus": "NCBITaxon_2706",
         # NOT PINNED, and that is the point. It is the root whose correspondence the
         # export used to drop, so parity here is the regression test for that fix.
@@ -232,22 +242,19 @@ else:
         print(f"{'root':<16} {'app':>7} {'sparql':>7} {'agree':>7}  {'diff':>6}")
         print("-" * 50)
         for name, frag in ROOTS.items():
-            if frag == "NCBITaxon_2706":
-                continue          # bridges asserted above; whole-root parity not claimed
             iri = "http://purl.obolibrary.org/obo/" + frag
             checks += 1
             py = set(g.closure([iri])[0]) - {iri}
             s = sp.get(iri, set())
-            # A class the index reached through a NESTED filler is the one known
-            # divergence, reported above. Attribute it by structure rather than by
-            # name: anything else diverging still fails, so this cannot become a
-            # blanket excuse.
-            excused = (py - s) & _nested_subjects
-            d = len((py ^ s) - excused)
+            # No divergence is excused any more. It used to be, for classes the
+            # index reached through a nested class expression; those are now exported
+            # as local:weaklyUnder and the walk follows them.
+            d = len(py ^ s)
+            nested_here = len((py | s) & _nested_subjects)
             print(f"{name:<16} {len(py):>7,} {len(s):>7,} {len(py & s):>7,}  {d:>6}"
-                  + (f"   ({len(excused)} nested-filler)" if excused else ""))
+                  + (f"   ({nested_here} via nested expr)" if nested_here else ""))
             if d:
-                only_py = [lbl(x) for x in list(py - s - excused)[:4]]
+                only_py = [lbl(x) for x in list(py - s)[:4]]
                 only_sp = [lbl(x) for x in list(s - py)[:4]]
                 fails.append(f"{name}: SPARQL and the app disagree on {d} classes "
                              f"(app-only {only_py}, sparql-only {only_sp})")
