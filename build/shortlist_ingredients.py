@@ -36,7 +36,11 @@ cur = lambda i: i.rsplit("/", 1)[-1].replace("_", ":", 1)
 # `red` and `white` as QUALITIES, and they were arriving as candidates for `red wine
 # vinegar` and `white wine vinegar` -- a reviewer clicking one would map an ingredient
 # to the colour of itself. BFO, PATO, OBI and the rest describe the world, not the menu.
-FOOD_NS = {"FOODON", "NCBITaxon", "CHEBI", "UBERON", "PO", "GAZ", "Q"}
+# GAZ is a GAZETTEER -- it carries `Chile` the COUNTRY, and four signed mappings
+# (`green chiles`, `red thai chile`, `red fresno chiles`, `red thai chiles`) landed on
+# it because the label matched. An ingredient mapped to a country never matches
+# anything, and reads as done. Q is Wikidata, same problem in a different shape.
+FOOD_NS = {"FOODON", "NCBITaxon", "CHEBI", "UBERON", "PO"}
 
 
 def usable(iri):
@@ -51,31 +55,48 @@ def entry(iri, why):
 
 
 # label index for word-subset search, built once
-WORDS = {}
+WORDS, STEMS = {}, {}
 for _i, _v in g.N.items():
     _l = (_v.get("l") or "").lower()
     if _l and not _v.get("dep") and _i not in g.excluded and usable(_i):
         WORDS[_i] = set(re.findall(r"[a-z]+", _l))
 
 
+
+def _stem0(w):
+    return w[:-1] if len(w) > 3 and w.endswith("s") else w
+
+
+for _i, _w in WORDS.items():
+    STEMS[_i] = {_stem0(x) for x in _w}
+
+
+def _stem(w):
+    return w[:-1] if len(w) > 3 and w.endswith("s") else w
+
+
 def word_subset(term, limit=4):
-    """Classes whose label contains every word of the term, in any order.
+    """Classes ranked by how much of the term they name, then by how little else.
 
-    Substring search misses what a cook actually writes. `rice vinegar` is not a
-    substring of `rice wine vinegar`, so the shortlist for the 129-use term offered
-    `vinegar` and `rice plant` and nothing else -- and the right class, FOODON:03307370,
-    sitting directly under `wine vinegar`, was never shown. Matt found it by hand.
+    Score is (words covered, -extra words), maximised in that order -- not a level
+    search. Levels picked the wrong thing twice: `frozen peas` matched `rice and peas
+    (frozen)` (covers both, and drags in rice) before it ever reached `pea (frozen)`,
+    and nothing at all matched `cracked black pepper` whole, leaving black pepper
+    pointed at Capsicum.
 
-    Ranked by FEWEST EXTRA WORDS, so the most specific match that still contains
-    everything asked for comes first.
+    Stemmed, because recipes pluralise and FoodOn does not: `tortillas` is not
+    `tortilla`, `peas` is not `pea`, and both cost a correct answer.
     """
-    want = set(re.findall(r"[a-z]+", term))
-    if not want:
+    words = {_stem(w) for w in re.findall(r"[a-z]+", term)}
+    if not words:
         return []
-    hits = [(len(w - want), i) for i, w in WORDS.items() if want <= w]
-    hits.sort()
-    return [(i, n) for n, i in hits[:limit]]
-
+    scored = []
+    for i, w in STEMS.items():
+        cov = len(words & w)
+        if cov:
+            scored.append((-cov, len(w - words), i))
+    scored.sort()
+    return [(i, extra) for _c, extra, i in scored[:limit]]
 
 def shortlist(e):
     """Most specific first, then anything a reviewer might reasonably prefer.
@@ -105,14 +126,16 @@ def shortlist(e):
         for i, extra in word_subset(term):
             if extra <= 1:
                 push(i, f"names everything in `{term}`")
-    # 1b. a SIGNED entry carries no proposal and no candidates -- only what it already
-    #     maps to. Without this the correction view offered "FoodOn has no class for
-    #     this" on 87 mappings that plainly have one.
+    # A SIGNED entry's current mapping goes in the list but NOT at the front: the
+    # correction view exists to surface something better, and putting the incumbent
+    # first made it the recommendation again on every row.
     if e.get("maps_to_iri"):
-        push(e["maps_to_iri"], "currently mapped here")
+        later = [(e["maps_to_iri"], "currently mapped here")]
     elif e.get("maps_to"):
-        for i in r.resolve(e["maps_to"]).get("roots") or []:
-            push(i, "currently mapped here")
+        later = [(i, "currently mapped here")
+                 for i in r.resolve(e["maps_to"]).get("roots") or []]
+    else:
+        later = []
     # 2. what the model proposed, as classes
     if e.get("proposed"):
         res = r.resolve(e["proposed"])
@@ -128,6 +151,8 @@ def shortlist(e):
         for i in res.get("roots") or []:
             push(i, ("dropping `" + (c.get("dropped") or "") + "`") if c.get("risky")
                  else f"lexical: `{c['term']}`")
+    for i, why in later:
+        push(i, why)
     # 4. lexical neighbours, so neither the model nor the existing mapping is the
     #    only option on screen
     for term in (e["term"], strip_qualifiers(e["term"])):

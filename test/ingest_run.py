@@ -193,6 +193,17 @@ try:
             fails.append("approved a mapping to an excluded-branch class, which can "
                          "never match a query")
 
+    # A shortlist must never offer a class outside a food namespace. Four signed
+    # mappings landed on GAZ `Chile` -- the COUNTRY -- because the label matched, and
+    # an ingredient mapped to a country never matches anything while reading as done.
+    checks += 1
+    bad_ns = [(e["term"], c["curie"]) for e in A.ingredients()["queue"]
+              for c in (e.get("shortlist") or [])
+              if c["curie"].split(":")[0] not in
+                 {"FOODON", "NCBITaxon", "CHEBI", "UBERON", "PO"}]
+    if bad_ns:
+        fails.append(f"shortlists offer classes outside a food namespace: {bad_ns[:3]}")
+
     # an id that is not a class in this release must be refused
     checks += 1
     nope = A.review_ingredients([after["queue"][0]["term"]], "approve", who="test",
