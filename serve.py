@@ -151,8 +151,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path == "/api/audit/preview":
+            # accepts either shape: a statement (subject/predicate/object) or an
+            # override (target_class/claim/query_roots). The second is the one that
+            # had no preview, and is where a wrong IRI used to land in silence.
             try:
-                return self._send(audit_model.preview(self._body(), graph=GRAPH))
+                p = self._body()
+                if p.get("predicate"):
+                    return self._send(audit_model.preview(p, graph=GRAPH))
+                return self._send(audit_model.preview_override(p, graph=GRAPH))
             except audit_model.EditError as e:
                 return self._send({"error": str(e)}, 400)
         if parsed.path == "/api/audit/edit":
@@ -165,6 +171,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             except Exception:
                 traceback.print_exc()
                 return self._send({"error": "edit failed; see the server log"}, 500)
+            impact = (audit_model.impact_of(p.get("payload") or {})
+                      if p.get("action") in ("add_override", "edit_override") else None)
             log, stale = audit_model.regenerate(files)
             _audit["log"] = log
             if not all(x["ok"] for x in log):
@@ -174,7 +182,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             _audit["sparql_stale"] = stale
             reload_graph()
             return self._send({"ok": True, "files": files, "log": log,
-                               "audit": audit_data()})
+                               "impact": impact, "audit": audit_data()})
         if parsed.path == "/api/audit/ingredients/review":
             try:
                 p = self._body()

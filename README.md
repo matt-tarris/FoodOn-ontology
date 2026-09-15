@@ -1112,6 +1112,19 @@ labels then synonyms and shows each candidate's closure size, because that is th
 number that decides whether a candidate is the right grain — FoodOn's own `tree nut`
 class looks perfect and reaches 2 classes.
 
+**Every write path previews, including the override forms.** An override is a statement
+wearing different field names — a target, a claim, some query roots — so
+`/api/audit/preview` takes either shape and both get the same answer from the same code.
+Adding or editing a claim shows what it would do to each of its query roots before it is
+saved, and changing the claim type re-previews: `contains` reports what a query gains,
+`remove` what it loses, and a weak claim says *reported beside the graph, not in it*.
+
+That path had no preview until a suppression I wrote landed on `chicken meat food
+product` in silence. `FOODON:00001040` is a real class, so nothing objected, and a
+red-meat query kept all 828 of its dairy classes. **The target field is now a class
+picker rather than an IRI box** — both silent mis-writes in this layer came from typing
+an IRI that named a real but wrong class.
+
 **Nothing is saved without a preview.** `/api/audit/preview` applies the statement to an
 in-memory graph — the same mutations `traverse.py` makes when it loads a decision file,
 so a preview cannot drift from what saving does — and reports which pinned ingredients

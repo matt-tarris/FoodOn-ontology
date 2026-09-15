@@ -150,6 +150,41 @@ checks += 1
 if not A.lookup("sesame plant"):
     fails.append("lookup found nothing for an exact class label")
 
+# ---- the override path previews too ------------------------------------------
+# An override is a statement wearing different field names, and preview() answers both
+# from the same code. It had no preview until a suppression landed on `chicken meat
+# food product` in silence: FOODON:00001040 is a real class, so nothing objected, and
+# a red-meat query kept all 828 of its dairy classes.
+_IRI = "http://purl.obolibrary.org/obo/"
+checks += 1
+try:
+    right = A.preview_override(dict(type="remove", claim="not_avoidance_relevant",
+        target_class=_IRI + "UBERON_0001913",
+        query_roots=[_IRI + "FOODON_00001006"]))        # mammalian meat food product
+    wrong = A.preview_override(dict(type="remove", claim="not_avoidance_relevant",
+        target_class=_IRI + "UBERON_0001913",
+        query_roots=[_IRI + "FOODON_00001040"]))        # chicken meat food product
+    if right["roots"][0]["root"] == wrong["roots"][0]["root"]:
+        fails.append("the override preview cannot tell two different roots apart")
+except Exception as e:
+    fails.append(f"preview_override raised {type(e).__name__}: {e}")
+
+# a weak claim must preview as reported-only, never as a closure change
+checks += 1
+weak = A.preview_override(dict(claim="may_contain", target_class=_IRI + "CHEBI_30769",
+                               query_roots=[_IRI + "NCBITaxon_4070"]))
+if weak["enters"] is not False:
+    fails.append("a may_contain override previewed as entering the closure")
+
+# and a claim with no statement form must say so rather than silently previewing nothing
+checks += 1
+try:
+    A.preview_override(dict(claim="not a claim type", target_class=_IRI + "CHEBI_30769",
+                            query_roots=[_IRI + "NCBITaxon_4070"]))
+    fails.append("previewed an override whose claim has no statement form")
+except A.EditError:
+    pass
+
 print(f"{len(d['cards'])} ingredient dossiers, "
       f"{sum(len(c['decisions']) for c in d['cards'])} decisions attributed, "
       f"{len(d['rest'])} not tied to one ingredient")

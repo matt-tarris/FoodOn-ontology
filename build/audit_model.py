@@ -152,7 +152,11 @@ def _decorate(d, L, cur):
     d["tgt_label"] = d.get("tgt_label") or (L(d["tgt"]) if d.get("tgt") else None)
     d["src_label"] = L(d["src"]) if d.get("src") else None
     d["tgt_curie"] = cur(d.get("tgt")); d["src_curie"] = cur(d.get("src"))
-    d.pop("roots", None)
+    # override rows KEEP their roots: the audit UI needs them to preview an edit, and
+    # an edit whose impact cannot be previewed is how a suppression lands on the wrong
+    # class in silence.
+    if d.get("kind") != "override":
+        d.pop("roots", None)
     return d
 
 
@@ -246,6 +250,14 @@ def _edit_override(p, who):
     o["reviewed_by"] = who; o["reviewed_date"] = TODAY()
     _write(OVERRIDES, d)
     return [OVERRIDES]
+
+
+def impact_of(o):
+    """Best-effort impact for the response. Never blocks a write that validated."""
+    try:
+        return preview_override(o)
+    except Exception:
+        return None
 
 
 def _add_override(p, who):
@@ -745,3 +757,56 @@ def review_ingredients(terms, action, who="Matt", target=None, reason=None,
                                 if e["term"] not in handled]
     _write(INGREDIENT_MAP, spec)
     return dict(done=done, skipped=skipped, files=[INGREDIENT_MAP])
+
+
+# ---------------------------------------------------------------- override preview
+# An override IS a statement wearing a different set of field names: a target, a claim
+# and some query roots. Mapping one onto the other lets the same preview() answer both
+# -- a second implementation would be a second thing to keep honest, and the whole
+# reason the preview exists is that a wrong IRI is invisible without it. Twice while
+# building this layer I hand-wrote an IRI that named a real but wrong class:
+# FOODON:00001040 is `chicken meat food product`, not `mammalian meat food product`, and
+# the suppression landed on chicken in silence.
+CLAIM_PREDICATE = {
+    "contains": "derives from",
+    "is a": "is a",
+    "in taxon": "in taxon",
+    "may_contain": "may derive from",
+    "shared_compound": "shares compound with",
+    "cross_reactive": "cross reactive with",
+    "disputed": "disputed for",
+    "not_avoidance_relevant": "not relevant for",
+}
+
+
+def as_statements(o):
+    """An override payload as one statement per query root."""
+    claim = o.get("claim")
+    if o.get("type") == "remove" and not claim:
+        claim = "not_avoidance_relevant"
+    pred = CLAIM_PREDICATE.get(claim)
+    if not pred:
+        raise EditError(f"`{claim}` has no statement form, so it cannot be previewed")
+    tgt = o.get("target_class")
+    if not tgt:
+        raise EditError("nothing to preview: no target class")
+    return [dict(predicate=pred, subject=tgt, object=root) for root in roots_of(o)]
+
+
+def preview_override(o, graph=None):
+    """What an override would do, per query root, before it is written."""
+    g = graph or Graph()
+    L = lambda i: (g.N.get(i, {}) or {}).get("l") or i
+    out = dict(target=L(o.get("target_class")) if o.get("target_class") else None,
+               claim=o.get("claim"), roots=[], enters=None)
+    stmts = as_statements(o)
+    for st in stmts:
+        p = preview(st, graph=g)
+        out["enters"] = p["enters"]
+        out["roots"].append(dict(root=L(st["object"]), root_iri=st["object"],
+                                 note=p.get("note"), already=p.get("already", False),
+                                 changes=p.get("changes", [])))
+    if not stmts:
+        out["note"] = ("no query roots, so there is nothing to preview -- a claim is a "
+                       "statement about what a particular query returns")
+    return out

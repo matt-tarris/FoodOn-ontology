@@ -130,7 +130,9 @@ const FIELD = {
     ["confidence", "select", "confidence", false, ["high","medium","low"]],
     ["review_note", "textarea", "review note", false]],
   add_override: () => [
-    ["target_class", "text", "target class IRI — the thing to report or avoid", true],
+    // a PICKER, not an IRI field: both silent mis-writes in this layer came from
+    // hand-typing an IRI that named a real but wrong class
+    ["target_class", "pick", "the thing to report or avoid", true],
     ["claim", "select", "claim type", true, Object.keys(DATA.claim_types || {})],
     ["reason", "textarea", "reason", true],
     ["confidence", "select", "confidence", false, ["high","medium","low"]],
@@ -143,13 +145,19 @@ const FIELD = {
 function formHTML(act, prefill) {
   const rows = FIELD[act]().map(([k, type, label, req, opts]) => {
     const v = esc((prefill || {})[k] ?? "");
-    const input = type === "textarea" ? `<textarea name="${k}"${req?" required":""}>${v}</textarea>`
+    const input = type === "pick"
+      ? `<input class="pick" name="${k}" autocomplete="off" value="${v}"
+                placeholder="type a class name\u2026" data-iri="">
+         <div class="hits" hidden></div>`
+      : type === "textarea" ? `<textarea name="${k}"${req?" required":""}>${v}</textarea>`
       : type === "select" ? `<select name="${k}">${(opts||[]).map(o =>
           `<option${o===(prefill||{})[k]?" selected":""}>${esc(o)}</option>`).join("")}</select>`
       : `<input name="${k}" value="${v}"${req?" required":""}>`;
     return `<label>${esc(label)}${req?" *":""}${input}</label>`;
   }).join("");
-  return `<form class="ed">${rows}<div class="msg" data-msg></div>
+  return `<form class="ed">${rows}
+    <div class="prev" data-prev>Pick a class to see what this would change.</div>
+    <div class="msg" data-msg></div>
     <div class="acts"><button class="btn go" type="submit">Save</button>
       <button class="btn" type="button" data-cancel>Cancel</button></div></form>`;
 }
@@ -239,6 +247,18 @@ document.addEventListener("click", (ev) => {
   slot.dataset.open = act;
   const form = slot.querySelector("form");
   form.querySelector("[data-cancel]").onclick = () => { slot.innerHTML = ""; slot.dataset.open = ""; };
+  if (act === "add_override" || act === "edit_override") {
+    const roots = act === "add_override"
+      ? JSON.parse(b.dataset.roots || "[]")
+      : (allDecisions().find(x => x.kind === "override" && String(x.id) === b.dataset.id)?.roots || []);
+    const fixedTarget = act === "edit_override"
+      ? allDecisions().find(x => x.kind === "override" && String(x.id) === b.dataset.id)?.tgt
+      : null;
+    wireOverridePreview(form, () => ({
+      target_class: fixedTarget || form.target_class?.dataset.iri || null,
+      claim: form.claim ? form.claim.value : prefill.claim,
+      type: prefill.type, query_roots: roots}));
+  }
   form.onsubmit = async (e) => {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(form).entries());
@@ -248,8 +268,12 @@ document.addEventListener("click", (ev) => {
       payload = {kind: b.dataset.kind, id: b.dataset.id, rationale: f.rationale};
     else if (act === "edit_override") payload = {id: b.dataset.id, fields: f};
     else if (act === "edit_pin")      payload = {query: b.dataset.query, fields: f};
-    else if (act === "add_override")
-      payload = {...f, query_roots: JSON.parse(b.dataset.roots), query_class: b.dataset.name};
+    else if (act === "add_override") {
+      const iri = form.target_class?.dataset.iri;
+      if (!iri) { msg.textContent = "pick the target class from the suggestion list"; return; }
+      payload = {...f, target_class: iri,
+                 query_roots: JSON.parse(b.dataset.roots), query_class: b.dataset.name};
+    }
     await send(act === "decline" ? "decline" : act, payload, msg);
   };
 });
@@ -299,17 +323,7 @@ function statementForm(prefill) {
       <button class="btn" type="button" data-cancel>Cancel</button></div></form>`;
 }
 
-function wireStatement(form, onSave) {
-  const help = form.querySelector(".phelp");
-  const sel = form.predicate;
-  const showHelp = () => {
-    const v = VOCAB.predicates[sel.value];
-    help.innerHTML = `<b>${esc(v.subject)}</b> ${ARR} <b>${esc(v.object)}</b> &middot; ${esc(v.obo)}
-      <div>${esc(v.help)}</div>`;
-  };
-  sel.onchange = () => { showHelp(); doPreview(); };
-  showHelp();
-
+function wirePickers(form, onPick) {
   form.querySelectorAll(".pick").forEach(inp => {
     const box = inp.parentElement.querySelector(".hits");
     let timer;
@@ -334,9 +348,64 @@ function wireStatement(form, onSave) {
       const b = e.target.closest(".hit[data-iri]");
       if (!b) return;
       inp.value = b.dataset.label; inp.dataset.iri = b.dataset.iri;
-      box.hidden = true; doPreview();
+      box.hidden = true;
+      if (onPick) onPick();
     };
   });
+}
+
+/* The override forms preview too. An override is a statement wearing different field
+ * names -- a target, a claim, some query roots -- and /api/audit/preview takes either
+ * shape, so both get the same answer from the same code. This path had no preview
+ * until a suppression landed on `chicken meat food product` in silence: FOODON:00001040
+ * is a real class, so nothing objected, and red meat kept all 828 dairy classes. */
+function wireOverridePreview(form, getPayload) {
+  const prev = form.querySelector("[data-prev]");
+  if (!prev) return;
+  const run = async () => {
+    const p = getPayload();
+    if (!p || !p.target_class || !(p.query_roots || []).length) {
+      prev.className = "prev";
+      prev.textContent = "Pick a class from the list to see what this would change.";
+      return;
+    }
+    prev.className = "prev busy"; prev.textContent = "checking\u2026";
+    const r = await fetch("/api/audit/preview", {method: "POST",
+      headers: {"Content-Type": "application/json"}, body: JSON.stringify(p)});
+    const j = await r.json();
+    if (!r.ok) { prev.className = "prev bad"; prev.textContent = j.error; return; }
+    let moved = false;
+    const lines = (j.roots || []).map(root => {
+      if ((root.changes || []).length) {
+        moved = true;
+        return `<div><b>${esc(root.root)}</b>: ` + root.changes.map(c =>
+          `${esc(c.ingredient)} <b>${c.gained ? "+" + c.gained : "\u2212" + c.lost}</b>`
+        ).join(", ") + `</div>`;
+      }
+      return `<div><b>${esc(root.root)}</b>: <span class="ids">${
+        esc(root.note || "no change")}</span></div>`;
+    });
+    prev.className = moved ? "prev hit" : "prev";
+    prev.innerHTML = (j.enters === false
+      ? "<b>Reported beside the graph, not in it.</b> " : "") + lines.join("");
+  };
+  wirePickers(form, run);
+  form.addEventListener("change", run);
+  run();
+}
+
+function wireStatement(form, onSave) {
+  const help = form.querySelector(".phelp");
+  const sel = form.predicate;
+  const showHelp = () => {
+    const v = VOCAB.predicates[sel.value];
+    help.innerHTML = `<b>${esc(v.subject)}</b> ${ARR} <b>${esc(v.object)}</b> &middot; ${esc(v.obo)}
+      <div>${esc(v.help)}</div>`;
+  };
+  sel.onchange = () => { showHelp(); doPreview(); };
+  showHelp();
+
+  wirePickers(form, () => doPreview());
 
   const prev = form.querySelector("[data-prev]");
   async function doPreview() {
