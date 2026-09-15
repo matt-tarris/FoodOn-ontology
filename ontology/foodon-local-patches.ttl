@@ -3021,7 +3021,7 @@ local:patch-c1085192f1cf a local:Patch ;
 
 
 # =============================================================================
-# Claims that are NOT containment   (71)
+# Claims that are NOT containment   (72)
 # =============================================================================
 # Emitted on local properties, never on RO:0001000. Read the property
 # comments before consuming these. Entries marked DECLINED were reviewed and
@@ -3047,6 +3047,31 @@ local:patch-5d8ad720c664 a local:Patch ;
     local:patchClaim "may_contain" ;
     local:patchQuery "Corn" ;
     rdfs:comment "synthesised from glucose, feedstock often corn" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### buckwheat noodle  --mayDeriveFrom-->  wheat plant
+#   evidence:   proportion varies by producer and is not a property of the noodle; the pack states it, the ontology cannot
+#   confidence: high
+#   claim:      may_contain
+#   query:      wheat plant
+#   reviewer:   Matt
+#   Soba is a buckwheat noodle and buckwheat is not a grass, so the class is
+#   correctly outside the gluten closure. But most commercial soba is cut with
+#   wheat flour -- often the majority of it -- and juwari (100% buckwheat)
+#   soba is the exception a package has to declare. The identity is buckwheat;
+#   the wheat is a producer choice, which is exactly what may_contain is for.
+obo:FOODON_03309979 local:mayDeriveFrom obo:FOODON_03411312 .
+local:patch-4c4d0c035b3d a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03309979 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchEvidence "proportion varies by producer and is not a property of the noodle; the pack states it, the ontology cannot" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "wheat plant" ;
+    rdfs:comment "Soba is a buckwheat noodle and buckwheat is not a grass, so the class is correctly outside the gluten closure. But most commercial soba is cut with wheat flour -- often the majority of it -- and juwari (100% buckwheat) soba is the exception a package has to declare. The identity is buckwheat; the wheat is a producer choice, which is exactly what may_contain is for." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 

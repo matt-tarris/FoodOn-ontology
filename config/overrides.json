@@ -1022,6 +1022,27 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-15",
       "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "wheat plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312"
+      ],
+      "query_root_labels": [
+        "wheat plant"
+      ],
+      "target_label": "buckwheat noodle",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03309979",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Soba is a buckwheat noodle and buckwheat is not a grass, so the class is correctly outside the gluten closure. But most commercial soba is cut with wheat flour -- often the majority of it -- and juwari (100% buckwheat) soba is the exception a package has to declare. The identity is buckwheat; the wheat is a producer choice, which is exactly what may_contain is for.",
+      "source": "proportion varies by producer and is not a property of the noodle; the pack states it, the ontology cannot",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
     }
   ],
   "entry_types": {

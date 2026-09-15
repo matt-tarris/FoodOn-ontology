@@ -740,6 +740,18 @@ bread`, `butter and egg bread` and six more were reachable *only* through the bo
 path. FoodOn asserts no egg source on any of them, so the bug was masking a real gap
 rather than the fix creating one. They belong in the bridge queue.
 
+**Soba is the shape of a `may_contain`.** Soba is a buckwheat noodle, buckwheat is not
+a grass, and the class sits correctly outside the gluten closure — so a coeliac filter
+passes it. But most commercial soba is cut with wheat flour, often the majority of it,
+and 100% buckwheat soba is the exception a package has to declare.
+
+The identity is buckwheat and the wheat is a producer's choice, which is precisely the
+line `may_contain` draws. Mapping the ingredient to a wheat class would assert a
+containment that is false of the noodle; leaving it silent would hand a coeliac a bowl
+of it. So `buckwheat noodle may_contain wheat plant` is **reported beside the graph and
+never in it** — a gluten or wheat query shows it under *Reported, not traversed*, with
+the reason, and the closure is unchanged.
+
 **Absent is an answer.** Roughly two thirds of everyday allergen vocabulary has no
 FoodOn class at all. The resolver says so rather than resolving to something
 approximate.
