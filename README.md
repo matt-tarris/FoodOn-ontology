@@ -917,7 +917,8 @@ parmesan                197       ->  (no candidate, needs a human)
 
 ### Sweeping for the wrong family
 
-Two sweeps over the 5,000-recipe corpus, run against every major avoidance family. The
+`build/audit/family_sweep.py` — two sweeps over a recipe corpus, run against every major
+avoidance family, and worth re-running after any change to the mappings. The
 first asks which ingredients land in a family their name does not suggest — that caught
 black pepper pointing at Capsicum, and `panko → breadcrumbs` landing in **poultry**,
 which turned out to be the nested-union extraction bug. It is now clean: every remaining
@@ -942,6 +943,17 @@ Pointing the unqualified culinary terms at the wheat classes — the same judgem
 remaining 160 are almost all genuinely gluten-free: `rice flour`, `chickpea flour`,
 `buckwheat noodle`. That is the other half of the judgement, and the golden case asserts
 both halves: the default must catch `flour`, and must not swallow `rice flour`.
+
+**Both sweeps are now clean.** Working through what they found — black pepper out of
+the nightshade family, the nested-union extraction bug, the gluten defaults, six
+ingredients out of `Chile` the country, mayonnaise, and a last batch of seven orphans —
+took the misses sweep from 27 rows to 12, and **all 12 are cue-word noise**:
+`lemongrass` is not citrus, `almond flour` and `quinoa flour` are correctly not gluten,
+`apple butter` and `butter beans` are not dairy, `oyster mushrooms` are not molluscs.
+
+The sweeps keep their noise on purpose. A cue list tight enough to produce no false
+flags would be a cue list that stops finding things, and every real defect this project
+has found came from reading a noisy list rather than from a clean one.
 
 ### The proposals
 
