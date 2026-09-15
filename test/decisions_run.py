@@ -106,6 +106,24 @@ for m in json.load(open("config/ingredient-map.json")).get("mappings", []):
                      f"`{label(iri)}`, which is in an excluded branch and can never "
                      f"match a query")
 
+# ---- a mapping must point at a FOOD ------------------------------------------
+# The label/IRI pair cannot catch this one: GAZ:00002825 is labelled `Chile`, and so is
+# the country a reviewer never meant. Six signed mappings pointed at it -- `green
+# chiles`, `red thai chile` and four more -- because the label matched exactly. An
+# ingredient mapped to a country never matches anything, and reads as done.
+FOOD_NS = {"FOODON", "NCBITaxon", "CHEBI", "UBERON", "PO"}
+for m in json.load(open("config/ingredient-map.json")).get("mappings", []):
+    iri = m.get("maps_to_iri")
+    if not iri:
+        continue
+    checks += 1
+    ns = iri.rsplit("/", 1)[-1].split("_")[0]
+    if ns not in FOOD_NS:
+        fails.append(f"config/ingredient-map.json: `{m['term']}` maps to {ns} "
+                     f"`{m.get('maps_to')}`, which is not a food namespace -- GAZ is a "
+                     f"gazetteer and Q is Wikidata, and a label match there is a "
+                     f"coincidence, not a mapping")
+
 # ---- signed means signed ------------------------------------------------------
 for path, key, who in [("config/taxon-bridges.json", "signed_off", "signed_off_by"),
                        ("data/mined-classified.json", "signed_off", "signed_off_by")]:

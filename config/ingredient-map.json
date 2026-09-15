@@ -7938,54 +7938,6 @@
       ]
     },
     {
-      "term": "green chiles",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
-      "maps_to": "Chile",
-      "uses": 6,
-      "root_labels": [
-        "Chile"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": null,
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002684",
-          "label": "mustard greens",
-          "curie": "FOODON:00002684",
-          "why": "names everything in `green chiles`",
-          "closure": 5,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003765",
-          "label": "green tomato",
-          "curie": "FOODON:00003765",
-          "why": "names everything in `green chiles`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003885",
-          "label": "mixed greens",
-          "curie": "FOODON:00003885",
-          "why": "names everything in `green chiles`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00005616",
-          "label": "green lentil",
-          "curie": "FOODON:00005616",
-          "why": "names everything in `green chiles`",
-          "closure": 3,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "semi-pearled farro",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00004701",
       "maps_to": "farro food product",
@@ -8501,54 +8453,6 @@
           "curie": "CHEBI:24868",
           "why": "names everything in `salt taste`",
           "closure": 10,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "red thai chile",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
-      "maps_to": "Chile",
-      "uses": 6,
-      "root_labels": [
-        "Chile"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": null,
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002794",
-          "label": "red banana",
-          "curie": "FOODON:00002794",
-          "why": "names everything in `red thai chile`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003103",
-          "label": "red crowberry",
-          "curie": "FOODON:00003103",
-          "why": "names everything in `red thai chile`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003516",
-          "label": "red onion",
-          "curie": "FOODON:00003516",
-          "why": "names everything in `red thai chile`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003729",
-          "label": "red raspberry",
-          "curie": "FOODON:00003729",
-          "why": "names everything in `red thai chile`",
-          "closure": 7,
           "excluded": false
         }
       ]
@@ -9218,102 +9122,6 @@
       ]
     },
     {
-      "term": "red fresno chiles",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
-      "maps_to": "Chile",
-      "uses": 5,
-      "root_labels": [
-        "Chile"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": null,
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002794",
-          "label": "red banana",
-          "curie": "FOODON:00002794",
-          "why": "names everything in `red fresno chiles`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003103",
-          "label": "red crowberry",
-          "curie": "FOODON:00003103",
-          "why": "names everything in `red fresno chiles`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003516",
-          "label": "red onion",
-          "curie": "FOODON:00003516",
-          "why": "names everything in `red fresno chiles`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003729",
-          "label": "red raspberry",
-          "curie": "FOODON:00003729",
-          "why": "names everything in `red fresno chiles`",
-          "closure": 7,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "red thai chiles",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
-      "maps_to": "Chile",
-      "uses": 5,
-      "root_labels": [
-        "Chile"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": null,
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002794",
-          "label": "red banana",
-          "curie": "FOODON:00002794",
-          "why": "names everything in `red thai chiles`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003103",
-          "label": "red crowberry",
-          "curie": "FOODON:00003103",
-          "why": "names everything in `red thai chiles`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003516",
-          "label": "red onion",
-          "curie": "FOODON:00003516",
-          "why": "names everything in `red thai chiles`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003729",
-          "label": "red raspberry",
-          "curie": "FOODON:00003729",
-          "why": "names everything in `red thai chiles`",
-          "closure": 7,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "cracked black pepper",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
       "maps_to": "black pepper food product",
@@ -9620,6 +9428,98 @@
       "corrected_from": "noodle",
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03306944",
       "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "green chiles",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+      "maps_to": "chili pepper",
+      "uses": 6,
+      "root_labels": [
+        "chili pepper"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "corrected_from": "Chile",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "red thai chile",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+      "maps_to": "chili pepper",
+      "uses": 6,
+      "root_labels": [
+        "chili pepper"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "corrected_from": "Chile",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "red fresno chiles",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+      "maps_to": "chili pepper",
+      "uses": 5,
+      "root_labels": [
+        "chili pepper"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "corrected_from": "Chile",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "red thai chiles",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+      "maps_to": "chili pepper",
+      "uses": 5,
+      "root_labels": [
+        "chili pepper"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "corrected_from": "Chile",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "chile",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+      "maps_to": "chili pepper",
+      "uses": null,
+      "root_labels": [
+        "chili pepper"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "chiles",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+      "maps_to": "chili pepper",
+      "uses": null,
+      "root_labels": [
+        "chili pepper"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
       "signed_off_by": "Matt",
       "signed_off_date": "2026-09-15"
     }
