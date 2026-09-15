@@ -2563,7 +2563,7 @@ local:patch-f7eeee07b2fb a local:Patch ;
 
 
 # =============================================================================
-# Reviewed containment claims FoodOn cannot make   (7)
+# Reviewed containment claims FoodOn cannot make   (8)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a
 # condiment`, `casein is_a protein extract` -- and asserts no source. These
@@ -2694,6 +2694,34 @@ local:patch-e118d150686f a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "Egg" ;
     rdfs:comment "food-grade lysozyme is hen egg white lysozyme. FoodOn models this class but parents it by function (food additive) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### rye bread food product  --RO:0001000-->  rye plant
+#   evidence:   FoodOn asserts no source on the class; the variants beneath it are all reached through the rye plant
+#   confidence: high
+#   claim:      contains
+#   query:      rye plant
+#   reviewer:   Matt
+#   `rye bread food product` carries no derives-from at all, so a gluten query
+#   reached every rye bread VARIANT (raisin rye, whole grain rye, rye bread
+#   (enriched)) and not the product class itself. The label-convention repair
+#   pass could not see it because the convention it follows is `<X> food
+#   product -> <X> plant` and the source here is named `rye`, not `rye bread`.
+obo:FOODON_00002214 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411313 ] .
+local:patch-a7c9d155c9f3 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00002214 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411313 ;
+    local:patchEvidence "FoodOn asserts no source on the class; the variants beneath it are all reached through the rye plant" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "rye plant" ;
+    rdfs:comment "`rye bread food product` carries no derives-from at all, so a gluten query reached every rye bread VARIANT (raisin rye, whole grain rye, rye bread (enriched)) and not the product class itself. The label-convention repair pass could not see it because the convention it follows is `<X> food product -> <X> plant` and the source here is named `rye`, not `rye bread`." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 

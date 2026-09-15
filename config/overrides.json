@@ -812,6 +812,27 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-15",
       "review_note": "signed: does NOT apply to the alpha-gal pin, which keeps `mammal` as its root precisely so that dairy stays in. Alpha-gal is present in mammalian milk; red meat as a culinary choice is not about milk at all."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "rye plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411313"
+      ],
+      "query_root_labels": [
+        "rye plant"
+      ],
+      "target_label": "rye bread food product",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00002214",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "`rye bread food product` carries no derives-from at all, so a gluten query reached every rye bread VARIANT (raisin rye, whole grain rye, rye bread (enriched)) and not the product class itself. The label-convention repair pass could not see it because the convention it follows is `<X> food product -> <X> plant` and the source here is named `rye`, not `rye bread`.",
+      "source": "FoodOn asserts no source on the class; the variants beneath it are all reached through the rye plant",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
     }
   ],
   "entry_types": {

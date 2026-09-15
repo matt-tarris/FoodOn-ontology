@@ -3527,54 +3527,6 @@
       ]
     },
     {
-      "term": "flour tortillas",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00004510",
-      "maps_to": "flour",
-      "uses": 16,
-      "root_labels": [
-        "flour"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": null,
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03307944",
-          "label": "tortilla flour",
-          "curie": "FOODON:03307944",
-          "why": "names everything in `flour tortillas`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00004510",
-          "label": "flour",
-          "curie": "FOODON:00004510",
-          "why": "names everything in `flour tortillas`",
-          "closure": 125,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03307668",
-          "label": "tortilla",
-          "curie": "FOODON:03307668",
-          "why": "names everything in `flour tortillas`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002207",
-          "label": "rice flour",
-          "curie": "FOODON:00002207",
-          "why": "names everything in `flour tortillas`",
-          "closure": 11,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "sweet italian sausage",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03317294",
       "maps_to": "italian sausage",
@@ -4490,30 +4442,6 @@
       ]
     },
     {
-      "term": "panko",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
-      "maps_to": "breadcrumbs",
-      "uses": 52,
-      "root_labels": [
-        "breadcrumbs"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
-          "label": "breadcrumbs",
-          "curie": "FOODON:00005442",
-          "why": "currently mapped here",
-          "closure": 3,
-          "excluded": false,
-          "recommended": true
-        }
-      ]
-    },
-    {
       "term": "english hothouse cucumber",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003415",
       "maps_to": "cucumber",
@@ -4974,30 +4902,6 @@
           "why": "currently mapped here",
           "closure": 226,
           "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "baguette",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-      "maps_to": "bread",
-      "uses": 23,
-      "root_labels": [
-        "bread"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-          "label": "bread",
-          "curie": "FOODON:03000288",
-          "why": "currently mapped here",
-          "closure": 282,
-          "excluded": false,
-          "recommended": true
         }
       ]
     },
@@ -5690,54 +5594,6 @@
       ]
     },
     {
-      "term": "graham crackers",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00002711",
-      "maps_to": "cracker",
-      "uses": 15,
-      "root_labels": [
-        "cracker"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002711",
-          "label": "cracker",
-          "curie": "FOODON:00002711",
-          "why": "names everything in `graham crackers`",
-          "closure": 2,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003317",
-          "label": "graham flour",
-          "curie": "FOODON:00003317",
-          "why": "names everything in `graham crackers`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03302362",
-          "label": "potato cracker",
-          "curie": "FOODON:03302362",
-          "why": "names everything in `graham crackers`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03302571",
-          "label": "soda cracker",
-          "curie": "FOODON:03302571",
-          "why": "names everything in `graham crackers`",
-          "closure": 1,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "ricotta salata",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03302908",
       "maps_to": "ricotta cheese",
@@ -6030,54 +5886,6 @@
           "closure": 1,
           "excluded": false,
           "recommended": true
-        }
-      ]
-    },
-    {
-      "term": "crusty bread",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-      "maps_to": "bread",
-      "uses": 13,
-      "root_labels": [
-        "bread"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-          "label": "bread",
-          "curie": "FOODON:03000288",
-          "why": "names everything in `crusty bread`",
-          "closure": 282,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002665",
-          "label": "quick bread",
-          "curie": "FOODON:00002665",
-          "why": "names everything in `crusty bread`",
-          "closure": 22,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003056",
-          "label": "rice bread",
-          "curie": "FOODON:00003056",
-          "why": "names everything in `crusty bread`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003060",
-          "label": "pita bread",
-          "curie": "FOODON:00003060",
-          "why": "names everything in `crusty bread`",
-          "closure": 1,
-          "excluded": false
         }
       ]
     },
@@ -6389,62 +6197,6 @@
           "curie": "FOODON:00003559",
           "why": "names everything in `white rum`",
           "closure": 2,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "thick country-style bread",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-      "maps_to": "bread",
-      "uses": 11,
-      "root_labels": [
-        "bread"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03302496",
-          "label": "bread (country-style)",
-          "curie": "FOODON:03302496",
-          "why": "names everything in `thick country-style bread`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03305311",
-          "label": "gravy (country-style)",
-          "curie": "FOODON:03305311",
-          "why": "names everything in `thick country-style bread`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_02000060",
-          "label": "beef country-style rib",
-          "curie": "FOODON:02000060",
-          "why": "names everything in `thick country-style bread`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_02000061",
-          "label": "beef country-style rib (raw)",
-          "curie": "FOODON:02000061",
-          "why": "names everything in `thick country-style bread`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-          "label": "bread",
-          "curie": "FOODON:03000288",
-          "why": "currently mapped here",
-          "closure": 282,
           "excluded": false
         }
       ]
@@ -6941,62 +6693,6 @@
           "curie": "FOODON:00003494",
           "why": "names everything in `shishito peppers`",
           "closure": 11,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "-thick country-style bread",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-      "maps_to": "bread",
-      "uses": 9,
-      "root_labels": [
-        "bread"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03302496",
-          "label": "bread (country-style)",
-          "curie": "FOODON:03302496",
-          "why": "names everything in `thick country-style bread`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03305311",
-          "label": "gravy (country-style)",
-          "curie": "FOODON:03305311",
-          "why": "names everything in `thick country-style bread`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_02000060",
-          "label": "beef country-style rib",
-          "curie": "FOODON:02000060",
-          "why": "names everything in `thick country-style bread`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_02000061",
-          "label": "beef country-style rib (raw)",
-          "curie": "FOODON:02000061",
-          "why": "names everything in `thick country-style bread`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-          "label": "bread",
-          "curie": "FOODON:03000288",
-          "why": "currently mapped here",
-          "closure": 282,
           "excluded": false
         }
       ]
@@ -7805,54 +7501,6 @@
           "curie": "FOODON:00004884",
           "why": "names everything in `english cucumber`",
           "closure": 3,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "soba noodles",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03306944",
-      "maps_to": "noodle",
-      "uses": 7,
-      "root_labels": [
-        "noodle"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03306944",
-          "label": "noodle",
-          "curie": "FOODON:03306944",
-          "why": "names everything in `soba noodles`",
-          "closure": 52,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002940",
-          "label": "instant noodle",
-          "curie": "FOODON:00002940",
-          "why": "names everything in `soba noodles`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00005555",
-          "label": "rice noodle",
-          "curie": "FOODON:00005555",
-          "why": "names everything in `soba noodles`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00005567",
-          "label": "cellophane noodle",
-          "curie": "FOODON:00005567",
-          "why": "names everything in `soba noodles`",
-          "closure": 1,
           "excluded": false
         }
       ]
@@ -8906,46 +8554,6 @@
       ]
     },
     {
-      "term": "torn breadcrumbs",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
-      "maps_to": "breadcrumbs",
-      "uses": 6,
-      "root_labels": [
-        "breadcrumbs"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": null,
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
-          "label": "breadcrumbs",
-          "curie": "FOODON:00005442",
-          "why": "names everything in `torn breadcrumbs`",
-          "closure": 3,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03301907",
-          "label": "wheat breadcrumbs",
-          "curie": "FOODON:03301907",
-          "why": "names everything in `torn breadcrumbs`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03305377",
-          "label": "wheat breadcrumbs (enriched)",
-          "curie": "FOODON:03305377",
-          "why": "names everything in `torn breadcrumbs`",
-          "closure": 1,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "dry prosecco",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00002611",
       "maps_to": "Prosecco wine",
@@ -9812,6 +9420,206 @@
       "chosen_from_shortlist": true,
       "proposed_by": null,
       "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "flour",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001210",
+      "maps_to": "wheat flour food product",
+      "uses": null,
+      "root_labels": [
+        "wheat flour food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "bread",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+      "maps_to": "wheat bread",
+      "uses": null,
+      "root_labels": [
+        "wheat bread"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "breadcrumbs",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03301907",
+      "maps_to": "wheat breadcrumbs",
+      "uses": null,
+      "root_labels": [
+        "wheat breadcrumbs"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "cracker",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00002353",
+      "maps_to": "wheat cracker food product",
+      "uses": null,
+      "root_labels": [
+        "wheat cracker food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "panko",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03301907",
+      "maps_to": "wheat breadcrumbs",
+      "uses": 52,
+      "root_labels": [
+        "wheat breadcrumbs"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "breadcrumbs",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "baguette",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+      "maps_to": "wheat bread",
+      "uses": 23,
+      "root_labels": [
+        "wheat bread"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "bread",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "crusty bread",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+      "maps_to": "wheat bread",
+      "uses": 13,
+      "root_labels": [
+        "wheat bread"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "bread",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "thick country-style bread",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+      "maps_to": "wheat bread",
+      "uses": 11,
+      "root_labels": [
+        "wheat bread"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "bread",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "-thick country-style bread",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+      "maps_to": "wheat bread",
+      "uses": 9,
+      "root_labels": [
+        "wheat bread"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "bread",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "flour tortillas",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001210",
+      "maps_to": "wheat flour food product",
+      "uses": 16,
+      "root_labels": [
+        "wheat flour food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "corrected_from": "flour",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00004510",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "graham crackers",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00002353",
+      "maps_to": "wheat cracker food product",
+      "uses": 15,
+      "root_labels": [
+        "wheat cracker food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "cracker",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00002711",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "torn breadcrumbs",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03301907",
+      "maps_to": "wheat breadcrumbs",
+      "uses": 6,
+      "root_labels": [
+        "wheat breadcrumbs"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "corrected_from": "breadcrumbs",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "soba noodles",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03309979",
+      "maps_to": "buckwheat noodle",
+      "uses": 7,
+      "root_labels": [
+        "buckwheat noodle"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "noodle",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03306944",
+      "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
       "signed_off_date": "2026-09-15"
     }

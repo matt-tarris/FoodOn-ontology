@@ -915,6 +915,34 @@ unseasoned rice vinegar 127       ->  vinegar    ** dropping `rice` loses the fo
 parmesan                197       ->  (no candidate, needs a human)
 ```
 
+### Sweeping for the wrong family
+
+Two sweeps over the 5,000-recipe corpus, run against every major avoidance family. The
+first asks which ingredients land in a family their name does not suggest — that caught
+black pepper pointing at Capsicum, and `panko → breadcrumbs` landing in **poultry**,
+which turned out to be the nested-union extraction bug. It is now clean: every remaining
+flag is correct (`chives → allium`, `tomatoes → nightshade`, and `creme fraiche →
+alpha-gal`, which is deliberate).
+
+The second sweep asks the dangerous question — which ingredients name a family and do
+**not** land in it — and found the worst defect in the project:
+
+```
+a gluten query rejected      312 of 5,000 recipes
+and missed                   988 that named a grain
+```
+
+FoodOn's **generic** grain classes carry no source, and correctly so: bread can be made
+from any grain. But a recipe that says `flour` means wheat flour, and the ingredient map
+was pointing `flour` (647 recipes), `bread`, `breadcrumbs`, `panko` and `cracker` at
+those generic classes. A coeliac filter was catching under a quarter of what it should.
+
+Pointing the unqualified culinary terms at the wheat classes — the same judgement as
+`pepper → black pepper` — takes it to **1,090 rejected and 160 missed**, and the
+remaining 160 are almost all genuinely gluten-free: `rice flour`, `chickpea flour`,
+`buckwheat noodle`. That is the other half of the judgement, and the golden case asserts
+both halves: the default must catch `flour`, and must not swallow `rice flour`.
+
 ### The proposals
 
 `build/propose_ingredient_map.py` attaches a model's answers to the queue **under
