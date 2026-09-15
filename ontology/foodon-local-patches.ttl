@@ -6287,6 +6287,9 @@ obo:FOODON_02021556 local:sameOrganismAs obo:FOODON_00002449 .
 # and shellfish into one 4,508-class query -- and a second implementation of
 # it in SPARQL would be a second thing to keep correct. One rule, one place.
 
+### animal lipid food product  -> lipid food product   [isa_union]
+obo:FOODON_00002664 local:weaklyUnder obo:FOODON_00001243 .
+obo:FOODON_00001243 local:propagatesTo obo:FOODON_00002664 .
 ### antelope  -> venison   [rel_nest]
 obo:FOODON_00002935 local:weaklyUnder obo:FOODON_03411481 .
 obo:FOODON_03411481 local:propagatesTo obo:FOODON_00002935 .
@@ -6344,6 +6347,9 @@ obo:FOODON_03311353 local:propagatesTo obo:FOODON_00001687 .
 ### chia seed  -> chia seed (whole or pieces)   [isa_union]
 obo:FOODON_03000241 local:weaklyUnder obo:FOODON_00002961 .
 obo:FOODON_00002961 local:propagatesTo obo:FOODON_03000241 .
+### chicken  -> chicken meat food product   [isa_union]
+obo:FOODON_00001040 local:weaklyUnder obo:FOODON_03411457 .
+obo:FOODON_03411457 local:propagatesTo obo:FOODON_00001040 .
 ### coelenterate  -> aquatic invertebrate animal (excluding shellfish)   [isa_union]
 obo:FOODON_03411142 local:weaklyUnder obo:FOODON_03412409 .
 obo:FOODON_03412409 local:propagatesTo obo:FOODON_03411142 .
@@ -6419,6 +6425,9 @@ obo:CHEBI_48408 local:propagatesTo obo:FOODON_03316764 .
 ### european cantaloupe plant  -> cantaloupe fruit food product   [rel_nest]
 obo:FOODON_00001288 local:weaklyUnder obo:FOODON_03411471 .
 obo:FOODON_03411471 local:propagatesTo obo:FOODON_00001288 .
+### exocarp  -> fruit peel (anatomical part)   [isa_union]
+obo:FOODON_03420294 local:weaklyUnder obo:PO_0009085 .
+obo:PO_0009085 local:propagatesTo obo:FOODON_03420294 .
 ### exoskeleton  -> soybean oil (flavored with extract from lobster shell)   [rel_nest]
 obo:FOODON_03309609 local:weaklyUnder obo:UBERON_0006611 .
 obo:UBERON_0006611 local:propagatesTo obo:FOODON_03309609 .
@@ -6440,6 +6449,12 @@ obo:FOODON_03411222 local:propagatesTo obo:FOODON_00001054 .
 ### flavoring extract  -> soybean oil (flavored with extract from lobster shell)   [rel_nest]
 obo:FOODON_03309609 local:weaklyUnder obo:FOODON_03306145 .
 obo:FOODON_03306145 local:propagatesTo obo:FOODON_03309609 .
+### food (baked)  -> Buffalo wing (dish)   [isa_union]
+obo:FOODON_00002675 local:weaklyUnder obo:FOODON_00002456 .
+obo:FOODON_00002456 local:propagatesTo obo:FOODON_00002675 .
+### food (deep-fried)  -> Buffalo wing (dish)   [isa_union]
+obo:FOODON_00002675 local:weaklyUnder obo:FOODON_03307052 .
+obo:FOODON_03307052 local:propagatesTo obo:FOODON_00002675 .
 ### food cooking  -> bean (rehydrated, cooked)   [rel_nest]
 obo:FOODON_03311840 local:weaklyUnder obo:FOODON_03450002 .
 obo:FOODON_03450002 local:propagatesTo obo:FOODON_03311840 .
@@ -6548,6 +6563,9 @@ obo:NCBITaxon_283210 local:propagatesTo obo:FOODON_03411245 .
 ### masa  -> tamale   [rel_nest]
 obo:FOODON_03304758 local:weaklyUnder obo:FOODON_00002529 .
 obo:FOODON_00002529 local:propagatesTo obo:FOODON_03304758 .
+### mesocarp  -> fruit peel (anatomical part)   [isa_union]
+obo:FOODON_03420294 local:weaklyUnder obo:PO_0009087 .
+obo:PO_0009087 local:propagatesTo obo:FOODON_03420294 .
 ### milk beverage analog  -> milk, milk product or milk substitute (eurofir)   [rel_nest]
 obo:FOODON_03400778 local:weaklyUnder obo:FOODON_00002034 .
 obo:FOODON_00002034 local:propagatesTo obo:FOODON_03400778 .
@@ -6611,6 +6629,9 @@ obo:NCBITaxon_8406 local:propagatesTo obo:FOODON_03413463 .
 ### pigeon pea  -> stew peas (dish)   [rel_nest]
 obo:FOODON_03304776 local:weaklyUnder obo:FOODON_00002781 .
 obo:FOODON_00002781 local:propagatesTo obo:FOODON_03304776 .
+### plant lipid food product  -> lipid food product   [isa_union]
+obo:FOODON_00002664 local:weaklyUnder obo:FOODON_00001174 .
+obo:FOODON_00001174 local:propagatesTo obo:FOODON_00002664 .
 ### pulse food product  -> 07  pulses, seeds, kernels, nuts and products (eurocode2)   [rel_nest]
 obo:FOODON_03400730 local:weaklyUnder obo:FOODON_00001209 .
 obo:FOODON_00001209 local:propagatesTo obo:FOODON_03400730 .

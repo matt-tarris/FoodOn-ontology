@@ -304,6 +304,26 @@
         "citrus family"
       ],
       "why": "FoodOn's plant hierarchy has no genus-level citrus class: seventeen plant classes hang off `citrus family`, which is Rutaceae and therefore ABOVE the genus. Six carry `in taxon <species>` and were reachable; eleven did not and were not, so a citrus query returned 308 classes and reached neither `lemon plant` nor `orange plant`. Five signed `in taxon` links in config/taxon-bridges.json close it, one class at a time and on FoodOn's own property. The rejects are why it is done per class rather than by bridging `citrus family` wholesale: Zanthoxylum -- prickly ash, japan pepper, sansho, uzazi -- is in the family and is not citrus, and the family node itself stays out because reaching it would be an ascent."
+    },
+    {
+      "name": "a dish is not the parent of its cooking method",
+      "roots": [
+        "poultry"
+      ],
+      "expect": [
+        "chicken wing",
+        "Buffalo wing (dish)",
+        "turkey breast"
+      ],
+      "reject": [
+        "bread",
+        "apple pie (baked)",
+        "Irish soda bread",
+        "pizza food product",
+        "apple (baked)",
+        "anisette toast"
+      ],
+      "why": "FoodOn defines `Buffalo wing (dish) = prepared chicken wing and (food (baked) or food (deep-fried))`. The union sits INSIDE an intersection, which entails `Buffalo wing subClassOf (baked or fried)` and nothing whatever about `food (baked) subClassOf Buffalo wing`. Reading those operands as children made a chicken dish the parent of every baked food, so poultry returned 1,200 classes instead of 875 and egg returned 1,160 instead of 882 -- both swallowing the entire baked-goods tree, 327 classes of it. The top-level `X = A or B` rule that makes operands children is right and does not apply once a union is nested inside an intersection."
     }
   ]
 }

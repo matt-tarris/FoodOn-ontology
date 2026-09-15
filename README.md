@@ -698,6 +698,29 @@ genuinely is: `wine`, `beer`, `beef` and the third `egg` root had been edited in
 JSON directly, so regenerating would have dropped them. They are back in the
 generator, which now reproduces every pre-existing entry byte-for-byte.
 
+**A dish is not the parent of its cooking method.** FoodOn defines
+
+```
+Buffalo wing (dish)  ≡  prepared chicken wing ⊓ (food (baked) ⊔ food (deep-fried))
+```
+
+The union sits **inside an intersection**, which entails `Buffalo wing ⊑ (baked ⊔ fried)`
+and nothing whatever about `food (baked) ⊑ Buffalo wing`. The extraction read those
+operands as children — correct for a top-level `X ≡ A ⊔ B`, wrong the moment a union is
+nested — and made a chicken dish the parent of **every baked food**. A poultry query
+returned 1,200 classes instead of 875 and an egg query 1,160 instead of 882, each
+swallowing the same 327-class baked-goods tree: `Irish soda bread`, `apple pie`,
+`anisette toast`, `pizza food product`.
+
+Found by asking which ingredients land in a family their name does not suggest — the
+same sweep that caught black pepper. `panko → breadcrumbs` was landing in **poultry**
+and **egg**, and `baguette → bread` with it.
+
+The fix costs 9 true positives, and they are worth naming: `egg bagel`, `egg raisin
+bread`, `butter and egg bread` and six more were reachable *only* through the bogus
+path. FoodOn asserts no egg source on any of them, so the bug was masking a real gap
+rather than the fix creating one. They belong in the bridge queue.
+
 **Absent is an answer.** Roughly two thirds of everyday allergen vocabulary has no
 FoodOn class at all. The resolver says so rather than resolving to something
 approximate.

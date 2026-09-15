@@ -29,6 +29,8 @@ DESCEND = {INTER, UNION, COMPL, FIRST, REST}
 #                                             A and B are PARENTS of X.       5,254
 #   X = A or B    (equiv/unionOf)         ->  A subClassOf X, B subClassOf X.
 #                                             A and B are CHILDREN of X.         50
+#   X = A and (B or C)  (union in inter)  ->  X subClassOf (B or C) and nothing
+#                                             about B subClassOf X. Neither.
 #   X <= A or B   (sub/unionOf)           ->  says every X is an A or a B, and
 #                                             NOTHING about X subClassOf A.       13
 #   X <= A and B  (sub/intersectionOf)    ->  A and B are parents.                 8
@@ -69,7 +71,16 @@ def walk(top):
             continue
         for p, o in po(node):
             if p not in DESCEND or o == NIL: continue
-            if p == UNION:    stack.append((o, nest, "union"))
+            # A union INSIDE an intersection is not a top-level union. FoodOn writes
+            # `Buffalo wing = prepared chicken wing and (food (baked) or food
+            # (deep-fried))`, which entails `Buffalo wing subClassOf (baked or fried)`
+            # and NOTHING about `food (baked) subClassOf Buffalo wing`. Treating the
+            # operands as children made every baked food a descendant of a chicken
+            # dish, so a poultry or egg query swallowed the entire baked-goods tree.
+            # Inside an intersection it reads like `X <= A or B`: recall-first, X is
+            # under one of them, emitted on the weaker `isa_union` kind.
+            if p == UNION:    stack.append((o, nest, "inter_union"
+                                            if via == "inter" else "union"))
             elif p == COMPL:  stack.append((o, nest, "compl"))
             elif p == INTER:  stack.append((o, nest, via or "inter"))
             else:             stack.append((o, nest, via))     # rdf:first / rdf:rest
@@ -98,6 +109,10 @@ for cls in [s for s in triples if named(s)]:
                     # makes neither a parent nor a child of blood meal. Kept on the
                     # weaker `rel_nest` kind exactly as before.
                     add(cls, "isa", other, "rel_nest")
+                    continue
+                if via == "inter_union":
+                    # X = A and (B or C): X is under B or C, we cannot say which
+                    add(cls, "isa", other, "isa_union")
                     continue
                 if via == "union":
                     if pred == EQUIV:
