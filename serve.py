@@ -15,7 +15,7 @@ The audit endpoints write to the governed decision files and NEVER to the .ttl. 
 .ttl is generated from those files, and test/patch_run.py fails on a hand-edit, so an
 editor that wrote Turtle would be writing something the next build throws away.
 """
-import json, sys, urllib.parse, http.server, socketserver, traceback, time, subprocess
+import json, os, sys, urllib.parse, http.server, socketserver, traceback, time, subprocess
 
 sys.path.insert(0, "build")
 from resolve import Resolver
@@ -27,6 +27,15 @@ RESOLVER = Resolver()
 GRAPH = RESOLVER.g
 print(f"ready in {time.time()-_t:.1f}s  "
       f"({len(GRAPH.N):,} classes, FoodOn {GRAPH.meta['version']})", flush=True)
+
+# Explore-only: the shipped .app serves the graph and nothing that writes. The audit
+# layer edits governed decision files, and a tester's copy has no review process behind
+# it -- an edit there is a decision nobody signed. Gated at the server, not by hiding a
+# link, because the audit page is reached by typing its URL and nothing else.
+EXPLORE_ONLY = os.environ.get("FOODON_EXPLORE_ONLY") == "1"
+_READ_ONLY = {"error": "This build is explore-only. The audit interface, which edits "
+                       "the signed decision files, is not included.",
+              "explore_only": True}
 
 _cache = {}
 _audit = {"data": None, "sparql_stale": False, "log": []}
@@ -150,6 +159,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
+        if EXPLORE_ONLY:
+            return self._send(_READ_ONLY, 403)
         if parsed.path == "/api/audit/preview":
             # accepts either shape: a statement (subject/predicate/object) or an
             # override (target_class/claim/query_roots). The second is the one that
@@ -210,6 +221,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
+        if EXPLORE_ONLY and (parsed.path.startswith("/api/audit")
+                             or parsed.path.lstrip("/").startswith("audit.")):
+            return self._send(_READ_ONLY, 403)
         if parsed.path == "/api/audit/lookup":
             qs = urllib.parse.parse_qs(parsed.query)
             return self._send({"hits": audit_model.lookup((qs.get("q") or [""])[0],

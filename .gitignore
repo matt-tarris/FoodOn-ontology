@@ -35,3 +35,9 @@ __pycache__/
 
 # macOS finder metadata
 .DS_Store
+
+# The packaged Mac app. Reproducible from package/build_app.sh in a few minutes, and
+# the .app alone is 44 MB of frozen interpreter -- a build product, not a source.
+dist/
+build_pyi/
+.buildenv

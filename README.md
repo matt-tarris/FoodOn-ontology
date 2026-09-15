@@ -1333,6 +1333,49 @@ machinery:
 - Certified gluten-free oats cannot be expressed here. Oats count as gluten-containing
   by decision; the exception is a product-label fact and must be handled downstream.
 
+## Shipping it to someone without a checkout
+
+`package/build_app.sh` produces `FoodOn Avoidance.app` and a drag-to-Applications
+`.dmg` — 44 MB and 14 MB respectively. It exists so the tool can be handed to someone
+who should not have to install Python, clone a private repo, or download a 40 MB
+ontology to look at a graph.
+
+```bash
+brew install python@3.12 python-tk@3.12
+/opt/homebrew/opt/python@3.12/bin/python3.12 -m venv .buildenv
+.buildenv/bin/pip install pyinstaller
+package/build_app.sh
+```
+
+Freeze with Homebrew's Python, not `/usr/bin/python3`: Apple's is a Command Line Tools
+stub and PyInstaller handles it badly.
+
+The bundle carries only what the server opens at runtime — `data/index.json` and three
+classified files, `config/`, `web/`. The vendor ontology and `robot.jar` are build-time
+only, and leaving them out is 119 MB the app would otherwise carry for nothing. ROBOT
+is reachable from the running app in exactly one place, the audit UI's *Rebuild*
+button, and that interface is not in this build.
+
+Three things about it are worth stating plainly, because each one is a limit somebody
+will hit:
+
+- **It is explore-only, enforced at the server.** `FOODON_EXPLORE_ONLY=1` makes every
+  `/api/audit` route and the audit page itself return 403. The gate is in `serve.py`
+  rather than a hidden link, because the audit page is reached by typing its URL and
+  by nothing else — hiding a link that does not exist would protect nothing. The
+  decision files ship read-only: an edit made on a copy with no review behind it is a
+  decision nobody signed.
+- **It is ad-hoc signed and therefore Gatekeeper-rejected.** `spctl` says `rejected`,
+  and the recipient must approve it once under System Settings → Privacy & Security.
+  `package/FIRST-RUN.md` walks through that. A Developer ID signature plus notarisation
+  removes the step entirely and is the only thing that does.
+- **It is arm64 only.** It will not launch on an Intel Mac. A universal build needs a
+  universal Python to freeze against.
+
+The launcher takes any free port rather than insisting on 8790, and shows a window with
+a Quit button, because a local server with no window cannot be stopped by someone who
+does not know what Activity Monitor is.
+
 ## Provenance and licence
 
 Three bodies of work are stacked here and they are not under the same terms.
