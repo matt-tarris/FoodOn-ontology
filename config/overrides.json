@@ -875,6 +875,153 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-15",
       "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "wheat plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312"
+      ],
+      "query_root_labels": [
+        "wheat plant"
+      ],
+      "target_label": "ramen noodle",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03306959",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Ramen is a wheat-flour noodle. FoodOn parents it under the generic `noodle`, which correctly carries no grain because a noodle can be rice or buckwheat, and asserts no source of its own -- so a gluten query reached neither it nor the recipes naming it.",
+      "source": "FoodOn asserts no derives-from on the class or its parents",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "wheat plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312"
+      ],
+      "query_root_labels": [
+        "wheat plant"
+      ],
+      "target_label": "lasagna noodle",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03306124",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Lasagna is a durum wheat pasta. Same gap as ramen: parented under the generic `noodle`, which carries no grain by design, with no source of its own.",
+      "source": "FoodOn asserts no derives-from on the class or its parents",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "wheat plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312"
+      ],
+      "query_root_labels": [
+        "wheat plant"
+      ],
+      "target_label": "pita bread",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00003060",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Pita is a wheat flatbread. Parented under `bread food product`, which carries no grain because bread can be made from any, and asserts no source of its own.",
+      "source": "FoodOn asserts no derives-from on the class or its parents",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "potato plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411218"
+      ],
+      "query_root_labels": [
+        "potato plant"
+      ],
+      "target_label": "potato roll",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03302312",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "A potato roll contains potato. FoodOn parents it under `wheat roll or bun` -- correct for its gluten, and it says nothing about the potato, so a nightshade query never reached it.",
+      "source": "FoodOn asserts no derives-from on the class or its parents",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "orange plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411339"
+      ],
+      "query_root_labels": [
+        "orange plant"
+      ],
+      "target_label": "orange marmalade",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03302512",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Marmalade is made from oranges. Parented under `orange preserve or jam food product`, which is a grouping rather than a source, with no derives-from anywhere in the chain.",
+      "source": "FoodOn asserts no derives-from on the class or its parents",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "citrus fruit",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00003324"
+      ],
+      "query_root_labels": [
+        "citrus fruit"
+      ],
+      "target_label": "candied citrus peel",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03302021",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Candied peel is citrus peel. Parented under `citrus fruit food product`, a grouping, with no source asserted -- so a citrus query missed it.",
+      "source": "FoodOn asserts no derives-from on the class or its parents",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "citrus fruit",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00003324"
+      ],
+      "query_root_labels": [
+        "citrus fruit"
+      ],
+      "target_label": "citrus fruit zest",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00003283",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Zest is the outer peel of a citrus fruit. Parented under `fruit food product` -- one level too general to carry the citrus -- and asserts no source. One of the six citrus classes found stranded when the taxon bridges were built.",
+      "source": "FoodOn asserts no derives-from on the class or its parents",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
     }
   ],
   "entry_types": {

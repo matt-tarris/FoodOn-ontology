@@ -2563,13 +2563,38 @@ local:patch-f7eeee07b2fb a local:Patch ;
 
 
 # =============================================================================
-# Reviewed containment claims FoodOn cannot make   (10)
+# Reviewed containment claims FoodOn cannot make   (17)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a
 # condiment`, `casein is_a protein extract` -- and asserts no source. These
 # are the cases where the containment is real and the ontology simply has no
 # axiom for it.
 
+
+### candied citrus peel  --RO:0001000-->  citrus fruit
+#   evidence:   FoodOn asserts no derives-from on the class or its parents
+#   confidence: high
+#   claim:      contains
+#   query:      citrus fruit
+#   reviewer:   Matt
+#   Candied peel is citrus peel. Parented under `citrus fruit food product`, a
+#   grouping, with no source asserted -- so a citrus query missed it.
+obo:FOODON_03302021 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_00003324 ] .
+local:patch-d9d4312eae61 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03302021 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_00003324 ;
+    local:patchEvidence "FoodOn asserts no derives-from on the class or its parents" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "citrus fruit" ;
+    rdfs:comment "Candied peel is citrus peel. Parented under `citrus fruit food product`, a grouping, with no source asserted -- so a citrus query missed it." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
 
 ### casein  --RO:0001000-->  milk
 #   evidence:   audit: processed ingredients are parented by function with no derives-from
@@ -2593,6 +2618,33 @@ local:patch-8e753c9e718c a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "Milk" ;
     rdfs:comment "the predominant milk protein. FoodOn models this class but parents it by function (protein extract, concentrate or isolate) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### citrus fruit zest  --RO:0001000-->  citrus fruit
+#   evidence:   FoodOn asserts no derives-from on the class or its parents
+#   confidence: high
+#   claim:      contains
+#   query:      citrus fruit
+#   reviewer:   Matt
+#   Zest is the outer peel of a citrus fruit. Parented under `fruit food
+#   product` -- one level too general to carry the citrus -- and asserts no
+#   source. One of the six citrus classes found stranded when the taxon
+#   bridges were built.
+obo:FOODON_00003283 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_00003324 ] .
+local:patch-4dc064fb76d2 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00003283 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_00003324 ;
+    local:patchEvidence "FoodOn asserts no derives-from on the class or its parents" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "citrus fruit" ;
+    rdfs:comment "Zest is the outer peel of a citrus fruit. Parented under `fruit food product` -- one level too general to carry the citrus -- and asserts no source. One of the six citrus classes found stranded when the taxon bridges were built." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
@@ -2644,6 +2696,32 @@ local:patch-e48328408916 a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "hickory" ;
     rdfs:comment "FoodOn parents hickory nut under mustard spinach food product. hickory tree has a closure of 1, and pecan sits under hickory nut, so both are orphaned - a tree-nut false negative." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### lasagna noodle  --RO:0001000-->  wheat plant
+#   evidence:   FoodOn asserts no derives-from on the class or its parents
+#   confidence: high
+#   claim:      contains
+#   query:      wheat plant
+#   reviewer:   Matt
+#   Lasagna is a durum wheat pasta. Same gap as ramen: parented under the
+#   generic `noodle`, which carries no grain by design, with no source of its
+#   own.
+obo:FOODON_03306124 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411312 ] .
+local:patch-58c1cd4e1062 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03306124 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchEvidence "FoodOn asserts no derives-from on the class or its parents" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "wheat plant" ;
+    rdfs:comment "Lasagna is a durum wheat pasta. Same gap as ramen: parented under the generic `noodle`, which carries no grain by design, with no source of its own." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
@@ -2754,6 +2832,111 @@ local:patch-c134be4e240e a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "egg yolk" ;
     rdfs:comment "The family class, bridged for the same reason as `mayonnaise` itself. Avoidance descends and never ascends, so bridging the child does not reach the parent: an ingredient that resolved to `mayonnaise food product` rather than `mayonnaise` would still have been missed by an egg query. The two classes have identical closures, so this adds only the family class itself." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### orange marmalade  --RO:0001000-->  orange plant
+#   evidence:   FoodOn asserts no derives-from on the class or its parents
+#   confidence: high
+#   claim:      contains
+#   query:      orange plant
+#   reviewer:   Matt
+#   Marmalade is made from oranges. Parented under `orange preserve or jam
+#   food product`, which is a grouping rather than a source, with no
+#   derives-from anywhere in the chain.
+obo:FOODON_03302512 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411339 ] .
+local:patch-ee52b3454150 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03302512 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411339 ;
+    local:patchEvidence "FoodOn asserts no derives-from on the class or its parents" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "orange plant" ;
+    rdfs:comment "Marmalade is made from oranges. Parented under `orange preserve or jam food product`, which is a grouping rather than a source, with no derives-from anywhere in the chain." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### pita bread  --RO:0001000-->  wheat plant
+#   evidence:   FoodOn asserts no derives-from on the class or its parents
+#   confidence: high
+#   claim:      contains
+#   query:      wheat plant
+#   reviewer:   Matt
+#   Pita is a wheat flatbread. Parented under `bread food product`, which
+#   carries no grain because bread can be made from any, and asserts no source
+#   of its own.
+obo:FOODON_00003060 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411312 ] .
+local:patch-40623a223770 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00003060 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchEvidence "FoodOn asserts no derives-from on the class or its parents" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "wheat plant" ;
+    rdfs:comment "Pita is a wheat flatbread. Parented under `bread food product`, which carries no grain because bread can be made from any, and asserts no source of its own." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### potato roll  --RO:0001000-->  potato plant
+#   evidence:   FoodOn asserts no derives-from on the class or its parents
+#   confidence: high
+#   claim:      contains
+#   query:      potato plant
+#   reviewer:   Matt
+#   A potato roll contains potato. FoodOn parents it under `wheat roll or bun`
+#   -- correct for its gluten, and it says nothing about the potato, so a
+#   nightshade query never reached it.
+obo:FOODON_03302312 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411218 ] .
+local:patch-4e8c5bfa0109 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03302312 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411218 ;
+    local:patchEvidence "FoodOn asserts no derives-from on the class or its parents" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "potato plant" ;
+    rdfs:comment "A potato roll contains potato. FoodOn parents it under `wheat roll or bun` -- correct for its gluten, and it says nothing about the potato, so a nightshade query never reached it." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### ramen noodle  --RO:0001000-->  wheat plant
+#   evidence:   FoodOn asserts no derives-from on the class or its parents
+#   confidence: high
+#   claim:      contains
+#   query:      wheat plant
+#   reviewer:   Matt
+#   Ramen is a wheat-flour noodle. FoodOn parents it under the generic
+#   `noodle`, which correctly carries no grain because a noodle can be rice or
+#   buckwheat, and asserts no source of its own -- so a gluten query reached
+#   neither it nor the recipes naming it.
+obo:FOODON_03306959 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411312 ] .
+local:patch-d97ec52896dc a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03306959 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchEvidence "FoodOn asserts no derives-from on the class or its parents" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "wheat plant" ;
+    rdfs:comment "Ramen is a wheat-flour noodle. FoodOn parents it under the generic `noodle`, which correctly carries no grain because a noodle can be rice or buckwheat, and asserts no source of its own -- so a gluten query reached neither it nor the recipes naming it." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 

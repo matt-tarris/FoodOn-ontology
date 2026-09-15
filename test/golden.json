@@ -393,6 +393,42 @@
         "diabetic mayonnaise"
       ],
       "why": "FoodOn asserts no source on mayonnaise, on `mayonnaise food product`, or on any of the six preparation variants -- so an egg query reached none of them, across 187 recipes in a 5,000-recipe corpus. It was the largest false negative the family sweep could find. Bridged to `egg yolk`, which is the part actually used and is itself inside the egg closure. BOTH the class and its family class are bridged, because avoidance descends and never ascends: bridging the child does not reach the parent, and an ingredient resolving to `mayonnaise food product` would still have been missed. The rejects are the point of not bridging higher still -- `mayonnaise analog` derives from `oil-producing plant`, is egg-free, and must stay out."
+    },
+    {
+      "name": "the grain and citrus foods a kitchen names reach their family",
+      "roots": [
+        "wheat plant"
+      ],
+      "expect": [
+        "ramen noodle",
+        "lasagna noodle",
+        "pita bread",
+        "pasta",
+        "wheat bread"
+      ],
+      "reject": [
+        "buckwheat noodle",
+        "rice noodle"
+      ],
+      "why": "FoodOn parents ramen and lasagna under the generic `noodle` and pita under `bread food product`. Those parents correctly carry no grain -- a noodle can be rice or buckwheat, bread can be any grain -- and the specific classes assert no source of their own, so a gluten query reached none of them. The rejects are why the fix is per class and not a bridge from `noodle`: buckwheat and rice noodles are named explicitly and are genuinely gluten-free."
+    },
+    {
+      "name": "citrus reaches its preserves, peel and zest",
+      "roots": [
+        "citrus fruit",
+        "Citrus"
+      ],
+      "expect": [
+        "orange marmalade",
+        "candied citrus peel",
+        "citrus fruit zest",
+        "lemon zest"
+      ],
+      "reject": [
+        "prickly ash plant",
+        "japan pepper plant"
+      ],
+      "why": "Three classes that sit under grouping parents carrying no source: `orange preserve or jam food product`, `citrus fruit food product`, and -- one level too general to carry the citrus at all -- `fruit food product`. All three were found stranded when the citrus taxon bridges were built and are now bridged directly. The rejects are the standing Zanthoxylum boundary: in the citrus FAMILY, not citrus."
     }
   ]
 }

@@ -9522,6 +9522,34 @@
       "overrides_resolver": true,
       "signed_off_by": "Matt",
       "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "anchovies",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03316282",
+      "maps_to": "anchovy",
+      "uses": null,
+      "root_labels": [
+        "anchovy"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "anchovy",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03316282",
+      "maps_to": "anchovy",
+      "uses": null,
+      "root_labels": [
+        "anchovy"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
     }
   ],
   "requires_signoff": [

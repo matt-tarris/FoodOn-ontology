@@ -44,6 +44,25 @@ for raw, want in TOGETHER:
     if got != want:
         fails.append(f"normalise+strip({raw[:30]!r}) = {got!r}, expected {want!r}")
 
+# hyphenated compounds, both directions. A preparation word on either side takes the
+# WHOLE compound: stripping only the matching half left `oil-packed anchovies` as
+# `oil anchovies` and `fire-roasted tomatoes` as `fire tomatoes`. But a hyphenated
+# FOOD NAME has to survive, which is why the rule tests the parts and the stop-word
+# pass excludes hyphens -- `half-and-half` was becoming `half -half`.
+for raw, want in [("2 oil-packed anchovies", "anchovies"),
+                  ("14 oz fire-roasted tomatoes", "tomatoes"),
+                  ("2 cups ice-cold water", "water"),
+                  ("1 lb freeze-dried strawberries", "strawberries"),
+                  ("1 cup half-and-half", "half-and-half"),
+                  ("1/4 cup bread-and-butter pickles", "bread-and-butter pickles")]:
+    checks += 1
+    got = strip_qualifiers(normalise(raw))
+    if got != want:
+        fails.append(f"hyphen handling: {raw!r} -> {got!r}, expected {want!r}")
+checks += 1
+if "-" in strip_qualifiers(normalise("2 Tbsp. good-quality olive oil")).split()[0]:
+    fails.append("a hyphenated qualifier left its hyphen behind")
+
 checks += 1
 if strip_qualifiers("fine flaky sea salt") != "salt":
     fails.append("strip_qualifiers did not repeat until stable on `fine flaky sea salt`")

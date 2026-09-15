@@ -76,10 +76,29 @@ def normalise(line):
     # ingredient rather than one already handled.
     s = re.sub(r"\b(?:" + UNIT + r")\b\.?", " ", s)
     s = re.sub(r"[\s\d" + FRAC + r"/]+", " ", s)
+    # A hyphenated compound goes WHOLE when either half is a preparation word.
+    # Stripping only the matching half left the other one welded to the food:
+    # `oil-packed anchovies` became `oil anchovies`, `fire-roasted tomatoes` became
+    # `fire tomatoes`, `ice-cold water` became `ice water`. `half-and-half` and
+    # `bread-and-butter pickles` survive, because neither half of either is a
+    # preparation word -- which is why the rule tests the parts rather than the hyphen.
+    s = re.sub(r"\b[a-z]+-(?:" + PREP + r")\b", " ", s)
+    s = re.sub(r"\b(?:" + PREP + r")-[a-z]+\b", " ", s)
     for _ in range(4):
         s = re.sub(r"\b(?:" + PREP + r")\b", " ", s)
-    s = re.sub(r"\b(?:" + STOP + r")\b", " ", s)
+    # Stop words, but NOT inside a hyphenated compound: `half-and-half` and
+    # `bread-and-butter pickles` are food names, and stripping the `and` out of them
+    # left `half -half`, which names nothing. The lookarounds exclude a hyphen on
+    # either side, so a free-standing `and` still goes.
+    s = re.sub(r"(?<![-\w])(?:" + STOP + r")(?![-\w])", " ", s)
     s = re.sub(r"[^a-z\s\-']", " ", s)
+    # A hyphenated compound loses one half to the preparation list and leaves the
+    # hyphen: `oil-packed anchovies` becomes `oil- anchovies`, `fire-roasted tomatoes`
+    # becomes `fire- tomatoes`, `half-and-half` becomes `half- -half`. 251 terms and 391
+    # uses arrived in the review queue looking like new ingredients. Same defect as the
+    # one fixed in strip_qualifiers; this is the other stripping pass.
+    s = re.sub(r"(?:^|\s)-+(?:\s|$)", " ", s)
+    s = re.sub(r"(\w)-+(\s|$)", r"\1\2", s)
     return re.sub(r"\s+", " ", s).strip()
 
 
