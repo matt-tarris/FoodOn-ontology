@@ -1155,6 +1155,32 @@ resolves each root **label** to an IRI so a class FoodOn relabels fails the buil
 rather than silently pinning nothing. The migration was verified byte-identical against
 the committed store.
 
+## The decision files check themselves
+
+`test/decisions_run.py` — **2,886 assertions** over seven governed files, against the
+release they claim to describe.
+
+The interface validates what it writes; the files do not, and both silent mis-writes in
+this layer arrived by a script editing JSON directly. `FOODON:00001040` is `chicken meat
+food product`, not `mammalian meat food product`. `FOODON:03411318` is `cacao plant`, not
+`rye plant`. Both are **real classes**, so every existence check passed and nothing
+objected — a red-meat query kept all 828 of its dairy classes in the meantime.
+
+The check that catches those is the **label/IRI pair**. Almost every IRI in these files
+sits beside a human-readable label, written by the same hand at the same moment. When
+they disagree, the label says what was *meant* and the IRI says what was *written*:
+
+```
+config/overrides.json.overrides[32]: `query_root_labels` says "mammalian meat food
+product" but `query_roots` points at "chicken meat food product"
+```
+
+Verified by injecting both real slips and confirming each fails. It also catches an IRI
+that is not a class in this release, a class deprecated upstream, an undeclared claim or
+entry type, a signed entry with no signature, a pin whose root label FoodOn no longer
+has, and a mapping to an excluded branch — which can never match a query and reads as
+done.
+
 ## Bridges awaiting review
 
 FoodOn omits `derives from` on 62% of its `<X> food product` classes.
