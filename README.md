@@ -641,6 +641,25 @@ class** for any of them, only preparation variants like `wine (dealcoholized)` a
 | `beer` | `beer beverage` | 17 — ale, IPA, porter, brown beer, barley malt beer |
 | `beef` | `bovine meat food product` | 1,555 → **785** after the override below |
 
+**`red meat` and `alpha-gal` are different questions.** They shared one pin and one
+root — `mammal` — which reaches the *animal* rather than the meat and so carried **828
+dairy classes**. A diner who simply does not eat red meat was being told to avoid
+parmesan and crème fraîche.
+
+They cannot share a root, because the suppression that removes dairy is keyed on the
+root. So the pin is split:
+
+| query | root | classes | dairy |
+|---|---|---|---|
+| `red meat`, `mammalian meat` | `mammalian meat food product` + a signed `remove` | 1,725 | **0** |
+| `alpha-gal` and its aliases | `mammal` | 3,130 | **828, deliberately** |
+
+Alpha-gal syndrome is a reaction to galactose-α-1,3-galactose, and that carbohydrate is
+present in mammalian **milk** as well as in tissue. So the clinical query keeps dairy and
+the culinary one must not: a false positive there costs a diner cheese, a false negative
+here costs an allergic diner a reaction. `mammalian meat food product` covers beef, pork,
+lamb, venison, prosciutto and corned beef, and excludes poultry and fish by construction.
+
 **Beef needed an override as well as a pin.** Its root reaches `cow food product`,
 which carries `in taxon Bos taurus`; the species pivot then walks back down from the
 taxon and returns everything else bovine — `cow milk`, `cheddar cheese` and 675 more

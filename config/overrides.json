@@ -791,6 +791,27 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-11",
       "review_note": "signed: intolerance support, not allergy. Matt 2026-09-11 -- \"I'd be looking for support of an intolerance response. It doesn't need to classify as an allergy.\" Attached to every citrus query root that resolves -- the genus, the fruit class and each species -- because someone with this intolerance says \"lemon\" or \"orange\" far more often than \"citrus\", and a weak claim is matched on the resolved root, not inherited down the hierarchy."
+    },
+    {
+      "type": "remove",
+      "claim": "not_avoidance_relevant",
+      "status": "REVIEWED",
+      "query_class": "mammalian meat food product",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00001006"
+      ],
+      "query_root_labels": [
+        "mammalian meat food product"
+      ],
+      "target_label": "milk",
+      "target_class": "http://purl.obolibrary.org/obo/UBERON_0001913",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "`mammalian meat food product` descends to the species classes, which carry `in taxon`, and the species pivot then walks back down and returns everything else that animal produces -- 828 dairy classes on a RED MEAT query. Meat and milk are separate avoidances: someone who does not eat red meat eats cheese. Same defect and same remedy as the `bovine meat food product` entry above, one level up the hierarchy.",
+      "source": "the species pivot, not a claim about what meat contains",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": "signed: does NOT apply to the alpha-gal pin, which keeps `mammal` as its root precisely so that dairy stays in. Alpha-gal is present in mammalian milk; red meat as a culinary choice is not about milk at all."
     }
   ],
   "entry_types": {

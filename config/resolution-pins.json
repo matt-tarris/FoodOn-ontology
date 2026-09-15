@@ -143,21 +143,33 @@
       "reviewed_date": "2026-09-09"
     },
     {
-      "query": "mammalian meat",
+      "query": "red meat",
+      "root_labels": [
+        "mammalian meat food product"
+      ],
+      "confidence": "high",
+      "rationale": "The culinary reading: a diner who does not eat red meat. `mammalian meat food product` (2,510) covers beef, pork, lamb, venison, prosciutto, salami and corned beef, and excludes poultry and fish by construction. It replaces `mammal` (3,130), which reached the animal rather than the meat and so carried 828 dairy classes: a red-meat avoider was being told to avoid parmesan and creme fraiche.",
+      "note": "SPLIT FROM `alpha-gal` on 2026-09-15, because one pin was answering two questions with one root. Alpha-gal syndrome is a reaction to a carbohydrate that is present in mammalian MILK as well as mammalian tissue, so a clinical query must keep dairy and a culinary one must not. They cannot share a root, because the suppression that removes dairy is keyed on the root. See the `remove` override on this root in config/overrides.json, which takes the residual dairy to nil.",
+      "aliases": [
+        "mammalian meat"
+      ],
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15"
+    },
+    {
+      "query": "alpha-gal",
       "root_labels": [
         "mammal"
       ],
       "confidence": "high",
       "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
-      "note": null,
+      "note": "KEEPS DAIRY, deliberately. Alpha-gal is galactose-alpha-1,3-galactose, and it is present in mammalian milk as well as in tissue; dairy reactions are less common than meat reactions and are well attested. The culinary `red meat` pin suppresses dairy and this one must not -- a false positive there costs a diner cheese, a false negative here costs an allergic diner a reaction. Split from `red meat` 2026-09-15.",
       "aliases": [
-        "alpha-gal",
         "alpha gal",
-        "mammalian meat (alpha-gal)",
-        "red meat"
+        "mammalian meat (alpha-gal)"
       ],
-      "reviewed_by": "Claude (offline pass)",
-      "reviewed_date": "2026-09-09"
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15"
     },
     {
       "query": "wine",

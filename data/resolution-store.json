@@ -526,21 +526,39 @@
       "ontology_version": "2025-12-30",
       "resolver_version": "1.0.0"
     },
+    "red meat": {
+      "query": "red meat",
+      "status": "resolved",
+      "method": "offline-review",
+      "roots": [
+        "http://purl.obolibrary.org/obo/FOODON_00001006"
+      ],
+      "root_labels": [
+        "mammalian meat food product"
+      ],
+      "confidence": "high",
+      "rationale": "The culinary reading: a diner who does not eat red meat. `mammalian meat food product` (2,510) covers beef, pork, lamb, venison, prosciutto, salami and corned beef, and excludes poultry and fish by construction. It replaces `mammal` (3,130), which reached the animal rather than the meat and so carried 828 dairy classes: a red-meat avoider was being told to avoid parmesan and creme fraiche.",
+      "note": "SPLIT FROM `alpha-gal` on 2026-09-15, because one pin was answering two questions with one root. Alpha-gal syndrome is a reaction to a carbohydrate that is present in mammalian MILK as well as mammalian tissue, so a clinical query must keep dairy and a culinary one must not. They cannot share a root, because the suppression that removes dairy is keyed on the root. See the `remove` override on this root in config/overrides.json, which takes the residual dairy to nil.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "ontology_version": "2025-12-30",
+      "resolver_version": "1.0.0"
+    },
     "mammalian meat": {
       "query": "mammalian meat",
       "status": "resolved",
       "method": "offline-review",
       "roots": [
-        "http://purl.obolibrary.org/obo/FOODON_03411134"
+        "http://purl.obolibrary.org/obo/FOODON_00001006"
       ],
       "root_labels": [
-        "mammal"
+        "mammalian meat food product"
       ],
       "confidence": "high",
-      "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
-      "note": null,
-      "reviewed_by": "Claude (offline pass)",
-      "reviewed_date": "2026-09-09",
+      "rationale": "The culinary reading: a diner who does not eat red meat. `mammalian meat food product` (2,510) covers beef, pork, lamb, venison, prosciutto, salami and corned beef, and excludes poultry and fish by construction. It replaces `mammal` (3,130), which reached the animal rather than the meat and so carried 828 dairy classes: a red-meat avoider was being told to avoid parmesan and creme fraiche.",
+      "note": "SPLIT FROM `alpha-gal` on 2026-09-15, because one pin was answering two questions with one root. Alpha-gal syndrome is a reaction to a carbohydrate that is present in mammalian MILK as well as mammalian tissue, so a clinical query must keep dairy and a culinary one must not. They cannot share a root, because the suppression that removes dairy is keyed on the root. See the `remove` override on this root in config/overrides.json, which takes the residual dairy to nil.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
       "ontology_version": "2025-12-30",
       "resolver_version": "1.0.0"
     },
@@ -556,9 +574,9 @@
       ],
       "confidence": "high",
       "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
-      "note": null,
-      "reviewed_by": "Claude (offline pass)",
-      "reviewed_date": "2026-09-09",
+      "note": "KEEPS DAIRY, deliberately. Alpha-gal is galactose-alpha-1,3-galactose, and it is present in mammalian milk as well as in tissue; dairy reactions are less common than meat reactions and are well attested. The culinary `red meat` pin suppresses dairy and this one must not -- a false positive there costs a diner cheese, a false negative here costs an allergic diner a reaction. Split from `red meat` 2026-09-15.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
       "ontology_version": "2025-12-30",
       "resolver_version": "1.0.0"
     },
@@ -574,9 +592,9 @@
       ],
       "confidence": "high",
       "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
-      "note": null,
-      "reviewed_by": "Claude (offline pass)",
-      "reviewed_date": "2026-09-09",
+      "note": "KEEPS DAIRY, deliberately. Alpha-gal is galactose-alpha-1,3-galactose, and it is present in mammalian milk as well as in tissue; dairy reactions are less common than meat reactions and are well attested. The culinary `red meat` pin suppresses dairy and this one must not -- a false positive there costs a diner cheese, a false negative here costs an allergic diner a reaction. Split from `red meat` 2026-09-15.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
       "ontology_version": "2025-12-30",
       "resolver_version": "1.0.0"
     },
@@ -592,27 +610,9 @@
       ],
       "confidence": "high",
       "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
-      "note": null,
-      "reviewed_by": "Claude (offline pass)",
-      "reviewed_date": "2026-09-09",
-      "ontology_version": "2025-12-30",
-      "resolver_version": "1.0.0"
-    },
-    "red meat": {
-      "query": "red meat",
-      "status": "resolved",
-      "method": "offline-review",
-      "roots": [
-        "http://purl.obolibrary.org/obo/FOODON_03411134"
-      ],
-      "root_labels": [
-        "mammal"
-      ],
-      "confidence": "high",
-      "rationale": "Alpha-gal syndrome is a reaction to galactose-alpha-1,3-galactose, present in non-primate mammalian tissue. `mammal` is the correct root; there is no alpha-gal class in FoodOn and there could not usefully be one, since the carbohydrate is a property of the tissue rather than a separate ingredient.",
-      "note": null,
-      "reviewed_by": "Claude (offline pass)",
-      "reviewed_date": "2026-09-09",
+      "note": "KEEPS DAIRY, deliberately. Alpha-gal is galactose-alpha-1,3-galactose, and it is present in mammalian milk as well as in tissue; dairy reactions are less common than meat reactions and are well attested. The culinary `red meat` pin suppresses dairy and this one must not -- a false positive there costs a diner cheese, a false negative here costs an allergic diner a reaction. Split from `red meat` 2026-09-15.",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
       "ontology_version": "2025-12-30",
       "resolver_version": "1.0.0"
     },

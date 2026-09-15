@@ -324,6 +324,30 @@
         "anisette toast"
       ],
       "why": "FoodOn defines `Buffalo wing (dish) = prepared chicken wing and (food (baked) or food (deep-fried))`. The union sits INSIDE an intersection, which entails `Buffalo wing subClassOf (baked or fried)` and nothing whatever about `food (baked) subClassOf Buffalo wing`. Reading those operands as children made a chicken dish the parent of every baked food, so poultry returned 1,200 classes instead of 875 and egg returned 1,160 instead of 882 -- both swallowing the entire baked-goods tree, 327 classes of it. The top-level `X = A or B` rule that makes operands children is right and does not apply once a union is nested inside an intersection."
+    },
+    {
+      "name": "red meat is meat; alpha-gal keeps the dairy",
+      "roots": [
+        "mammalian meat food product"
+      ],
+      "expect": [
+        "beef steak",
+        "pork chop",
+        "lamb chop",
+        "venison",
+        "prosciutto",
+        "corned beef",
+        "beef jerky"
+      ],
+      "reject": [
+        "cow milk",
+        "butter",
+        "cheddar cheese",
+        "parmesan cheese food product",
+        "chicken breast",
+        "turkey breast"
+      ],
+      "why": "Two questions were sharing one pin and one root. `red meat` as a CULINARY avoidance is about meat: someone who does not eat it eats cheese. `alpha-gal` is a reaction to galactose-alpha-1,3-galactose, which is present in mammalian MILK as well as tissue, so a clinical query must keep dairy. Both resolved to `mammal`, which reaches the animal rather than the meat and carried 828 dairy classes -- so a red-meat avoider was told to avoid parmesan. They cannot share a root, because the suppression that removes dairy is keyed on the root. `red meat` now resolves to `mammalian meat food product` with a signed `remove`, 1,725 classes and no dairy; `alpha-gal` keeps `mammal` and its 828, deliberately. A false positive there costs a diner cheese; a false negative here costs an allergic diner a reaction."
     }
   ]
 }

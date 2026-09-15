@@ -4371,12 +4371,34 @@ local:patch-f119275e262c a local:Patch ;
 
 
 # =============================================================================
-# Exceptions that OWL cannot express as retractions   (2)
+# Exceptions that OWL cannot express as retractions   (3)
 # =============================================================================
 # OWL is monotonic: an import adds and never removes. Where an upstream
 # axiom is ontologically defensible but wrong for avoidance, the exception
 # is stated declaratively for a traversal to honour.
 
+
+### milk  --notAvoidanceRelevantFor-->  mammalian meat food product
+#   confidence: high
+#   claim:      not_avoidance_relevant
+#   reviewer:   Matt
+#   `mammalian meat food product` descends to the species classes, which carry
+#   `in taxon`, and the species pivot then walks back down and returns
+#   everything else that animal produces -- 828 dairy classes on a RED MEAT
+#   query. Meat and milk are separate avoidances: someone who does not eat red
+#   meat eats cheese. Same defect and same remedy as the `bovine meat food
+#   product` entry above, one level up the hierarchy.
+obo:UBERON_0001913 local:notAvoidanceRelevantFor obo:FOODON_00001006 .
+local:patch-2e8ec8d73a8e a local:Patch ;
+    local:patchSection "remove" ;
+    local:patchTarget obo:UBERON_0001913 ;
+    local:patchProperty local:notAvoidanceRelevantFor ;
+    local:patchValue obo:FOODON_00001006 ;
+    local:patchConfidence "high" ;
+    local:patchClaim "not_avoidance_relevant" ;
+    rdfs:comment "`mammalian meat food product` descends to the species classes, which carry `in taxon`, and the species pivot then walks back down and returns everything else that animal produces -- 828 dairy classes on a RED MEAT query. Meat and milk are separate avoidances: someone who does not eat red meat eats cheese. Same defect and same remedy as the `bovine meat food product` entry above, one level up the hierarchy." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
 
 ### milk  --notAvoidanceRelevantFor-->  bovine meat food product
 #   confidence: high
@@ -7602,7 +7624,8 @@ obo:FOODON_00002809 local:resolvesQuery "edamame" .
 obo:FOODON_03420194 local:resolvesQuery "egg" .
 obo:FOODON_00004409 local:resolvesQuery "greek yoghurt" .
 obo:FOODON_03310795 local:resolvesQuery "double cream" .
-obo:FOODON_03411134 local:resolvesQuery "alpha gal" , "alpha-gal" , "mammalian meat" , "mammalian meat (alpha-gal)" , "red meat" .
+obo:FOODON_03411134 local:resolvesQuery "alpha gal" , "alpha-gal" , "mammalian meat (alpha-gal)" .
+obo:FOODON_00001006 local:resolvesQuery "mammalian meat" , "red meat" .
 obo:FOODON_03412112 local:resolvesQuery "mollusc" , "molluscan shellfish" , "molluscs" , "mollusk" , "shellfish (mollusc)" .
 obo:FOODON_00001172 local:resolvesQuery "tree nut" , "tree nuts" , "treenut" .
 obo:FOODON_03411213 local:resolvesQuery "tree nut" , "tree nuts" , "treenut" .
