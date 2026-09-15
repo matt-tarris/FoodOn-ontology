@@ -9550,6 +9550,58 @@
       "overrides_resolver": true,
       "signed_off_by": "Matt",
       "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "ramps",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03413716",
+      "maps_to": "broadleaf wild leek plant",
+      "uses": 13,
+      "root_labels": [
+        "broadleaf wild leek plant"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "schmaltz",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03305091",
+      "maps_to": "chicken fat",
+      "uses": 9,
+      "root_labels": [
+        "chicken fat"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "cornichons",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003279",
+      "maps_to": "Cornichon pickle",
+      "uses": 8,
+      "root_labels": [
+        "Cornichon pickle"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "orecchiette",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03306347",
+      "maps_to": "pasta",
+      "uses": 7,
+      "root_labels": [
+        "pasta"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
     }
   ],
   "requires_signoff": [
@@ -12000,29 +12052,6 @@
           "why": "dropping `ancho chile`",
           "closure": 1,
           "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "ramps",
-      "uses": 13,
-      "share": 0.022,
-      "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed": "wild leek",
-      "proposed_roots": [
-        "Allium ampeloprasum"
-      ],
-      "proposed_closure": 7,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_4681",
-          "label": "Allium ampeloprasum",
-          "curie": "NCBITaxon:4681",
-          "why": "proposed: `wild leek`",
-          "closure": 7,
-          "excluded": false,
-          "recommended": true
         }
       ]
     },
@@ -15715,26 +15744,6 @@
       ]
     },
     {
-      "term": "nuoc nam",
-      "uses": 10,
-      "share": 0.017,
-      "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001313",
-          "label": "nam-budu",
-          "curie": "FOODON:00001313",
-          "why": "names everything in `nuoc nam`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        }
-      ]
-    },
-    {
       "term": "celery ribs",
       "uses": 9,
       "share": 0.016,
@@ -16893,29 +16902,6 @@
       "proposed_by": "Claude (offline pass)",
       "proposed": null,
       "declined_reason": "equipment"
-    },
-    {
-      "term": "schmaltz",
-      "uses": 9,
-      "share": 0.016,
-      "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed": "chicken fat",
-      "proposed_roots": [
-        "chicken fat"
-      ],
-      "proposed_closure": 764,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03305091",
-          "label": "chicken fat",
-          "curie": "FOODON:03305091",
-          "why": "proposed: `chicken fat`",
-          "closure": 764,
-          "excluded": false,
-          "recommended": true
-        }
-      ]
     },
     {
       "term": "oil- anchovies",
@@ -18377,26 +18363,6 @@
       ]
     },
     {
-      "term": "cornichons",
-      "uses": 8,
-      "share": 0.014,
-      "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003279",
-          "label": "Cornichon pickle",
-          "curie": "FOODON:00003279",
-          "why": "names everything in `cornichons`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        }
-      ]
-    },
-    {
       "term": "sun gold",
       "uses": 8,
       "share": 0.014,
@@ -19330,29 +19296,6 @@
           "why": "lexical: `grain`",
           "closure": 1546,
           "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "orecchiette",
-      "uses": 7,
-      "share": 0.012,
-      "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed": "pasta",
-      "proposed_roots": [
-        "pasta"
-      ],
-      "proposed_closure": 159,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03306347",
-          "label": "pasta",
-          "curie": "FOODON:03306347",
-          "why": "proposed: `pasta`",
-          "closure": 159,
-          "excluded": false,
-          "recommended": true
         }
       ]
     },
@@ -25525,23 +25468,6 @@
       ]
     },
     {
-      "term": "superfine",
-      "uses": 5,
-      "share": 0.009,
-      "candidates": [],
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03306646",
-          "label": "white sugar (superfine)",
-          "curie": "FOODON:03306646",
-          "why": "names everything in `superfine`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        }
-      ]
-    },
-    {
       "term": "coconut palm sugar",
       "uses": 5,
       "share": 0.009,
@@ -26988,6 +26914,20 @@
       "reason": "equipment",
       "declined_by": "Matt",
       "declined_date": "2026-09-11"
+    },
+    {
+      "term": "superfine",
+      "uses": 5,
+      "reason": "stale: the normaliser no longer produces this term. `superfine sugar` and `caster (superfine) sugar` now reach `sugar` once the parenthetical and the grade word come off, and `fish sauce (such as nam pla or nuoc nam)` reaches `fish sauce`. Both were queued before those fixes; no line in the corpus produces either term today.",
+      "declined_by": "Matt",
+      "declined_date": "2026-09-15"
+    },
+    {
+      "term": "nuoc nam",
+      "uses": 10,
+      "reason": "stale: the normaliser no longer produces this term. `superfine sugar` and `caster (superfine) sugar` now reach `sugar` once the parenthetical and the grade word come off, and `fish sauce (such as nam pla or nuoc nam)` reaches `fish sauce`. Both were queued before those fixes; no line in the corpus produces either term today.",
+      "declined_by": "Matt",
+      "declined_date": "2026-09-15"
     }
   ]
 }
