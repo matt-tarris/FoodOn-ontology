@@ -370,12 +370,15 @@ python3 build/build_relation_policy.py
 python3 build/build_resolution_store.py
 python3 build/validate_store.py
 
-python3 test/run.py             # 116 golden + invariant assertions
-python3 test/resolution_run.py  # 155 resolution assertions
-python3 test/override_run.py    # 61 assertions: signed claims do what their claim says
+python3 test/run.py             # 184 golden + invariant assertions
+python3 test/resolution_run.py  # 200 resolution assertions
+python3 test/override_run.py    # 183 assertions: signed claims do what their claim says
 python3 test/mined_run.py       # 123 assertions: nothing unsigned reaches an answer
 python3 test/allergen_run.py    # real allergen derivative coverage
-python3 test/patch_run.py       # 12 assertions: the .ttl export means what the app means
+python3 test/patch_run.py       # 25 assertions: the .ttl export means what the app means
+python3 test/audit_run.py       # 97 assertions: the audit UI's read/write model
+python3 test/ingest_run.py      # 47 assertions: recipe line -> class, or nothing
+python3 test/decisions_run.py   # every IRI in every decision file still names that class
 
 python3 build/audit/probe.py    # the one-off discovery scripts; see build/audit/README.md
 ```
@@ -1181,7 +1184,7 @@ the committed store.
 
 ## The decision files check themselves
 
-`test/decisions_run.py` — **2,886 assertions** over seven governed files, against the
+`test/decisions_run.py` — **3,206 assertions** over seven governed files, against the
 release they claim to describe.
 
 The interface validates what it writes; the files do not, and both silent mis-writes in
@@ -1329,3 +1332,36 @@ machinery:
   `mustard spinach food product`. Both are allergen false negatives.
 - Certified gluten-free oats cannot be expressed here. Oats count as gluten-containing
   by decision; the exception is a product-label fact and must be handled downstream.
+
+## Provenance and licence
+
+Three bodies of work are stacked here and they are not under the same terms.
+
+**FoodOn** is the ontology this is grounded in — 39,894 classes, release 2025-12-30,
+declaring `https://creativecommons.org/licenses/by/4.0/` in its own header. It is not
+redistributed here: `.gitignore` keeps the vendor `.owl` out, and a clone fetches it
+from `purl.obolibrary.org` against the committed `ontology/foodon.owl.sha256`. Cite it
+as the OBO Foundry asks — Dooley et al., *FoodOn: a harmonized food ontology*, npj
+Science of Food 2 (2018).
+
+**ROBOT** (`ontodev/robot`, v1.9.10) does the merge, query and convert steps. Also not
+redistributed; also hash-pinned; downloaded from its own GitHub release.
+
+**Everything else in this repository** — the traversal, the patch layer, the audit
+interface, the ingest pipeline, and every governed decision file under `config/` — is
+this project's work. No licence has been chosen for it yet, which means all rights are
+reserved and nobody else may reuse it; the repository is private while that is true.
+
+One thing to be clear about, because it is the part most likely to be reused: the
+decision files are **judgements, not data extracts**. `config/overrides.json` says
+mayonnaise contains egg yolk; `config/ingredient-map.json` says a recipe line reading
+`swordfish steaks` means `swordfish` and not `swordfish steak (raw)`. Those were
+decided by a human reviewing a shortlist, one at a time, and they are only as good as
+that review. They carry no warranty, and in particular **this is not a medical device
+and not clinical advice** — a system that decides what a person with a food allergy
+may eat needs review by someone qualified to take that responsibility, and nothing
+here substitutes for it. The `Known limits` section above is the honest list of what
+it does not catch.
+
+The recipe corpora used to seed the ingredient map are not committed either; only the
+term-to-class decisions derived from them are, and those name no recipe.
