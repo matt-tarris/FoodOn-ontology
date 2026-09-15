@@ -109,12 +109,36 @@ spec = dict(
     mappings=[],
     requires_signoff=queue,
 )
-old = {}
+# A RE-SEED REFRESHES WHAT THE CORPUS SAYS AND KEEPS WHAT A PERSON DECIDED.
+# The corpus and the normaliser both move: terms appear, and terms stop existing --
+# `superfine` and `nuoc nam` were queued before the parenthetical and hyphen fixes and
+# no line produces either now. Re-seeding is how those leave. But it must not throw
+# away the decisions layered on top, or a re-seed would cost more than it cleans:
+#   signed mappings   kept, and their terms never re-queued
+#   declines          kept, and their terms never re-queued
+#   proposals         carried onto the surviving queue entries
+carried = 0
 if os.path.exists(MAP_FILE):
     prev = json.load(open(MAP_FILE))
     spec["mappings"] = prev.get("mappings", [])
-    old = {m["term"] for m in spec["mappings"]}
-    spec["requires_signoff"] = [q for q in queue if q["term"] not in old]
+    spec["declined"] = prev.get("declined", [])
+    decided = ({m["term"] for m in spec["mappings"]}
+               | {d["term"] for d in spec["declined"]})
+    KEEP = ("proposed", "proposed_by", "proposed_roots", "proposed_closure",
+            "proposed_note", "declined_reason")
+    was = {q["term"]: q for q in prev.get("requires_signoff", [])}
+    fresh = []
+    for q in queue:
+        if q["term"] in decided:
+            continue
+        old_q = was.get(q["term"])
+        if old_q:
+            kept = {k: old_q[k] for k in KEEP if k in old_q}
+            if kept:
+                carried += 1
+            q.update(kept)
+        fresh.append(q)
+    spec["requires_signoff"] = fresh
 json.dump(spec, open(MAP_FILE, "w"), indent=2)
 
 covered = sum(q["uses"] for q in spec["requires_signoff"])
@@ -129,4 +153,5 @@ print(f"queued for sign-off   : {len(spec['requires_signoff'])} terms, {covered:
 print(f"  with a candidate    : {withcand}")
 print(f"  ONLY risky candidates: {risky}  (head-noun collapses; these need a human answer)")
 print(f"  no candidate at all : {len(spec['requires_signoff'])-withcand}")
-print(f"\nwrote {MAP_FILE} -- signed entries: {len(spec['mappings'])}")
+print(f"\nwrote {MAP_FILE} -- {len(spec['mappings'])} signed, "
+      f"{len(spec.get('declined', []))} declined, {carried} proposals carried forward")

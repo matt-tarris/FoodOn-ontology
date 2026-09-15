@@ -2,9 +2,9 @@
   "version": "2026-09-11",
   "note": "Recipe ingredient term -> a term build/resolve.py can find. Seeded from a corpus by build/seed_ingredient_map.py; NOTHING here takes effect until an entry carries `signed_off_by`, which build/ingest.py is the only reader of.\n\nKept separate from data/resolution-store.json on purpose. That file pins what a DINER means by a word, 53 entries carrying long arguments about allergen scope. This one records what a RECIPE WRITER means, runs to hundreds of mostly-mechanical entries, and wants a different review burden. Merging them would bury the reasoned decisions in the routine ones.",
   "corpus": "5000_real_recipes.json",
-  "corpus_lines": 57972,
-  "corpus_terms": 8987,
-  "deterministic_share": 68.6,
+  "corpus_lines": 57939,
+  "corpus_terms": 8884,
+  "deterministic_share": 68.9,
   "mappings": [
     {
       "term": "white wine vinegar",
@@ -568,7 +568,7 @@
           "label": "orange",
           "curie": "FOODON:03315106",
           "why": "names everything in `orange zest`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false,
           "recommended": true
         },
@@ -888,7 +888,7 @@
           "label": "chicken",
           "curie": "FOODON:03411457",
           "why": "names everything in `chicken stock`",
-          "closure": 811,
+          "closure": 486,
           "excluded": false,
           "recommended": true
         },
@@ -3361,7 +3361,7 @@
           "label": "potato",
           "curie": "FOODON:03315354",
           "why": "currently mapped here",
-          "closure": 192,
+          "closure": 193,
           "excluded": false
         }
       ]
@@ -3697,7 +3697,7 @@
           "label": "potato",
           "curie": "FOODON:03315354",
           "why": "currently mapped here",
-          "closure": 192,
+          "closure": 193,
           "excluded": false
         }
       ]
@@ -5004,7 +5004,7 @@
           "label": "chicken egg",
           "curie": "FOODON:03316061",
           "why": "currently mapped here",
-          "closure": 764,
+          "closure": 486,
           "excluded": false
         }
       ]
@@ -5027,7 +5027,7 @@
           "label": "chicken",
           "curie": "FOODON:03411457",
           "why": "names everything in `rotisserie chicken`",
-          "closure": 811,
+          "closure": 486,
           "excluded": false,
           "recommended": true
         },
@@ -5044,7 +5044,7 @@
           "label": "chicken wing",
           "curie": "FOODON:00002674",
           "why": "names everything in `rotisserie chicken`",
-          "closure": 811,
+          "closure": 486,
           "excluded": false
         },
         {
@@ -5052,7 +5052,7 @@
           "label": "chicken breast",
           "curie": "FOODON:00002703",
           "why": "names everything in `rotisserie chicken`",
-          "closure": 764,
+          "closure": 486,
           "excluded": false
         }
       ]
@@ -8331,7 +8331,7 @@
           "label": "flower",
           "curie": "PO:0009046",
           "why": "names everything in `edible flowers`",
-          "closure": 2115,
+          "closure": 2116,
           "excluded": false,
           "recommended": true
         },
@@ -8587,7 +8587,7 @@
           "label": "orange",
           "curie": "FOODON:03315106",
           "why": "names everything in `wide strips orange zest`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false,
           "recommended": true
         },
@@ -9135,7 +9135,42 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
+          "label": "black pepper (ground)",
+          "curie": "FOODON:03306739",
+          "why": "names everything in `cracked black pepper`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
+          "label": "black pepper powder",
+          "curie": "FOODON:03317003",
+          "why": "names everything in `cracked black pepper`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
+          "label": "black pepper plant",
+          "curie": "FOODON:03411191",
+          "why": "names everything in `cracked black pepper`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+          "label": "black pepper food product",
+          "curie": "FOODON:00001650",
+          "why": "names everything in `cracked black pepper`",
+          "closure": 5,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "kosher salt black pepper",
@@ -9151,7 +9186,42 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
+          "label": "black pepper (ground)",
+          "curie": "FOODON:03306739",
+          "why": "names everything in `salt black pepper`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
+          "label": "black pepper powder",
+          "curie": "FOODON:03317003",
+          "why": "names everything in `salt black pepper`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
+          "label": "black pepper plant",
+          "curie": "FOODON:03411191",
+          "why": "names everything in `salt black pepper`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+          "label": "black pepper food product",
+          "curie": "FOODON:00001650",
+          "why": "names everything in `salt black pepper`",
+          "closure": 5,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "salt black pepper",
@@ -9167,7 +9237,42 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
+          "label": "black pepper (ground)",
+          "curie": "FOODON:03306739",
+          "why": "names everything in `salt black pepper`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
+          "label": "black pepper powder",
+          "curie": "FOODON:03317003",
+          "why": "names everything in `salt black pepper`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
+          "label": "black pepper plant",
+          "curie": "FOODON:03411191",
+          "why": "names everything in `salt black pepper`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+          "label": "black pepper food product",
+          "curie": "FOODON:00001650",
+          "why": "names everything in `salt black pepper`",
+          "closure": 5,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "salt pepper",
@@ -9183,7 +9288,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/CHEBI_24866",
+          "label": "salt",
+          "curie": "CHEBI:24866",
+          "why": "names everything in `salt pepper`",
+          "closure": 10,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
+          "label": "pepper",
+          "curie": "FOODON:00003520",
+          "why": "names everything in `salt pepper`",
+          "closure": 176,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/CHEBI_23114",
+          "label": "chloride salt",
+          "curie": "CHEBI:23114",
+          "why": "names everything in `salt pepper`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305070",
+          "label": "salt and pepper spray",
+          "curie": "FOODON:03305070",
+          "why": "names everything in `salt pepper`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+          "label": "black pepper food product",
+          "curie": "FOODON:00001650",
+          "why": "currently mapped here",
+          "closure": 5,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "sea salt black pepper",
@@ -9199,7 +9347,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
+          "label": "black pepper (ground)",
+          "curie": "FOODON:03306739",
+          "why": "names everything in `salt black pepper`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
+          "label": "black pepper powder",
+          "curie": "FOODON:03317003",
+          "why": "names everything in `salt black pepper`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
+          "label": "black pepper plant",
+          "curie": "FOODON:03411191",
+          "why": "names everything in `salt black pepper`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03411438",
+          "label": "black sea bass",
+          "curie": "FOODON:03411438",
+          "why": "names everything in `sea salt black pepper`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+          "label": "black pepper food product",
+          "curie": "FOODON:00001650",
+          "why": "names everything in `salt black pepper`",
+          "closure": 5,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "sea salt cracked black pepper",
@@ -9215,7 +9406,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
+          "label": "black pepper (ground)",
+          "curie": "FOODON:03306739",
+          "why": "names everything in `salt cracked black pepper`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
+          "label": "black pepper powder",
+          "curie": "FOODON:03317003",
+          "why": "names everything in `salt cracked black pepper`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
+          "label": "black pepper plant",
+          "curie": "FOODON:03411191",
+          "why": "names everything in `salt cracked black pepper`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03411438",
+          "label": "black sea bass",
+          "curie": "FOODON:03411438",
+          "why": "names everything in `sea salt cracked black pepper`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+          "label": "black pepper food product",
+          "curie": "FOODON:00001650",
+          "why": "names everything in `salt cracked black pepper`",
+          "closure": 5,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "pepper",
@@ -9229,7 +9463,58 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
+          "label": "pepper",
+          "curie": "FOODON:00003520",
+          "why": "names everything in `pepper`",
+          "closure": 176,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002994",
+          "label": "ancho pepper",
+          "curie": "FOODON:00002994",
+          "why": "names everything in `pepper`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003470",
+          "label": "sichuan pepper",
+          "curie": "FOODON:00003470",
+          "why": "names everything in `pepper`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003494",
+          "label": "jalapeno pepper",
+          "curie": "FOODON:00003494",
+          "why": "names everything in `pepper`",
+          "closure": 11,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+          "label": "black pepper food product",
+          "curie": "FOODON:00001650",
+          "why": "currently mapped here",
+          "closure": 5,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_4071",
+          "label": "Capsicum",
+          "curie": "NCBITaxon:4071",
+          "why": "close lexical match",
+          "closure": 177,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "flour",
@@ -9243,7 +9528,58 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00004510",
+          "label": "flour",
+          "curie": "FOODON:00004510",
+          "why": "names everything in `flour`",
+          "closure": 125,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002207",
+          "label": "rice flour",
+          "curie": "FOODON:00002207",
+          "why": "names everything in `flour`",
+          "closure": 11,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002413",
+          "label": "bean flour",
+          "curie": "FOODON:00002413",
+          "why": "names everything in `flour`",
+          "closure": 4,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002553",
+          "label": "triticale flour",
+          "curie": "FOODON:00002553",
+          "why": "names everything in `flour`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001210",
+          "label": "wheat flour food product",
+          "curie": "FOODON:00001210",
+          "why": "currently mapped here",
+          "closure": 75,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001056",
+          "label": "flour food product",
+          "curie": "FOODON:00001056",
+          "why": "close lexical match",
+          "closure": 125,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "bread",
@@ -9257,7 +9593,58 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
+          "label": "bread",
+          "curie": "FOODON:03000288",
+          "why": "names everything in `bread`",
+          "closure": 282,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002665",
+          "label": "quick bread",
+          "curie": "FOODON:00002665",
+          "why": "names everything in `bread`",
+          "closure": 22,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003056",
+          "label": "rice bread",
+          "curie": "FOODON:00003056",
+          "why": "names everything in `bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003060",
+          "label": "pita bread",
+          "curie": "FOODON:00003060",
+          "why": "names everything in `bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+          "label": "wheat bread",
+          "curie": "FOODON:03302200",
+          "why": "currently mapped here",
+          "closure": 159,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001183",
+          "label": "bread food product",
+          "curie": "FOODON:00001183",
+          "why": "close lexical match",
+          "closure": 282,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "breadcrumbs",
@@ -9271,7 +9658,34 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
+          "label": "breadcrumbs",
+          "curie": "FOODON:00005442",
+          "why": "names everything in `breadcrumbs`",
+          "closure": 3,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301907",
+          "label": "wheat breadcrumbs",
+          "curie": "FOODON:03301907",
+          "why": "names everything in `breadcrumbs`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305377",
+          "label": "wheat breadcrumbs (enriched)",
+          "curie": "FOODON:03305377",
+          "why": "names everything in `breadcrumbs`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "cracker",
@@ -9285,7 +9699,58 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002711",
+          "label": "cracker",
+          "curie": "FOODON:00002711",
+          "why": "names everything in `cracker`",
+          "closure": 2,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302362",
+          "label": "potato cracker",
+          "curie": "FOODON:03302362",
+          "why": "names everything in `cracker`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302571",
+          "label": "soda cracker",
+          "curie": "FOODON:03302571",
+          "why": "names everything in `cracker`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302871",
+          "label": "rye cracker",
+          "curie": "FOODON:03302871",
+          "why": "names everything in `cracker`",
+          "closure": 4,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002353",
+          "label": "wheat cracker food product",
+          "curie": "FOODON:00002353",
+          "why": "currently mapped here",
+          "closure": 19,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002466",
+          "label": "biscuit (hard) food product",
+          "curie": "FOODON:00002466",
+          "why": "close lexical match",
+          "closure": 10,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "panko",
@@ -9301,7 +9766,18 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301907",
+          "label": "wheat breadcrumbs",
+          "curie": "FOODON:03301907",
+          "why": "currently mapped here",
+          "closure": 2,
+          "excluded": false,
+          "recommended": true
+        }
+      ]
     },
     {
       "term": "baguette",
@@ -9317,7 +9793,18 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+          "label": "wheat bread",
+          "curie": "FOODON:03302200",
+          "why": "currently mapped here",
+          "closure": 159,
+          "excluded": false,
+          "recommended": true
+        }
+      ]
     },
     {
       "term": "crusty bread",
@@ -9333,7 +9820,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
+          "label": "bread",
+          "curie": "FOODON:03000288",
+          "why": "names everything in `crusty bread`",
+          "closure": 282,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002665",
+          "label": "quick bread",
+          "curie": "FOODON:00002665",
+          "why": "names everything in `crusty bread`",
+          "closure": 22,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003056",
+          "label": "rice bread",
+          "curie": "FOODON:00003056",
+          "why": "names everything in `crusty bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003060",
+          "label": "pita bread",
+          "curie": "FOODON:00003060",
+          "why": "names everything in `crusty bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+          "label": "wheat bread",
+          "curie": "FOODON:03302200",
+          "why": "currently mapped here",
+          "closure": 159,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "thick country-style bread",
@@ -9349,7 +9879,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302496",
+          "label": "bread (country-style)",
+          "curie": "FOODON:03302496",
+          "why": "names everything in `thick country-style bread`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305311",
+          "label": "gravy (country-style)",
+          "curie": "FOODON:03305311",
+          "why": "names everything in `thick country-style bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_02000060",
+          "label": "beef country-style rib",
+          "curie": "FOODON:02000060",
+          "why": "names everything in `thick country-style bread`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_02000061",
+          "label": "beef country-style rib (raw)",
+          "curie": "FOODON:02000061",
+          "why": "names everything in `thick country-style bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+          "label": "wheat bread",
+          "curie": "FOODON:03302200",
+          "why": "currently mapped here",
+          "closure": 159,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "-thick country-style bread",
@@ -9365,7 +9938,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302496",
+          "label": "bread (country-style)",
+          "curie": "FOODON:03302496",
+          "why": "names everything in `thick country-style bread`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305311",
+          "label": "gravy (country-style)",
+          "curie": "FOODON:03305311",
+          "why": "names everything in `thick country-style bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_02000060",
+          "label": "beef country-style rib",
+          "curie": "FOODON:02000060",
+          "why": "names everything in `thick country-style bread`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_02000061",
+          "label": "beef country-style rib (raw)",
+          "curie": "FOODON:02000061",
+          "why": "names everything in `thick country-style bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+          "label": "wheat bread",
+          "curie": "FOODON:03302200",
+          "why": "currently mapped here",
+          "closure": 159,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "flour tortillas",
@@ -9381,7 +9997,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00004510",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03307944",
+          "label": "tortilla flour",
+          "curie": "FOODON:03307944",
+          "why": "names everything in `flour tortillas`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00004510",
+          "label": "flour",
+          "curie": "FOODON:00004510",
+          "why": "names everything in `flour tortillas`",
+          "closure": 125,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03307668",
+          "label": "tortilla",
+          "curie": "FOODON:03307668",
+          "why": "names everything in `flour tortillas`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002207",
+          "label": "rice flour",
+          "curie": "FOODON:00002207",
+          "why": "names everything in `flour tortillas`",
+          "closure": 11,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001210",
+          "label": "wheat flour food product",
+          "curie": "FOODON:00001210",
+          "why": "currently mapped here",
+          "closure": 75,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "graham crackers",
@@ -9397,7 +10056,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00002711",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002711",
+          "label": "cracker",
+          "curie": "FOODON:00002711",
+          "why": "names everything in `graham crackers`",
+          "closure": 2,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003317",
+          "label": "graham flour",
+          "curie": "FOODON:00003317",
+          "why": "names everything in `graham crackers`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302362",
+          "label": "potato cracker",
+          "curie": "FOODON:03302362",
+          "why": "names everything in `graham crackers`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302571",
+          "label": "soda cracker",
+          "curie": "FOODON:03302571",
+          "why": "names everything in `graham crackers`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002353",
+          "label": "wheat cracker food product",
+          "curie": "FOODON:00002353",
+          "why": "currently mapped here",
+          "closure": 19,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "torn breadcrumbs",
@@ -9413,7 +10115,34 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00005442",
+          "label": "breadcrumbs",
+          "curie": "FOODON:00005442",
+          "why": "names everything in `torn breadcrumbs`",
+          "closure": 3,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301907",
+          "label": "wheat breadcrumbs",
+          "curie": "FOODON:03301907",
+          "why": "names everything in `torn breadcrumbs`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305377",
+          "label": "wheat breadcrumbs (enriched)",
+          "curie": "FOODON:03305377",
+          "why": "names everything in `torn breadcrumbs`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "soba noodles",
@@ -9429,7 +10158,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03306944",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03306944",
+          "label": "noodle",
+          "curie": "FOODON:03306944",
+          "why": "names everything in `soba noodles`",
+          "closure": 52,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002940",
+          "label": "instant noodle",
+          "curie": "FOODON:00002940",
+          "why": "names everything in `soba noodles`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00005555",
+          "label": "rice noodle",
+          "curie": "FOODON:00005555",
+          "why": "names everything in `soba noodles`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00005567",
+          "label": "cellophane noodle",
+          "curie": "FOODON:00005567",
+          "why": "names everything in `soba noodles`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03309979",
+          "label": "buckwheat noodle",
+          "curie": "FOODON:03309979",
+          "why": "currently mapped here",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "green chiles",
@@ -9445,7 +10217,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002684",
+          "label": "mustard greens",
+          "curie": "FOODON:00002684",
+          "why": "names everything in `green chiles`",
+          "closure": 5,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003765",
+          "label": "green tomato",
+          "curie": "FOODON:00003765",
+          "why": "names everything in `green chiles`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003885",
+          "label": "mixed greens",
+          "curie": "FOODON:00003885",
+          "why": "names everything in `green chiles`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00005616",
+          "label": "green lentil",
+          "curie": "FOODON:00005616",
+          "why": "names everything in `green chiles`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+          "label": "chili pepper",
+          "curie": "FOODON:00003744",
+          "why": "currently mapped here",
+          "closure": 160,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "red thai chile",
@@ -9461,7 +10276,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002794",
+          "label": "red banana",
+          "curie": "FOODON:00002794",
+          "why": "names everything in `red thai chile`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003103",
+          "label": "red crowberry",
+          "curie": "FOODON:00003103",
+          "why": "names everything in `red thai chile`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003516",
+          "label": "red onion",
+          "curie": "FOODON:00003516",
+          "why": "names everything in `red thai chile`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003729",
+          "label": "red raspberry",
+          "curie": "FOODON:00003729",
+          "why": "names everything in `red thai chile`",
+          "closure": 7,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+          "label": "chili pepper",
+          "curie": "FOODON:00003744",
+          "why": "currently mapped here",
+          "closure": 160,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "red fresno chiles",
@@ -9477,7 +10335,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002794",
+          "label": "red banana",
+          "curie": "FOODON:00002794",
+          "why": "names everything in `red fresno chiles`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003103",
+          "label": "red crowberry",
+          "curie": "FOODON:00003103",
+          "why": "names everything in `red fresno chiles`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003516",
+          "label": "red onion",
+          "curie": "FOODON:00003516",
+          "why": "names everything in `red fresno chiles`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003729",
+          "label": "red raspberry",
+          "curie": "FOODON:00003729",
+          "why": "names everything in `red fresno chiles`",
+          "closure": 7,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+          "label": "chili pepper",
+          "curie": "FOODON:00003744",
+          "why": "currently mapped here",
+          "closure": 160,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "red thai chiles",
@@ -9493,7 +10394,50 @@
       "corrected_from_iri": "http://purl.obolibrary.org/obo/GAZ_00002825",
       "originally_signed": "2026-09-11",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002794",
+          "label": "red banana",
+          "curie": "FOODON:00002794",
+          "why": "names everything in `red thai chiles`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003103",
+          "label": "red crowberry",
+          "curie": "FOODON:00003103",
+          "why": "names everything in `red thai chiles`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003516",
+          "label": "red onion",
+          "curie": "FOODON:00003516",
+          "why": "names everything in `red thai chiles`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003729",
+          "label": "red raspberry",
+          "curie": "FOODON:00003729",
+          "why": "names everything in `red thai chiles`",
+          "closure": 7,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+          "label": "chili pepper",
+          "curie": "FOODON:00003744",
+          "why": "currently mapped here",
+          "closure": 160,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "chile",
@@ -9507,7 +10451,26 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03415020",
+          "label": "chile cocopalm plant",
+          "curie": "FOODON:03415020",
+          "why": "names everything in `chile`",
+          "closure": 2,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+          "label": "chili pepper",
+          "curie": "FOODON:00003744",
+          "why": "currently mapped here",
+          "closure": 160,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "chiles",
@@ -9521,7 +10484,26 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03415020",
+          "label": "chile cocopalm plant",
+          "curie": "FOODON:03415020",
+          "why": "names everything in `chiles`",
+          "closure": 2,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+          "label": "chili pepper",
+          "curie": "FOODON:00003744",
+          "why": "currently mapped here",
+          "closure": 160,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "anchovies",
@@ -9535,7 +10517,42 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03307140",
+          "label": "olive (stuffed with anchovies)",
+          "curie": "FOODON:03307140",
+          "why": "names everything in `anchovies`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03311142",
+          "label": "green olive (stuffed with anchovies, canned)",
+          "curie": "FOODON:03311142",
+          "why": "names everything in `anchovies`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03316282",
+          "label": "anchovy",
+          "curie": "FOODON:03316282",
+          "why": "currently mapped here",
+          "closure": 13,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_43062",
+          "label": "Engraulidae",
+          "curie": "NCBITaxon:43062",
+          "why": "close lexical match",
+          "closure": 62,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "anchovy",
@@ -9549,7 +10566,58 @@
       "proposed_by": null,
       "overrides_resolver": true,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03316282",
+          "label": "anchovy",
+          "curie": "FOODON:03316282",
+          "why": "names everything in `anchovy`",
+          "closure": 13,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002669",
+          "label": "anchovy fillet",
+          "curie": "FOODON:00002669",
+          "why": "names everything in `anchovy`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00004439",
+          "label": "anchovy (canned)",
+          "curie": "FOODON:00004439",
+          "why": "names everything in `anchovy`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_02021881",
+          "label": "european anchovy",
+          "curie": "FOODON:02021881",
+          "why": "names everything in `anchovy`",
+          "closure": 15,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_184585",
+          "label": "Engraulis encrasicolus",
+          "curie": "NCBITaxon:184585",
+          "why": "close lexical match",
+          "closure": 15,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001589",
+          "label": "anchovy food product",
+          "curie": "FOODON:00001589",
+          "why": "close lexical match",
+          "closure": 13,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "ramps",
@@ -9562,7 +10630,18 @@
       "chosen_from_shortlist": true,
       "proposed_by": "Claude (offline pass)",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03413716",
+          "label": "broadleaf wild leek plant",
+          "curie": "FOODON:03413716",
+          "why": "currently mapped here",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        }
+      ]
     },
     {
       "term": "schmaltz",
@@ -9575,7 +10654,18 @@
       "chosen_from_shortlist": true,
       "proposed_by": "Claude (offline pass)",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305091",
+          "label": "chicken fat",
+          "curie": "FOODON:03305091",
+          "why": "currently mapped here",
+          "closure": 486,
+          "excluded": false,
+          "recommended": true
+        }
+      ]
     },
     {
       "term": "cornichons",
@@ -9588,7 +10678,18 @@
       "chosen_from_shortlist": true,
       "proposed_by": "Claude (offline pass)",
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003279",
+          "label": "Cornichon pickle",
+          "curie": "FOODON:00003279",
+          "why": "names everything in `cornichons`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        }
+      ]
     },
     {
       "term": "orecchiette",
@@ -9600,6 +10701,82 @@
       ],
       "chosen_from_shortlist": true,
       "proposed_by": "Claude (offline pass)",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03306347",
+          "label": "pasta",
+          "curie": "FOODON:03306347",
+          "why": "currently mapped here",
+          "closure": 159,
+          "excluded": false,
+          "recommended": true
+        }
+      ]
+    },
+    {
+      "term": "calabrian chiles",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+      "maps_to": "chili pepper",
+      "uses": 10,
+      "root_labels": [
+        "chili pepper"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "mild honey",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/UBERON_0036016",
+      "maps_to": "honey",
+      "uses": 5,
+      "root_labels": [
+        "honey"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "halloumi",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001030",
+      "maps_to": "halloumi cheese food product",
+      "uses": 5,
+      "root_labels": [
+        "halloumi cheese food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "popcorn kernels",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003427",
+      "maps_to": "maize kernel",
+      "uses": 5,
+      "root_labels": [
+        "maize kernel"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "swordfish steaks",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_02021998",
+      "maps_to": "swordfish",
+      "uses": 5,
+      "root_labels": [
+        "swordfish"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
       "signed_off_by": "Matt",
       "signed_off_date": "2026-09-15"
     }
@@ -9621,8 +10798,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "mustard",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "mustard plant"
       ],
@@ -9698,13 +10875,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `rice vinegar`, which the resolver returns as absent",
       "proposed": "vinegar",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "vinegar"
       ],
       "proposed_closure": 37,
+      "proposed_note": "REFUSED: proposed `rice vinegar`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_03307370",
@@ -9751,8 +10928,8 @@
     },
     {
       "term": "jalapeno",
-      "uses": 81,
-      "share": 0.14,
+      "uses": 82,
+      "share": 0.142,
       "candidates": [],
       "shortlist": [
         {
@@ -9792,11 +10969,11 @@
     },
     {
       "term": "skinless",
-      "uses": 67,
-      "share": 0.116,
+      "uses": 68,
+      "share": 0.117,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a preparation word, not an ingredient",
       "shortlist": [
         {
@@ -9845,8 +11022,8 @@
       "uses": 62,
       "share": 0.107,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a grade word, not an ingredient",
       "shortlist": [
         {
@@ -10031,11 +11208,11 @@
     },
     {
       "term": "mozzarella",
-      "uses": 52,
-      "share": 0.09,
+      "uses": 53,
+      "share": 0.091,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "mozzarella cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "mozzarella cheese"
       ],
@@ -10081,8 +11258,8 @@
       "uses": 49,
       "share": 0.085,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "whiskey",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "whiskey"
       ],
@@ -10136,8 +11313,8 @@
       "uses": 48,
       "share": 0.083,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a preparation word, not an ingredient",
       "shortlist": [
         {
@@ -10176,70 +11353,12 @@
       ]
     },
     {
-      "term": "oil- anchovy",
-      "uses": 45,
-      "share": 0.078,
-      "candidates": [
-        {
-          "term": "anchovy",
-          "roots": [
-            "anchovy"
-          ],
-          "closure": 13,
-          "dropped": "oil-",
-          "risky": false,
-          "warning": null
-        }
-      ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed": "anchovy",
-      "proposed_roots": [
-        "anchovy"
-      ],
-      "proposed_closure": 13,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03310387",
-          "label": "oil",
-          "curie": "FOODON:03310387",
-          "why": "names everything in `oil- anchovy`",
-          "closure": 81,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03316282",
-          "label": "anchovy",
-          "curie": "FOODON:03316282",
-          "why": "names everything in `oil- anchovy`",
-          "closure": 13,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03302307",
-          "label": "anchovy in olive oil",
-          "curie": "FOODON:03302307",
-          "why": "names everything in `oil- anchovy`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03307785",
-          "label": "anchovy fillet in oil",
-          "curie": "FOODON:03307785",
-          "why": "names everything in `oil- anchovy`",
-          "closure": 1,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "deep-fry thermometer",
       "uses": 44,
       "share": 0.076,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "equipment",
       "shortlist": [
         {
@@ -10282,8 +11401,8 @@
       "uses": 39,
       "share": 0.067,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "ricotta cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "ricotta cheese"
       ],
@@ -10332,8 +11451,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "bread",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "bread"
       ],
@@ -10387,8 +11506,8 @@
       "uses": 35,
       "share": 0.06,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "tomato ketchup",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "tomato ketchup"
       ],
@@ -10451,8 +11570,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chocolate",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chocolate"
       ],
@@ -10498,8 +11617,8 @@
       "uses": 34,
       "share": 0.059,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "feta cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "feta cheese"
       ],
@@ -10567,13 +11686,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `rice vinegar`, which the resolver returns as absent",
       "proposed": "vinegar",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "vinegar"
       ],
       "proposed_closure": 37,
+      "proposed_note": "REFUSED: proposed `rice vinegar`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_03307370",
@@ -10621,15 +11740,15 @@
     {
       "term": "pecorino",
       "uses": 31,
-      "share": 0.053,
+      "share": 0.054,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `pecorino romano cheese`, which the resolver returns as absent",
       "proposed": "pecorino cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "pecorino cheese"
       ],
       "proposed_closure": 1,
+      "proposed_note": "REFUSED: proposed `pecorino romano cheese`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_00001295",
@@ -10651,59 +11770,6 @@
       ]
     },
     {
-      "term": "half- -half",
-      "uses": 29,
-      "share": 0.05,
-      "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed": "half and half",
-      "proposed_roots": [
-        "half and half"
-      ],
-      "proposed_closure": 1,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03301794",
-          "label": "half and half",
-          "curie": "FOODON:03301794",
-          "why": "names everything in `half- -half`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_02000256",
-          "label": "lamb shank half",
-          "curie": "FOODON:02000256",
-          "why": "names everything in `half- -half`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_02000258",
-          "label": "lamb sirloin half",
-          "curie": "FOODON:02000258",
-          "why": "names everything in `half- -half`",
-          "closure": 4,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03301492",
-          "label": "half and half (sour)",
-          "curie": "FOODON:03301492",
-          "why": "names everything in `half- -half`",
-          "closure": 1,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "-",
-      "uses": 28,
-      "share": 0.048,
-      "candidates": []
-    },
-    {
       "term": "active dry yeast",
       "uses": 27,
       "share": 0.047,
@@ -10719,8 +11785,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "yeast",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "yeast"
       ],
@@ -10782,17 +11848,17 @@
       "uses": 25,
       "share": 0.043,
       "candidates": [],
+      "proposed": null,
       "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null
+      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe"
     },
     {
       "term": "harissa paste",
       "uses": 25,
       "share": 0.043,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -10887,17 +11953,17 @@
       "uses": 24,
       "share": 0.041,
       "candidates": [],
+      "proposed": null,
       "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null
+      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe"
     },
     {
       "term": "sharp cheddar",
       "uses": 23,
       "share": 0.04,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "cheddar cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "cheddar cheese"
       ],
@@ -10964,8 +12030,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "water",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "water"
       ],
@@ -11019,8 +12085,8 @@
       "uses": 19,
       "share": 0.033,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "cayenne pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "cayenne pepper"
       ],
@@ -11093,8 +12159,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "water",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "water"
       ],
@@ -11148,8 +12214,8 @@
       "uses": 18,
       "share": 0.031,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a preparation word, not an ingredient",
       "shortlist": [
         {
@@ -11203,8 +12269,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -11234,9 +12300,9 @@
       "uses": 17,
       "share": 0.029,
       "candidates": [],
+      "proposed": null,
       "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null
+      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe"
     },
     {
       "term": "juice lime",
@@ -11264,8 +12330,8 @@
           "warning": "dropping `lime` loses the food: `juice` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "lime",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "lime"
       ],
@@ -11327,8 +12393,8 @@
       "uses": 17,
       "share": 0.029,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "gruyere cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "gruyere cheese"
       ],
@@ -11446,13 +12512,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `rice vinegar`, which the resolver returns as absent",
       "proposed": "vinegar",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "vinegar"
       ],
       "proposed_closure": 37,
+      "proposed_note": "REFUSED: proposed `rice vinegar`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_03307370",
@@ -11523,8 +12589,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "spice",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "spice"
       ],
@@ -11574,12 +12640,56 @@
       ]
     },
     {
+      "term": "one",
+      "uses": 14,
+      "share": 0.024,
+      "candidates": [],
+      "proposed": null,
+      "proposed_by": "Claude (offline pass)",
+      "declined_reason": "parser residue",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/CHEBI_64708",
+          "label": "one-carbon compound",
+          "curie": "CHEBI:64708",
+          "why": "names everything in `one`",
+          "closure": 6,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03490226",
+          "label": "one component adhesive",
+          "curie": "FOODON:03490226",
+          "why": "names everything in `one`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03490227",
+          "label": "one component adhesive, organic solvent",
+          "curie": "FOODON:03490227",
+          "why": "names everything in `one`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03490228",
+          "label": "one component adhesive, water soluble",
+          "curie": "FOODON:03490228",
+          "why": "names everything in `one`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
+    },
+    {
       "term": "cheddar",
       "uses": 14,
       "share": 0.024,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "cheddar cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "cheddar cheese"
       ],
@@ -11640,14 +12750,14 @@
           "roots": [
             "food (cooked)"
           ],
-          "closure": 401,
+          "closure": 402,
           "dropped": "quinoa",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "quinoa",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "quinoa plant"
       ],
@@ -11658,7 +12768,7 @@
           "label": "food (cooked)",
           "curie": "FOODON:00001181",
           "why": "names everything in `cooked quinoa`",
-          "closure": 401,
+          "closure": 402,
           "excluded": false,
           "recommended": true
         },
@@ -11722,8 +12832,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -11819,8 +12929,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "mustard seed",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "mustard seed"
       ],
@@ -11882,9 +12992,9 @@
       "uses": 13,
       "share": 0.022,
       "candidates": [],
+      "proposed": null,
       "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null
+      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe"
     },
     {
       "term": "sweet paprika",
@@ -11913,8 +13023,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "paprika (ground)",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "paprika (ground)"
       ],
@@ -11997,8 +13107,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper (ground)",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper (ground)"
       ],
@@ -12081,8 +13191,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -12136,8 +13246,8 @@
       "uses": 13,
       "share": 0.022,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "pasta",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "pasta"
       ],
@@ -12188,8 +13298,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -12247,8 +13357,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "pea",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "pea plant",
         "pea"
@@ -12308,14 +13418,14 @@
           "roots": [
             "chicken"
           ],
-          "closure": 811,
+          "closure": 486,
           "dropped": "stock",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chicken broth",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chicken broth"
       ],
@@ -12326,7 +13436,7 @@
           "label": "chicken",
           "curie": "FOODON:03411457",
           "why": "names everything in `chicken stock`",
-          "closure": 811,
+          "closure": 486,
           "excluded": false,
           "recommended": true
         },
@@ -12388,8 +13498,8 @@
           "warning": "dropping `diamond crystal` loses the food: `salt` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "salt",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "salt"
       ],
@@ -12435,8 +13545,8 @@
       "uses": 13,
       "share": 0.022,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a chocolate grade with no food word attached",
       "shortlist": [
         {
@@ -12495,8 +13605,8 @@
       "uses": 13,
       "share": 0.022,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "parser residue",
       "shortlist": [
         {
@@ -12570,8 +13680,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "not a food: an aerosol release agent",
       "shortlist": [
         {
@@ -12651,8 +13761,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "`to taste` residue",
       "shortlist": [
         {
@@ -12736,8 +13846,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "mustard seed",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "mustard seed"
       ],
@@ -12810,8 +13920,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chocolate",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chocolate"
       ],
@@ -12865,13 +13975,13 @@
       "uses": 12,
       "share": 0.021,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `pecorino romano cheese`, which the resolver returns as absent",
       "proposed": "pecorino cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "pecorino cheese"
       ],
       "proposed_closure": 1,
+      "proposed_note": "REFUSED: proposed `pecorino romano cheese`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_00001295",
@@ -12934,8 +14044,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "beet",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "beet plant"
       ],
@@ -13018,8 +14128,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "vermouth",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "vermouth"
       ],
@@ -13087,8 +14197,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "rice",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "rice plant",
         "rice"
@@ -13162,8 +14272,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "orange",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "orange",
         "orange plant"
@@ -13175,7 +14285,7 @@
           "label": "orange",
           "curie": "FOODON:03315106",
           "why": "names everything in `strips orange zest`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false,
           "recommended": true
         },
@@ -13208,7 +14318,7 @@
           "label": "orange plant",
           "curie": "FOODON:03411339",
           "why": "proposed: `orange`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false
         },
         {
@@ -13232,7 +14342,7 @@
             "orange",
             "orange plant"
           ],
-          "closure": 90,
+          "closure": 91,
           "dropped": "zest",
           "risky": false,
           "warning": null
@@ -13248,8 +14358,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "orange",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "orange",
         "orange plant"
@@ -13261,7 +14371,7 @@
           "label": "orange",
           "curie": "FOODON:03315106",
           "why": "names everything in `zest orange`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false,
           "recommended": true
         },
@@ -13294,7 +14404,7 @@
           "label": "orange plant",
           "curie": "FOODON:03411339",
           "why": "proposed: `orange`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false
         },
         {
@@ -13323,8 +14433,8 @@
           "warning": "dropping `maldon` loses the food: `salt` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "salt",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "salt"
       ],
@@ -13391,8 +14501,8 @@
           "warning": "dropping `kefir` loses the food: `milk` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "kefir",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "kefir"
       ],
@@ -13465,8 +14575,8 @@
           "warning": "dropping `parmigiano-reggiano` loses the food: `cheese` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "parmesan cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "parmesan cheese food product"
       ],
@@ -13551,8 +14661,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "five-spice powder",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chinese five spice powder"
       ],
@@ -13617,8 +14727,8 @@
           "warning": "dropping `flakes` loses the food: `salt` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "salt",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "salt"
       ],
@@ -13679,14 +14789,14 @@
           "roots": [
             "sauce"
           ],
-          "closure": 363,
+          "closure": 37,
           "dropped": "regular soy",
           "risky": true,
           "warning": "dropping `regular soy` loses the food: `sauce` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "soy sauce",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "soy sauce food product"
       ],
@@ -13730,7 +14840,7 @@
           "label": "sauce",
           "curie": "FOODON:03311146",
           "why": "dropping `regular soy`",
-          "closure": 363,
+          "closure": 37,
           "excluded": false
         }
       ]
@@ -13761,13 +14871,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `vegetable broth`, which the resolver returns as absent",
       "proposed": "broth",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "broth"
       ],
       "proposed_closure": 1,
+      "proposed_note": "REFUSED: proposed `vegetable broth`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_00003816",
@@ -13846,8 +14956,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "spinach",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "spinach plant"
       ],
@@ -13914,8 +15024,8 @@
           "warning": "dropping `sharp cheddar` loses the food: `cheese` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "cheddar cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "cheddar cheese"
       ],
@@ -13984,14 +15094,14 @@
           "roots": [
             "rye plant"
           ],
-          "closure": 26,
+          "closure": 27,
           "dropped": "whiskey",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "whiskey",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "whiskey"
       ],
@@ -14011,7 +15121,7 @@
           "label": "rye kernel",
           "curie": "FOODON:00003734",
           "why": "names everything in `rye whiskey`",
-          "closure": 26,
+          "closure": 27,
           "excluded": false
         },
         {
@@ -14035,7 +15145,7 @@
           "label": "rye plant",
           "curie": "FOODON:03411313",
           "why": "lexical: `rye`",
-          "closure": 26,
+          "closure": 27,
           "excluded": false
         }
       ]
@@ -14057,8 +15167,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "coriander",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "coriander",
         "coriander plant"
@@ -14089,8 +15199,8 @@
       "uses": 11,
       "share": 0.019,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "equipment",
       "shortlist": [
         {
@@ -14173,8 +15283,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "grapefruit",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "grapefruit plant",
         "grapefruit",
@@ -14270,8 +15380,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "balsamic vinegar",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "balsamic vinegar"
       ],
@@ -14317,8 +15427,8 @@
       "uses": 10,
       "share": 0.017,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "unit residue"
     },
     {
@@ -14326,9 +15436,72 @@
       "uses": 10,
       "share": 0.017,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "unit residue"
+    },
+    {
+      "term": "coffee",
+      "uses": 10,
+      "share": 0.017,
+      "candidates": [],
+      "proposed": "coffee bean",
+      "proposed_by": "Claude (offline pass)",
+      "proposed_roots": [
+        "coffee bean"
+      ],
+      "proposed_closure": 20,
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001244",
+          "label": "coffee beverage",
+          "curie": "FOODON:00001244",
+          "why": "names everything in `coffee`",
+          "closure": 15,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301035",
+          "label": "coffee (instant)",
+          "curie": "FOODON:03301035",
+          "why": "names everything in `coffee`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301477",
+          "label": "coffee bean",
+          "curie": "FOODON:03301477",
+          "why": "names everything in `coffee`",
+          "closure": 20,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301602",
+          "label": "coffee extender",
+          "curie": "FOODON:03301602",
+          "why": "names everything in `coffee`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_13443",
+          "label": "Coffea arabica",
+          "curie": "NCBITaxon:13443",
+          "why": "close lexical match",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_13442",
+          "label": "Coffea",
+          "curie": "NCBITaxon:13442",
+          "why": "close lexical match",
+          "closure": 6,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "coconut sugar",
@@ -14356,8 +15529,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "sugar",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "sugar"
       ],
@@ -14424,13 +15597,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `coffee`, which the resolver returns as ambiguous",
       "proposed": "espresso",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "espresso"
       ],
       "proposed_closure": 2,
+      "proposed_note": "REFUSED: proposed `coffee`, which the resolver returns as ambiguous",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_00005575",
@@ -14509,8 +15682,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "lemon",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "lemon plant",
         "lemon",
@@ -14596,8 +15769,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "rose",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "rose plant"
       ],
@@ -14692,8 +15865,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "mustard seed",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "mustard seed"
       ],
@@ -14776,8 +15949,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper (ground)",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper (ground)"
       ],
@@ -14860,8 +16033,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "squid",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "squid species"
       ],
@@ -14907,8 +16080,8 @@
       "uses": 10,
       "share": 0.017,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "equipment",
       "shortlist": [
         {
@@ -14962,13 +16135,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `matzo`, which the resolver returns as absent",
       "proposed": "matzoth",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "matzoth"
       ],
       "proposed_closure": 1,
+      "proposed_note": "REFUSED: proposed `matzo`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_00001564",
@@ -15033,14 +16206,14 @@
           "roots": [
             "grain plant"
           ],
-          "closure": 1546,
+          "closure": 1550,
           "dropped": "dijon mustard",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "mustard",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "mustard plant"
       ],
@@ -15092,7 +16265,7 @@
           "label": "grain plant",
           "curie": "FOODON:03411324",
           "why": "lexical: `grain`",
-          "closure": 1546,
+          "closure": 1550,
           "excluded": false
         }
       ]
@@ -15113,8 +16286,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "beef",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "bovine meat food product"
       ],
@@ -15197,8 +16370,8 @@
           "warning": "dropping `crumbled blue` loses the food: `cheese` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "blue cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "blue cheese food product"
       ],
@@ -15263,8 +16436,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "onion",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "onion",
         "onion plant",
@@ -15349,8 +16522,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "not a food: an aerosol release agent",
       "shortlist": [
         {
@@ -15414,8 +16587,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "kaffir lime",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "kaffir lime plant"
       ],
@@ -15469,8 +16642,8 @@
       "uses": 10,
       "share": 0.017,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a grade word, not an ingredient",
       "shortlist": [
         {
@@ -15524,8 +16697,8 @@
           "warning": "dropping `red-wine` loses the food: `vinegar` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "wine vinegar",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "wine vinegar"
       ],
@@ -15579,9 +16752,9 @@
       "uses": 10,
       "share": 0.017,
       "candidates": [],
+      "proposed": null,
       "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null
+      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe"
     },
     {
       "term": "anchovy in oil",
@@ -15609,8 +16782,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "anchovy",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "anchovy"
       ],
@@ -15693,8 +16866,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "fish sauce",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "fish sauce"
       ],
@@ -15769,8 +16942,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "celery",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "celery plant"
       ],
@@ -15853,8 +17026,8 @@
           "warning": "dropping `limes` loses the food: `juice` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "lime",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "lime"
       ],
@@ -15937,8 +17110,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -16006,8 +17179,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "tomato",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "tomato plant",
         "tomato",
@@ -16077,7 +17250,7 @@
           "roots": [
             "flower"
           ],
-          "closure": 2115,
+          "closure": 2116,
           "dropped": "hibiscus",
           "risky": false,
           "warning": null
@@ -16094,8 +17267,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "hibiscus",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "Hibiscus",
         "hibiscus plant"
@@ -16116,7 +17289,7 @@
           "label": "flower",
           "curie": "PO:0009046",
           "why": "names everything in `hibiscus flowers`",
-          "closure": 2115,
+          "closure": 2116,
           "excluded": false
         },
         {
@@ -16171,8 +17344,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "beer",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "beer beverage"
       ],
@@ -16231,14 +17404,14 @@
           "roots": [
             "sauce"
           ],
-          "closure": 363,
+          "closure": 37,
           "dropped": "sriracha",
           "risky": true,
           "warning": "dropping `sriracha` loses the food: `sauce` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili sauce",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili sauce"
       ],
@@ -16249,7 +17422,7 @@
           "label": "sauce",
           "curie": "FOODON:03311146",
           "why": "names everything in `sriracha sauce`",
-          "closure": 363,
+          "closure": 37,
           "excluded": false,
           "recommended": true
         },
@@ -16303,13 +17476,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `broccoli raab`, which the resolver returns as ambiguous",
       "proposed": "broccoli",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "broccoli plant"
       ],
       "proposed_closure": 18,
+      "proposed_note": "REFUSED: proposed `broccoli raab`, which the resolver returns as ambiguous",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_00002989",
@@ -16378,8 +17551,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "beef broth",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "beef broth"
       ],
@@ -16437,72 +17610,6 @@
       ]
     },
     {
-      "term": "oil- calabrian chiles",
-      "uses": 9,
-      "share": 0.016,
-      "candidates": [
-        {
-          "term": "chiles",
-          "roots": [
-            "Chile"
-          ],
-          "closure": 1,
-          "dropped": "oil- calabrian",
-          "risky": false,
-          "warning": null
-        }
-      ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed": "chili pepper",
-      "proposed_roots": [
-        "chili pepper"
-      ],
-      "proposed_closure": 160,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03310387",
-          "label": "oil",
-          "curie": "FOODON:03310387",
-          "why": "names everything in `oil- calabrian chiles`",
-          "closure": 81,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001088",
-          "label": "flaxseed oil",
-          "curie": "FOODON:00001088",
-          "why": "names everything in `oil- calabrian chiles`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002857",
-          "label": "hydrogenated oil",
-          "curie": "FOODON:00002857",
-          "why": "names everything in `oil- calabrian chiles`",
-          "closure": 12,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003216",
-          "label": "poppyseed oil",
-          "curie": "FOODON:00003216",
-          "why": "names everything in `oil- calabrian chiles`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
-          "label": "chili pepper",
-          "curie": "FOODON:00003744",
-          "why": "proposed: `chili pepper`",
-          "closure": 160,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "vegetable oil frying",
       "uses": 9,
       "share": 0.016,
@@ -16528,8 +17635,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "`for frying` residue",
       "shortlist": [
         {
@@ -16580,8 +17687,8 @@
       "uses": 9,
       "share": 0.016,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "equipment"
     },
     {
@@ -16600,13 +17707,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `bread crumb`, which the resolver returns as absent",
       "proposed": "breadcrumbs",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "breadcrumbs"
       ],
       "proposed_closure": 3,
+      "proposed_note": "REFUSED: proposed `bread crumb`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_03305699",
@@ -16676,8 +17783,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "brown rice kernel",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "brown rice kernel"
       ],
@@ -16770,8 +17877,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "spinach",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "spinach plant"
       ],
@@ -16836,8 +17943,8 @@
           "warning": "dropping `self-rising` loses the food: `flour` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "wheat flour",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "wheat flour food product"
       ],
@@ -16899,83 +18006,9 @@
       "uses": 9,
       "share": 0.016,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
-      "declined_reason": "equipment"
-    },
-    {
-      "term": "oil- anchovies",
-      "uses": 9,
-      "share": 0.016,
-      "candidates": [
-        {
-          "term": "anchovies",
-          "roots": [
-            "Engraulidae"
-          ],
-          "closure": 62,
-          "dropped": "oil-",
-          "risky": false,
-          "warning": null
-        }
-      ],
       "proposed_by": "Claude (offline pass)",
-      "proposed": "anchovy",
-      "proposed_roots": [
-        "anchovy"
-      ],
-      "proposed_closure": 13,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03310387",
-          "label": "oil",
-          "curie": "FOODON:03310387",
-          "why": "names everything in `oil- anchovies`",
-          "closure": 81,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001088",
-          "label": "flaxseed oil",
-          "curie": "FOODON:00001088",
-          "why": "names everything in `oil- anchovies`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002857",
-          "label": "hydrogenated oil",
-          "curie": "FOODON:00002857",
-          "why": "names everything in `oil- anchovies`",
-          "closure": 12,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003216",
-          "label": "poppyseed oil",
-          "curie": "FOODON:00003216",
-          "why": "names everything in `oil- anchovies`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03316282",
-          "label": "anchovy",
-          "curie": "FOODON:03316282",
-          "why": "proposed: `anchovy`",
-          "closure": 13,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_43062",
-          "label": "Engraulidae",
-          "curie": "NCBITaxon:43062",
-          "why": "lexical: `anchovies`",
-          "closure": 62,
-          "excluded": false
-        }
-      ]
+      "declined_reason": "equipment"
     },
     {
       "term": "pasilla chiles",
@@ -16993,8 +18026,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -17051,13 +18084,13 @@
           "warning": "dropping `malted milk` loses the food: `powder` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `milk powder`, which the resolver returns as absent",
       "proposed": "milk",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "milk"
       ],
       "proposed_closure": 1098,
+      "proposed_note": "REFUSED: proposed `milk powder`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_03301818",
@@ -17111,50 +18144,6 @@
       ]
     },
     {
-      "term": "one",
-      "uses": 9,
-      "share": 0.016,
-      "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed": null,
-      "declined_reason": "parser residue",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/CHEBI_64708",
-          "label": "one-carbon compound",
-          "curie": "CHEBI:64708",
-          "why": "names everything in `one`",
-          "closure": 6,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03490226",
-          "label": "one component adhesive",
-          "curie": "FOODON:03490226",
-          "why": "names everything in `one`",
-          "closure": 3,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03490227",
-          "label": "one component adhesive, organic solvent",
-          "curie": "FOODON:03490227",
-          "why": "names everything in `one`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03490228",
-          "label": "one component adhesive, water soluble",
-          "curie": "FOODON:03490228",
-          "why": "names everything in `one`",
-          "closure": 1,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "chile flakes",
       "uses": 8,
       "share": 0.014,
@@ -17170,8 +18159,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -17246,8 +18235,8 @@
           "warning": "dropping `firmly brown` loses the food: `sugar` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "brown sugar",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "brown sugar"
       ],
@@ -17322,8 +18311,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -17369,8 +18358,8 @@
       "uses": 8,
       "share": 0.014,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a grade word, not an ingredient",
       "shortlist": [
         {
@@ -17434,8 +18423,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "lime",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "lime"
       ],
@@ -17500,8 +18489,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "jalapeno pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "jalapeno pepper",
         "jalapeno pepper plant"
@@ -17577,8 +18566,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "garlic",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "garlic plant"
       ],
@@ -17654,8 +18643,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "brown rice kernel",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "brown rice kernel"
       ],
@@ -17733,14 +18722,14 @@
             "orange",
             "orange plant"
           ],
-          "closure": 90,
+          "closure": 91,
           "dropped": "bitters",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "bitters",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "bitters"
       ],
@@ -17768,7 +18757,7 @@
           "label": "orange",
           "curie": "FOODON:03315106",
           "why": "names everything in `orange bitters`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false
         },
         {
@@ -17784,70 +18773,7 @@
           "label": "orange plant",
           "curie": "FOODON:03411339",
           "why": "lexical: `orange`",
-          "closure": 90,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "coffee",
-      "uses": 8,
-      "share": 0.014,
-      "candidates": [],
-      "proposed_by": "Claude (offline pass)",
-      "proposed": "coffee bean",
-      "proposed_roots": [
-        "coffee bean"
-      ],
-      "proposed_closure": 20,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001244",
-          "label": "coffee beverage",
-          "curie": "FOODON:00001244",
-          "why": "names everything in `coffee`",
-          "closure": 15,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03301035",
-          "label": "coffee (instant)",
-          "curie": "FOODON:03301035",
-          "why": "names everything in `coffee`",
-          "closure": 3,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03301477",
-          "label": "coffee bean",
-          "curie": "FOODON:03301477",
-          "why": "names everything in `coffee`",
-          "closure": 20,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03301602",
-          "label": "coffee extender",
-          "curie": "FOODON:03301602",
-          "why": "names everything in `coffee`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_13443",
-          "label": "Coffea arabica",
-          "curie": "NCBITaxon:13443",
-          "why": "close lexical match",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_13442",
-          "label": "Coffea",
-          "curie": "NCBITaxon:13442",
-          "why": "close lexical match",
-          "closure": 6,
+          "closure": 91,
           "excluded": false
         }
       ]
@@ -17868,8 +18794,8 @@
           "warning": "dropping `neutral` loses the food: `oil` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "vegetable oil",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "vegetable oil"
       ],
@@ -17934,8 +18860,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "gelatin",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "gelatin"
       ],
@@ -18011,8 +18937,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "lemon",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "lemon plant",
         "lemon",
@@ -18077,8 +19003,8 @@
       "uses": 8,
       "share": 0.014,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "mozzarella cheese",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "mozzarella cheese"
       ],
@@ -18153,8 +19079,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "salmon",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "salmon"
       ],
@@ -18227,8 +19153,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "tofu",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "tofu"
       ],
@@ -18282,9 +19208,9 @@
       "uses": 8,
       "share": 0.014,
       "candidates": [],
+      "proposed": null,
       "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null
+      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe"
     },
     {
       "term": "squeezed orange juice",
@@ -18312,8 +19238,8 @@
           "warning": "dropping `squeezed orange` loses the food: `juice` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "orange juice",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "orange juice"
       ],
@@ -18367,8 +19293,8 @@
       "uses": 8,
       "share": 0.014,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a tomato cultivar name with no food word attached",
       "shortlist": [
         {
@@ -18423,14 +19349,14 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `agave syrup`, which the resolver returns as absent",
       "proposed": "agave",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "agave",
         "agave plant"
       ],
       "proposed_closure": 13,
+      "proposed_note": "REFUSED: proposed `agave syrup`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_00005198",
@@ -18499,8 +19425,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "green bean",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "green bean plant"
       ],
@@ -18530,8 +19456,8 @@
       "uses": 8,
       "share": 0.014,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a size word; the food was lost before this point",
       "shortlist": [
         {
@@ -18579,14 +19505,14 @@
           "roots": [
             "sauce"
           ],
-          "closure": 363,
+          "closure": 37,
           "dropped": "tabasco",
           "risky": true,
           "warning": "dropping `tabasco` loses the food: `sauce` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili sauce",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili sauce"
       ],
@@ -18597,7 +19523,7 @@
           "label": "sauce",
           "curie": "FOODON:03311146",
           "why": "names everything in `tabasco sauce`",
-          "closure": 363,
+          "closure": 37,
           "excluded": false,
           "recommended": true
         },
@@ -18651,8 +19577,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "beet",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "beet plant"
       ],
@@ -18729,14 +19655,14 @@
           "roots": [
             "prepared food product"
           ],
-          "closure": 581,
+          "closure": 333,
           "dropped": "pizza dough",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "dough",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "dough"
       ],
@@ -18780,7 +19706,7 @@
           "label": "prepared food product",
           "curie": "FOODON:00001180",
           "why": "lexical: `prepared`",
-          "closure": 581,
+          "closure": 333,
           "excluded": false
         }
       ]
@@ -18801,8 +19727,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "artichoke",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "artichoke plant"
       ],
@@ -18864,9 +19790,9 @@
       "uses": 7,
       "share": 0.012,
       "candidates": [],
+      "proposed": null,
       "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null
+      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe"
     },
     {
       "term": "morita chiles",
@@ -18884,8 +19810,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -18936,8 +19862,8 @@
           "warning": "dropping `lemons` loses the food: `juice` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "lemon",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "lemon plant",
         "lemon",
@@ -19034,8 +19960,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -19102,14 +20028,14 @@
           "roots": [
             "potato"
           ],
-          "closure": 192,
+          "closure": 193,
           "dropped": "ricer",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "equipment",
       "shortlist": [
         {
@@ -19117,7 +20043,7 @@
           "label": "potato",
           "curie": "FOODON:03315354",
           "why": "names everything in `potato ricer`",
-          "closure": 192,
+          "closure": 193,
           "excluded": false,
           "recommended": true
         },
@@ -19164,8 +20090,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "pumpkin",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "pumpkin",
         "pumpkin plant"
@@ -19235,14 +20161,14 @@
           "roots": [
             "grain plant"
           ],
-          "closure": 1546,
+          "closure": 1550,
           "dropped": "mustard",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "mustard",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "mustard plant"
       ],
@@ -19294,7 +20220,7 @@
           "label": "grain plant",
           "curie": "FOODON:03411324",
           "why": "lexical: `grain`",
-          "closure": 1546,
+          "closure": 1550,
           "excluded": false
         }
       ]
@@ -19315,8 +20241,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "bread",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "bread"
       ],
@@ -19378,8 +20304,8 @@
       "uses": 7,
       "share": 0.012,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "equipment",
       "shortlist": [
         {
@@ -19422,8 +20348,8 @@
       "uses": 7,
       "share": 0.012,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "equipment",
       "shortlist": [
         {
@@ -19466,8 +20392,8 @@
       "uses": 7,
       "share": 0.012,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "equipment",
       "shortlist": [
         {
@@ -19510,8 +20436,8 @@
       "uses": 7,
       "share": 0.012,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "a grade word, not an ingredient",
       "shortlist": [
         {
@@ -19565,8 +20491,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -19631,8 +20557,8 @@
           "warning": "dropping `vegan` loses the food: `butter` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "margarine",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "margarine"
       ],
@@ -19717,8 +20643,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chia seed",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chia seed"
       ],
@@ -19772,8 +20698,8 @@
       "uses": 7,
       "share": 0.012,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "serrano pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "serrano pepper"
       ],
@@ -19840,8 +20766,8 @@
           "warning": "dropping `pepper` loses the food: `salt` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped",
       "shortlist": [
         {
@@ -19898,8 +20824,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "lemon",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "lemon plant",
         "lemon",
@@ -19985,8 +20911,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chili pepper",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chili pepper"
       ],
@@ -20035,8 +20961,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "coconut",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "coconut"
       ],
@@ -20108,14 +21034,14 @@
           "roots": [
             "food (cooked)"
           ],
-          "closure": 401,
+          "closure": 402,
           "dropped": "white rice",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "white rice",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "white rice"
       ],
@@ -20198,8 +21124,8 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "trout",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "trout"
       ],
@@ -20264,13 +21190,13 @@
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
-      "proposed_note": "REFUSED: proposed `turkey broth`, which the resolver returns as absent",
       "proposed": "turkey",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "turkey"
       ],
       "proposed_closure": 261,
+      "proposed_note": "REFUSED: proposed `turkey broth`, which the resolver returns as absent",
       "shortlist": [
         {
           "iri": "http://purl.obolibrary.org/obo/FOODON_02020418",
@@ -20312,8 +21238,8 @@
       "uses": 7,
       "share": 0.012,
       "candidates": [],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "an apple cultivar name with no food word attached",
       "shortlist": [
         {
@@ -20340,9 +21266,9 @@
       "uses": 7,
       "share": 0.012,
       "candidates": [],
+      "proposed": null,
       "proposed_by": "Claude (offline pass)",
-      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe",
-      "proposed": null
+      "proposed_note": "FoodOn has no class for this; the ingredient will quarantine its recipe"
     },
     {
       "term": "crumbled feta cheese",
@@ -20702,8 +21628,8 @@
           "warning": "dropping `pepper taste` loses the food: `salt` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped",
       "shortlist": [
         {
@@ -21017,6 +21943,68 @@
       ]
     },
     {
+      "term": "store-bought pizza dough",
+      "uses": 7,
+      "share": 0.012,
+      "candidates": [
+        {
+          "term": "dough",
+          "roots": [
+            "dough"
+          ],
+          "closure": 6,
+          "dropped": "pizza",
+          "risky": false,
+          "warning": null
+        },
+        {
+          "term": "pizza",
+          "roots": [
+            "pizza"
+          ],
+          "closure": 26,
+          "dropped": "dough",
+          "risky": false,
+          "warning": null
+        }
+      ],
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301563",
+          "label": "pizza crust dough",
+          "curie": "FOODON:03301563",
+          "why": "names everything in `pizza dough`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003928",
+          "label": "pizza",
+          "curie": "FOODON:00003928",
+          "why": "names everything in `pizza dough`",
+          "closure": 26,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03311552",
+          "label": "dough",
+          "curie": "FOODON:03311552",
+          "why": "names everything in `pizza dough`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003929",
+          "label": "margherita pizza",
+          "curie": "FOODON:00003929",
+          "why": "names everything in `pizza dough`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
+    },
+    {
       "term": "grainy mustard",
       "uses": 7,
       "share": 0.012,
@@ -21112,8 +22100,8 @@
           "warning": "dropping `black pepper` loses the food: `salt` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped",
       "shortlist": [
         {
@@ -21570,7 +22558,7 @@
           "roots": [
             "Solanum tuberosum"
           ],
-          "closure": 192,
+          "closure": 193,
           "dropped": "waxy",
           "risky": false,
           "warning": null
@@ -21599,7 +22587,7 @@
           "label": "Solanum tuberosum",
           "curie": "NCBITaxon:4113",
           "why": "lexical: `potatoes`",
-          "closure": 192,
+          "closure": 193,
           "excluded": false
         }
       ]
@@ -21615,7 +22603,7 @@
           "label": "orange",
           "curie": "FOODON:03315106",
           "why": "names everything in `garnish orange twist`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false,
           "recommended": true
         },
@@ -22031,69 +23019,6 @@
       ]
     },
     {
-      "term": "fire- tomatoes",
-      "uses": 6,
-      "share": 0.01,
-      "candidates": [
-        {
-          "term": "tomatoes",
-          "roots": [
-            "tomato plant",
-            "tomato",
-            "tomato food product",
-            "Solanum lycopersicum"
-          ],
-          "closure": 164,
-          "dropped": "fire-",
-          "risky": false,
-          "warning": null
-        }
-      ],
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03412349",
-          "label": "fire thorn plant",
-          "curie": "FOODON:03412349",
-          "why": "names everything in `fire- tomatoes`",
-          "closure": 3,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411276",
-          "label": "tomato plant",
-          "curie": "FOODON:03411276",
-          "why": "lexical: `tomatoes`",
-          "closure": 164,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03301453",
-          "label": "tomato",
-          "curie": "FOODON:03301453",
-          "why": "lexical: `tomatoes`",
-          "closure": 164,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001164",
-          "label": "tomato food product",
-          "curie": "FOODON:00001164",
-          "why": "lexical: `tomatoes`",
-          "closure": 164,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_4081",
-          "label": "Solanum lycopersicum",
-          "curie": "NCBITaxon:4081",
-          "why": "lexical: `tomatoes`",
-          "closure": 164,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "scotch",
       "uses": 6,
       "share": 0.01,
@@ -22144,7 +23069,7 @@
           "roots": [
             "chicken"
           ],
-          "closure": 811,
+          "closure": 486,
           "dropped": "cooked",
           "risky": false,
           "warning": null
@@ -22154,14 +23079,14 @@
           "roots": [
             "food (cooked)"
           ],
-          "closure": 401,
+          "closure": 402,
           "dropped": "chicken",
           "risky": false,
           "warning": null
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": "chicken",
+      "proposed_by": "Claude (offline pass)",
       "proposed_roots": [
         "chicken"
       ],
@@ -22205,7 +23130,7 @@
           "label": "chicken",
           "curie": "FOODON:03411457",
           "why": "proposed: `chicken`",
-          "closure": 811,
+          "closure": 486,
           "excluded": false
         },
         {
@@ -22213,7 +23138,7 @@
           "label": "food (cooked)",
           "curie": "FOODON:00001181",
           "why": "lexical: `cooked`",
-          "closure": 401,
+          "closure": 402,
           "excluded": false
         }
       ]
@@ -22863,7 +23788,7 @@
           "roots": [
             "food (cooked)"
           ],
-          "closure": 401,
+          "closure": 402,
           "dropped": "chickpeas",
           "risky": false,
           "warning": null
@@ -22892,7 +23817,7 @@
           "label": "food (cooked)",
           "curie": "FOODON:00001181",
           "why": "names everything in `cooked chickpeas`",
-          "closure": 401,
+          "closure": 402,
           "excluded": false
         },
         {
@@ -23309,7 +24234,7 @@
           "roots": [
             "sauce"
           ],
-          "closure": 363,
+          "closure": 37,
           "dropped": "tamari soy",
           "risky": true,
           "warning": "dropping `tamari soy` loses the food: `sauce` is a vehicle, not an ingredient"
@@ -23362,69 +24287,7 @@
           "label": "sauce",
           "curie": "FOODON:03311146",
           "why": "dropping `tamari soy`",
-          "closure": 363,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "store-bought pizza dough",
-      "uses": 6,
-      "share": 0.01,
-      "candidates": [
-        {
-          "term": "dough",
-          "roots": [
-            "dough"
-          ],
-          "closure": 6,
-          "dropped": "pizza",
-          "risky": false,
-          "warning": null
-        },
-        {
-          "term": "pizza",
-          "roots": [
-            "pizza"
-          ],
-          "closure": 26,
-          "dropped": "dough",
-          "risky": false,
-          "warning": null
-        }
-      ],
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03301563",
-          "label": "pizza crust dough",
-          "curie": "FOODON:03301563",
-          "why": "names everything in `pizza dough`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003928",
-          "label": "pizza",
-          "curie": "FOODON:00003928",
-          "why": "names everything in `pizza dough`",
-          "closure": 26,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03311552",
-          "label": "dough",
-          "curie": "FOODON:03311552",
-          "why": "names everything in `pizza dough`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003929",
-          "label": "margherita pizza",
-          "curie": "FOODON:00003929",
-          "why": "names everything in `pizza dough`",
-          "closure": 1,
+          "closure": 37,
           "excluded": false
         }
       ]
@@ -23517,7 +24380,7 @@
           "roots": [
             "Solanum tuberosum"
           ],
-          "closure": 192,
+          "closure": 193,
           "dropped": "baby new",
           "risky": false,
           "warning": null
@@ -23562,7 +24425,7 @@
           "label": "Solanum tuberosum",
           "curie": "NCBITaxon:4113",
           "why": "lexical: `potatoes`",
-          "closure": 192,
+          "closure": 193,
           "excluded": false
         }
       ]
@@ -23864,7 +24727,7 @@
           "roots": [
             "chicken"
           ],
-          "closure": 811,
+          "closure": 486,
           "dropped": "stock",
           "risky": false,
           "warning": null
@@ -23876,7 +24739,7 @@
           "label": "chicken",
           "curie": "FOODON:03411457",
           "why": "names everything in `chicken stock`",
-          "closure": 811,
+          "closure": 486,
           "excluded": false,
           "recommended": true
         },
@@ -23948,7 +24811,7 @@
           "roots": [
             "chicken"
           ],
-          "closure": 811,
+          "closure": 486,
           "dropped": "cutlets",
           "risky": false,
           "warning": null
@@ -23977,7 +24840,7 @@
           "label": "chicken",
           "curie": "FOODON:03411457",
           "why": "names everything in `chicken cutlets`",
-          "closure": 811,
+          "closure": 486,
           "excluded": false
         },
         {
@@ -24523,8 +25386,8 @@
           "warning": "dropping `pepper` loses the food: `salt` is a vehicle, not an ingredient"
         }
       ],
-      "proposed_by": "Claude (offline pass)",
       "proposed": null,
+      "proposed_by": "Claude (offline pass)",
       "declined_reason": "two ingredients on one line (salt AND pepper); the parser must split before this can be mapped",
       "shortlist": [
         {
@@ -24662,7 +25525,7 @@
           "roots": [
             "chicken"
           ],
-          "closure": 811,
+          "closure": 486,
           "dropped": "bone broth",
           "risky": false,
           "warning": null
@@ -24715,7 +25578,7 @@
           "label": "chicken",
           "curie": "FOODON:03411457",
           "why": "lexical: `chicken`",
-          "closure": 811,
+          "closure": 486,
           "excluded": false
         }
       ]
@@ -25408,66 +26271,6 @@
       ]
     },
     {
-      "term": "ice- water",
-      "uses": 5,
-      "share": 0.009,
-      "candidates": [
-        {
-          "term": "water",
-          "roots": [
-            "water"
-          ],
-          "closure": 25,
-          "dropped": "ice-",
-          "risky": true,
-          "warning": "dropping `ice-` loses the food: `water` is a vehicle, not an ingredient"
-        }
-      ],
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03304833",
-          "label": "grape water ice",
-          "curie": "FOODON:03304833",
-          "why": "names everything in `ice- water`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03305646",
-          "label": "imitation water ice",
-          "curie": "FOODON:03305646",
-          "why": "names everything in `ice- water`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03315244",
-          "label": "fruit and water ices",
-          "curie": "FOODON:03315244",
-          "why": "names everything in `ice- water`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03316247",
-          "label": "ice, edible, water-based",
-          "curie": "FOODON:03316247",
-          "why": "names everything in `ice- water`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/CHEBI_15377",
-          "label": "water",
-          "curie": "CHEBI:15377",
-          "why": "dropping `ice-`",
-          "closure": 25,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "coconut palm sugar",
       "uses": 5,
       "share": 0.009,
@@ -25861,66 +26664,6 @@
           "curie": "FOODON:00001956",
           "why": "lexical: `red peppers`",
           "closure": 160,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "oil- tuna",
-      "uses": 5,
-      "share": 0.009,
-      "candidates": [
-        {
-          "term": "tuna",
-          "roots": [
-            "tuna"
-          ],
-          "closure": 119,
-          "dropped": "oil-",
-          "risky": false,
-          "warning": null
-        }
-      ],
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03311112",
-          "label": "skipjack tuna packed in oil",
-          "curie": "FOODON:03311112",
-          "why": "names everything in `oil- tuna`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03311114",
-          "label": "yellowfin tuna (packed in oil)",
-          "curie": "FOODON:03311114",
-          "why": "names everything in `oil- tuna`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03308726",
-          "label": "yellowtail tuna (in cottonseed oil, smoked)",
-          "curie": "FOODON:03308726",
-          "why": "names everything in `oil- tuna`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03309668",
-          "label": "tuna (solid pack, canned in oil)",
-          "curie": "FOODON:03309668",
-          "why": "names everything in `oil- tuna`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411269",
-          "label": "tuna",
-          "curie": "FOODON:03411269",
-          "why": "lexical: `tuna`",
-          "closure": 119,
           "excluded": false
         }
       ]
@@ -26617,7 +27360,7 @@
             "orange",
             "orange plant"
           ],
-          "closure": 90,
+          "closure": 91,
           "dropped": "twists",
           "risky": false,
           "warning": null
@@ -26629,7 +27372,7 @@
           "label": "orange",
           "curie": "FOODON:03315106",
           "why": "names everything in `orange twists`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false,
           "recommended": true
         },
@@ -26662,7 +27405,7 @@
           "label": "orange plant",
           "curie": "FOODON:03411339",
           "why": "lexical: `orange`",
-          "closure": 90,
+          "closure": 91,
           "excluded": false
         }
       ]
@@ -26926,6 +27669,27 @@
       "term": "nuoc nam",
       "uses": 10,
       "reason": "stale: the normaliser no longer produces this term. `superfine sugar` and `caster (superfine) sugar` now reach `sugar` once the parenthetical and the grade word come off, and `fish sauce (such as nam pla or nuoc nam)` reaches `fish sauce`. Both were queued before those fixes; no line in the corpus produces either term today.",
+      "declined_by": "Matt",
+      "declined_date": "2026-09-15"
+    },
+    {
+      "term": "slow cooker",
+      "uses": 8,
+      "reason": "equipment, not an ingredient. The parser lifts these from lines like `a 9x13\" baking dish` in a Special Equipment note; every candidate the shortlist can offer is a coincidence of the word -- `baking dish` matched `baking soda` and `meringue (dish)`.",
+      "declined_by": "Matt",
+      "declined_date": "2026-09-15"
+    },
+    {
+      "term": "bundt pan",
+      "uses": 7,
+      "reason": "equipment, not an ingredient. The parser lifts these from lines like `a 9x13\" baking dish` in a Special Equipment note; every candidate the shortlist can offer is a coincidence of the word -- `baking dish` matched `baking soda` and `meringue (dish)`.",
+      "declined_by": "Matt",
+      "declined_date": "2026-09-15"
+    },
+    {
+      "term": "baking dish",
+      "uses": 7,
+      "reason": "equipment, not an ingredient. The parser lifts these from lines like `a 9x13\" baking dish` in a Special Equipment note; every candidate the shortlist can offer is a coincidence of the word -- `baking dish` matched `baking soda` and `meringue (dish)`.",
       "declined_by": "Matt",
       "declined_date": "2026-09-15"
     }

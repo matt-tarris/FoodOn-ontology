@@ -126,6 +126,20 @@ rec = I.recipe(["2 tablespoons olive oil", "1 tablespoon chili oil"])
 if rec["usable"]:
     fails.append("a recipe with an unresolved ingredient was reported usable")
 
+# ---- a re-seed must not discard what was decided -----------------------------
+# The corpus and the normaliser both move, so the queue has to be re-seeded: terms
+# appear, and terms stop existing -- `superfine` and `nuoc nam` were queued before the
+# parenthetical and hyphen fixes and no line produces either now. But a re-seed that
+# threw away the decisions layered on top would cost more than it cleaned.
+spec_now = json.load(open(MAP_FILE))
+checks += 1
+decided = ({m["term"] for m in spec_now.get("mappings", [])}
+           | {d["term"] for d in spec_now.get("declined", [])})
+requeued = [q["term"] for q in spec_now.get("requires_signoff", []) if q["term"] in decided]
+if requeued:
+    fails.append(f"{len(requeued)} decided terms are back in the review queue, "
+                 f"e.g. {requeued[:3]} -- a re-seed has discarded a decision")
+
 # ---- batch review ------------------------------------------------------------
 # Approving re-checks the target. A proposal was validated when it was made, and the
 # ontology it was validated against is the one thing this project expects to be
