@@ -815,62 +815,6 @@
       ]
     },
     {
-      "term": "kosher salt black pepper",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-      "maps_to": "pepper",
-      "uses": 56,
-      "root_labels": [
-        "pepper"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
-          "label": "black pepper (ground)",
-          "curie": "FOODON:03306739",
-          "why": "names everything in `salt black pepper`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
-          "label": "black pepper powder",
-          "curie": "FOODON:03317003",
-          "why": "names everything in `salt black pepper`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
-          "label": "black pepper plant",
-          "curie": "FOODON:03411191",
-          "why": "names everything in `salt black pepper`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
-          "label": "black pepper food product",
-          "curie": "FOODON:00001650",
-          "why": "names everything in `salt black pepper`",
-          "closure": 5,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-          "label": "pepper",
-          "curie": "FOODON:00003520",
-          "why": "currently mapped here",
-          "closure": 176,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "simple syrup",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03420108",
       "maps_to": "sugar",
@@ -983,54 +927,6 @@
       ]
     },
     {
-      "term": "salt pepper",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-      "maps_to": "pepper",
-      "uses": 49,
-      "root_labels": [
-        "pepper"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/CHEBI_24866",
-          "label": "salt",
-          "curie": "CHEBI:24866",
-          "why": "names everything in `salt pepper`",
-          "closure": 10,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-          "label": "pepper",
-          "curie": "FOODON:00003520",
-          "why": "names everything in `salt pepper`",
-          "closure": 176,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/CHEBI_23114",
-          "label": "chloride salt",
-          "curie": "CHEBI:23114",
-          "why": "names everything in `salt pepper`",
-          "closure": 3,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03305070",
-          "label": "salt and pepper spray",
-          "curie": "FOODON:03305070",
-          "why": "names everything in `salt pepper`",
-          "closure": 1,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "lime zest",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003661",
       "maps_to": "lime",
@@ -1074,54 +970,6 @@
           "curie": "FOODON:03306160",
           "why": "names everything in `lime zest`",
           "closure": 6,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "salt black pepper",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
-      "maps_to": "black pepper plant",
-      "uses": 48,
-      "root_labels": [
-        "black pepper plant"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
-          "label": "black pepper (ground)",
-          "curie": "FOODON:03306739",
-          "why": "names everything in `salt black pepper`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
-          "label": "black pepper powder",
-          "curie": "FOODON:03317003",
-          "why": "names everything in `salt black pepper`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
-          "label": "black pepper plant",
-          "curie": "FOODON:03411191",
-          "why": "names everything in `salt black pepper`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
-          "label": "black pepper food product",
-          "curie": "FOODON:00001650",
-          "why": "names everything in `salt black pepper`",
-          "closure": 5,
           "excluded": false
         }
       ]
@@ -1319,70 +1167,6 @@
       ]
     },
     {
-      "term": "sea salt cracked black pepper",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-      "maps_to": "pepper",
-      "uses": 41,
-      "root_labels": [
-        "pepper"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
-          "label": "black pepper (ground)",
-          "curie": "FOODON:03306739",
-          "why": "names everything in `salt cracked black pepper`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
-          "label": "black pepper powder",
-          "curie": "FOODON:03317003",
-          "why": "names everything in `salt cracked black pepper`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
-          "label": "black pepper plant",
-          "curie": "FOODON:03411191",
-          "why": "names everything in `salt cracked black pepper`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411438",
-          "label": "black sea bass",
-          "curie": "FOODON:03411438",
-          "why": "names everything in `sea salt cracked black pepper`",
-          "closure": 3,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
-          "label": "black pepper food product",
-          "curie": "FOODON:00001650",
-          "why": "names everything in `salt cracked black pepper`",
-          "closure": 5,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-          "label": "pepper",
-          "curie": "FOODON:00003520",
-          "why": "currently mapped here",
-          "closure": 176,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "serrano chiles",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03000128",
       "maps_to": "serrano pepper",
@@ -1479,70 +1263,6 @@
       ]
     },
     {
-      "term": "sea salt black pepper",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-      "maps_to": "pepper",
-      "uses": 34,
-      "root_labels": [
-        "pepper"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": "Claude (offline pass)",
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
-          "label": "black pepper (ground)",
-          "curie": "FOODON:03306739",
-          "why": "names everything in `salt black pepper`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
-          "label": "black pepper powder",
-          "curie": "FOODON:03317003",
-          "why": "names everything in `salt black pepper`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
-          "label": "black pepper plant",
-          "curie": "FOODON:03411191",
-          "why": "names everything in `salt black pepper`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411438",
-          "label": "black sea bass",
-          "curie": "FOODON:03411438",
-          "why": "names everything in `sea salt black pepper`",
-          "closure": 3,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
-          "label": "black pepper food product",
-          "curie": "FOODON:00001650",
-          "why": "names everything in `salt black pepper`",
-          "closure": 5,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-          "label": "pepper",
-          "curie": "FOODON:00003520",
-          "why": "currently mapped here",
-          "closure": 176,
-          "excluded": false
-        }
-      ]
-    },
-    {
       "term": "pomegranate seeds",
       "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003679",
       "maps_to": "pomegranate",
@@ -1586,62 +1306,6 @@
           "curie": "FOODON:00002791",
           "why": "names everything in `pomegranate seeds`",
           "closure": 16,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "cracked black pepper",
-      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-      "maps_to": "pepper",
-      "uses": 34,
-      "root_labels": [
-        "pepper"
-      ],
-      "chosen_from_shortlist": true,
-      "proposed_by": null,
-      "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-11",
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03306739",
-          "label": "black pepper (ground)",
-          "curie": "FOODON:03306739",
-          "why": "names everything in `cracked black pepper`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03317003",
-          "label": "black pepper powder",
-          "curie": "FOODON:03317003",
-          "why": "names everything in `cracked black pepper`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
-          "label": "black pepper plant",
-          "curie": "FOODON:03411191",
-          "why": "names everything in `cracked black pepper`",
-          "closure": 6,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
-          "label": "black pepper food product",
-          "curie": "FOODON:00001650",
-          "why": "names everything in `cracked black pepper`",
-          "closure": 5,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
-          "label": "pepper",
-          "curie": "FOODON:00003520",
-          "why": "currently mapped here",
-          "closure": 176,
           "excluded": false
         }
       ]
@@ -10040,6 +9704,116 @@
           "excluded": false
         }
       ]
+    },
+    {
+      "term": "cracked black pepper",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+      "maps_to": "black pepper food product",
+      "uses": 34,
+      "root_labels": [
+        "black pepper food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "corrected_from": "pepper",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "kosher salt black pepper",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+      "maps_to": "black pepper food product",
+      "uses": 56,
+      "root_labels": [
+        "black pepper food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "pepper",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "salt black pepper",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+      "maps_to": "black pepper food product",
+      "uses": 48,
+      "root_labels": [
+        "black pepper food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "black pepper plant",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_03411191",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "salt pepper",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+      "maps_to": "black pepper food product",
+      "uses": 49,
+      "root_labels": [
+        "black pepper food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "pepper",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "sea salt black pepper",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+      "maps_to": "black pepper food product",
+      "uses": 34,
+      "root_labels": [
+        "black pepper food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "pepper",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "sea salt cracked black pepper",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+      "maps_to": "black pepper food product",
+      "uses": 41,
+      "root_labels": [
+        "black pepper food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "corrected_from": "pepper",
+      "corrected_from_iri": "http://purl.obolibrary.org/obo/FOODON_00003520",
+      "originally_signed": "2026-09-11",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
+    },
+    {
+      "term": "pepper",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00001650",
+      "maps_to": "black pepper food product",
+      "uses": null,
+      "root_labels": [
+        "black pepper food product"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "overrides_resolver": true,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-15"
     }
   ],
   "requires_signoff": [

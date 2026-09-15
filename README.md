@@ -934,6 +934,18 @@ outside the traversal by policy, so a mapping to one would be a mapping that sil
 never fires. They are filtered out of every shortlist and refused on approval, with the
 reason given.
 
+**A term the resolver gets *wrong* can be overridden.** The queue holds only terms the
+resolver cannot settle, so one it settles wrongly has no entry anywhere. `pepper`
+resolved cleanly to `FOODON:00003520` — which is **Capsicum**, and sits inside the
+nightshade closure — while all 110 of its lines in the 5,000-recipe corpus read
+"freshly ground pepper" or "Pepper". Approving a class for a term that is neither
+queued nor signed creates the override and records it as one.
+
+That correction plus five like it is worth measuring: a nightshade query over the
+corpus went from **1,701 recipes rejected to 1,496** — 205 meals handed back to a
+diner who was losing them to a seasoning that is not a nightshade. `aleppo pepper` and
+`shishito peppers` keep their own mappings and are still correctly rejected.
+
 **A signed mapping can be corrected.** One signed in good faith and later found coarse
 has to be fixable in the interface rather than by hand-editing the file the interface
 exists to replace. The *signed* filter lists them with their current class pre-selected

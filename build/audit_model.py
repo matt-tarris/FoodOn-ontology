@@ -669,9 +669,18 @@ def review_ingredients(terms, action, who="Matt", target=None, reason=None,
             # without hand-editing the file the interface exists to replace.
             prev = signed_by.get(t)
             if prev is None:
-                skipped.append((t, "not in the queue and not already signed"))
-                continue
-            if action == "decline":
+                # Neither queued nor signed. The queue only holds terms the resolver
+                # CANNOT settle, so a term it settles WRONGLY has no entry anywhere --
+                # and `pepper` resolves cleanly to Capsicum while every one of its 110
+                # lines in the corpus reads "freshly ground pepper". An override needs
+                # a way in, or the only fix is hand-editing the file this replaces.
+                if action == "approve" and (choices or {}).get(t):
+                    e = {"term": t, "uses": None, "overrides_resolver": True}
+                else:
+                    skipped.append((t, "not in the queue and not already signed; give a "
+                                       "class to override what the resolver returns"))
+                    continue
+            elif action == "decline":
                 spec["mappings"] = [m for m in spec["mappings"] if m["term"] != t]
                 spec["declined"].append(dict(term=t, uses=prev.get("uses"),
                                              reason=reason or "withdrawn on review",
@@ -679,7 +688,8 @@ def review_ingredients(terms, action, who="Matt", target=None, reason=None,
                                              declined_by=who, declined_date=TODAY()))
                 done.append(t)
                 continue
-            e = dict(prev, correcting=True)
+            else:
+                e = dict(prev, correcting=True)
         if action == "decline":
             spec["declined"].append(dict(term=t, uses=e.get("uses"),
                                          reason=reason or e.get("declined_reason")
@@ -709,6 +719,7 @@ def review_ingredients(terms, action, who="Matt", target=None, reason=None,
                 term=t, maps_to_iri=iri, maps_to=r.g.label(iri), uses=e.get("uses"),
                 root_labels=[r.g.label(iri)], chosen_from_shortlist=True,
                 proposed_by=e.get("proposed_by"),
+                **({"overrides_resolver": True} if e.get("overrides_resolver") else {}),
                 **({"corrected_from": prev.get("maps_to"),
                     "corrected_from_iri": prev.get("maps_to_iri"),
                     "originally_signed": prev.get("signed_off_date")} if prev else {}),

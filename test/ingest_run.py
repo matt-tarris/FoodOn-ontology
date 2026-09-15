@@ -204,6 +204,26 @@ try:
     if bad_ns:
         fails.append(f"shortlists offer classes outside a food namespace: {bad_ns[:3]}")
 
+    # A term the resolver settles WRONGLY has no entry anywhere: the queue holds only
+    # what it cannot settle. `pepper` resolves cleanly to Capsicum while all 110 of its
+    # lines in the corpus read "freshly ground pepper", so an override needs a way in.
+    checks += 1
+    fresh = "a term the queue has never heard of"
+    out_new = A.review_ingredients([fresh], "approve", who="test",
+                                   choices={fresh: "http://purl.obolibrary.org/obo/FOODON_00001650"})
+    if fresh not in out_new["done"]:
+        fails.append(f"could not create an override for an unqueued term: {out_new['skipped']}")
+    else:
+        m_new = next(x for x in A.ingredients()["signed"] if x["term"] == fresh)
+        checks += 1
+        if not m_new.get("overrides_resolver"):
+            fails.append("an override of the resolver was not recorded as one")
+    # ...but not without naming a class
+    checks += 1
+    out_bad = A.review_ingredients(["another unheard-of term"], "approve", who="test")
+    if out_bad["done"]:
+        fails.append("created a mapping for an unqueued term with nothing to map it to")
+
     # an id that is not a class in this release must be refused
     checks += 1
     nope = A.review_ingredients([after["queue"][0]["term"]], "approve", who="test",
