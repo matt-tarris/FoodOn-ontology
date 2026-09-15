@@ -833,6 +833,48 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-15",
       "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "egg yolk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0007378"
+      ],
+      "query_root_labels": [
+        "egg yolk"
+      ],
+      "target_label": "mayonnaise",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03301440",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Mayonnaise is an emulsion of oil in egg yolk; the yolk is the emulsifier and is what makes it egg. FoodOn asserts no source on the class at all, so an egg query reached neither mayonnaise nor its six preparation variants -- 160 ingredient uses across the 5,000-recipe corpus, and the single largest false negative the family sweep could find. `egg yolk` rather than `chicken egg` because the yolk is the part actually used; both give the same +7, and the yolk is inside the egg closure so the transitive path holds either way.",
+      "source": "FoodOn asserts no derives-from on mayonnaise, mayonnaise food product, or any of the six variants; only `mayonnaise with smoked salmon` has one, pointing back at mayonnaise itself",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "egg yolk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0007378"
+      ],
+      "query_root_labels": [
+        "egg yolk"
+      ],
+      "target_label": "mayonnaise food product",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00001234",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "The family class, bridged for the same reason as `mayonnaise` itself. Avoidance descends and never ascends, so bridging the child does not reach the parent: an ingredient that resolved to `mayonnaise food product` rather than `mayonnaise` would still have been missed by an egg query. The two classes have identical closures, so this adds only the family class itself.",
+      "source": "same gap as the class beneath it: FoodOn asserts no source on either",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-15",
+      "review_note": null
     }
   ],
   "entry_types": {

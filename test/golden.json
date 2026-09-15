@@ -373,6 +373,26 @@
         "buckwheat noodle"
       ],
       "why": "FoodOn's GENERIC grain classes carry no source, correctly: bread can be made from any grain. But a recipe that says `flour` means wheat flour, and the ingredient map was pointing `flour`, `bread`, `breadcrumbs` and `cracker` at those generic classes -- so a gluten query rejected 312 of 5,000 real recipes while missing 988 that named a grain. Pointing the unqualified culinary terms at the wheat classes took it to 1,090 rejected and 160 missed. The rejects here are the other half of the same judgement: `rice flour` and `buckwheat noodle` are named explicitly and are genuinely gluten-free, so the default must not swallow them."
+    },
+    {
+      "name": "egg reaches mayonnaise, and not the vegan one",
+      "roots": [
+        "egg or egg component",
+        "chicken egg",
+        "animal egg"
+      ],
+      "expect": [
+        "mayonnaise",
+        "mayonnaise food product",
+        "mayonnaise (homemade)",
+        "mayonnaise (low calorie)",
+        "mayonnaise with smoked salmon"
+      ],
+      "reject": [
+        "mayonnaise analog",
+        "diabetic mayonnaise"
+      ],
+      "why": "FoodOn asserts no source on mayonnaise, on `mayonnaise food product`, or on any of the six preparation variants -- so an egg query reached none of them, across 187 recipes in a 5,000-recipe corpus. It was the largest false negative the family sweep could find. Bridged to `egg yolk`, which is the part actually used and is itself inside the egg closure. BOTH the class and its family class are bridged, because avoidance descends and never ascends: bridging the child does not reach the parent, and an ingredient resolving to `mayonnaise food product` would still have been missed. The rejects are the point of not bridging higher still -- `mayonnaise analog` derives from `oil-producing plant`, is egg-free, and must stay out."
     }
   ]
 }

@@ -2563,7 +2563,7 @@ local:patch-f7eeee07b2fb a local:Patch ;
 
 
 # =============================================================================
-# Reviewed containment claims FoodOn cannot make   (8)
+# Reviewed containment claims FoodOn cannot make   (10)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a
 # condiment`, `casein is_a protein extract` -- and asserts no source. These
@@ -2694,6 +2694,66 @@ local:patch-e118d150686f a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "Egg" ;
     rdfs:comment "food-grade lysozyme is hen egg white lysozyme. FoodOn models this class but parents it by function (food additive) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### mayonnaise  --RO:0001000-->  egg yolk
+#   evidence:   FoodOn asserts no derives-from on mayonnaise, mayonnaise food product, or any of the six variants; only `mayonnaise with smoked salmon` has one, pointing back at mayonnaise itself
+#   confidence: high
+#   claim:      contains
+#   query:      egg yolk
+#   reviewer:   Matt
+#   Mayonnaise is an emulsion of oil in egg yolk; the yolk is the emulsifier
+#   and is what makes it egg. FoodOn asserts no source on the class at all, so
+#   an egg query reached neither mayonnaise nor its six preparation variants
+#   -- 160 ingredient uses across the 5,000-recipe corpus, and the single
+#   largest false negative the family sweep could find. `egg yolk` rather than
+#   `chicken egg` because the yolk is the part actually used; both give the
+#   same +7, and the yolk is inside the egg closure so the transitive path
+#   holds either way.
+obo:FOODON_03301440 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0007378 ] .
+local:patch-b29f00524d63 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03301440 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0007378 ;
+    local:patchEvidence "FoodOn asserts no derives-from on mayonnaise, mayonnaise food product, or any of the six variants; only `mayonnaise with smoked salmon` has one, pointing back at mayonnaise itself" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "egg yolk" ;
+    rdfs:comment "Mayonnaise is an emulsion of oil in egg yolk; the yolk is the emulsifier and is what makes it egg. FoodOn asserts no source on the class at all, so an egg query reached neither mayonnaise nor its six preparation variants -- 160 ingredient uses across the 5,000-recipe corpus, and the single largest false negative the family sweep could find. `egg yolk` rather than `chicken egg` because the yolk is the part actually used; both give the same +7, and the yolk is inside the egg closure so the transitive path holds either way." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### mayonnaise food product  --RO:0001000-->  egg yolk
+#   evidence:   same gap as the class beneath it: FoodOn asserts no source on either
+#   confidence: high
+#   claim:      contains
+#   query:      egg yolk
+#   reviewer:   Matt
+#   The family class, bridged for the same reason as `mayonnaise` itself.
+#   Avoidance descends and never ascends, so bridging the child does not reach
+#   the parent: an ingredient that resolved to `mayonnaise food product`
+#   rather than `mayonnaise` would still have been missed by an egg query. The
+#   two classes have identical closures, so this adds only the family class
+#   itself.
+obo:FOODON_00001234 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0007378 ] .
+local:patch-c134be4e240e a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00001234 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0007378 ;
+    local:patchEvidence "same gap as the class beneath it: FoodOn asserts no source on either" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "egg yolk" ;
+    rdfs:comment "The family class, bridged for the same reason as `mayonnaise` itself. Avoidance descends and never ascends, so bridging the child does not reach the parent: an ingredient that resolved to `mayonnaise food product` rather than `mayonnaise` would still have been missed by an egg query. The two classes have identical closures, so this adds only the family class itself." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
