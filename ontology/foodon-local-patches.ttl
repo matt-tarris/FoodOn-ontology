@@ -3021,7 +3021,7 @@ local:patch-c1085192f1cf a local:Patch ;
 
 
 # =============================================================================
-# Claims that are NOT containment   (74)
+# Claims that are NOT containment   (75)
 # =============================================================================
 # Emitted on local properties, never on RO:0001000. Read the property
 # comments before consuming these. Entries marked DECLINED were reviewed and
@@ -4691,6 +4691,32 @@ local:patch-f5f085850c0a a local:Patch ;
     local:patchClaim "may_contain" ;
     local:patchQuery "wheat plant" ;
     rdfs:comment "Soy sauce is brewed from soybeans AND wheat in roughly equal parts in the dominant Japanese and Chinese styles, yet FoodOn asserts no wheat derivation, so the class sits outside the gluten closure entirely. The identity is a soy product; the wheat is a producer choice, which is what may_contain is for. This class also covers `soy sauce (proteolytic fermentation)` and `soy sauce (acid-hydrolyzed)`." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### tamari sauce  --mayDeriveFrom-->  wheat plant
+#   evidence:   the wheat share is a producer choice within the style; a certified gluten-free tamari is a product-label fact the ontology cannot carry
+#   confidence: medium
+#   claim:      may_contain
+#   query:      wheat plant
+#   reviewer:   Matt
+#   Tamari is the low-wheat or wheat-free style of soy sauce, brewed from the
+#   miso by-product with little or no wheat, and it is what a gluten-avoiding
+#   diner is usually steered toward. But `tamari` names a style, not a recipe:
+#   commercial tamari is not reliably wheat-free, many brands include some,
+#   and only the pack says which. The claim is weaker here than for soy sauce
+#   and shoyu, and that is what may_contain is for.
+obo:FOODON_03309556 local:mayDeriveFrom obo:FOODON_03411312 .
+local:patch-84ddd3f061be a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03309556 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchEvidence "the wheat share is a producer choice within the style; a certified gluten-free tamari is a product-label fact the ontology cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "wheat plant" ;
+    rdfs:comment "Tamari is the low-wheat or wheat-free style of soy sauce, brewed from the miso by-product with little or no wheat, and it is what a gluten-avoiding diner is usually steered toward. But `tamari` names a style, not a recipe: commercial tamari is not reliably wheat-free, many brands include some, and only the pack says which. The claim is weaker here than for soy sauce and shoyu, and that is what may_contain is for." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 

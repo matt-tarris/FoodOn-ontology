@@ -64,7 +64,7 @@ _spec = _u.spec_from_file_location("_serve", "serve.py")
 _serve = _u.module_from_spec(_spec); _spec.loader.exec_module(_serve)
 for q in ("wheat", "gluten"):
     reported = {a["term"] for a in _serve.query(q).get("annotations") or []}
-    for want in ("soy sauce food product", "shoyu sauce"):
+    for want in ("soy sauce food product", "shoyu sauce", "tamari sauce"):
         checks += 1
         if want not in reported:
             fails.append(f"a {q!r} query does not report {want!r}; the may_contain "
