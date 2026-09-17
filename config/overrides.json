@@ -1106,6 +1106,27 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-17",
       "review_note": "signed at Matt's request alongside soy sauce and shoyu. Held back from that batch on the argument that flagging tamari warns off the one option a gluten-avoiding diner is steered toward -- overruled, and the overrule is right: an unflagged tamari that contains wheat is a worse outcome than a flagged one that does not, because only the first reaches a plate. Confidence medium, not high, to keep the difference from soy sauce visible."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "butterscotch chip (artificially-flavored)",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03302602",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Butterscotch is brown sugar and BUTTER, and the mainstream chips -- Toll House, Hershey -- list milk or milkfat and carry a milk allergen declaration. FoodOn asserts no dairy for the class, so a dairy query reached nothing. `(artificially-flavored)` qualifies the FLAVOUR, not the fat: an artificial butterscotch flavour is routinely carried in a product that still contains milk solids.",
+      "source": "dairy-free butterscotch chips exist and are the exception; which one is in the jar is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "contains rather than may_contain, and deliberately. may_contain is reported and never traversed, so it would have left the sweep's false negative exactly where it was -- documented instead of fixed. This follows the oats decision: oats count as gluten-containing here and the certified exception is pushed downstream as a label fact. Same shape, same direction. A false positive costs a diner choice; a false negative costs them a reaction."
     }
   ],
   "entry_types": {

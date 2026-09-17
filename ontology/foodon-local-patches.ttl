@@ -2563,13 +2563,42 @@ local:patch-f7eeee07b2fb a local:Patch ;
 
 
 # =============================================================================
-# Reviewed containment claims FoodOn cannot make   (17)
+# Reviewed containment claims FoodOn cannot make   (18)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a
 # condiment`, `casein is_a protein extract` -- and asserts no source. These
 # are the cases where the containment is real and the ontology simply has no
 # axiom for it.
 
+
+### butterscotch chip (artificially-flavored)  --RO:0001000-->  milk
+#   evidence:   dairy-free butterscotch chips exist and are the exception; which one is in the jar is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Butterscotch is brown sugar and BUTTER, and the mainstream chips -- Toll
+#   House, Hershey -- list milk or milkfat and carry a milk allergen
+#   declaration. FoodOn asserts no dairy for the class, so a dairy query
+#   reached nothing. `(artificially-flavored)` qualifies the FLAVOUR, not the
+#   fat: an artificial butterscotch flavour is routinely carried in a product
+#   that still contains milk solids.
+obo:FOODON_03302602 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-95e4ddac2a4e a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03302602 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "dairy-free butterscotch chips exist and are the exception; which one is in the jar is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Butterscotch is brown sugar and BUTTER, and the mainstream chips -- Toll House, Hershey -- list milk or milkfat and carry a milk allergen declaration. FoodOn asserts no dairy for the class, so a dairy query reached nothing. `(artificially-flavored)` qualifies the FLAVOUR, not the fat: an artificial butterscotch flavour is routinely carried in a product that still contains milk solids." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
 
 ### candied citrus peel  --RO:0001000-->  citrus fruit
 #   evidence:   FoodOn asserts no derives-from on the class or its parents
