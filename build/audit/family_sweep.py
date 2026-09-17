@@ -57,6 +57,20 @@ EXEMPT = {"sweet potato", "coconut milk", "almond milk", "almond butter", "peanu
           "chickpea flour", "coconut", "eggplant", "black pepper", "white pepper",
           "peppercorn", "sichuan pepper", "milk chocolate", "cocoa butter", "shea butter"}
 
+# A cue matches `\b<cue>\w*`, and the wildcard earns its place: it is what makes `tomato`
+# find `tomatoes` and `chile` find `chiles`. But two cues are proper prefixes of unrelated
+# foods, and the wildcard swallowed the difference:
+#
+#   tamari  -> tamarind      a different plant entirely, flagged as missing soy
+#   crumb   -> crumbled      a preparation word, so `crumbled feta` and `crumbled queso
+#                            fresco` were flagged as missing gluten
+#
+# EXEMPT is the wrong instrument for this. It drops a term from all 19 family checks, so
+# exempting `crumbled` would also drop the dairy check that `crumbled feta` currently
+# passes. What is wrong is the one cue match, not the term. So: words that are never a
+# cue however they were reached.
+NOT_A_CUE = {"tamarind", "crumbled", "crumble", "crumbly"}
+
 r = Resolver(); g = r.g
 clos = {}
 for f in FAMILIES:
@@ -94,7 +108,12 @@ for t, n in uses.most_common(TOP):
         if inside and not (tw & fw or tw & lw):
             lands.append((n, t, label, fam))
         if not inside and fam in CUE:
-            if any(re.search(r"\b" + c + r"\w*", t) for c in CUE[fam].split()):
+            # finditer, not search: `crumbled breadcrumbs` would match `crumbled` first,
+            # and stopping there would discard a term that genuinely names the family
+            hit = any(m.group(0) not in NOT_A_CUE
+                      for c in CUE[fam].split()
+                      for m in re.finditer(r"\b" + c + r"\w*", t))
+            if hit:
                 misses.append((n, t, label, fam))
 
 def show(rows, title, note):
