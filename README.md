@@ -377,7 +377,7 @@ python3 test/mined_run.py       # 123 assertions: nothing unsigned reaches an an
 python3 test/allergen_run.py    # real allergen derivative coverage
 python3 test/patch_run.py       # 25 assertions: the .ttl export means what the app means
 python3 test/audit_run.py       # 97 assertions: the audit UI's read/write model
-python3 test/ingest_run.py      # 56 assertions: recipe line -> class, or nothing
+python3 test/ingest_run.py      # 87 assertions: recipe line -> class, or nothing
 python3 test/decisions_run.py   # every IRI in every decision file still names that class
 python3 test/oracle_run.py      # 30 assertions: the outside-corpus comparison is honest
 
@@ -1333,6 +1333,52 @@ machinery:
   `mustard spinach food product`. Both are allergen false negatives.
 - Certified gluten-free oats cannot be expressed here. Oats count as gluten-containing
   by decision; the exception is a product-label fact and must be handled downstream.
+
+## Certification claims: identity in the ontology, the certificate in the app
+
+`halal beef tenderloin` used to resolve to **nothing**. Not beef, not cattle, not red
+meat, not alpha-gal. Writing the word `halal` on a line made the beef invisible to the
+allergen filter — the dangerous direction to fail in, and a diner avoiding alpha-gal
+would not have been protected by it. `organic` worked only by accident of having been
+added to `QUAL` for unrelated reasons, and even then the word was destroyed.
+
+Both halves were wrong. A certification word has to strip, so identity survives it, and
+has to be kept, so the app knows this line carries a claim someone must stand behind.
+`ingest.line()` now returns both:
+
+```
+2 lb halal beef tenderloin  ->  term "beef tenderloin", reaches alpha-gal,
+                                claims ["halal"]
+```
+
+The claim is a **claim, not a fact**: the line says someone asserted it. Whether a
+certificate stands behind it is a product-level question this layer cannot answer.
+
+**Claims do not inherit, and this is the trap.** Containment flows downstream and is
+monotone — beef → beef tenderloin → beef stock all carry beef, and no processing removes
+it. A certificate flows nowhere: a halal-certified tenderloin does not make a stock
+halal, because shared equipment or one unsupervised step breaks it. So claims are
+recorded against the line and never propagated through the closure, however much the
+problem looks like the one the graph already solves.
+
+Names are canonical rather than whatever the supplier wrote, so `grassfed` and
+`grass-fed` are one claim and so are `non-GMO` and `GMO-free`. Across the 5,000-recipe
+corpus: organic 85, gluten-free 35, free-range 23, pasture-raised 8, grass-fed 6,
+dairy-free 5, wild-caught 3, non-GMO 3, kosher 3, pareve 1.
+
+### `kosher` is usually not a claim
+
+22 lines in the corpus carry the word and 18 of them mean salt or a pickle. It has to
+survive three exclusions, each measured rather than guessed:
+
+| excluded | because |
+|---|---|
+| `kosher or sea salt`, `Kosher or coarse salt`, `Pinch of kosher` | a crystal grade named for koshering meat, asserting nothing about the salt. A lookahead for `kosher salt` alone caught none of these |
+| `kosher dill pickle` | a pickle style — garlic-brined, named after delicatessen practice |
+| `turkey (not kosher)` | reported a kosher *claim* before this: a line recorded as saying the opposite of what it says |
+
+What survives is what should: `kosher gelatin`, `kosher beef salami`, `a kosher bird`.
+22 claims became 4, three of them genuine.
 
 ## Validating against a corpus we did not curate
 

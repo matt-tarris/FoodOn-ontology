@@ -48,8 +48,48 @@ QUAL = (r"kosher|unsalted|salted|extra-?virgin|virgin|all-?purpose|granulated|po
         r"low-?sodium|reduced-?sodium|no-?salt-?added|nonstick|flaky|fine|coarse|table|"
         r"sea|full-?fat|low-?fat|nonfat|skim|heavy|double|single|chilled|boneless|"
         r"skinless|bone-?in|lean|raw|organic|free-?range|unbleached|bleached|instant|"
+        r"halal|pareve|parve|non-?gmo|gmo-?free|grass-?fed|grass-?finished|"
+        r"pasture-?raised|cage-?free|wild-?caught|gluten-?free|dairy-?free|"
+        r"biodynamic|fair-?trade|"
         r"quick-?cooking|old-?fashioned|store-?bought|homemade|good|best|quality|plain|"
         r"natural|creamy|crunchy|smooth|seasoned|unseasoned|dry|wet|day-?old|ripe|unripe")
+# CERTIFICATION CLAIMS. These strip like any other qualifier, because identity must
+# survive them: `halal beef tenderloin` resolved to NOTHING before this -- not to beef,
+# not to cattle, not to red meat, not to alpha-gal -- so writing `halal` on a line made
+# the beef invisible to the allergen filter. That is the dangerous direction to fail in.
+#
+# But unlike a qualifier they are not noise, and dropping them silently was the other
+# half of the bug. `organic` worked only by accident of having been added to QUAL for
+# unrelated reasons, and the word was destroyed either way.
+#
+# What they are NOT is inheritable. Containment flows downstream and is monotone: beef
+# -> beef tenderloin -> beef stock all carry beef, and no processing removes it. A
+# certificate flows nowhere. A halal-certified tenderloin does not make a stock halal;
+# shared equipment or one unsupervised step breaks it. So these are recorded against
+# the LINE, for the app to hang a product-level certificate off, and are never
+# propagated through the graph.
+#
+# `kosher` is the one word that is USUALLY not a claim, and the measurement said so:
+# 22 lines in the corpus carry it and 18 of them mean salt or a pickle style. It has to
+# survive three exclusions to count.
+#
+#   salt at any distance   `kosher or sea salt`, `Kosher or coarse salt`, `kosher or
+#                          other salt` -- all a crystal grade, none an assertion about
+#                          the salt. A lookahead for `kosher salt` alone caught none.
+#   `kosher dill`          a pickle style: garlic-brined, named after delicatessen
+#                          practice, asserting nothing about supervision
+#   negation               `turkey (not kosher)` reported a kosher CLAIM before this,
+#                          which is the one failure here with teeth: a line that says
+#                          the opposite of what it was recorded as saying
+#
+# What survives is what should: `kosher gelatin`, `kosher beef salami`.
+KOSHER = (r"(?<!not )(?<!non-)(?<!non )kosher"
+          r"(?!(?:\s+\w+){0,3}\s+(?:salt|alt))(?!\s+dill)(?!\s*$)")
+
+CERT = (r"halal|" + KOSHER + r"|pareve|parve|non-?gmo|gmo-?free|grass-?fed|"
+        r"grass-?finished|free-?range|pasture-?raised|cage-?free|wild-?caught|"
+        r"gluten-?free|dairy-?free|certified organic|organic|biodynamic|fair-?trade")
+
 STOP = r"of|and|the|a|an|into|for|with|to|plus|each|any|more"
 # `or` is NOT a stop word. Removing it welded alternatives together: "sherry vinegar or
 # red wine vinegar" became `sherry vinegar red wine vinegar`, "kosher salt or sea salt"
@@ -58,6 +98,35 @@ STOP = r"of|and|the|a|an|into|for|with|to|plus|each|any|more"
 ALT = re.compile(r"\bor\b|\bplus\b|/")
 
 _qual_re = re.compile(r"\b(?:" + QUAL + r")\b")
+_cert_re = re.compile(r"\b(?:" + CERT + r")\b")
+CANON = {"halal": "halal", "kosher": "kosher", "pareve": "pareve", "parve": "pareve",
+         "nongmo": "non-GMO", "gmofree": "non-GMO",
+         "grassfed": "grass-fed", "grassfinished": "grass-fed",
+         "freerange": "free-range", "pastureraised": "pasture-raised",
+         "cagefree": "cage-free", "wildcaught": "wild-caught",
+         "glutenfree": "gluten-free", "dairyfree": "dairy-free",
+         "certifiedorganic": "organic", "organic": "organic",
+         "biodynamic": "biodynamic", "fairtrade": "fair-trade"}
+
+
+def claims(raw):
+    """Certification claims written on the line, as a sorted list.
+
+    Read off the RAW text, before normalise touches it: the whole point is that these
+    words are stripped for identity, so anything reading them afterwards reads nothing.
+
+    A claim here is a claim, not a fact. The line says someone asserted it; whether a
+    certificate stands behind it is a product-level question this file cannot answer and
+    must not pretend to.
+    """
+    t = str(raw).lower()
+    t = "".join(c for c in unicodedata.normalize("NFKD", t)
+                if not unicodedata.combining(c))
+    # canonical names, not the spelling that happened to be on the label: `grassfed`
+    # and `grass-fed` are one claim, and so are `non-GMO` and `GMO-free`. A caller
+    # grouping by claim should not have to know how a supplier writes it.
+    return sorted({CANON.get(re.sub(r"[\s-]+", "", m.group(0)), m.group(0))
+                   for m in _cert_re.finditer(t)})
 
 
 def normalise(line):
@@ -172,7 +241,7 @@ class Ingestor:
         """
         term = normalise(raw)
         out = dict(raw=raw, term=term, stage=None, status="unresolved",
-                   roots=[], root_labels=[])
+                   roots=[], root_labels=[], claims=claims(raw))
         if not term:
             out["stage"] = "empty"
             return out

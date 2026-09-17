@@ -12,7 +12,7 @@ it reached that number by dropping the modifier carrying the food -- `chili oil`
 """
 import json, sys, os
 sys.path.insert(0, "build")
-from ingest import Ingestor, normalise, strip_qualifiers, load_map, MAP_FILE
+from ingest import Ingestor, normalise, strip_qualifiers, load_map, claims, MAP_FILE
 
 fails, checks = [], 0
 I = Ingestor()
@@ -125,6 +125,84 @@ checks += 1
 rec = I.recipe(["2 tablespoons olive oil", "1 tablespoon chili oil"])
 if rec["usable"]:
     fails.append("a recipe with an unresolved ingredient was reported usable")
+
+# ---- a certification claim must not cost the ingredient its identity ---------
+# `halal beef tenderloin` resolved to NOTHING before this: not beef, not cattle, not red
+# meat, not alpha-gal. Writing `halal` on a line made the beef invisible to the allergen
+# filter, which is the dangerous direction. `organic` worked only by accident of having
+# been in QUAL for unrelated reasons.
+from resolve import Resolver as _R
+_r = _R(); _G = _r.g
+_fam = {f: set(_G.closure(_r.resolve(f)["roots"])[0])
+        for f in ("beef", "alpha-gal", "red meat", "fish", "milk")}
+
+for line, want_term, want_claims, family in [
+    ("2 lb halal beef tenderloin", "beef tenderloin", ["halal"], "alpha-gal"),
+    ("1 lb kosher beef brisket", "beef brisket", ["kosher"], "red meat"),
+    ("1 lb organic beef tenderloin", "beef tenderloin", ["organic"], "beef"),
+    ("6 oz wild-caught salmon", "salmon", ["wild-caught"], "fish"),
+    ("2 cups grass-fed whole milk", "milk", ["grass-fed"], "milk"),
+]:
+    got = I.line(line)
+    checks += 1
+    if got["status"] != "resolved":
+        fails.append(f"{line!r} does not resolve; a certification word must not cost "
+                     f"the ingredient its identity")
+    checks += 1
+    if got["claims"] != want_claims:
+        fails.append(f"claims({line!r}) = {got['claims']}, want {want_claims} -- the "
+                     f"claim must survive the stripping that identity needs")
+    checks += 1
+    if not (set(got.get("roots") or ()) & _fam[family]):
+        fails.append(f"{line!r} does not reach {family!r}: a diner avoiding it would "
+                     f"not be protected by a line whose ingredient happened to be "
+                     f"certified")
+
+# `kosher` is usually not a claim, and the corpus said so: 22 lines carry the word and
+# 18 mean salt or a pickle style. Each exclusion below is a real line from the corpus.
+for line in [
+    "2 tsp kosher salt",                          # a crystal grade, not an assertion
+    "Kosher or sea salt",                         # the grade, at a distance
+    "2 teaspoons coarse kosher or sea salt",
+    "Kosher or other salt",
+    "1 teaspoon kosher alt",                      # the corpus's own typo
+    "Pinch of kosher",                            # salt elided entirely
+    "4 kosher dill pickle spears, sliced",        # a pickle style, garlic-brined
+    "1 (12-14 pound) turkey (not kosher)",        # says the OPPOSITE of the claim
+]:
+    checks += 1
+    if "kosher" in I.line(line)["claims"]:
+        fails.append(f"{line!r} reported as a kashrut claim; it is not one")
+
+# and what should survive does
+for line in ["2 1/4 tsp. kosher gelatin", "6 thin slices kosher beef salami"]:
+    checks += 1
+    if "kosher" not in I.line(line)["claims"]:
+        fails.append(f"{line!r} is a genuine kashrut claim and was dropped")
+
+checks += 1
+if I.line("2 tsp kosher salt")["term"] != "salt":
+    fails.append("`kosher salt` must still strip to salt")
+
+# spellings fold to one canonical name: a caller grouping by claim should not need to
+# know how a supplier writes it
+for a, b in [("grassfed beef", "grass-fed beef"), ("non-GMO corn", "GMO-free corn"),
+             ("parve margarine", "pareve margarine")]:
+    checks += 1
+    if claims(a) != claims(b):
+        fails.append(f"claims({a!r})={claims(a)} but claims({b!r})={claims(b)}; "
+                     f"one claim, two spellings")
+
+# a claim changes nothing about identity
+checks += 1
+if (I.line("1 lb organic beef tenderloin")["roots"]
+        != I.line("beef tenderloin")["roots"]):
+    fails.append("a certification word changed which class the line resolves to")
+
+# claims are read off the raw line, so a plain line carries none
+checks += 1
+if claims("2 Tbsp. unsalted butter, melted") != []:
+    fails.append("a line with no certification claim must report none")
 
 # ---- spellings and compounds found by the outside-corpus harness -------------
 # Both of these came from build/validate_corpus.py rather than from the seed corpus,
