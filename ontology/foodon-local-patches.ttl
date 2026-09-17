@@ -3021,7 +3021,7 @@ local:patch-c1085192f1cf a local:Patch ;
 
 
 # =============================================================================
-# Claims that are NOT containment   (72)
+# Claims that are NOT containment   (74)
 # =============================================================================
 # Emitted on local properties, never on RO:0001000. Read the property
 # comments before consuming these. Entries marked DECLINED were reviewed and
@@ -4641,6 +4641,56 @@ local:patch-f3720bb6e71a a local:Patch ;
     local:patchClaim "cross_reactive" ;
     local:patchQuery "Tree Nuts" ;
     rdfs:comment "Schinus in Anacardiaceae with cashew and pistachio; cross-reactive, contains no tree nut" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### shoyu sauce  --mayDeriveFrom-->  wheat plant
+#   evidence:   the wheat share varies by producer and style and is not a property of the sauce; the pack states it, the ontology cannot
+#   confidence: high
+#   claim:      may_contain
+#   query:      wheat plant
+#   reviewer:   Matt
+#   Shoyu is soy sauce under its Japanese name, and koikuchi -- the default
+#   style -- is close to half wheat. FoodOn parents it outside `soy sauce food
+#   product`, so the claim on that class does not reach it and a recipe
+#   writing `shoyu` would have been warned about nothing.
+obo:FOODON_03304988 local:mayDeriveFrom obo:FOODON_03411312 .
+local:patch-f58c549e8f81 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03304988 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchEvidence "the wheat share varies by producer and style and is not a property of the sauce; the pack states it, the ontology cannot" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "wheat plant" ;
+    rdfs:comment "Shoyu is soy sauce under its Japanese name, and koikuchi -- the default style -- is close to half wheat. FoodOn parents it outside `soy sauce food product`, so the claim on that class does not reach it and a recipe writing `shoyu` would have been warned about nothing." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### soy sauce food product  --mayDeriveFrom-->  wheat plant
+#   evidence:   the wheat share varies by producer and style and is not a property of the sauce; the pack states it, the ontology cannot
+#   confidence: high
+#   claim:      may_contain
+#   query:      wheat plant
+#   reviewer:   Matt
+#   Soy sauce is brewed from soybeans AND wheat in roughly equal parts in the
+#   dominant Japanese and Chinese styles, yet FoodOn asserts no wheat
+#   derivation, so the class sits outside the gluten closure entirely. The
+#   identity is a soy product; the wheat is a producer choice, which is what
+#   may_contain is for. This class also covers `soy sauce (proteolytic
+#   fermentation)` and `soy sauce (acid-hydrolyzed)`.
+obo:FOODON_00001235 local:mayDeriveFrom obo:FOODON_03411312 .
+local:patch-f5f085850c0a a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_00001235 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchEvidence "the wheat share varies by producer and style and is not a property of the sauce; the pack states it, the ontology cannot" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "wheat plant" ;
+    rdfs:comment "Soy sauce is brewed from soybeans AND wheat in roughly equal parts in the dominant Japanese and Chinese styles, yet FoodOn asserts no wheat derivation, so the class sits outside the gluten closure entirely. The identity is a soy product; the wheat is a producer choice, which is what may_contain is for. This class also covers `soy sauce (proteolytic fermentation)` and `soy sauce (acid-hydrolyzed)`." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 

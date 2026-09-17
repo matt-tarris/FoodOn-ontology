@@ -1043,6 +1043,48 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-15",
       "review_note": null
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "wheat plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312"
+      ],
+      "query_root_labels": [
+        "wheat plant"
+      ],
+      "target_label": "soy sauce food product",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00001235",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Soy sauce is brewed from soybeans AND wheat in roughly equal parts in the dominant Japanese and Chinese styles, yet FoodOn asserts no wheat derivation, so the class sits outside the gluten closure entirely. The identity is a soy product; the wheat is a producer choice, which is what may_contain is for. This class also covers `soy sauce (proteolytic fermentation)` and `soy sauce (acid-hydrolyzed)`.",
+      "source": "the wheat share varies by producer and style and is not a property of the sauce; the pack states it, the ontology cannot",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "signed: soy sauce is one of the commonest hidden wheat sources in a kitchen, and a gluten query returned nothing for it at all"
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "wheat plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312"
+      ],
+      "query_root_labels": [
+        "wheat plant"
+      ],
+      "target_label": "shoyu sauce",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03304988",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Shoyu is soy sauce under its Japanese name, and koikuchi -- the default style -- is close to half wheat. FoodOn parents it outside `soy sauce food product`, so the claim on that class does not reach it and a recipe writing `shoyu` would have been warned about nothing.",
+      "source": "the wheat share varies by producer and style and is not a property of the sauce; the pack states it, the ontology cannot",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "signed alongside soy sauce: excluding it would leave exactly the hole the soy sauce claim was made to close"
     }
   ],
   "entry_types": {

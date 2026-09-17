@@ -55,6 +55,21 @@ for o in ov["overrides"]:
 #                         cross_reactive it is false in the direction that needlessly
 #                         excludes safe food. These are carried as reported claims
 #                         instead — asserted by check 2b.
+# A claim rooted at `wheat plant` must also surface for `gluten`, which resolves to five
+# roots of which wheat is one. Soy sauce is the case that matters: FoodOn asserts no
+# wheat derivation for it, so a gluten query found nothing at all, and soy sauce is one
+# of the commonest hidden wheat sources in a kitchen.
+import importlib.util as _u
+_spec = _u.spec_from_file_location("_serve", "serve.py")
+_serve = _u.module_from_spec(_spec); _spec.loader.exec_module(_serve)
+for q in ("wheat", "gluten"):
+    reported = {a["term"] for a in _serve.query(q).get("annotations") or []}
+    for want in ("soy sauce food product", "shoyu sauce"):
+        checks += 1
+        if want not in reported:
+            fails.append(f"a {q!r} query does not report {want!r}; the may_contain "
+                         f"claim is signed but never reaches an answer")
+
 redundant = []
 for o in signed:
     if o.get("type") != "add": continue
