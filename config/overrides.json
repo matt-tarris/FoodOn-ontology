@@ -1190,6 +1190,27 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-17",
       "review_note": "may_contain rather than contains, and the difference from the other three butterscotch entries is the point. For the candy the butter is definitional and for the chips it is typical, so both are contains and both reject. Here the defining ingredient is the one thing the name puts in doubt, so a contains claim would assert something the label does not support. It surfaces under `Reported, not traversed` instead, which is the honest strength of the evidence."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "butterscotch chip cookie (artificially colored and flavored)",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03303423",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "The class names butterscotch chips in its own label, and butterscotch chips contain milk -- signed separately on FOODON:03302602. FoodOn does not model a cookie as having its chips as a part, so nothing connects the two and a dairy query reached neither.",
+      "source": "a dairy-free chip in a dairy-free dough is possible and is the same product-label fact as the rest of this family",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "The claim rides on the NAMED COMPONENT, not on cookie-ness, and that limit is deliberate. No cookie class reaches dairy today -- not `cookie`, not `chocolate chip cookie`, not `sugar cookie` -- and that is right for the same reason FoodOn's `bread` carries no grain: a cookie can be made without butter. What is asserted here is narrower: this cookie says on its face what is in it. Nothing here implies anything about cookies generally, and the wider question of whether baked goods should reach dairy by default is a separate one."
     }
   ],
   "entry_types": {

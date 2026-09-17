@@ -2563,7 +2563,7 @@ local:patch-f7eeee07b2fb a local:Patch ;
 
 
 # =============================================================================
-# Reviewed containment claims FoodOn cannot make   (20)
+# Reviewed containment claims FoodOn cannot make   (21)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a
 # condiment`, `casein is_a protein extract` -- and asserts no source. These
@@ -2650,6 +2650,33 @@ local:patch-95e4ddac2a4e a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "Milk" ;
     rdfs:comment "Butterscotch is brown sugar and BUTTER, and the mainstream chips -- Toll House, Hershey -- list milk or milkfat and carry a milk allergen declaration. FoodOn asserts no dairy for the class, so a dairy query reached nothing. `(artificially-flavored)` qualifies the FLAVOUR, not the fat: an artificial butterscotch flavour is routinely carried in a product that still contains milk solids." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### butterscotch chip cookie (artificially colored and flavored)  --RO:0001000-->  milk
+#   evidence:   a dairy-free chip in a dairy-free dough is possible and is the same product-label fact as the rest of this family
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   The class names butterscotch chips in its own label, and butterscotch
+#   chips contain milk -- signed separately on FOODON:03302602. FoodOn does
+#   not model a cookie as having its chips as a part, so nothing connects the
+#   two and a dairy query reached neither.
+obo:FOODON_03303423 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-fe1833bd9082 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03303423 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free chip in a dairy-free dough is possible and is the same product-label fact as the rest of this family" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "The class names butterscotch chips in its own label, and butterscotch chips contain milk -- signed separately on FOODON:03302602. FoodOn does not model a cookie as having its chips as a part, so nothing connects the two and a dairy query reached neither." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
