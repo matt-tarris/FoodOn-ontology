@@ -1169,6 +1169,27 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-17",
       "review_note": "signed alongside the plain class for the same reason shoyu was signed alongside soy sauce: excluding a sibling FoodOn happens to parent elsewhere leaves exactly the hole the claim was made to close."
+    },
+    {
+      "type": "add",
+      "claim": "may_contain",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "imitation butterscotch candy",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03303827",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "`Imitation` is a stronger word than `artificially-flavored`: in US labelling it marks a substitute FOR the food rather than the food with a cheap flavour, so the butter that defines butterscotch may be absent entirely. But absent butter is not absent dairy -- imitation confections routinely carry milk solids, whey or lactose as bulking agents and declare milk. Whether this one does is open, which is what may_contain is for.",
+      "source": "the formulation is a producer choice and the pack declares it; the word `imitation` says what the product is not, not what is in it",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "may_contain rather than contains, and the difference from the other three butterscotch entries is the point. For the candy the butter is definitional and for the chips it is typical, so both are contains and both reject. Here the defining ingredient is the one thing the name puts in doubt, so a contains claim would assert something the label does not support. It surfaces under `Reported, not traversed` instead, which is the honest strength of the evidence."
     }
   ],
   "entry_types": {

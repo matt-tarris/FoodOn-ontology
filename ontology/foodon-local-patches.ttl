@@ -3103,7 +3103,7 @@ local:patch-c1085192f1cf a local:Patch ;
 
 
 # =============================================================================
-# Claims that are NOT containment   (75)
+# Claims that are NOT containment   (76)
 # =============================================================================
 # Emitted on local properties, never on RO:0001000. Read the property
 # comments before consuming these. Entries marked DECLINED were reviewed and
@@ -4635,6 +4635,32 @@ local:patch-943f35fe3c2e a local:Patch ;
     local:patchClaim "may_contain" ;
     local:patchQuery "Corn" ;
     rdfs:comment "fermentation of corn or wheat starch hydrolysate" ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### imitation butterscotch candy  --mayDeriveFrom-->  milk
+#   evidence:   the formulation is a producer choice and the pack declares it; the word `imitation` says what the product is not, not what is in it
+#   confidence: medium
+#   claim:      may_contain
+#   query:      Milk
+#   reviewer:   Matt
+#   `Imitation` is a stronger word than `artificially-flavored`: in US
+#   labelling it marks a substitute FOR the food rather than the food with a
+#   cheap flavour, so the butter that defines butterscotch may be absent
+#   entirely. But absent butter is not absent dairy -- imitation confections
+#   routinely carry milk solids, whey or lactose as bulking agents and declare
+#   milk. Whether this one does is open, which is what may_contain is for.
+obo:FOODON_03303827 local:mayDeriveFrom obo:UBERON_0001913 .
+local:patch-048cca574535 a local:Patch ;
+    local:patchSection "weak" ;
+    local:patchTarget obo:FOODON_03303827 ;
+    local:patchProperty local:mayDeriveFrom ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "the formulation is a producer choice and the pack declares it; the word `imitation` says what the product is not, not what is in it" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "may_contain" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "`Imitation` is a stronger word than `artificially-flavored`: in US labelling it marks a substitute FOR the food rather than the food with a cheap flavour, so the butter that defines butterscotch may be absent entirely. But absent butter is not absent dairy -- imitation confections routinely carry milk solids, whey or lactose as bulking agents and declare milk. Whether this one does is open, which is what may_contain is for." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
