@@ -27,7 +27,10 @@ sys.path.insert(0, "build")
 MAP_FILE = "config/ingredient-map.json"
 
 FRAC = r"¼-¾⅐-⅞"
-UNIT = (r"tsp|teaspoons?|tbsp|tablespoons?|cups?|oz|ounces?|lb|lbs|pounds?|g|gr|kg|ml|l|"
+# `tbs` is not a typo for `tbsp`, it is a second common spelling, and TheMealDB uses it
+# throughout. Without it `2 tbs soy sauce` failed while `3 tbsp soy sauce` resolved --
+# soy sauce being both a soy and a gluten source, that is an allergen miss on a spelling.
+UNIT = (r"tsps?|teaspoons?|tbsps?|tbs|tbls?|tablespoons?|cups?|oz|ounces?|lb|lbs|pounds?|g|gr|kg|ml|l|"
         r"liters?|litres?|quarts?|pints?|gallons?|cloves?|sprigs?|stalks?|heads?|"
         r"bunch(?:es)?|cans?|jars?|packages?|pkg|pinch(?:es)?|dash(?:es)?|slices?|"
         r"pieces?|sticks?|ears?|fillets?|large|medium|small|whole|scant|generous")
@@ -74,6 +77,12 @@ def normalise(line):
     # second `tsp` mid-string once the comma clause is cut, and `tsp kosher salt`
     # then resolves to nothing and arrives in the review queue looking like a new
     # ingredient rather than one already handled.
+    # `whole grain` before the unit pass: `whole` is a unit word ("1 whole chicken"), so
+    # stripping it alone turned `whole grain oats` into `grain oats` and `whole grain
+    # wheat flour` into `grain wheat flour` -- neither of which names anything, while
+    # `oats` and `wheat flour` both resolve. FoodOn does have a `whole grain` class, but
+    # mapping whole grain oats to it would lose the oat, and with it the gluten answer.
+    s = re.sub(r"\bwhole[\s-]?grains?\b", " ", s)
     s = re.sub(r"\b(?:" + UNIT + r")\b\.?", " ", s)
     s = re.sub(r"[\s\d" + FRAC + r"/]+", " ", s)
     # A hyphenated compound goes WHOLE when either half is a preparation word.

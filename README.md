@@ -377,7 +377,7 @@ python3 test/mined_run.py       # 123 assertions: nothing unsigned reaches an an
 python3 test/allergen_run.py    # real allergen derivative coverage
 python3 test/patch_run.py       # 25 assertions: the .ttl export means what the app means
 python3 test/audit_run.py       # 97 assertions: the audit UI's read/write model
-python3 test/ingest_run.py      # 47 assertions: recipe line -> class, or nothing
+python3 test/ingest_run.py      # 56 assertions: recipe line -> class, or nothing
 python3 test/decisions_run.py   # every IRI in every decision file still names that class
 python3 test/oracle_run.py      # 30 assertions: the outside-corpus comparison is honest
 
@@ -1388,6 +1388,21 @@ The gap it did find is the one already written down under `Known limits`, now me
 - TheMealDB, faceted by cuisine, costs nothing and immediately turns up `sesame seed
   oil` and `soy sauce` — two named allergens — plus `tbs` surviving as a unit and
   British spellings (`chilli`, `icing sugar`) the normaliser does not fold.
+
+Two of those were normaliser defects and are fixed. `tbs` is a second common spelling
+of `tbsp`, not a typo, and TheMealDB uses it throughout — so `2 tbs soy sauce` failed
+while `3 tbsp soy sauce` resolved, and soy sauce carries both soy and gluten. `whole`
+is a unit word (`1 whole chicken`), so stripping it alone turned `whole grain oats`
+into `grain oats`, which names nothing, and lost the gluten answer that `oats` carries.
+Neither spelling occurs anywhere in the 5,000-recipe corpus, which is the argument for
+running the harness at all. TheMealDB went 74.3% → 80.0% of lines and Open Food Facts
+10.0% → 14.0% of products fully mapped, with no movement on the recipe corpus.
+
+What the same tail shows that is **not** a normaliser defect: `flax seed`, `cracked
+wheat`, `oat fiber` and `sesame seed oil` are absent from FoodOn under those names
+while `linseed` → flaxseed, `bulgur`, `oat` and `sesame oil` all resolve. Those are
+mapping decisions and need a signature, not a regex. Sesame is a declarable allergen,
+so `sesame seed oil` is the one to take first.
 
 The headline number is not 77.4% or 53.4% but **fully-mapped items: 11.4% of recipes
 and 10.0% of products.** One unmapped ingredient quarantines the whole item, because a

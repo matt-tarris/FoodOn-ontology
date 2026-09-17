@@ -126,6 +126,34 @@ rec = I.recipe(["2 tablespoons olive oil", "1 tablespoon chili oil"])
 if rec["usable"]:
     fails.append("a recipe with an unresolved ingredient was reported usable")
 
+# ---- spellings and compounds found by the outside-corpus harness -------------
+# Both of these came from build/validate_corpus.py rather than from the seed corpus,
+# which is the argument for running it: neither spelling occurs in the 5,000 recipes.
+for line, want in [
+    ("2 tbs soy sauce", "soy sauce"),       # TheMealDB writes tbs, not tbsp. Soy sauce
+    ("1 tbl butter", "butter"),             # is both a soy and a gluten source, so the
+    ("2 tsps sesame oil", "sesame oil"),    # miss was an allergen miss on a spelling.
+    ("WHOLE GRAIN OATS", "oats"),           # `whole` is a unit word; stripping it alone
+    ("WHOLE GRAIN WHEAT FLOUR", "wheat flour"),   # left `grain oats`, which names
+    ("whole-grain rye flour", "rye flour"),       # nothing, and lost the gluten answer
+]:
+    checks += 1
+    got = normalise(line)
+    if got != want:
+        fails.append(f"normalise({line!r}) = {got!r}, want {want!r}")
+
+# and the words those rules could have eaten
+for line, want in [
+    ("1 whole chicken", "chicken"),   # `whole` alone is still a unit
+    ("2 cups whole milk", "milk"),
+    ("1 cup wheat berries", "wheat berries"),   # `grain` only goes as part of the pair
+]:
+    checks += 1
+    got = normalise(line)
+    if got != want:
+        fails.append(f"normalise({line!r}) = {got!r}, want {want!r} -- the whole-grain "
+                     f"rule has over-reached")
+
 # ---- a re-seed must not discard what was decided -----------------------------
 # The corpus and the normaliser both move, so the queue has to be re-seeded: terms
 # appear, and terms stop existing -- `superfine` and `nuoc nam` were queued before the
