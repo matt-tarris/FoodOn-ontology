@@ -1211,6 +1211,216 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-17",
       "review_note": "The claim rides on the NAMED COMPONENT, not on cookie-ness, and that limit is deliberate. No cookie class reaches dairy today -- not `cookie`, not `chocolate chip cookie`, not `sugar cookie` -- and that is right for the same reason FoodOn's `bread` carries no grain: a cookie can be made without butter. What is asserted here is narrower: this cookie says on its face what is in it. Nothing here implies anything about cookies generally, and the wider question of whether baked goods should reach dairy by default is a separate one."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "cookie",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03301585",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "A cookie is creamed butter and sugar. The anchor carries 106 classes and the only two a dairy default arguably over-reaches are `oat bar (sweetened)` and its peanut butter variant, both of which are commonly buttered anyway. FoodOn asserts no dairy for any of them, so a dairy query reached none.",
+      "source": "a dairy-free version of any of these is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact. Same shape as the gluten decision too, which had to catch `flour` without swallowing `rice flour`."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "cake food product",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00001278",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Cake is butter, milk or both by method. 62 classes; the only questionable rows are `fruit and nut cake` and its alcoholic variant, and traditional fruitcake is butter-rich. Checked for `rice cake`, which is NOT under this class -- the rice-flour trap of the gluten decision does not exist here. FoodOn asserts no dairy for any of them, so a dairy query reached none.",
+      "source": "a dairy-free version of any of these is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact. Same shape as the gluten decision too, which had to catch `flour` without swallowing `rice flour`."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "pastry",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03315272",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Pastry is fat cut or laminated into flour, and in every named style here that fat is butter. 7 classes, none questionable. FoodOn asserts no dairy for any of them, so a dairy query reached none.",
+      "source": "a dairy-free version of any of these is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact. Same shape as the gluten decision too, which had to catch `flour` without swallowing `rice flour`."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "doughnut",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03301938",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Enriched baked good (17 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it.",
+      "source": "a dairy-free version is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "scone",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00002465",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it.",
+      "source": "a dairy-free version is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "croissant",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03309852",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it.",
+      "source": "a dairy-free version is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "muffin",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03309530",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it.",
+      "source": "a dairy-free version is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "waffle",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03315259",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it.",
+      "source": "a dairy-free version is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "pancake",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03315258",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it.",
+      "source": "a dairy-free version is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "cornbread",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03302343",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it.",
+      "source": "a dairy-free version is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact."
     }
   ],
   "entry_types": {

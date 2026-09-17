@@ -2563,7 +2563,7 @@ local:patch-f7eeee07b2fb a local:Patch ;
 
 
 # =============================================================================
-# Reviewed containment claims FoodOn cannot make   (21)
+# Reviewed containment claims FoodOn cannot make   (31)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a
 # condiment`, `casein is_a protein extract` -- and asserts no source. These
@@ -2680,6 +2680,34 @@ local:patch-fe1833bd9082 a local:Patch ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
+### cake food product  --RO:0001000-->  milk
+#   evidence:   a dairy-free version of any of these is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Cake is butter, milk or both by method. 62 classes; the only questionable
+#   rows are `fruit and nut cake` and its alcoholic variant, and traditional
+#   fruitcake is butter-rich. Checked for `rice cake`, which is NOT under this
+#   class -- the rice-flour trap of the gluten decision does not exist here.
+#   FoodOn asserts no dairy for any of them, so a dairy query reached none.
+obo:FOODON_00001278 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-a377149a28e8 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00001278 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version of any of these is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Cake is butter, milk or both by method. 62 classes; the only questionable rows are `fruit and nut cake` and its alcoholic variant, and traditional fruitcake is butter-rich. Checked for `rice cake`, which is NOT under this class -- the rice-flour trap of the gluten decision does not exist here. FoodOn asserts no dairy for any of them, so a dairy query reached none." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
 ### candied citrus peel  --RO:0001000-->  citrus fruit
 #   evidence:   FoodOn asserts no derives-from on the class or its parents
 #   confidence: high
@@ -2754,6 +2782,109 @@ local:patch-4dc064fb76d2 a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "citrus fruit" ;
     rdfs:comment "Zest is the outer peel of a citrus fruit. Parented under `fruit food product` -- one level too general to carry the citrus -- and asserts no source. One of the six citrus classes found stranded when the taxon bridges were built." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### cookie  --RO:0001000-->  milk
+#   evidence:   a dairy-free version of any of these is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   A cookie is creamed butter and sugar. The anchor carries 106 classes and
+#   the only two a dairy default arguably over-reaches are `oat bar
+#   (sweetened)` and its peanut butter variant, both of which are commonly
+#   buttered anyway. FoodOn asserts no dairy for any of them, so a dairy query
+#   reached none.
+obo:FOODON_03301585 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-5ff60b906067 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03301585 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version of any of these is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "A cookie is creamed butter and sugar. The anchor carries 106 classes and the only two a dairy default arguably over-reaches are `oat bar (sweetened)` and its peanut butter variant, both of which are commonly buttered anyway. FoodOn asserts no dairy for any of them, so a dairy query reached none." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### cornbread  --RO:0001000-->  milk
+#   evidence:   a dairy-free version is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Enriched baked good (1 class(es)) that FoodOn parents outside the cookie,
+#   cake and pastry anchors, so no anchor reaches it.
+obo:FOODON_03302343 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-59c711984269 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03302343 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### croissant  --RO:0001000-->  milk
+#   evidence:   a dairy-free version is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Enriched baked good (1 class(es)) that FoodOn parents outside the cookie,
+#   cake and pastry anchors, so no anchor reaches it.
+obo:FOODON_03309852 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-17247a2c23ab a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03309852 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### doughnut  --RO:0001000-->  milk
+#   evidence:   a dairy-free version is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Enriched baked good (17 class(es)) that FoodOn parents outside the cookie,
+#   cake and pastry anchors, so no anchor reaches it.
+obo:FOODON_03301938 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-2fa2fb8bdee4 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03301938 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Enriched baked good (17 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
@@ -2944,6 +3075,31 @@ local:patch-c134be4e240e a local:Patch ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
+### muffin  --RO:0001000-->  milk
+#   evidence:   a dairy-free version is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Enriched baked good (1 class(es)) that FoodOn parents outside the cookie,
+#   cake and pastry anchors, so no anchor reaches it.
+obo:FOODON_03309530 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-1642b2d0af48 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03309530 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
 ### orange marmalade  --RO:0001000-->  orange plant
 #   evidence:   FoodOn asserts no derives-from on the class or its parents
 #   confidence: high
@@ -2967,6 +3123,57 @@ local:patch-ee52b3454150 a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "orange plant" ;
     rdfs:comment "Marmalade is made from oranges. Parented under `orange preserve or jam food product`, which is a grouping rather than a source, with no derives-from anywhere in the chain." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### pancake  --RO:0001000-->  milk
+#   evidence:   a dairy-free version is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Enriched baked good (1 class(es)) that FoodOn parents outside the cookie,
+#   cake and pastry anchors, so no anchor reaches it.
+obo:FOODON_03315258 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-90903788deb7 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03315258 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### pastry  --RO:0001000-->  milk
+#   evidence:   a dairy-free version of any of these is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Pastry is fat cut or laminated into flour, and in every named style here
+#   that fat is butter. 7 classes, none questionable. FoodOn asserts no dairy
+#   for any of them, so a dairy query reached none.
+obo:FOODON_03315272 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-4731422d502c a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03315272 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version of any of these is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Pastry is fat cut or laminated into flour, and in every named style here that fat is butter. 7 classes, none questionable. FoodOn asserts no dairy for any of them, so a dairy query reached none." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
@@ -3103,6 +3310,31 @@ local:patch-22b4753b5264 a local:Patch ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 
+### scone  --RO:0001000-->  milk
+#   evidence:   a dairy-free version is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Enriched baked good (1 class(es)) that FoodOn parents outside the cookie,
+#   cake and pastry anchors, so no anchor reaches it.
+obo:FOODON_00002465 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-0999f094a9d3 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00002465 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
 ### sodium caseinate  --RO:0001000-->  milk
 #   evidence:   audit: processed ingredients are parented by function with no derives-from
 #   confidence: high
@@ -3125,6 +3357,31 @@ local:patch-c1085192f1cf a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "Milk" ;
     rdfs:comment "casein salt. FoodOn models this class but parents it by function (casein) and asserts no source." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### waffle  --RO:0001000-->  milk
+#   evidence:   a dairy-free version is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Enriched baked good (1 class(es)) that FoodOn parents outside the cookie,
+#   cake and pastry anchors, so no anchor reaches it.
+obo:FOODON_03315259 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-997a674a6943 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03315259 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a dairy-free version is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Enriched baked good (1 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 

@@ -70,6 +70,27 @@ for q in ("wheat", "gluten"):
             fails.append(f"a {q!r} query does not report {want!r}; the may_contain "
                          f"claim is signed but never reaches an answer")
 
+# The baked-goods dairy policy, both halves -- the same shape as the gluten default,
+# which had to catch `flour` without swallowing `rice flour`. Half an assertion here
+# would let the policy drift either way: into rejecting every bread, or into reaching
+# nothing.
+_milk = set(g.closure(r.resolve("milk")["roots"])[0])
+for t in ("cookie", "chocolate chip cookie", "sugar cookie", "cake food product",
+          "pastry", "scone", "croissant", "muffin", "doughnut", "waffle", "cornbread"):
+    x = r.resolve(t)
+    checks += 1
+    if x.get("status") != "resolved" or not (set(x["roots"]) & _milk):
+        fails.append(f"enriched baked good {t!r} does not reach dairy; the policy is "
+                     f"that butter or milk is part of the method")
+for t in ("bread", "wheat bread", "breadcrumbs", "pita bread", "tortilla", "bagel",
+          "sourdough bread", "rice cake"):
+    x = r.resolve(t)
+    checks += 1
+    if x.get("status") == "resolved" and (set(x["roots"]) & _milk):
+        fails.append(f"lean dough {t!r} reaches dairy; the policy is that a lean dough "
+                     f"is flour, water, yeast and salt, and swallowing these would cost "
+                     f"a dairy-avoiding diner most of the menu for nothing")
+
 redundant = []
 for o in signed:
     if o.get("type") != "add": continue

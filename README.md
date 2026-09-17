@@ -1334,6 +1334,56 @@ machinery:
 - Certified gluten-free oats cannot be expressed here. Oats count as gluten-containing
   by decision; the exception is a product-label fact and must be handled downstream.
 
+## The baked-goods dairy policy
+
+A dairy-avoiding diner got no protection from any cookie, biscuit or cake in the
+ontology: none of them carried dairy. Per class that is defensible — a cookie *can* be
+made without butter — and in aggregate it is alarming, because baked goods are among the
+most reliably buttered things on a menu. Five single claims in a row (the butterscotch
+family) made it clear this wanted deciding once rather than one baked good at a time.
+
+**Enriched baked goods default to containing dairy. Lean doughs do not.**
+
+The split is by method, not by category. A lean dough is flour, water, yeast and salt;
+an enriched one needs butter, milk or both to be the thing it is named after. This is
+the same shape as the gluten default, which had to catch `flour` without swallowing
+`rice flour`, and `test/override_run.py` asserts **both halves** for the same reason —
+half an assertion would let the policy drift into rejecting every bread, or into
+reaching nothing.
+
+| | classes | |
+|---|---|---|
+| **enriched** → contains dairy | `cookie` 106, `cake food product` 62, `doughnut` 17, `pastry` 7, plus `scone`, `croissant`, `muffin`, `waffle`, `pancake`, `cornbread` | 139 newly reach dairy |
+| **lean** → unchanged | bread, breadcrumbs, panko, pita, tortilla, bagel, sourdough, phyllo, matzo | 224 classes stay dairy-free |
+
+Asserted on **anchors, not labels**. A regex over 301 matching labels would have caught
+`puff pastry shortening` (which is shortening, the *non*-butter fat), `cow milk cheese
+cake` (already dairy), and a run of excluded EFSA code-list rows. Four anchor classes
+plus six singles carry it structurally instead, and the closure does the rest.
+
+Checked for the rice-flour trap: **`rice cake` is not under `cake food product`**, so the
+equivalent false positive does not exist here.
+
+### What it actually cost, and why that number is misleading
+
+Projected **+70 recipes** on the 5,000-recipe corpus. Realised **+4** — dairy rejection
+went 2,111 → 2,115.
+
+The gap is not good news, and it should not be read as the policy being cheap. The
+projection counted lines whose *text* named an enriched baked good; the policy only
+reaches lines that *resolve to a class*. Most of them do not:
+
+```
+1 sheet frozen puff pastry   absent        graham cracker crumbs   absent
+4 sheets phyllo dough        absent        2 brioche buns          absent
+one box puff pastry          absent        ladyfingers             absent
+```
+
+So the policy is nearly free here because the ingest coverage for prepared baked goods
+is poor, not because it is well targeted. Its value arrives as those terms get mapped —
+and until they are, a recipe calling for puff pastry is quarantined rather than
+cleared, which is the safe failure but not a working one.
+
 ## Certification claims: identity in the ontology, the certificate in the app
 
 `halal beef tenderloin` used to resolve to **nothing**. Not beef, not cattle, not red
