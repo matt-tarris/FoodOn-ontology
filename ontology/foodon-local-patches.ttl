@@ -2563,13 +2563,66 @@ local:patch-f7eeee07b2fb a local:Patch ;
 
 
 # =============================================================================
-# Reviewed containment claims FoodOn cannot make   (18)
+# Reviewed containment claims FoodOn cannot make   (20)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a
 # condiment`, `casein is_a protein extract` -- and asserts no source. These
 # are the cases where the containment is real and the ontology simply has no
 # axiom for it.
 
+
+### butterscotch candy  --RO:0001000-->  milk
+#   evidence:   a margarine or dairy-free butterscotch is a product-label fact this layer cannot carry
+#   confidence: high
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   Butterscotch is brown sugar boiled with BUTTER -- the butter is the
+#   definition, not an optional enrichment, and the name says so. FoodOn
+#   asserts no dairy, so a dairy query reached nothing.
+obo:FOODON_03302583 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-76c670a00997 a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03302583 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a margarine or dairy-free butterscotch is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "Butterscotch is brown sugar boiled with BUTTER -- the butter is the definition, not an optional enrichment, and the name says so. FoodOn asserts no dairy, so a dairy query reached nothing." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### butterscotch candy (artificially-flavored)  --RO:0001000-->  milk
+#   evidence:   a margarine or dairy-free butterscotch is a product-label fact this layer cannot carry
+#   confidence: medium
+#   claim:      contains
+#   query:      Milk
+#   reviewer:   Matt
+#   FoodOn parents this outside `butterscotch candy`, so the claim there does
+#   not reach it. `(artificially-flavored)` qualifies the FLAVOUR, not the
+#   fat: the mainstream butterscotch sweets carry an artificial flavour and
+#   still list butter, cream or milk, and declare milk as an allergen.
+obo:FOODON_03302588 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:UBERON_0001913 ] .
+local:patch-47d9786934cb a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_03302588 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:UBERON_0001913 ;
+    local:patchEvidence "a margarine or dairy-free butterscotch is a product-label fact this layer cannot carry" ;
+    local:patchConfidence "medium" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "Milk" ;
+    rdfs:comment "FoodOn parents this outside `butterscotch candy`, so the claim there does not reach it. `(artificially-flavored)` qualifies the FLAVOUR, not the fat: the mainstream butterscotch sweets carry an artificial flavour and still list butter, cream or milk, and declare milk as an allergen." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
 
 ### butterscotch chip (artificially-flavored)  --RO:0001000-->  milk
 #   evidence:   dairy-free butterscotch chips exist and are the exception; which one is in the jar is a product-label fact this layer cannot carry

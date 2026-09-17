@@ -1127,6 +1127,48 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-17",
       "review_note": "contains rather than may_contain, and deliberately. may_contain is reported and never traversed, so it would have left the sweep's false negative exactly where it was -- documented instead of fixed. This follows the oats decision: oats count as gluten-containing here and the certified exception is pushed downstream as a label fact. Same shape, same direction. A false positive costs a diner choice; a false negative costs them a reaction."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "butterscotch candy",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03302583",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Butterscotch is brown sugar boiled with BUTTER -- the butter is the definition, not an optional enrichment, and the name says so. FoodOn asserts no dairy, so a dairy query reached nothing.",
+      "source": "a margarine or dairy-free butterscotch is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "contains, and a stronger case than the chips: for the chips the butter is typical, for the candy it is what the word means. Margarine-based butterscotch exists and is the same downstream label fact as a dairy-free chip."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "Milk",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/UBERON_0001913"
+      ],
+      "query_root_labels": [
+        "milk"
+      ],
+      "target_label": "butterscotch candy (artificially-flavored)",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_03302588",
+      "in_foodon": true,
+      "confidence": "medium",
+      "reason": "FoodOn parents this outside `butterscotch candy`, so the claim there does not reach it. `(artificially-flavored)` qualifies the FLAVOUR, not the fat: the mainstream butterscotch sweets carry an artificial flavour and still list butter, cream or milk, and declare milk as an allergen.",
+      "source": "a margarine or dairy-free butterscotch is a product-label fact this layer cannot carry",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "signed alongside the plain class for the same reason shoyu was signed alongside soy sauce: excluding a sibling FoodOn happens to parent elsewhere leaves exactly the hole the claim was made to close."
     }
   ],
   "entry_types": {
