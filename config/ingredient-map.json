@@ -10726,7 +10726,26 @@
       "chosen_from_shortlist": true,
       "proposed_by": null,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03415020",
+          "label": "chile cocopalm plant",
+          "curie": "FOODON:03415020",
+          "why": "names everything in `calabrian chiles`",
+          "closure": 2,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003744",
+          "label": "chili pepper",
+          "curie": "FOODON:00003744",
+          "why": "currently mapped here",
+          "closure": 160,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "mild honey",
@@ -10739,7 +10758,42 @@
       "chosen_from_shortlist": true,
       "proposed_by": null,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/UBERON_0036016",
+          "label": "honey",
+          "curie": "UBERON:0036016",
+          "why": "names everything in `mild honey`",
+          "closure": 36,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002504",
+          "label": "tualag honey",
+          "curie": "FOODON:00002504",
+          "why": "names everything in `mild honey`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00004919",
+          "label": "Honey mango",
+          "curie": "FOODON:00004919",
+          "why": "names everything in `mild honey`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301010",
+          "label": "honey butter",
+          "curie": "FOODON:03301010",
+          "why": "names everything in `mild honey`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "halloumi",
@@ -10752,7 +10806,18 @@
       "chosen_from_shortlist": true,
       "proposed_by": null,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00001030",
+          "label": "halloumi cheese food product",
+          "curie": "FOODON:00001030",
+          "why": "names everything in `halloumi`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        }
+      ]
     },
     {
       "term": "popcorn kernels",
@@ -10765,7 +10830,42 @@
       "chosen_from_shortlist": true,
       "proposed_by": null,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003154",
+          "label": "spelt kernel",
+          "curie": "FOODON:00003154",
+          "why": "names everything in `popcorn kernels`",
+          "closure": 7,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003427",
+          "label": "maize kernel",
+          "curie": "FOODON:00003427",
+          "why": "names everything in `popcorn kernels`",
+          "closure": 192,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003734",
+          "label": "rye kernel",
+          "curie": "FOODON:00003734",
+          "why": "names everything in `popcorn kernels`",
+          "closure": 27,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00004702",
+          "label": "farro kernel",
+          "curie": "FOODON:00004702",
+          "why": "names everything in `popcorn kernels`",
+          "closure": 3,
+          "excluded": false
+        }
+      ]
     },
     {
       "term": "swordfish steaks",
@@ -10778,7 +10878,42 @@
       "chosen_from_shortlist": true,
       "proposed_by": null,
       "signed_off_by": "Matt",
-      "signed_off_date": "2026-09-15"
+      "signed_off_date": "2026-09-15",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305459",
+          "label": "swordfish steak (raw)",
+          "curie": "FOODON:03305459",
+          "why": "names everything in `swordfish steaks`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03311021",
+          "label": "swordfish steak (frozen)",
+          "curie": "FOODON:03311021",
+          "why": "names everything in `swordfish steaks`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_02021998",
+          "label": "swordfish",
+          "curie": "FOODON:02021998",
+          "why": "names everything in `swordfish steaks`",
+          "closure": 21,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002556",
+          "label": "wagyu steak",
+          "curie": "FOODON:00002556",
+          "why": "names everything in `swordfish steaks`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
     }
   ],
   "requires_signoff": [
@@ -23283,6 +23418,14 @@
           "excluded": false
         },
         {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003683",
+          "label": "flaxseed",
+          "curie": "FOODON:00003683",
+          "why": "proposed: `linseed`",
+          "closure": 14,
+          "excluded": false
+        },
+        {
           "iri": "http://purl.obolibrary.org/obo/FOODON_03411700",
           "label": "flax plant",
           "curie": "FOODON:03411700",
@@ -23290,7 +23433,14 @@
           "closure": 14,
           "excluded": false
         }
-      ]
+      ],
+      "proposed": "linseed",
+      "proposed_by": "Claude (validation harness)",
+      "proposed_roots": [
+        "flaxseed"
+      ],
+      "proposed_closure": 14,
+      "proposed_note": "FoodOn carries this as flaxseed, reachable by its linseed synonym but not by `flax seed`. The existing shortlist leads with `seed` at 2,175 classes, which is a vehicle, not a food."
     },
     {
       "term": "red chile powder",
@@ -27617,6 +27767,155 @@
           "curie": "FOODON:03411350",
           "why": "lexical: `peaches`",
           "closure": 59,
+          "excluded": false
+        }
+      ]
+    },
+    {
+      "term": "sesame seed oil",
+      "uses": 9,
+      "source": "themealdb",
+      "proposed": "sesame oil",
+      "proposed_by": "Claude (validation harness)",
+      "proposed_roots": [
+        "sesame oil"
+      ],
+      "proposed_closure": 1,
+      "proposed_note": "FoodOn has sesame oil; only the word seed differs, and sesame is a declarable allergen",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03304152",
+          "label": "sesame oil",
+          "curie": "FOODON:03304152",
+          "why": "names everything in `sesame seed oil`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03310306",
+          "label": "sesame seed",
+          "curie": "FOODON:03310306",
+          "why": "names everything in `sesame seed oil`",
+          "closure": 6,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03420307",
+          "label": "seed oil",
+          "curie": "FOODON:03420307",
+          "why": "names everything in `sesame seed oil`",
+          "closure": 30,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002884",
+          "label": "tea seed oil",
+          "curie": "FOODON:00002884",
+          "why": "names everything in `sesame seed oil`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
+    },
+    {
+      "term": "cracked wheat",
+      "uses": 7,
+      "source": "openfoodfacts",
+      "proposed": "bulgur",
+      "proposed_by": "Claude (validation harness)",
+      "proposed_roots": [
+        "bulgur"
+      ],
+      "proposed_closure": 1,
+      "proposed_note": "cracked wheat is bulgur in culinary use; wheat is a gluten source",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03317228",
+          "label": "wheat (cracked)",
+          "curie": "FOODON:03317228",
+          "why": "names everything in `cracked wheat`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302355",
+          "label": "cracked wheat bread",
+          "curie": "FOODON:03302355",
+          "why": "names everything in `cracked wheat`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305370",
+          "label": "cracked wheat flour",
+          "curie": "FOODON:03305370",
+          "why": "names everything in `cracked wheat`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002354",
+          "label": "wheat pasta",
+          "curie": "FOODON:00002354",
+          "why": "names everything in `cracked wheat`",
+          "closure": 3,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003143",
+          "label": "bulgur",
+          "curie": "FOODON:00003143",
+          "why": "proposed: `bulgur`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
+    },
+    {
+      "term": "oat fiber",
+      "uses": 7,
+      "source": "openfoodfacts",
+      "proposed": "oat",
+      "proposed_by": "Claude (validation harness)",
+      "proposed_roots": [
+        "oat"
+      ],
+      "proposed_closure": 40,
+      "proposed_note": "milled from oat; oats count as gluten-containing by decision here",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003429",
+          "label": "oat",
+          "curie": "FOODON:00003429",
+          "why": "names everything in `oat fiber`",
+          "closure": 40,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003774",
+          "label": "oat bran",
+          "curie": "FOODON:00003774",
+          "why": "names everything in `oat fiber`",
+          "closure": 38,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00004515",
+          "label": "oat milk",
+          "curie": "FOODON:00004515",
+          "why": "names everything in `oat fiber`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00005568",
+          "label": "quick oats",
+          "curie": "FOODON:00005568",
+          "why": "names everything in `oat fiber`",
+          "closure": 2,
           "excluded": false
         }
       ]
