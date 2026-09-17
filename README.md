@@ -379,6 +379,7 @@ python3 test/patch_run.py       # 25 assertions: the .ttl export means what the 
 python3 test/audit_run.py       # 97 assertions: the audit UI's read/write model
 python3 test/ingest_run.py      # 47 assertions: recipe line -> class, or nothing
 python3 test/decisions_run.py   # every IRI in every decision file still names that class
+python3 test/oracle_run.py      # 30 assertions: the outside-corpus comparison is honest
 
 python3 build/audit/probe.py    # the one-off discovery scripts; see build/audit/README.md
 ```
@@ -1332,6 +1333,66 @@ machinery:
   `mustard spinach food product`. Both are allergen false negatives.
 - Certified gluten-free oats cannot be expressed here. Oats count as gluten-containing
   by decision; the exception is a product-label fact and must be handled downstream.
+
+## Validating against a corpus we did not curate
+
+`build/validate_corpus.py` runs the mapping layer over an outside corpus and reports
+two things. The first is coverage. The second is the one that could not be got any
+other way.
+
+```bash
+python3 build/validate_corpus.py file /path/to/recipes.json --limit 500
+python3 build/validate_corpus.py themealdb --limit 200          # free, no key
+python3 build/validate_corpus.py openfoodfacts --limit 300      # free, ODbL
+```
+
+A corpus of our own choosing can only show what we failed to map. A corpus that carries
+its own allergen labels can show what we got **wrong**, and internal review cannot
+produce that however careful it is. Open Food Facts tags products with the 14
+declarable allergens; all 14 resolve here, so every labelled product is a comparison.
+
+The rule that makes the comparison honest is about completeness:
+
+| the label says milk, we find no dairy, and… | verdict |
+|---|---|
+| every ingredient resolved | a real traversal defect — start here |
+| something did not resolve | explained by the coverage gap; not a traversal claim |
+
+Counting the second as a defect would invent bugs we do not have; counting it as
+nothing would hide the gap. They are reported in separate columns. The reverse — we
+reach an allergen the label omits — is reported too, but weighted lower on purpose:
+Open Food Facts allergen tags are contributor-entered and often incomplete, so it is as
+likely to be the label's omission as our error. A lead, not a defect.
+
+`test/oracle_run.py` pins that classification against a fixture written by hand rather
+than fetched. Open Food Facts is ODbL, and a share-alike obligation on a corpus
+committed to a repository with no licence chosen is not a thing to acquire by accident;
+the cache under `data/validation-cache/` is not committed for the same reason.
+
+### What the first runs said
+
+Against 150 Open Food Facts products, the oracle found **two real misses, both on one
+product** — a peanut butter spread whose ingredients read `PEANUTS, SUGAR, PALM OIL,
+SALT, MOLASSES` and which is tagged both gluten and tree-nut. That is a mislabelled
+product, not a traversal failure. Against the declared allergens the traversal did not
+disagree with a single correctly-labelled item.
+
+The gap it did find is the one already written down under `Known limits`, now measured:
+
+- **Line resolution falls from 77.4% on recipes to 53.4% on packaged goods.** The
+  unresolved tail is `soy lecithin`, `natural flavors`, `enzymes`, `cheese cultures`,
+  `niacin`, `reduced iron` — label vocabulary that barely occurs in a cookbook.
+- **Milk, soy and gluten each go undecided on 12–17 of 150 products** purely because an
+  ingredient did not resolve. Nothing was decided wrongly; a great deal could not be
+  decided at all.
+- TheMealDB, faceted by cuisine, costs nothing and immediately turns up `sesame seed
+  oil` and `soy sauce` — two named allergens — plus `tbs` surviving as a unit and
+  British spellings (`chilli`, `icing sugar`) the normaliser does not fold.
+
+The headline number is not 77.4% or 53.4% but **fully-mapped items: 11.4% of recipes
+and 10.0% of products.** One unmapped ingredient quarantines the whole item, because a
+recipe cannot be cleared for someone with an allergy on the strength of the ingredients
+that happened to resolve.
 
 ## Shipping it to someone without a checkout
 

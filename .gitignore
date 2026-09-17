@@ -41,3 +41,4 @@ __pycache__/
 dist/
 build_pyi/
 .buildenv
+data/validation-cache/
