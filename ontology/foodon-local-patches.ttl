@@ -2563,7 +2563,7 @@ local:patch-f7eeee07b2fb a local:Patch ;
 
 
 # =============================================================================
-# Reviewed containment claims FoodOn cannot make   (31)
+# Reviewed containment claims FoodOn cannot make   (32)
 # =============================================================================
 # FoodOn parents processed ingredients by function -- `tahini is_a
 # condiment`, `casein is_a protein extract` -- and asserts no source. These
@@ -2885,6 +2885,32 @@ local:patch-2fa2fb8bdee4 a local:Patch ;
     local:patchClaim "contains" ;
     local:patchQuery "Milk" ;
     rdfs:comment "Enriched baked good (17 class(es)) that FoodOn parents outside the cookie, cake and pastry anchors, so no anchor reaches it." ;
+    dcterms:creator "Matt" ;
+    dcterms:created "2026-09-10"^^xsd:date .
+
+### filo  --RO:0001000-->  wheat plant
+#   evidence:   gluten-free filo substitutes exist as a separate product and would be named as such
+#   confidence: high
+#   claim:      contains
+#   query:      wheat plant
+#   reviewer:   Matt
+#   Filo is wheat flour, water and a little oil, stretched paper-thin. There
+#   is no filo that is not wheat -- it is the one thing the dough is. FoodOn
+#   asserts no grain, so a gluten query reached nothing.
+obo:FOODON_00003199 rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0001000 ;
+    owl:someValuesFrom obo:FOODON_03411312 ] .
+local:patch-076612bf253c a local:Patch ;
+    local:patchSection "contains" ;
+    local:patchTarget obo:FOODON_00003199 ;
+    local:patchProperty obo:RO_0001000 ;
+    local:patchValue obo:FOODON_03411312 ;
+    local:patchEvidence "gluten-free filo substitutes exist as a separate product and would be named as such" ;
+    local:patchConfidence "high" ;
+    local:patchClaim "contains" ;
+    local:patchQuery "wheat plant" ;
+    rdfs:comment "Filo is wheat flour, water and a little oil, stretched paper-thin. There is no filo that is not wheat -- it is the one thing the dough is. FoodOn asserts no grain, so a gluten query reached nothing." ;
     dcterms:creator "Matt" ;
     dcterms:created "2026-09-10"^^xsd:date .
 

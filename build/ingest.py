@@ -33,10 +33,20 @@ FRAC = r"¼-¾⅐-⅞"
 UNIT = (r"tsps?|teaspoons?|tbsps?|tbs|tbls?|tablespoons?|cups?|oz|ounces?|lb|lbs|pounds?|g|gr|kg|ml|l|"
         r"liters?|litres?|quarts?|pints?|gallons?|cloves?|sprigs?|stalks?|heads?|"
         r"bunch(?:es)?|cans?|jars?|packages?|pkg|pinch(?:es)?|dash(?:es)?|slices?|"
-        r"pieces?|sticks?|ears?|fillets?|large|medium|small|whole|scant|generous")
+        r"pieces?|sticks?|ears?|fillets?|large|medium|small|whole|scant|generous|"
+        # packaging, found by mapping the prepared baked goods: `1 sheet frozen puff
+        # pastry` and `4 sheets phyllo dough` kept `sheet`, so the map could not be
+        # keyed on anything a person would write. `loaf` only when something follows it
+        # -- trailing, it is the food: `meat loaf`.
+        r"sheets?|boxe?s?|bags?|packets?|tubs?|blocks?|bunches|jars?|tins?|"
+        r"loaf(?=\s+\w)|loaves(?=\s+\w)")
+# spelled-out quantities. `one box puff pastry` survived the digit strip entirely.
+NUM = (r"one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|"
+       r"a couple|couple|several|half|quarter")
 # preparation: how it was cut or treated. Never changes what the ingredient IS.
 PREP = (r"fresh(?:ly)?|dried|ground|chopped|minced|sliced|diced|grated|shredded|crushed|"
         r"melted|softened|toasted|roasted|peeled|seeded|cored|halved|quartered|trimmed|"
+        r"frozen|thawed|defrosted|"
         r"rinsed|drained|divided|julienned|cubed|stemmed|pitted|zested|juiced|beaten|"
         r"room temperature|cold|warm|hot|thinly|roughly|finely|coarsely|lightly|well|"
         r"plus more|for serving|for garnish|optional|such as|preferably|about|packed|sifted")
@@ -151,6 +161,7 @@ def normalise(line):
     # wheat flour` into `grain wheat flour` -- neither of which names anything, while
     # `oats` and `wheat flour` both resolve. FoodOn does have a `whole grain` class, but
     # mapping whole grain oats to it would lose the oat, and with it the gluten answer.
+    s = re.sub(r"^\s*(?:" + NUM + r")\b", " ", s)          # `one box puff pastry`
     s = re.sub(r"\bwhole[\s-]?grains?\b", " ", s)
     s = re.sub(r"\b(?:" + UNIT + r")\b\.?", " ", s)
     s = re.sub(r"[\s\d" + FRAC + r"/]+", " ", s)

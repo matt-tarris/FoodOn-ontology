@@ -2368,7 +2368,7 @@
           "label": "milk",
           "curie": "UBERON:0001913",
           "why": "names everything in `milk ricotta`",
-          "closure": 1098,
+          "closure": 1238,
           "excluded": false,
           "recommended": true
         },
@@ -2657,7 +2657,7 @@
           "label": "bovine meat food product",
           "curie": "FOODON:00001134",
           "why": "currently mapped here",
-          "closure": 785,
+          "closure": 783,
           "excluded": false
         }
       ]
@@ -10914,6 +10914,222 @@
           "excluded": false
         }
       ]
+    },
+    {
+      "term": "puff pastry",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03315272",
+      "maps_to": "pastry",
+      "uses": 9,
+      "root_labels": [
+        "pastry"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (validation harness)",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-17",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03306655",
+          "label": "puff pastry shortening",
+          "curie": "FOODON:03306655",
+          "why": "names everything in `puff pastry`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03315272",
+          "label": "pastry",
+          "curie": "FOODON:03315272",
+          "why": "names everything in `puff pastry`",
+          "closure": 7,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003355",
+          "label": "pastry flour",
+          "curie": "FOODON:00003355",
+          "why": "names everything in `puff pastry`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301929",
+          "label": "pastry (sweetened)",
+          "curie": "FOODON:03301929",
+          "why": "names everything in `puff pastry`",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
+    },
+    {
+      "term": "phyllo dough",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_00003199",
+      "maps_to": "filo",
+      "uses": 9,
+      "root_labels": [
+        "filo"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (validation harness)",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-17",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03311552",
+          "label": "dough",
+          "curie": "FOODON:03311552",
+          "why": "names everything in `phyllo dough`",
+          "closure": 6,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03309451",
+          "label": "ravioli dough",
+          "curie": "FOODON:03309451",
+          "why": "names everything in `phyllo dough`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03309484",
+          "label": "dough (frozen)",
+          "curie": "FOODON:03309484",
+          "why": "names everything in `phyllo dough`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03310637",
+          "label": "macaroni dough",
+          "curie": "FOODON:03310637",
+          "why": "names everything in `phyllo dough`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003199",
+          "label": "filo",
+          "curie": "FOODON:00003199",
+          "why": "currently mapped here",
+          "closure": 1,
+          "excluded": false
+        }
+      ]
+    },
+    {
+      "term": "graham cracker crumbs",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03307113",
+      "maps_to": "wheat cracker",
+      "uses": 6,
+      "root_labels": [
+        "wheat cracker"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": null,
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-17",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00002711",
+          "label": "cracker",
+          "curie": "FOODON:00002711",
+          "why": "names everything in `graham cracker crumbs`",
+          "closure": 2,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_00003317",
+          "label": "graham flour",
+          "curie": "FOODON:00003317",
+          "why": "names everything in `graham cracker crumbs`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302362",
+          "label": "potato cracker",
+          "curie": "FOODON:03302362",
+          "why": "names everything in `graham cracker crumbs`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302571",
+          "label": "soda cracker",
+          "curie": "FOODON:03302571",
+          "why": "names everything in `graham cracker crumbs`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03307113",
+          "label": "wheat cracker",
+          "curie": "FOODON:03307113",
+          "why": "currently mapped here",
+          "closure": 19,
+          "excluded": false
+        }
+      ]
+    },
+    {
+      "term": "country-style bread",
+      "maps_to_iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+      "maps_to": "wheat bread",
+      "uses": 36,
+      "root_labels": [
+        "wheat bread"
+      ],
+      "chosen_from_shortlist": true,
+      "proposed_by": "Claude (offline pass)",
+      "signed_off_by": "Matt",
+      "signed_off_date": "2026-09-17",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302496",
+          "label": "bread (country-style)",
+          "curie": "FOODON:03302496",
+          "why": "names everything in `country-style bread`",
+          "closure": 1,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03305311",
+          "label": "gravy (country-style)",
+          "curie": "FOODON:03305311",
+          "why": "names everything in `country-style bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_02000060",
+          "label": "beef country-style rib",
+          "curie": "FOODON:02000060",
+          "why": "names everything in `country-style bread`",
+          "closure": 2,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_02000061",
+          "label": "beef country-style rib (raw)",
+          "curie": "FOODON:02000061",
+          "why": "names everything in `country-style bread`",
+          "closure": 1,
+          "excluded": false
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03302200",
+          "label": "wheat bread",
+          "curie": "FOODON:03302200",
+          "why": "currently mapped here",
+          "closure": 159,
+          "excluded": false
+        }
+      ]
     }
   ],
   "requires_signoff": [
@@ -11565,72 +11781,6 @@
           "label": "ricotta cheese (made from whole milk)",
           "curie": "FOODON:03000472",
           "why": "names everything in `ricotta`",
-          "closure": 1,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "country-style bread",
-      "uses": 36,
-      "share": 0.062,
-      "candidates": [
-        {
-          "term": "bread",
-          "roots": [
-            "bread"
-          ],
-          "closure": 282,
-          "dropped": "country-style",
-          "risky": false,
-          "warning": null
-        }
-      ],
-      "proposed": "bread",
-      "proposed_by": "Claude (offline pass)",
-      "proposed_roots": [
-        "bread"
-      ],
-      "proposed_closure": 282,
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03302496",
-          "label": "bread (country-style)",
-          "curie": "FOODON:03302496",
-          "why": "names everything in `country-style bread`",
-          "closure": 1,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03305311",
-          "label": "gravy (country-style)",
-          "curie": "FOODON:03305311",
-          "why": "names everything in `country-style bread`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03000288",
-          "label": "bread",
-          "curie": "FOODON:03000288",
-          "why": "proposed: `bread`",
-          "closure": 282,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_02000060",
-          "label": "beef country-style rib",
-          "curie": "FOODON:02000060",
-          "why": "names everything in `country-style bread`",
-          "closure": 2,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_02000061",
-          "label": "beef country-style rib (raw)",
-          "curie": "FOODON:02000061",
-          "why": "names everything in `country-style bread`",
           "closure": 1,
           "excluded": false
         }
@@ -14657,7 +14807,7 @@
           "label": "milk",
           "curie": "UBERON:0001913",
           "why": "names everything in `milk kefir`",
-          "closure": 1098,
+          "closure": 1238,
           "excluded": false
         },
         {
@@ -16400,7 +16550,7 @@
           "label": "grain plant",
           "curie": "FOODON:03411324",
           "why": "lexical: `grain`",
-          "closure": 1550,
+          "closure": 1551,
           "excluded": false
         }
       ]
@@ -16458,7 +16608,7 @@
           "label": "bovine meat food product",
           "curie": "FOODON:00001134",
           "why": "proposed: `beef`",
-          "closure": 785,
+          "closure": 783,
           "excluded": false
         },
         {
@@ -17739,7 +17889,7 @@
           "label": "bovine meat food product",
           "curie": "FOODON:00001134",
           "why": "lexical: `beef`",
-          "closure": 785,
+          "closure": 783,
           "excluded": false
         }
       ]
@@ -18265,7 +18415,7 @@
           "label": "milk",
           "curie": "UBERON:0001913",
           "why": "proposed: `milk`",
-          "closure": 1098,
+          "closure": 1238,
           "excluded": false
         },
         {
@@ -20355,7 +20505,7 @@
           "label": "grain plant",
           "curie": "FOODON:03411324",
           "why": "lexical: `grain`",
-          "closure": 1550,
+          "closure": 1551,
           "excluded": false
         }
       ]
@@ -22764,66 +22914,6 @@
           "curie": "FOODON:00003579",
           "why": "names everything in `garnish orange twist`",
           "closure": 2,
-          "excluded": false
-        }
-      ]
-    },
-    {
-      "term": "graham cracker crumbs",
-      "uses": 6,
-      "share": 0.01,
-      "candidates": [
-        {
-          "term": "crumbs",
-          "roots": [
-            "divided into pieces, thickness <0.3 cm."
-          ],
-          "closure": 1,
-          "dropped": "graham cracker",
-          "risky": false,
-          "warning": null
-        }
-      ],
-      "shortlist": [
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00002711",
-          "label": "cracker",
-          "curie": "FOODON:00002711",
-          "why": "names everything in `graham cracker crumbs`",
-          "closure": 2,
-          "excluded": false,
-          "recommended": true
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_00003317",
-          "label": "graham flour",
-          "curie": "FOODON:00003317",
-          "why": "names everything in `graham cracker crumbs`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03302362",
-          "label": "potato cracker",
-          "curie": "FOODON:03302362",
-          "why": "names everything in `graham cracker crumbs`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03302571",
-          "label": "soda cracker",
-          "curie": "FOODON:03302571",
-          "why": "names everything in `graham cracker crumbs`",
-          "closure": 1,
-          "excluded": false
-        },
-        {
-          "iri": "http://purl.obolibrary.org/obo/FOODON_03430100",
-          "label": "divided into pieces, thickness <0.3 cm.",
-          "curie": "FOODON:03430100",
-          "why": "lexical: `crumbs`",
-          "closure": 1,
           "excluded": false
         }
       ]
@@ -26005,7 +26095,7 @@
           "label": "milk",
           "curie": "UBERON:0001913",
           "why": "dropping `yogurt`",
-          "closure": 1098,
+          "closure": 1238,
           "excluded": false
         }
       ]
@@ -27916,6 +28006,37 @@
           "curie": "FOODON:00005568",
           "why": "names everything in `oat fiber`",
           "closure": 2,
+          "excluded": false
+        }
+      ]
+    },
+    {
+      "term": "ladyfingers",
+      "uses": 9,
+      "source": "5000_real_recipes (baked goods)",
+      "proposed": "cookie",
+      "proposed_by": "Claude (validation harness)",
+      "proposed_roots": [
+        "cookie"
+      ],
+      "proposed_closure": 106,
+      "proposed_note": "savoiardi are flour, egg and sugar. The only named class is ladyfinger cookie (dietetic), which asserts a sugar-free variant a recipe never says  NOT SIGNED: `cookie` reaches dairy but NOT gluten, and savoiardi are wheat. Signing this would clear a coeliac's recipe that an unmapped term would have quarantined -- worse than leaving it unmapped. It needs either a gluten claim on `cookie`, which is wrong because a cookie can be made from any flour, or a wheat-cookie class FoodOn does not have.",
+      "shortlist": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03301585",
+          "label": "cookie",
+          "curie": "FOODON:03301585",
+          "why": "proposed: `cookie`",
+          "closure": 106,
+          "excluded": false,
+          "recommended": true
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/FOODON_03303930",
+          "label": "ladyfinger cookie (dietetic)",
+          "curie": "FOODON:03303930",
+          "why": "names everything in `ladyfingers`",
+          "closure": 1,
           "excluded": false
         }
       ]

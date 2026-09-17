@@ -31,7 +31,10 @@ NORM = [
 ]
 TOGETHER = [
     ("1/3 cup creamy peanut butter", "peanut butter"),
-    ("⅓ loaf good-quality sturdy white bread", "loaf sturdy white bread"),
+    # was "loaf sturdy white bread": the expectation encoded the bug, since `loaf` is a
+    # unit and `⅓ loaf` is a quantity. `sturdy` survives because it is not in QUAL --
+    # a grade word the list does not yet carry, so this still resolves to nothing.
+    ("⅓ loaf good-quality sturdy white bread", "sturdy white bread"),
 ]
 for raw, want in NORM:
     checks += 1
@@ -231,6 +234,31 @@ for line, want in [
     if got != want:
         fails.append(f"normalise({line!r}) = {got!r}, want {want!r} -- the whole-grain "
                      f"rule has over-reached")
+
+# ---- packaging units, found by mapping the prepared baked goods --------------
+# A mapping is keyed on the normalised term, so a unit the normaliser does not know
+# makes the mapping unreachable however carefully it was signed. These five all had a
+# signed target and none of them fired.
+for line, want in [
+    ("1 sheet frozen puff pastry", "puff pastry"),
+    ("one box puff pastry", "puff pastry"),      # a spelled-out quantity, not a digit
+    ("4 sheets phyllo dough", "phyllo dough"),
+    ("1 loaf country-style bread", "country-style bread"),
+    ("1 jar marinara", "marinara"),
+    ("1 block feta", "feta"),
+    ("two cups flour", "flour"),
+    ("half a lemon", "lemon"),
+]:
+    checks += 1
+    got = normalise(line)
+    if got != want:
+        fails.append(f"normalise({line!r}) = {got!r}, want {want!r}")
+
+# `loaf` is a unit only when something follows it. Trailing, it is the food.
+checks += 1
+if normalise("1 lb meat loaf") != "meat loaf":
+    fails.append(f"normalise('1 lb meat loaf') = {normalise('1 lb meat loaf')!r}; the "
+                 f"loaf unit has eaten the food it was named after")
 
 # ---- a re-seed must not discard what was decided -----------------------------
 # The corpus and the normaliser both move, so the queue has to be re-seeded: terms

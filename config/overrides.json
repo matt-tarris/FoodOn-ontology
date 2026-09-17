@@ -1421,6 +1421,27 @@
       "reviewed_by": "Matt",
       "reviewed_date": "2026-09-17",
       "review_note": "Baked-goods dairy policy. Enriched baked goods -- those whose method needs butter, milk or both -- default to containing dairy; lean doughs do not. Measured on the 5,000-recipe corpus: the default costs 70 recipes, +1.4pp on dairy rejection, because an enriched baked good almost never appears in a recipe that is otherwise dairy-free. Same shape as the oats decision: default to containing, and push the dairy-free version downstream as a label fact."
+    },
+    {
+      "type": "add",
+      "claim": "contains",
+      "status": "REVIEWED",
+      "query_class": "wheat plant",
+      "query_roots": [
+        "http://purl.obolibrary.org/obo/FOODON_03411312"
+      ],
+      "query_root_labels": [
+        "wheat plant"
+      ],
+      "target_label": "filo",
+      "target_class": "http://purl.obolibrary.org/obo/FOODON_00003199",
+      "in_foodon": true,
+      "confidence": "high",
+      "reason": "Filo is wheat flour, water and a little oil, stretched paper-thin. There is no filo that is not wheat -- it is the one thing the dough is. FoodOn asserts no grain, so a gluten query reached nothing.",
+      "source": "gluten-free filo substitutes exist as a separate product and would be named as such",
+      "reviewed_by": "Matt",
+      "reviewed_date": "2026-09-17",
+      "review_note": "Written BEFORE mapping `phyllo dough` onto this class, and required by it: pointing a recipe term at a class that misses gluten is worse than leaving the term unmapped, because unmapped quarantines the recipe and a wrong mapping clears it."
     }
   ],
   "entry_types": {
