@@ -199,7 +199,50 @@ else:
         # NOT PINNED, and that is the point. It is the root whose correspondence the
         # export used to drop, so parity here is the regression test for that fix.
         "citrus fruit": "FOODON_00003324",
+
+        # The eight above were the whole list, and none of them is dairy. A stale
+        # foodon-queryable.owl went unnoticed for two days and was caught only because
+        # filo happens to sit under `wheat plant`; the 139-class baked-goods dairy
+        # policy, the butterscotch entries and the soy sauce claims had no parity check
+        # at all. So: every root of every allergen family the app can answer.
+        "milk": "UBERON_0001913",
+        "soybean plant": "FOODON_03411452",
+        "fish species": "FOODON_03411222",
+        "crustacean": "FOODON_03411374",
+        "mollusc": "FOODON_03412112",
+        "nut plant": "FOODON_03411213",
+        "nut food": "FOODON_00001172",
+        "peanut": "FOODON_00003206",
+        "celery plant": "FOODON_03411282",
+        "Allium": "NCBITaxon_4678",
+        "mammal meat": "FOODON_00001006",
+        "mammal": "FOODON_03411134",
+        "poultry": "FOODON_00004298",
+        # gluten resolves to five roots and only wheat was checked
+        "barley plant": "FOODON_03411230",
+        "rye plant": "FOODON_03411313",
+        "triticale": "FOODON_03411358",
+        "oat plant": "FOODON_03414319",
+        # egg resolves to three, and the multi-root families are where the parity sweep
+        # has historically found the app and SPARQL furthest apart
+        "egg/component": "FOODON_03420194",
+        "chicken egg": "FOODON_03316061",
+        "animal egg": "FOODON_02010002",
     }
+    # Measured, not excused. Every one is the species pivot, which the app does and the
+    # export does not; `nut plant` is the reverse, SPARQL reaching peanut products the
+    # app keeps out of tree nut. A change in any number fails this test.
+    KNOWN_DIVERGENCE = {
+        "fish species": 149,
+        "crustacean": 5,
+        "mollusc": 7,
+        "nut plant": 89,
+        "mammal meat": 605,
+        "mammal": 572,
+        "poultry": 51,
+        "egg/component": 707,
+    }
+
     values = " ".join(f"obo:{v}" for v in ROOTS.values())
     q = open("build/sparql/patch_closure.rq").read()
     q = re.sub(r"VALUES \?root \{[^}]*\}", "VALUES ?root { " + values + " }", q)
@@ -246,17 +289,36 @@ else:
             checks += 1
             py = set(g.closure([iri])[0]) - {iri}
             s = sp.get(iri, set())
-            # No divergence is excused any more. It used to be, for classes the
-            # index reached through a nested class expression; those are now exported
-            # as local:weaklyUnder and the walk follows them.
+            # No divergence is excused any more -- for the eight roots this test
+            # started with. Adding the rest of the allergen families surfaced eight
+            # that do diverge, and the cause is NOT the export: it is the app's
+            # rank-guarded species pivot, which SPARQL does not implement. Traced on
+            # `egg or egg component`:
+            #
+            #   egg or egg component -> shelled egg -> animal egg (shell on)
+            #     -> chicken egg (shell on) -> Gallus gallus -> chicken
+            #     -> chicken meat food product -> chicken (ground or minced)
+            #
+            # The pivot crosses from an egg to the bird and then down into its MEAT, so
+            # an egg-avoiding diner loses chicken. That costs choice rather than safety,
+            # and `nut plant` diverges the other way -- SPARQL reaches peanut products
+            # the app correctly keeps out of tree nut, peanut being a legume.
+            #
+            # These are pinned at their measured size rather than excused. The suite
+            # fails if any of them MOVES in either direction, so the divergence cannot
+            # grow quietly while the real question -- whether the pivot should cross
+            # organism products at all -- is decided separately.
             d = len(py ^ s)
             nested_here = len((py | s) & _nested_subjects)
             print(f"{name:<16} {len(py):>7,} {len(s):>7,} {len(py & s):>7,}  {d:>6}"
                   + (f"   ({nested_here} via nested expr)" if nested_here else ""))
-            if d:
+            want = KNOWN_DIVERGENCE.get(name, 0)
+            if d != want:
                 only_py = [lbl(x) for x in list(py - s)[:4]]
                 only_sp = [lbl(x) for x in list(s - py)[:4]]
-                fails.append(f"{name}: SPARQL and the app disagree on {d} classes "
+                how = (f"expected {want} (a pinned, documented divergence) and got {d}"
+                       if want else f"disagree on {d} classes")
+                fails.append(f"{name}: SPARQL and the app {how} "
                              f"(app-only {only_py}, sparql-only {only_sp})")
     os.unlink(qf)
 
